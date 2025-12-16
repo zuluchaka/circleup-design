@@ -1,93 +1,52 @@
-# Design OS
+<img width="1280" height="640" alt="design-os-og" src="https://github.com/user-attachments/assets/f70671a2-66e8-4c80-8998-d4318af55d10" />
 
-A UI screen design prototyping workspace using Tailwind CSS, Shadcn/ui components, and Lucide icons.
+## The missing step between your idea and your codebase.
 
-## Setup Your Own Instance
+[Design OS](https://buildermethods.com/design-os) is a product planning and design tool that helps you define your product vision, structure your data model, design your UI, and export production-ready components for implementation. Rather than jumping straight into code, you work through a guided process that captures what you're building and why—then hands off everything your coding agent needs to build it right.
 
-To create your own instance of this repository:
+## The Problem
 
-1. **Clone with a custom name:**
-```bash
-git clone https://github.com/buildermethods/design-os.git my-design-os
-cd my-design-os
-```
+AI coding tools are incredible at building fast. But the results often miss the mark. You describe what you want, the agent builds *something*, but it's not what you envisioned. The UI looks generic. Features get half-implemented. You spend as much time fixing and redirecting as you would have spent building.
 
-_Replace `my-design-os` with whatever you want to name your project._
+**The core issue:** we're asking coding agents to figure out what to build *and* build it simultaneously. Design decisions get made on the fly, buried in code, impossible to adjust without starting over. There's no spec. No shared understanding. No source of truth for what "done" looks like.
 
-2. **Remove the original remote:**
-```bash
-git remote remove origin
-```
+## The Design OS Process
 
-Now you have a clean local instance ready to use.
+Design OS powers a guided design and architecture process. You + AI, working together through structured steps:
 
-## Use as a Template for Future Projects
+1. **Product Planning** — Define your vision, break down your roadmap, and model your data
+2. **Design System** — Choose colors, typography, and design your application shell
+3. **Section Design** — For each feature area: specify requirements, generate sample data, and design the screens
+4. **Export** — Generate a complete handoff package for implementation
 
-If you want to save this as your own template and create new projects from it:
+Each step is a conversation. The AI asks questions, you provide direction, and together you shape a product that matches your vision—before any implementation begins.
 
-1. **Push to your own GitHub repository:**
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
-```
+---
 
-2. **Set as a template repository:**
-   - Go to your repository on GitHub
-   - Click **Settings**
-   - Check the box **Template repository** near the top
-   - Now you can easily create new instances from your own template using GitHub's "Use this template" button
+## Documentation & Installation
 
-## Useage
+Docs, installation, usage, & best practices 👉 [It's all here](https://buildermethods.com/design-os)
 
-```bash
-npm install
-npm run dev
-```
+---
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+## Support, Training & Community
 
-## Workflow
+For official support, training, and community as you use Design OS—for yourself or with your team, consider joining [Builder Methods Pro](https://buildermethods.com/pro). You'll get access to Brian Casel (the creator) for questions, a community of builders using Design OS, plus all Builder Methods workshops and training on AI-first development.
 
-1. **Discuss** - Describe your feature/product concept to the AI agent. The agent will ask clarifying questions to shape the scope.
+---
 
-2. **Spec** - After discussion, the AI generates `spec.md` documenting the features and decisions.
+## Follow updates & releases
 
-3. **Data** - The AI creates `data.json` with sample data based on the spec.
+Read the [changelog](CHANGELOG.md)
 
-4. **Screen Design** - The AI builds `Page.tsx` using Shadcn components, following the spec exactly.
+[Subscribe to be notified of major new releases of Agent OS](https://buildermethods.com/design-os)
 
-## Project Structure
+---
 
-```
-src/
-├── components/ui/     # Shadcn components
-├── sections/          # Your screen design pages
-│   └── [name]/
-│       ├── spec.md    # Feature spec from discussion
-│       ├── data.json  # Sample data for the screen design
-│       └── Page.tsx   # The screen design component
-├── App.tsx            # Index page / navigation
-└── index.css          # Tailwind + theme config
-```
+## Created by Brian Casel @ Builder Methods
 
-## Available Shadcn Components
+Created by Brian Casel, the creator of [Builder Methods](https://buildermethods.com), where Brian helps professional software developers and teams build with AI.
 
-Pre-installed: Button, Card, Input, Label, Badge, Avatar, Dropdown Menu, Table, Tabs, Dialog, Sheet, Separator, Skeleton
-
-Add more with:
-```bash
-npx shadcn@latest add [component-name]
-```
-urn
-## Fonts
-
-- **Display/Headings:** Sora
-- **Body:** Outfit
-
-## Design Guidelines
-
-See `agents.md` for AI agent directives including:
-- Mobile responsive design
-- Light & dark mode support
-- Using Tailwind's built-in color palette
-# design-os-internal
+Get Brian's free resources on building with AI:
+- [Builder Briefing newsletter](https://buildermethods.com)
+- [YouTube](https://youtube.com/@briancasel)
