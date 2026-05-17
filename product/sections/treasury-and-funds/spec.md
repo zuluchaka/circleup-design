@@ -1,243 +1,53 @@
-# Treasury & Funds
-
-Multi-fund accounting with audit trails, welfare and mutual aid fund management, and application workflows for fund requests.
-
----
-
-## Shell Configuration
-
-- **Display Mode:** Inside App Shell
-- **Navigation Label:** Treasury
-- **Icon Suggestion:** Landmark (bank/treasury icon)
-
----
+# Treasury & Funds Specification
 
 ## Overview
 
-The Treasury & Funds section provides comprehensive financial management capabilities for the CircleUp platform. It enables treasurers to monitor fund positions in real-time, ensures segregated accounting per circle, supports multi-currency operations, and provides complete audit trails for regulatory compliance.
+Treasury & Funds is the **money operations** layer of CircleUp's V1.9 MVP — circle-scoped fund views, treasury dashboards, multi-currency settings, transaction ledger, reconciliation tooling, investment management, PostFinance import flow (Swiss-specific), financial reports, and emergency-fund administration. Where the `rosca-circles` section provides per-circle contribution / payout UI, this section is the **treasurer's workbench** for visibility, control, and compliance across all circles and association-level funds.
 
-This section serves multiple user roles:
-- **Treasurers** managing day-to-day fund operations
-- **Members** requesting emergency fund disbursements
-- **Auditors** reviewing financial records
-- **Platform administrators** viewing aggregated portfolio positions
+Treasury V1.9 emphasises Swiss-bank-aware tooling (PostFinance CSV import, CHF as default, multi-currency support EUR/USD/GBP), audit-grade ledger output, and an explicit reconciliation flow between platform-recorded transactions and external bank statements.
 
----
+## User Flows
 
-## Screen Designs
+### Treasurer overview
+- **Treasury Dashboard** — Top-level treasurer view: balances across all circle funds + association account, pending reconciliations, emergency-fund usage, recent transactions, action queue.
+- **Circle Fund Detail** — Per-circle deep-dive: real-time balance, pending contributions / payouts, EF interventions, audit trail.
 
-### 1. Treasury Dashboard
+### Ledger & transactions
+- **Transaction Ledger** — Full double-entry ledger view: filter by circle, date, category, status; export PDF/CSV.
+- **Reconciliation Console** — Side-by-side platform ledger vs. external bank statement; match transactions, flag discrepancies, post adjustments with reason and audit trail.
+- **PostFinance Import Flow** — Swiss-specific import wizard: upload PostFinance CSV → auto-detect format → preview parsing → map to ledger entries → confirm and post.
 
-**Purpose:** Real-time overview of fund positions across all circles a user manages or participates in.
+### Reporting & compliance
+- **Financial Report Panel** — Generate period reports (monthly / quarterly / annual) with summary KPIs, balance sheet, cash flow.
+- **Audit Report Generator** — Generate auditor-ready reports with full transaction history, EF interventions, reconciliation records, and signatures.
 
-**Key Elements:**
-- Total portfolio value with trend indicator
-- Fund breakdown by category (contributions, payouts pending, emergency fund, investments)
-- Pending transactions requiring action
-- Cash flow summary (inflows vs outflows, 30-day view)
-- Quick actions: Transfer, Reconcile, Generate Report
+### Multi-currency
+- **Multi-Currency Settings** — Per-association/per-circle currency selection (CHF default, EUR/USD/GBP supported), exchange-rate source, conversion display rules.
 
-**User Story Reference:** US-3.2, US-3.8
+### Investments (optional, V1.9 preview)
+- **Investment Manager** — Surface idle EF balances and propose conservative placement (money-market, bond ladders). Read-only preview in V1.9 MVP.
 
----
+### Emergency fund
+- **Emergency Fund Panel** — Treasury-side view of EF balance, interventions, recoveries, and contribution sources (cross-referenced from rosca-circles section).
 
-### 2. Circle Fund Detail
+## UI Requirements
 
-**Purpose:** Detailed view of a single circle's segregated fund account.
+- Adopts Associations stacked-card layout pattern.
+- **Treasury Dashboard**: 4-up stats hero (Total Funds, Available, Pending, EF Balance), action queue card (pending reconciliations / unconfirmed transfers / expiring statements), recent-transactions table, per-circle fund grid.
+- **Circle Fund Detail**: Sticky header with circle name and current balance, stats strip, tabbed view (Ledger / Reconciliation / EF / Reports).
+- **Transaction Ledger**: Filterable table with debit/credit columns, running balance, category badges, drill-down to entry detail.
+- **Reconciliation Console**: Two-column diff view (Platform | Bank), drag-to-match, status legend (matched / discrepancy / orphan), "post adjustment" inline form.
+- **PostFinance Import Flow**: 4-step wizard (Upload → Detect → Map → Confirm) with progress indicator and validation report.
+- **Financial Report Panel** / **Audit Report Generator**: Form to define period + scope, preview, generate, download (native save on Capacitor).
+- **Multi-Currency Settings**: Currency picker with flag icons, exchange-rate source dropdown (FX provider), real-time conversion preview.
+- **Investment Manager**: Read-only opportunity cards with risk/return and "Talk to advisor" CTA (V1.9 preview).
+- **Emergency Fund Panel**: Mirrors rosca-circles EF view from the treasurer's vantage point.
 
-**Key Elements:**
-- Circle identification header with fund status badge
-- Current balance with available vs held amounts
-- Transaction history with filters (date range, type, status)
-- Segregation indicator showing isolation from other circles
-- Fund allocation breakdown (pie chart)
-- Export options for statements
+### Mobile & platform
+- Reports and statements saved via Capacitor native file-save.
+- Reconciliation Console collapses two-column to stacked accordions on mobile.
+- All financial figures formatted with currency-aware thousands separators and locale (CHF 12'345.50 in CH locale).
 
-**User Story Reference:** US-3.1, US-3.6
+## Configuration
 
----
-
-### 3. Transaction Ledger
-
-**Purpose:** Comprehensive financial record for audit and compliance purposes.
-
-**Key Elements:**
-- Searchable transaction table with columns: Date, Type, Description, Amount, Balance, Status
-- Advanced filters: transaction type, date range, member, status
-- Batch export (CSV, PDF)
-- Audit trail details on row expansion (who, when, what changed)
-- Reconciliation status indicators
-- Print-friendly view option
-
-**User Story Reference:** US-3.6, US-3.7
-
----
-
-### 4. Reconciliation Console
-
-**Purpose:** Daily automated reconciliation review and manual adjustment interface.
-
-**Key Elements:**
-- Reconciliation summary cards (matched, unmatched, pending review)
-- Discrepancy list with severity indicators
-- Side-by-side comparison view (expected vs actual)
-- Resolution workflow (approve match, flag for review, manual adjust)
-- Historical reconciliation reports
-- Automated reconciliation schedule settings
-
-**User Story Reference:** US-3.7
-
----
-
-### 5. Emergency Fund Panel
-
-**Purpose:** Manage emergency fund requests and voting within a circle.
-
-**Key Elements:**
-- Emergency fund balance and utilization rate
-- Active request cards with voting progress
-- Request form: amount, reason, supporting documents
-- Voting interface: approve/deny with optional comment
-- Request history with outcomes
-- Fund replenishment settings
-
-**User Story Reference:** US-3.5
-
----
-
-### 6. Investment Manager
-
-**Purpose:** Configure and monitor low-risk investment allocations for idle funds.
-
-**Key Elements:**
-- Investment portfolio summary with current yield
-- Available investment instruments (money market, T-bills, etc.)
-- Allocation configuration sliders
-- Performance charts (returns over time)
-- Risk indicator badges
-- Liquidity timeline showing when funds are available
-
-**User Story Reference:** US-3.3
-
----
-
-### 7. Multi-Currency Settings
-
-**Purpose:** Configure payout currency preferences and view exchange rates.
-
-**Key Elements:**
-- Supported currencies list with current exchange rates
-- Default currency selector per circle
-- Payout preference configuration (fixed currency vs floating)
-- Exchange rate alerts setup
-- Currency conversion preview calculator
-- Historical exchange rate chart
-
-**User Story Reference:** US-3.4
-
----
-
-### 8. Audit Report Generator
-
-**Purpose:** Generate comprehensive financial reports for auditors and regulators.
-
-**Key Elements:**
-- Report type selector (annual summary, transaction detail, reconciliation, compliance)
-- Date range picker
-- Circle/fund selector (single, multiple, all)
-- Report preview pane
-- Export formats (PDF, Excel, CSV)
-- Scheduled report configuration
-- Report history with download links
-
-**User Story Reference:** US-3.6
-
----
-
-## Data Entities
-
-This section primarily interacts with:
-
-- **Fund** — Segregated account for a circle with balance and transaction history
-- **Transaction** — Individual financial movement (contribution, payout, transfer, fee)
-- **ReconciliationRecord** — Daily reconciliation results and discrepancies
-- **EmergencyFundRequest** — Member request for emergency disbursement
-- **EmergencyFundVote** — Member vote on a pending request
-- **Investment** — Allocation of idle funds to investment instruments
-- **CurrencyPreference** — User/circle currency and payout settings
-- **AuditReport** — Generated compliance report with metadata
-
----
-
-## Interactions & Flows
-
-### View Fund Position
-1. User navigates to Treasury Dashboard
-2. System displays aggregated portfolio value
-3. User clicks on specific circle card
-4. System shows Circle Fund Detail with full breakdown
-
-### Daily Reconciliation Review
-1. System runs automated reconciliation at configured time
-2. Treasurer receives notification of results
-3. Treasurer opens Reconciliation Console
-4. Reviews any discrepancies flagged
-5. Approves matches or flags for manual review
-6. System updates reconciliation status
-
-### Emergency Fund Request
-1. Member opens Emergency Fund Panel
-2. Clicks "Request Funds"
-3. Fills amount, reason, uploads supporting documents
-4. Submits request to circle
-5. Other members receive voting notification
-6. Members cast votes (approve/deny)
-7. Upon reaching threshold, funds disbursed or request denied
-8. All parties notified of outcome
-
-### Generate Audit Report
-1. Auditor opens Audit Report Generator
-2. Selects report type and parameters
-3. Previews report content
-4. Exports in required format
-5. Report logged to history for future reference
-
-### Configure Investment Allocation
-1. Treasurer opens Investment Manager
-2. Reviews available instruments and current yield
-3. Adjusts allocation sliders
-4. System shows projected returns
-5. Confirms changes
-6. System reallocates funds according to new configuration
-
----
-
-## States & Edge Cases
-
-- **Empty Fund:** New circle with no contributions yet — show onboarding prompt
-- **Reconciliation Mismatch:** Highlight discrepancies prominently, block certain operations until resolved
-- **Pending Emergency Request:** Show countdown timer if voting has deadline
-- **Insufficient Emergency Fund:** Disable request submission, show replenishment options
-- **Investment Lock Period:** Show when funds will be available for withdrawal
-- **Multi-Currency Volatility:** Warn user when exchange rate has moved significantly since last check
-- **Audit in Progress:** Indicate when report generation is processing for large datasets
-
----
-
-## Accessibility Notes
-
-- All financial tables support keyboard navigation
-- Currency amounts announced with currency code by screen readers
-- Color-coded status indicators paired with text/icon alternatives
-- High contrast mode support for financial dashboards
-- Transaction amounts use proper ARIA labels for clarity
-
----
-
-## Design Considerations
-
-- Use consistent number formatting (locale-aware, 2 decimal places for currency)
-- Align all currency amounts to the right in tables
-- Use green/red sparingly and always with secondary indicators (icons, text)
-- Provide loading states for real-time data fetches
-- Consider offline scenarios for mobile treasurers in areas with poor connectivity
+- shell: true
