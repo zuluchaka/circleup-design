@@ -21,3 +21,9 @@ dist/
 # Logs
 *.log
 npm-debug.log*
+
+# Playwright MCP scratch output
+.playwright-mcp/
+
+# Ad-hoc screenshots at repo root (product screenshots live under product/sections/)
+/*.png
