@@ -1,28 +1,9 @@
-import { InvestmentManager } from './components'
-import sampleData from '@/../product/sections/treasury-and-funds/data.json'
-import type { Investment, InvestmentInstrument, AllocationChange } from '@/../product/sections/treasury-and-funds/types'
+import { InvestmentManager } from './components/InvestmentManager'
 
 export default function InvestmentManagerPreview() {
-  const handleAllocate = (instrumentId: string, amount: number) => {
-    console.log('Allocate:', instrumentId, amount)
-  }
-
-  const handleWithdraw = (investmentId: string, amount: number) => {
-    console.log('Withdraw:', investmentId, amount)
-  }
-
-  const handleAdjustAllocation = (allocations: AllocationChange[]) => {
-    console.log('Adjust allocation:', allocations)
-  }
-
   return (
-    <InvestmentManager
-      investments={sampleData.investments as Investment[]}
-      instruments={sampleData.investmentInstruments as InvestmentInstrument[]}
-      availableBalance={sampleData.dashboardSummary.totalAvailableBalance}
-      onAllocate={handleAllocate}
-      onWithdraw={handleWithdraw}
-      onAdjustAllocation={handleAdjustAllocation}
-    />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <InvestmentManager associationId="assoc-001" circleId="circle-001" />
+    </div>
   )
 }

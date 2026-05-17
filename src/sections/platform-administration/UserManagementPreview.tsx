@@ -2,10 +2,8 @@ import { UserManagement } from './components/UserManagement'
 
 export default function UserManagementPreview() {
   return (
-    <UserManagement
-      onSearch={(query) => console.log('Search:', query)}
-      onUserSelect={(userId) => console.log('Selected user:', userId)}
-      onUserAction={(userId, action) => console.log('User action:', userId, action)}
-    />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <UserManagement associationId="assoc-001" circleId="circle-001" />
+    </div>
   )
 }
