@@ -1,0 +1,1360 @@
+{
+  "_meta": {
+    "models": {
+      "heroContent": "The main headline, sub-headline, and call-to-action buttons displayed in the hero section above the fold.",
+      "trustBadges": "Security and compliance badges that build visitor confidence (encryption, regulatory compliance, payment partners).",
+      "benefits": "Key platform benefits with icons highlighting value for both members and organizers.",
+      "testimonials": "Real success stories from members and organizers with photos, quotes, roles, and quantified results.",
+      "platformStats": "Aggregate platform statistics displayed as animated counters to show scale and success.",
+      "partners": "Banking, payment, and technology partners displayed for institutional credibility.",
+      "faqs": "Frequently asked questions organized by category to address common concerns.",
+      "howItWorks": "Step-by-step process flow explaining how savings circles work on CircleUp.",
+      "roscaComparison": "Side-by-side comparison showing advantages of CircleUp over traditional ROSCA methods.",
+      "circleExamples": "Sample circle configurations demonstrating different use cases and savings goals.",
+      "culturalCommunities": "Showcase of diaspora communities using CircleUp with cultural context and terminology.",
+      "associationFeatures": "Association management feature highlights beyond savings circles.",
+      "pricingTiers": "Subscription plans with features, pricing, and platform fee percentages.",
+      "feeStructure": "Complete breakdown of all platform fees and when they apply.",
+      "quizQuestions": "Scenario-based readiness assessment questions for member and organizer personas.",
+      "activityFeed": "Live platform activity events showing real-time engagement.",
+      "ambassadors": "Community ambassador profiles featuring power users and community leaders.",
+      "referralProgram": "Referral rewards structure with tiers and earning potential.",
+      "mobileFeatures": "Mobile app feature highlights for iOS and Android.",
+      "impactMetrics": "Community impact statistics showing collective achievements.",
+      "demoSlots": "Available time slots for booking live demo sessions."
+    },
+    "relationships": [
+      "Testimonials reference the community type from culturalCommunities",
+      "Quiz questions are categorized by persona type (member or organizer)",
+      "FAQs are organized into categories (trust, member, organizer)",
+      "Pricing tiers include features from associationFeatures",
+      "Activity feed events reference circle types from circleExamples"
+    ]
+  },
+
+  "heroContent": {
+    "headline": "Save Together, Grow Together",
+    "subHeadline": "CircleUp digitizes traditional savings circles (tontines, tandas, chit funds) with automated payments, transparent tracking, and built-in default protection. Join 45,000+ members saving smarter.",
+    "primaryCta": {
+      "text": "Start Free Trial",
+      "href": "/signup"
+    },
+    "secondaryCta": {
+      "text": "Watch Demo",
+      "href": "#demo-video"
+    },
+    "backgroundVideoUrl": "/videos/hero-background.mp4",
+    "trustBadgeIds": ["encryption", "swiss-compliant", "stripe"]
+  },
+
+  "trustBadges": [
+    {
+      "id": "encryption",
+      "name": "Bank-Level Encryption",
+      "icon": "shield-lock",
+      "description": "Your data is protected with AES-256 encryption, the same standard used by major banks worldwide.",
+      "detailsUrl": "/security"
+    },
+    {
+      "id": "swiss-compliant",
+      "name": "Swiss Compliant",
+      "icon": "badge-check",
+      "description": "Fully compliant with Swiss FINMA regulations and FADP data protection requirements.",
+      "detailsUrl": "/compliance"
+    },
+    {
+      "id": "stripe",
+      "name": "Secured by Stripe",
+      "icon": "credit-card",
+      "description": "All payments processed through Stripe, a PCI-DSS Level 1 certified payment provider.",
+      "detailsUrl": "/payments"
+    },
+    {
+      "id": "gdpr",
+      "name": "GDPR Compliant",
+      "icon": "shield-check",
+      "description": "Full compliance with EU General Data Protection Regulation for data privacy.",
+      "detailsUrl": "/privacy"
+    },
+    {
+      "id": "kyc",
+      "name": "KYC Verified",
+      "icon": "user-check",
+      "description": "Identity verification ensures all members are who they claim to be.",
+      "detailsUrl": "/verification"
+    },
+    {
+      "id": "2fa",
+      "name": "Two-Factor Auth",
+      "icon": "key",
+      "description": "Optional 2FA adds an extra layer of security to your account.",
+      "detailsUrl": "/security#2fa"
+    }
+  ],
+
+  "benefits": [
+    {
+      "id": "transparency",
+      "title": "Complete Transparency",
+      "description": "See every contribution, every payout, and every member's status in real-time. No more wondering where your money is.",
+      "icon": "eye",
+      "forPersona": "member"
+    },
+    {
+      "id": "automation",
+      "title": "Automated Everything",
+      "description": "Payments collected automatically, payouts disbursed on schedule, reminders sent before due dates. You set it and forget it.",
+      "icon": "refresh-cw",
+      "forPersona": "organizer"
+    },
+    {
+      "id": "protection",
+      "title": "Default Protection",
+      "description": "Our Emergency Fund covers missed payments so your circle stays on track even if someone can't pay.",
+      "icon": "shield",
+      "forPersona": "both"
+    },
+    {
+      "id": "trust-score",
+      "title": "AI Trust Score",
+      "description": "Know who you're saving with. Our AI analyzes payment history, verification status, and more to rate member reliability.",
+      "icon": "trending-up",
+      "forPersona": "organizer"
+    },
+    {
+      "id": "easy-payments",
+      "title": "Easy Payments",
+      "description": "Pay with card, bank transfer, or mobile money. Automatic payments mean you never miss a contribution.",
+      "icon": "credit-card",
+      "forPersona": "member"
+    },
+    {
+      "id": "multi-language",
+      "title": "Your Language",
+      "description": "Available in English, French, German, Italian, and Portuguese. Invite your community in their preferred language.",
+      "icon": "globe",
+      "forPersona": "both"
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": "testimonial-001",
+      "name": "Aminata Diallo",
+      "role": "member",
+      "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop",
+      "community": "Senegalese Diaspora, Zurich",
+      "quote": "I was nervous about joining a tontine online, but CircleUp changed everything. I can see exactly where my money is at any moment. After 8 months, I received CHF 4,800 for my daughter's university fees.",
+      "memberSince": "2024-03",
+      "savingsAchieved": 4800,
+      "circlesCompleted": 2,
+      "featured": true
+    },
+    {
+      "id": "testimonial-002",
+      "name": "Carlos Mendoza",
+      "role": "organizer",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+      "community": "Latino Community, Geneva",
+      "quote": "I used to spend 10 hours a week chasing payments and updating spreadsheets. Now CircleUp does it all. I manage 5 tandas with 60 members and it takes me maybe 30 minutes a week.",
+      "memberSince": "2023-11",
+      "circlesManaged": 5,
+      "membersManaged": 60,
+      "hoursWeeklySaved": 10,
+      "onTimePaymentRate": 97,
+      "featured": true
+    },
+    {
+      "id": "testimonial-003",
+      "name": "Fatou Ndiaye",
+      "role": "member",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+      "community": "West African Tontine, Basel",
+      "quote": "The Emergency Fund saved our circle when one member lost her job. She couldn't pay for two months, but we all still got our payouts on time. That's something no WhatsApp group can do.",
+      "memberSince": "2024-01",
+      "savingsAchieved": 3600,
+      "circlesCompleted": 1,
+      "featured": true
+    },
+    {
+      "id": "testimonial-004",
+      "name": "Priya Sharma",
+      "role": "organizer",
+      "avatar": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop",
+      "community": "Indian Professionals, Lausanne",
+      "quote": "As a chit fund organizer back home, I was skeptical about digital platforms. But CircleUp's Trust Score feature helped me vet new members I'd never met in person. No defaults in 14 months.",
+      "memberSince": "2023-08",
+      "circlesManaged": 3,
+      "membersManaged": 36,
+      "hoursWeeklySaved": 8,
+      "onTimePaymentRate": 100,
+      "featured": true
+    },
+    {
+      "id": "testimonial-005",
+      "name": "Emmanuel Okonkwo",
+      "role": "member",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop",
+      "community": "Nigerian Community, Bern",
+      "quote": "I've been in esusu groups for 20 years. CircleUp is the first platform that truly understands how our savings circles work. The payout scheduling is exactly how we've always done it.",
+      "memberSince": "2024-02",
+      "savingsAchieved": 6000,
+      "circlesCompleted": 1,
+      "featured": false
+    },
+    {
+      "id": "testimonial-006",
+      "name": "Marie-Claire Dupont",
+      "role": "organizer",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop",
+      "community": "Haitian Association, Fribourg",
+      "quote": "Our sol was always disorganized—people paid late, forgot amounts, argued about whose turn it was. CircleUp eliminated all of that. Now our 15-person group runs like clockwork.",
+      "memberSince": "2024-04",
+      "circlesManaged": 2,
+      "membersManaged": 28,
+      "hoursWeeklySaved": 6,
+      "onTimePaymentRate": 94,
+      "featured": false
+    },
+    {
+      "id": "testimonial-007",
+      "name": "Ahmed Hassan",
+      "role": "member",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+      "community": "Somali Diaspora, Zurich",
+      "quote": "The mobile app makes contributing so easy. I set up automatic payments and get a notification when it's processed. After my payout, I bought the car I needed for my new job.",
+      "memberSince": "2024-05",
+      "savingsAchieved": 8400,
+      "circlesCompleted": 1,
+      "featured": false
+    },
+    {
+      "id": "testimonial-008",
+      "name": "Rosa Martinez",
+      "role": "member",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
+      "community": "Peruvian Community, Geneva",
+      "quote": "My grandmother ran juntas in Lima. I'm continuing our tradition here in Switzerland with CircleUp. It feels modern but respects how we've always saved together as a community.",
+      "memberSince": "2023-12",
+      "savingsAchieved": 5400,
+      "circlesCompleted": 2,
+      "featured": false
+    }
+  ],
+
+  "platformStats": [
+    {
+      "id": "total-users",
+      "label": "Active Members",
+      "value": 45000,
+      "suffix": "+",
+      "icon": "users"
+    },
+    {
+      "id": "circles-completed",
+      "label": "Circles Completed",
+      "value": 2800,
+      "suffix": "+",
+      "icon": "check-circle"
+    },
+    {
+      "id": "total-saved",
+      "label": "Total Saved",
+      "value": 28500000,
+      "prefix": "CHF ",
+      "suffix": "",
+      "icon": "piggy-bank"
+    },
+    {
+      "id": "completion-rate",
+      "label": "Completion Rate",
+      "value": 97.2,
+      "suffix": "%",
+      "icon": "trending-up"
+    },
+    {
+      "id": "countries",
+      "label": "Countries Served",
+      "value": 23,
+      "suffix": "",
+      "icon": "globe"
+    },
+    {
+      "id": "on-time-rate",
+      "label": "On-Time Payment Rate",
+      "value": 94.8,
+      "suffix": "%",
+      "icon": "clock"
+    }
+  ],
+
+  "partners": [
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "logo": "/images/partners/stripe.svg",
+      "type": "payment",
+      "description": "Global payment processing"
+    },
+    {
+      "id": "ubs",
+      "name": "UBS",
+      "logo": "/images/partners/ubs.svg",
+      "type": "banking",
+      "description": "Swiss banking partner"
+    },
+    {
+      "id": "postfinance",
+      "name": "PostFinance",
+      "logo": "/images/partners/postfinance.svg",
+      "type": "banking",
+      "description": "Swiss banking partner"
+    },
+    {
+      "id": "twint",
+      "name": "TWINT",
+      "logo": "/images/partners/twint.svg",
+      "type": "payment",
+      "description": "Swiss mobile payments"
+    },
+    {
+      "id": "sumsub",
+      "name": "Sumsub",
+      "logo": "/images/partners/sumsub.svg",
+      "type": "verification",
+      "description": "Identity verification"
+    },
+    {
+      "id": "aws",
+      "name": "Amazon Web Services",
+      "logo": "/images/partners/aws.svg",
+      "type": "infrastructure",
+      "description": "Cloud infrastructure"
+    }
+  ],
+
+  "faqs": [
+    {
+      "id": "faq-001",
+      "category": "trust",
+      "question": "Is my money safe with CircleUp?",
+      "answer": "Yes. CircleUp never holds your money—funds flow directly between members via Stripe, a PCI-DSS Level 1 certified payment processor. Your payment information is tokenized and encrypted. We're also regulated under Swiss FINMA requirements and fully GDPR compliant."
+    },
+    {
+      "id": "faq-002",
+      "category": "trust",
+      "question": "What happens if someone doesn't pay?",
+      "answer": "Our Emergency Fund protects your circle. Every contribution includes a small amount (typically 1%) that goes into a pooled protection fund. If a member misses a payment, the Emergency Fund covers it so payouts continue on schedule. The defaulting member then repays the fund over time."
+    },
+    {
+      "id": "faq-003",
+      "category": "trust",
+      "question": "Are there any hidden fees?",
+      "answer": "No hidden fees, ever. We charge a transparent platform fee (2-3% depending on your plan) on each contribution. This covers payment processing, the Emergency Fund, and all platform features. You see the exact fee before every payment."
+    },
+    {
+      "id": "faq-004",
+      "category": "trust",
+      "question": "How do you verify members?",
+      "answer": "We offer multiple verification levels: email verification (basic), phone verification, and full KYC with government ID. Our AI Trust Score also analyzes payment history, tenure, and other factors to rate member reliability from 0-1000."
+    },
+    {
+      "id": "faq-005",
+      "category": "member",
+      "question": "How do I join a circle?",
+      "answer": "You can join a circle in three ways: accept an invitation from an organizer, browse public circles and request to join, or get invited via a referral link. Once accepted, set up your payment method and you're ready to start contributing."
+    },
+    {
+      "id": "faq-006",
+      "category": "member",
+      "question": "When will I receive my payout?",
+      "answer": "Your payout date is determined when you join the circle, based on the payout method (fixed order, random draw, bidding, or Trust Score). You can see your scheduled payout date in the app at any time. Payouts are typically disbursed within 1-2 business days."
+    },
+    {
+      "id": "faq-007",
+      "category": "member",
+      "question": "Can I leave a circle early?",
+      "answer": "You can request to leave a circle, but it depends on where you are in the cycle. If you've already received your payout, you're committed to completing your contributions. If you haven't received your payout yet, the organizer can approve your exit and find a replacement member."
+    },
+    {
+      "id": "faq-008",
+      "category": "member",
+      "question": "What payment methods can I use?",
+      "answer": "We accept credit/debit cards, bank transfers (SEPA), and TWINT in Switzerland. You can set up automatic payments so you never miss a contribution, or pay manually each time—your choice."
+    },
+    {
+      "id": "faq-009",
+      "category": "organizer",
+      "question": "Am I liable if someone defaults?",
+      "answer": "No. As an organizer, you're not personally liable for member defaults. The Emergency Fund handles defaults automatically. Your role is to manage the circle, not guarantee payments. CircleUp's structure protects both organizers and members."
+    },
+    {
+      "id": "faq-010",
+      "category": "organizer",
+      "question": "How do I vet new members?",
+      "answer": "Use our AI Trust Score to evaluate potential members. You can see their payment history, verification level, tenure on the platform, and overall reliability score (0-1000). You can also require minimum Trust Scores to join your circle."
+    },
+    {
+      "id": "faq-011",
+      "category": "organizer",
+      "question": "Can I customize the circle rules?",
+      "answer": "Absolutely. You control contribution amounts, frequency (weekly, bi-weekly, monthly), payout order method, maximum members, Emergency Fund rate, late payment penalties, and more. Configure your circle to match your community's traditions."
+    },
+    {
+      "id": "faq-012",
+      "category": "organizer",
+      "question": "What if I need to remove a member?",
+      "answer": "You can remove members who consistently default or violate circle rules. The system handles the financial reconciliation—any amounts owed are tracked and the member's payout position is reassigned. You maintain full control of your circle's membership."
+    }
+  ],
+
+  "howItWorks": [
+    {
+      "step": 1,
+      "title": "Create or Join",
+      "description": "Start your own savings circle with friends, family, or colleagues—or join an existing one. Set your contribution amount and schedule.",
+      "icon": "plus-circle"
+    },
+    {
+      "step": 2,
+      "title": "Contribute Together",
+      "description": "Everyone contributes the same amount each period. Payments are collected automatically and tracked transparently. No chasing, no spreadsheets.",
+      "icon": "users"
+    },
+    {
+      "step": 3,
+      "title": "Receive Your Payout",
+      "description": "Each period, one member receives the full pot. Payouts continue until everyone has received their lump sum. Protected by our Emergency Fund.",
+      "icon": "banknote"
+    },
+    {
+      "step": 4,
+      "title": "Complete & Repeat",
+      "description": "Once everyone has received their payout, the circle is complete. Start a new one, join another, or take a break—it's up to you.",
+      "icon": "refresh-cw"
+    }
+  ],
+
+  "roscaComparison": {
+    "categories": [
+      {
+        "name": "Payment Collection",
+        "traditional": "Chase members via calls/WhatsApp, collect cash, track manually",
+        "circleup": "Automatic collection via card/bank, real-time tracking, reminders"
+      },
+      {
+        "name": "Default Protection",
+        "traditional": "Circle fails if someone can't pay, organizer may cover gap",
+        "circleup": "Emergency Fund automatically covers missed payments"
+      },
+      {
+        "name": "Transparency",
+        "traditional": "Trust the organizer's spreadsheet or notebook",
+        "circleup": "Real-time dashboard, complete audit trail, member visibility"
+      },
+      {
+        "name": "Member Verification",
+        "traditional": "Word of mouth, personal connections only",
+        "circleup": "AI Trust Score, KYC verification, payment history"
+      },
+      {
+        "name": "Record Keeping",
+        "traditional": "Spreadsheets, notebooks, WhatsApp messages",
+        "circleup": "Automatic records, exportable reports, tax-ready statements"
+      },
+      {
+        "name": "Organizer Time",
+        "traditional": "10+ hours/week for active circles",
+        "circleup": "30 minutes/week with automation"
+      },
+      {
+        "name": "Geographic Limits",
+        "traditional": "Same city/community, cash handoffs",
+        "circleup": "Global circles, any currency, instant transfers"
+      },
+      {
+        "name": "Dispute Resolution",
+        "traditional": "Informal, relationship-damaging",
+        "circleup": "Documented processes, mediation support"
+      }
+    ]
+  },
+
+  "circleExamples": [
+    {
+      "id": "example-family",
+      "name": "Family Savings Circle",
+      "description": "Perfect for close family members saving for shared goals like holiday gifts or family events.",
+      "members": 6,
+      "contribution": 200,
+      "frequency": "monthly",
+      "duration": "6 months",
+      "totalPayout": 1200,
+      "icon": "home",
+      "trustRequirement": "low"
+    },
+    {
+      "id": "example-community",
+      "name": "Community Tontine",
+      "description": "Traditional savings circle for diaspora communities. Larger group, higher payouts.",
+      "members": 12,
+      "contribution": 500,
+      "frequency": "monthly",
+      "duration": "12 months",
+      "totalPayout": 6000,
+      "icon": "users",
+      "trustRequirement": "medium"
+    },
+    {
+      "id": "example-professional",
+      "name": "Professional Network Circle",
+      "description": "For colleagues or professional associations. Higher contributions, verified members.",
+      "members": 10,
+      "contribution": 1000,
+      "frequency": "monthly",
+      "duration": "10 months",
+      "totalPayout": 10000,
+      "icon": "briefcase",
+      "trustRequirement": "high"
+    },
+    {
+      "id": "example-starter",
+      "name": "Starter Circle",
+      "description": "Low-commitment circle for first-timers. Build your Trust Score while saving.",
+      "members": 5,
+      "contribution": 100,
+      "frequency": "bi-weekly",
+      "duration": "10 weeks",
+      "totalPayout": 500,
+      "icon": "seedling",
+      "trustRequirement": "low"
+    },
+    {
+      "id": "example-goal",
+      "name": "Goal-Based Circle",
+      "description": "Everyone saves toward similar goals like home down payments or business capital.",
+      "members": 8,
+      "contribution": 750,
+      "frequency": "monthly",
+      "duration": "8 months",
+      "totalPayout": 6000,
+      "icon": "target",
+      "trustRequirement": "medium"
+    }
+  ],
+
+  "culturalCommunities": [
+    {
+      "id": "west-african",
+      "name": "West African Tontine",
+      "localName": "Tontine / Osusu / Esusu",
+      "countries": ["Senegal", "Nigeria", "Ghana", "Cameroon", "Ivory Coast"],
+      "description": "A centuries-old tradition where community members pool resources and take turns receiving the pot. Trust and social bonds are at the heart of every tontine.",
+      "image": "/images/communities/west-african.jpg",
+      "memberCount": 12000,
+      "testimonialId": "testimonial-001"
+    },
+    {
+      "id": "latin-american",
+      "name": "Latin American Tandas",
+      "localName": "Tanda / Junta / San",
+      "countries": ["Mexico", "Peru", "Colombia", "Ecuador", "Dominican Republic"],
+      "description": "Called tandas in Mexico, juntas in Peru, or san in the DR—these savings circles help families achieve goals from quinceañeras to business startups.",
+      "image": "/images/communities/latin-american.jpg",
+      "memberCount": 8500,
+      "testimonialId": "testimonial-002"
+    },
+    {
+      "id": "south-asian",
+      "name": "South Asian Chit Funds",
+      "localName": "Chit Fund / Kameti / Committee",
+      "countries": ["India", "Pakistan", "Sri Lanka", "Bangladesh"],
+      "description": "Known as chit funds in India or committees in Pakistan, these structured savings groups have helped millions build wealth and fund major life events.",
+      "image": "/images/communities/south-asian.jpg",
+      "memberCount": 6200,
+      "testimonialId": "testimonial-004"
+    },
+    {
+      "id": "caribbean",
+      "name": "Caribbean Sou-Sou",
+      "localName": "Sou-Sou / Sol / Partner",
+      "countries": ["Jamaica", "Trinidad", "Haiti", "Guyana", "Barbados"],
+      "description": "The Caribbean tradition of 'throwing hand' or 'partner' brings communities together to save collectively, often funding education or small businesses.",
+      "image": "/images/communities/caribbean.jpg",
+      "memberCount": 4800,
+      "testimonialId": "testimonial-006"
+    },
+    {
+      "id": "east-african",
+      "name": "East African Chama",
+      "localName": "Chama / Ekub / Iqub",
+      "countries": ["Kenya", "Ethiopia", "Tanzania", "Uganda", "Somalia"],
+      "description": "Chamas in Kenya and Iqubs in Ethiopia are more than savings groups—they're social institutions that fund businesses, education, and community projects.",
+      "image": "/images/communities/east-african.jpg",
+      "memberCount": 5400,
+      "testimonialId": "testimonial-007"
+    },
+    {
+      "id": "southeast-asian",
+      "name": "Southeast Asian Hui",
+      "localName": "Hui / Paluwagan / Arisan",
+      "countries": ["Vietnam", "Philippines", "Indonesia", "Thailand"],
+      "description": "From Vietnamese hui to Filipino paluwagan to Indonesian arisan, rotating credit associations are woven into the fabric of Southeast Asian community life.",
+      "image": "/images/communities/southeast-asian.jpg",
+      "memberCount": 3200,
+      "testimonialId": null
+    }
+  ],
+
+  "associationFeatures": [
+    {
+      "id": "member-management",
+      "title": "Member Management",
+      "description": "Complete member directory with profiles, roles, and engagement tracking. Invite via email, link, or QR code.",
+      "icon": "users",
+      "capabilities": ["Member directory", "Role assignment", "Invitation system", "Profile management"]
+    },
+    {
+      "id": "governance",
+      "title": "Governance & Voting",
+      "description": "Democratic decision-making with elections, proposals, and motions. Multiple voting methods with complete audit trails.",
+      "icon": "vote",
+      "capabilities": ["Elections", "Proposals", "Voting", "Meeting minutes"]
+    },
+    {
+      "id": "events",
+      "title": "Events & Calendar",
+      "description": "Plan and manage community events with registration, ticketing, and payment integration. Shared calendar for all activities.",
+      "icon": "calendar",
+      "capabilities": ["Event creation", "RSVP tracking", "Ticket sales", "Calendar sync"]
+    },
+    {
+      "id": "communication",
+      "title": "Communication Hub",
+      "description": "Multi-channel messaging to keep your community informed. Announcements, notifications, and direct messaging.",
+      "icon": "message-circle",
+      "capabilities": ["Announcements", "Push notifications", "Email/SMS", "In-app messaging"]
+    },
+    {
+      "id": "treasury",
+      "title": "Financial Management",
+      "description": "Beyond savings circles—manage dues, track expenses, and generate financial reports. Complete treasury management.",
+      "icon": "wallet",
+      "capabilities": ["Dues collection", "Expense tracking", "Financial reports", "Audit trails"]
+    },
+    {
+      "id": "documents",
+      "title": "Document Storage",
+      "description": "Secure storage for association documents. Meeting minutes, bylaws, financial records—all organized and accessible.",
+      "icon": "folder",
+      "capabilities": ["File storage", "Folder organization", "Sharing controls", "Version history"]
+    }
+  ],
+
+  "pricingTiers": [
+    {
+      "id": "free",
+      "name": "Free",
+      "price": 0,
+      "billingPeriod": "forever",
+      "platformFee": 3.5,
+      "description": "Perfect for trying CircleUp or running a single small circle.",
+      "features": [
+        "1 active circle",
+        "Up to 8 members",
+        "Basic payment tracking",
+        "Email support",
+        "Emergency Fund protection"
+      ],
+      "limitations": [
+        "No association features",
+        "Limited reporting",
+        "CircleUp branding"
+      ],
+      "ctaText": "Start Free",
+      "highlighted": false
+    },
+    {
+      "id": "basic",
+      "name": "Basic",
+      "price": 29,
+      "billingPeriod": "month",
+      "platformFee": 2.5,
+      "description": "For organizers managing multiple circles or small associations.",
+      "features": [
+        "5 active circles",
+        "Up to 50 members total",
+        "Full payment tracking",
+        "Priority email support",
+        "Emergency Fund protection",
+        "Basic association features",
+        "Export reports"
+      ],
+      "limitations": [
+        "Limited governance features"
+      ],
+      "ctaText": "Start Basic",
+      "highlighted": false
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "price": 99,
+      "billingPeriod": "month",
+      "platformFee": 2.0,
+      "description": "Full-featured for serious organizers and established associations.",
+      "features": [
+        "Unlimited circles",
+        "Up to 200 members",
+        "Advanced analytics",
+        "Phone & chat support",
+        "Emergency Fund protection",
+        "Full association features",
+        "Governance & voting",
+        "Custom branding",
+        "API access"
+      ],
+      "limitations": [],
+      "ctaText": "Start Pro",
+      "highlighted": true
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "price": null,
+      "billingPeriod": "custom",
+      "platformFee": 1.5,
+      "description": "For large organizations with custom requirements.",
+      "features": [
+        "Unlimited everything",
+        "Dedicated account manager",
+        "Custom integrations",
+        "SLA guarantees",
+        "On-premise option",
+        "White-label available",
+        "Custom training"
+      ],
+      "limitations": [],
+      "ctaText": "Contact Sales",
+      "highlighted": false
+    }
+  ],
+
+  "feeStructure": [
+    {
+      "id": "platform-fee",
+      "name": "Platform Fee",
+      "description": "Charged on each contribution to cover payment processing and platform services.",
+      "rate": "2-3.5%",
+      "appliesTo": "Each contribution",
+      "example": "On a CHF 500 contribution with Pro plan: CHF 10 platform fee"
+    },
+    {
+      "id": "emergency-fund",
+      "name": "Emergency Fund",
+      "description": "Small contribution to the pooled protection fund that covers member defaults.",
+      "rate": "1%",
+      "appliesTo": "Each contribution",
+      "example": "On a CHF 500 contribution: CHF 5 to Emergency Fund"
+    },
+    {
+      "id": "late-fee",
+      "name": "Late Payment Fee",
+      "description": "Optional fee charged to members who pay after the due date. Set by organizer.",
+      "rate": "0-5%",
+      "appliesTo": "Late payments only",
+      "example": "On a CHF 500 late payment with 2% late fee: CHF 10 penalty"
+    },
+    {
+      "id": "subscription",
+      "name": "Monthly Subscription",
+      "description": "Fixed monthly fee for Basic, Pro, or Enterprise plans. Free plan has no subscription.",
+      "rate": "CHF 0-99/month",
+      "appliesTo": "Monthly billing",
+      "example": "Pro plan: CHF 99/month regardless of circle activity"
+    },
+    {
+      "id": "payout-fee",
+      "name": "Payout Fee",
+      "description": "No additional fee for payouts—included in the platform fee.",
+      "rate": "0%",
+      "appliesTo": "Payouts",
+      "example": "Receive your full payout minus contributions already made"
+    }
+  ],
+
+  "quizQuestions": {
+    "member": [
+      {
+        "id": "mq-001",
+        "question": "Your circle contribution is due tomorrow but you just realized you don't have enough in your account. What should you do?",
+        "options": [
+          {"id": "a", "text": "Wait and hope no one notices you're late", "correct": false},
+          {"id": "b", "text": "Contact the organizer immediately to discuss options", "correct": true},
+          {"id": "c", "text": "Leave the circle to avoid embarrassment", "correct": false},
+          {"id": "d", "text": "Ask another member to cover for you secretly", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Great choice! Proactive communication helps organizers plan. CircleUp's Emergency Fund can also cover temporary shortfalls.",
+          "incorrect": "Communication is key in savings circles. CircleUp makes it easy to notify organizers and the Emergency Fund provides backup protection."
+        }
+      },
+      {
+        "id": "mq-002",
+        "question": "You're invited to join a circle with people you don't know personally. How do you evaluate if it's trustworthy?",
+        "options": [
+          {"id": "a", "text": "Join anyway—what's the worst that could happen?", "correct": false},
+          {"id": "b", "text": "Decline—only join circles with people you know", "correct": false},
+          {"id": "c", "text": "Check the organizer's Trust Score and circle completion history", "correct": true},
+          {"id": "d", "text": "Ask for members' personal financial details", "correct": false}
+        ],
+        "feedback": {
+          "correct": "CircleUp's Trust Score (0-1000) helps you evaluate members you haven't met. Check completion rates and payment history before joining.",
+          "incorrect": "CircleUp's Trust Score analyzes payment history, verification status, and more to help you evaluate members objectively."
+        }
+      },
+      {
+        "id": "mq-003",
+        "question": "What's the main advantage of automated payments in a savings circle?",
+        "options": [
+          {"id": "a", "text": "You can skip payments when you want to", "correct": false},
+          {"id": "b", "text": "You never forget or miss a contribution", "correct": true},
+          {"id": "c", "text": "The organizer can't see your payment status", "correct": false},
+          {"id": "d", "text": "You pay less in fees", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Exactly! Automatic payments mean peace of mind. Set it up once and your contributions happen on schedule every time.",
+          "incorrect": "Automated payments ensure you never miss a contribution—the number one cause of circle problems."
+        }
+      },
+      {
+        "id": "mq-004",
+        "question": "A member in your circle just received their payout but mentions they might stop contributing. What happens?",
+        "options": [
+          {"id": "a", "text": "Nothing—they already got their money", "correct": false},
+          {"id": "b", "text": "They're committed to complete contributions; Emergency Fund covers if needed", "correct": true},
+          {"id": "c", "text": "The circle immediately ends for everyone", "correct": false},
+          {"id": "d", "text": "Other members have to cover their share", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Once you receive a payout, you're committed to completing your contributions. If they can't pay, the Emergency Fund covers other members.",
+          "incorrect": "Members who've received payouts must complete their contributions. CircleUp's Emergency Fund protects the circle if they default."
+        }
+      },
+      {
+        "id": "mq-005",
+        "question": "How can you improve your Trust Score on CircleUp?",
+        "options": [
+          {"id": "a", "text": "Pay your connections to vouch for you", "correct": false},
+          {"id": "b", "text": "Make on-time payments, verify your identity, and stay engaged", "correct": true},
+          {"id": "c", "text": "Join as many circles as possible at once", "correct": false},
+          {"id": "d", "text": "Trust Scores can't be improved", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Your Trust Score improves with consistent on-time payments (40%), identity verification (20%), platform tenure (15%), and engagement (10%).",
+          "incorrect": "Trust Score is earned through behavior: on-time payments, verification, tenure, and positive engagement all contribute."
+        }
+      },
+      {
+        "id": "mq-006",
+        "question": "You want to join a circle but the minimum Trust Score requirement is higher than yours. What can you do?",
+        "options": [
+          {"id": "a", "text": "Create a fake profile with a higher score", "correct": false},
+          {"id": "b", "text": "Start with a beginner circle to build your score first", "correct": true},
+          {"id": "c", "text": "There's nothing you can do", "correct": false},
+          {"id": "d", "text": "Complain to the organizer until they let you in", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Great thinking! Starter circles have lower Trust Score requirements and help you build history for higher-tier circles.",
+          "incorrect": "CircleUp offers starter circles with lower Trust Score requirements. Complete a few successfully to build your reputation."
+        }
+      },
+      {
+        "id": "mq-007",
+        "question": "What information can you see about your circle's finances?",
+        "options": [
+          {"id": "a", "text": "Only your own contributions", "correct": false},
+          {"id": "b", "text": "Nothing—the organizer handles everything privately", "correct": false},
+          {"id": "c", "text": "All contributions, payouts, and the Emergency Fund balance", "correct": true},
+          {"id": "d", "text": "Other members' bank account details", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Full transparency! You can see every contribution, every payout, and the Emergency Fund balance. No secrets, no surprises.",
+          "incorrect": "CircleUp provides complete transparency—every member can see all contributions, payouts, and fund balances in real-time."
+        }
+      },
+      {
+        "id": "mq-008",
+        "question": "The organizer announces they need to change the contribution due date. How is this handled?",
+        "options": [
+          {"id": "a", "text": "The organizer changes it unilaterally", "correct": false},
+          {"id": "b", "text": "All members vote on the change", "correct": true},
+          {"id": "c", "text": "The circle must be cancelled and restarted", "correct": false},
+          {"id": "d", "text": "Only new members are affected", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Major changes require member agreement. CircleUp's voting feature lets everyone have a say in circle modifications.",
+          "incorrect": "CircleUp's governance features ensure all members can vote on significant changes to circle terms."
+        }
+      },
+      {
+        "id": "mq-009",
+        "question": "Why might you choose a circle with 'Trust Score' payout order instead of fixed order?",
+        "options": [
+          {"id": "a", "text": "It's completely random", "correct": false},
+          {"id": "b", "text": "Members with higher Trust Scores get priority, rewarding reliable behavior", "correct": true},
+          {"id": "c", "text": "The organizer always gets paid first", "correct": false},
+          {"id": "d", "text": "There's no difference", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Trust Score payout order rewards reliable members with earlier payouts, incentivizing good behavior throughout the circle.",
+          "incorrect": "Trust Score payout order gives priority to members with proven reliability, creating incentives for on-time payments."
+        }
+      },
+      {
+        "id": "mq-010",
+        "question": "You receive your payout. What should you do with the funds?",
+        "options": [
+          {"id": "a", "text": "Spend it all immediately—you earned it!", "correct": false},
+          {"id": "b", "text": "Use it for your savings goal, and continue contributing until the circle completes", "correct": true},
+          {"id": "c", "text": "Lend it to other circle members", "correct": false},
+          {"id": "d", "text": "Withdraw from the circle since you got your money", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Perfect! Use the payout for your goal, and remember—you're committed to contributing until everyone has received their payout.",
+          "incorrect": "Your payout is for your savings goal, but remember your commitment continues until all members have received their payouts."
+        }
+      }
+    ],
+    "organizer": [
+      {
+        "id": "oq-001",
+        "question": "A member with a low Trust Score wants to join your circle. What's the best approach?",
+        "options": [
+          {"id": "a", "text": "Reject them immediately—low scores mean trouble", "correct": false},
+          {"id": "b", "text": "Accept them but require additional verification or a smaller contribution", "correct": true},
+          {"id": "c", "text": "Accept everyone to fill the circle faster", "correct": false},
+          {"id": "d", "text": "Ask them to pay double contributions", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Smart approach! You can accept members conditionally—require enhanced KYC or start them in a smaller circle to build trust.",
+          "incorrect": "CircleUp lets you set custom requirements. Consider requiring additional verification for lower-Trust Score applicants."
+        }
+      },
+      {
+        "id": "oq-002",
+        "question": "Two members in your circle have a personal dispute. How should you handle it?",
+        "options": [
+          {"id": "a", "text": "Ignore it—personal matters aren't your concern", "correct": false},
+          {"id": "b", "text": "Kick both members out immediately", "correct": false},
+          {"id": "c", "text": "Mediate professionally and document any issues affecting the circle", "correct": true},
+          {"id": "d", "text": "Take sides with the member you know better", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Professional mediation keeps circles healthy. CircleUp provides documentation tools and, if needed, platform mediation support.",
+          "incorrect": "As organizer, you set the tone. Document issues professionally and use CircleUp's mediation support if disputes escalate."
+        }
+      },
+      {
+        "id": "oq-003",
+        "question": "What's the most important factor when setting your circle's contribution amount?",
+        "options": [
+          {"id": "a", "text": "The highest amount possible to maximize payouts", "correct": false},
+          {"id": "b", "text": "An amount all members can realistically afford consistently", "correct": true},
+          {"id": "c", "text": "The same amount as other circles on the platform", "correct": false},
+          {"id": "d", "text": "Whatever the first member to join suggests", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Affordability is key! Circles fail when contributions are too high. CircleUp's calculator helps you find the sweet spot.",
+          "incorrect": "Sustainable contributions = successful circles. Set amounts that all members can pay consistently, not just what's aspirational."
+        }
+      },
+      {
+        "id": "oq-004",
+        "question": "A member misses a payment and the Emergency Fund covers it. What happens next?",
+        "options": [
+          {"id": "a", "text": "Nothing—that's what the fund is for", "correct": false},
+          {"id": "b", "text": "The member is removed immediately", "correct": false},
+          {"id": "c", "text": "The member repays the fund over time while the circle continues normally", "correct": true},
+          {"id": "d", "text": "You must cover the difference personally", "correct": false}
+        ],
+        "feedback": {
+          "correct": "The Emergency Fund covers the immediate gap, and the defaulting member repays the fund gradually. Circle continuity is maintained.",
+          "incorrect": "CircleUp's Emergency Fund covers defaults automatically. The member then repays the fund—you don't have to manage recovery."
+        }
+      },
+      {
+        "id": "oq-005",
+        "question": "How should you handle the payout order for your circle?",
+        "options": [
+          {"id": "a", "text": "Always give yourself the first payout as organizer", "correct": false},
+          {"id": "b", "text": "Let members choose or use random/Trust Score based methods for fairness", "correct": true},
+          {"id": "c", "text": "Assign order based on who you like most", "correct": false},
+          {"id": "d", "text": "Order doesn't matter—everyone gets the same amount", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Fair payout order builds trust. CircleUp offers fixed, random, bidding, and Trust Score methods—transparency is key.",
+          "incorrect": "Fair, transparent payout order is essential. Use CircleUp's built-in methods rather than personal preference."
+        }
+      },
+      {
+        "id": "oq-006",
+        "question": "What's the main benefit of CircleUp's automated payment collection for you as an organizer?",
+        "options": [
+          {"id": "a", "text": "You can take extra fees from members", "correct": false},
+          {"id": "b", "text": "You eliminate hours of chasing payments and awkward conversations", "correct": true},
+          {"id": "c", "text": "Members can't see when they're supposed to pay", "correct": false},
+          {"id": "d", "text": "You can delay payments to members you don't like", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Exactly! No more chasing, no more awkward money conversations. Payments happen automatically, preserving relationships.",
+          "incorrect": "Automation saves you 10+ hours weekly on payment management and eliminates the relationship strain of chasing money."
+        }
+      },
+      {
+        "id": "oq-007",
+        "question": "A potential member asks why they should join your circle instead of a traditional one. What's your best answer?",
+        "options": [
+          {"id": "a", "text": "Traditional circles are outdated and don't work", "correct": false},
+          {"id": "b", "text": "CircleUp adds transparency, protection, and automation while honoring the tradition", "correct": true},
+          {"id": "c", "text": "You'll make more money with CircleUp", "correct": false},
+          {"id": "d", "text": "There's no real difference", "correct": false}
+        ],
+        "feedback": {
+          "correct": "CircleUp enhances tradition, not replaces it. Same community bonds, same savings power—plus modern protection and convenience.",
+          "incorrect": "Position CircleUp as an enhancement to tradition: same community spirit, better transparency, protection, and automation."
+        }
+      },
+      {
+        "id": "oq-008",
+        "question": "Your circle is halfway through and you need to add a new member to replace someone who left. How does this work?",
+        "options": [
+          {"id": "a", "text": "It's impossible—circles can't add members mid-cycle", "correct": false},
+          {"id": "b", "text": "The new member takes over the position, and CircleUp calculates their obligations", "correct": true},
+          {"id": "c", "text": "You have to restart the entire circle", "correct": false},
+          {"id": "d", "text": "The new member pays nothing and just receives a payout", "correct": false}
+        ],
+        "feedback": {
+          "correct": "CircleUp handles mid-cycle additions smoothly, calculating exactly what the new member owes based on the payout position.",
+          "incorrect": "CircleUp supports member replacement mid-cycle. The system calculates fair obligations for joining members."
+        }
+      },
+      {
+        "id": "oq-009",
+        "question": "What should you do before starting your first circle on CircleUp?",
+        "options": [
+          {"id": "a", "text": "Jump in immediately—you'll learn as you go", "correct": false},
+          {"id": "b", "text": "Use the Circle Size Calculator and review the organizer guide", "correct": true},
+          {"id": "c", "text": "Wait until you have 50+ interested members", "correct": false},
+          {"id": "d", "text": "Create multiple circles at once to maximize earnings", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Planning pays off! The Circle Size Calculator helps optimize your configuration, and the organizer guide covers best practices.",
+          "incorrect": "Use CircleUp's planning tools before launching. The Circle Size Calculator and organizer guide set you up for success."
+        }
+      },
+      {
+        "id": "oq-010",
+        "question": "How do you ensure your circle completes successfully?",
+        "options": [
+          {"id": "a", "text": "Threaten members who might not pay", "correct": false},
+          {"id": "b", "text": "Vet members carefully, enable automated payments, and maintain clear communication", "correct": true},
+          {"id": "c", "text": "Keep the circle as large as possible for higher payouts", "correct": false},
+          {"id": "d", "text": "Don't worry—the platform guarantees success", "correct": false}
+        ],
+        "feedback": {
+          "correct": "Success comes from good member selection, automation, and communication. CircleUp provides the tools; you provide the leadership.",
+          "incorrect": "Successful circles start with careful vetting, use automation to prevent issues, and maintain transparent communication."
+        }
+      }
+    ]
+  },
+
+  "activityFeed": [
+    {
+      "id": "activity-001",
+      "type": "payout_completed",
+      "message": "Fatou N. received their CHF 3,600 payout",
+      "community": "Zurich Tontine",
+      "timestamp": "2026-01-09T14:23:00Z",
+      "icon": "banknote"
+    },
+    {
+      "id": "activity-002",
+      "type": "circle_created",
+      "message": "New circle 'Geneva Professionals' started with 10 members",
+      "community": "Geneva",
+      "timestamp": "2026-01-09T14:18:00Z",
+      "icon": "plus-circle"
+    },
+    {
+      "id": "activity-003",
+      "type": "member_joined",
+      "message": "23 new members joined CircleUp today",
+      "community": "Platform-wide",
+      "timestamp": "2026-01-09T14:15:00Z",
+      "icon": "users"
+    },
+    {
+      "id": "activity-004",
+      "type": "circle_completed",
+      "message": "'Basel Family Savings' completed successfully - all 8 members paid out",
+      "community": "Basel",
+      "timestamp": "2026-01-09T13:45:00Z",
+      "icon": "check-circle"
+    },
+    {
+      "id": "activity-005",
+      "type": "contribution_milestone",
+      "message": "Platform crossed CHF 28.5M in total savings",
+      "community": "Platform-wide",
+      "timestamp": "2026-01-09T12:00:00Z",
+      "icon": "trending-up"
+    },
+    {
+      "id": "activity-006",
+      "type": "payout_completed",
+      "message": "Carlos M. received their CHF 5,000 payout",
+      "community": "Latino Geneva",
+      "timestamp": "2026-01-09T11:30:00Z",
+      "icon": "banknote"
+    },
+    {
+      "id": "activity-007",
+      "type": "circle_created",
+      "message": "New starter circle 'First Steps Bern' launched",
+      "community": "Bern",
+      "timestamp": "2026-01-09T10:45:00Z",
+      "icon": "plus-circle"
+    },
+    {
+      "id": "activity-008",
+      "type": "trust_score_milestone",
+      "message": "Aminata D. reached 900+ Trust Score",
+      "community": "Zurich",
+      "timestamp": "2026-01-09T09:20:00Z",
+      "icon": "award"
+    }
+  ],
+
+  "ambassadors": [
+    {
+      "id": "ambassador-001",
+      "name": "Moussa Camara",
+      "title": "Community Leader",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+      "community": "West African Diaspora, Zurich",
+      "story": "Moussa has organized tontines for 15 years. He brought his community of 200+ members to CircleUp and now manages 12 active circles. His circles have a 100% completion rate.",
+      "circlesManaged": 12,
+      "membersBrought": 200,
+      "totalFacilitated": 180000,
+      "joinedDate": "2023-06"
+    },
+    {
+      "id": "ambassador-002",
+      "name": "Isabella Rodriguez",
+      "title": "Founding Member",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+      "community": "Latin American Network, Geneva",
+      "story": "Isabella was one of CircleUp's first users. She's helped translate the platform to Spanish and Portuguese and has referred over 150 members from her community.",
+      "circlesManaged": 6,
+      "membersBrought": 150,
+      "totalFacilitated": 95000,
+      "joinedDate": "2023-04"
+    },
+    {
+      "id": "ambassador-003",
+      "name": "Raj Patel",
+      "title": "Tech Champion",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+      "community": "Indian Professionals, Lausanne",
+      "story": "A software engineer who saw the potential in digitizing chit funds. Raj has helped onboard skeptical tech professionals and provides feedback that shapes our product.",
+      "circlesManaged": 4,
+      "membersBrought": 45,
+      "totalFacilitated": 72000,
+      "joinedDate": "2023-09"
+    }
+  ],
+
+  "referralProgram": {
+    "description": "Earn rewards when friends join CircleUp and complete their first circle.",
+    "tiers": [
+      {
+        "name": "Starter",
+        "referralsRequired": 0,
+        "rewardPerReferral": 20,
+        "bonusReward": 0
+      },
+      {
+        "name": "Advocate",
+        "referralsRequired": 5,
+        "rewardPerReferral": 30,
+        "bonusReward": 50
+      },
+      {
+        "name": "Champion",
+        "referralsRequired": 15,
+        "rewardPerReferral": 40,
+        "bonusReward": 150
+      },
+      {
+        "name": "Ambassador",
+        "referralsRequired": 30,
+        "rewardPerReferral": 50,
+        "bonusReward": 500
+      }
+    ],
+    "conditions": [
+      "Referral must create account using your link",
+      "Referral must complete their first full circle",
+      "Rewards credited within 7 days of circle completion",
+      "No limit on number of referrals"
+    ],
+    "referralBonusForNewUser": 10
+  },
+
+  "mobileFeatures": [
+    {
+      "id": "push-notifications",
+      "title": "Smart Notifications",
+      "description": "Get reminded before contributions are due, notified when payments are processed, and alerted when your payout is ready.",
+      "icon": "bell"
+    },
+    {
+      "id": "one-tap-payment",
+      "title": "One-Tap Payments",
+      "description": "Pay your contribution in seconds with saved payment methods. No logging in, no forms—just tap and done.",
+      "icon": "zap"
+    },
+    {
+      "id": "biometric-login",
+      "title": "Biometric Security",
+      "description": "Log in with Face ID, Touch ID, or fingerprint. Your financial data protected by the same security as your phone.",
+      "icon": "fingerprint"
+    },
+    {
+      "id": "offline-access",
+      "title": "Offline Access",
+      "description": "View your circle status, contribution history, and payout schedule even without internet connection.",
+      "icon": "wifi-off"
+    },
+    {
+      "id": "quick-invite",
+      "title": "Quick Invite",
+      "description": "Share circle invitations via WhatsApp, SMS, or any messaging app. One-tap to generate shareable links.",
+      "icon": "share-2"
+    },
+    {
+      "id": "widgets",
+      "title": "Home Screen Widgets",
+      "description": "See your next contribution due date and circle status right on your home screen without opening the app.",
+      "icon": "layout"
+    }
+  ],
+
+  "impactMetrics": {
+    "totalSaved": 28500000,
+    "familiesHelped": 12400,
+    "goalsAchieved": 8900,
+    "circlesCompleted": 2847,
+    "countriesReached": 23,
+    "averageSavingsGoal": 4800,
+    "emergencyFundPayouts": 156,
+    "emergencyFundCoverage": 98.7,
+    "topGoals": [
+      {"goal": "Education", "percentage": 28},
+      {"goal": "Home Purchase", "percentage": 22},
+      {"goal": "Business Start", "percentage": 18},
+      {"goal": "Emergency Fund", "percentage": 15},
+      {"goal": "Vehicle", "percentage": 10},
+      {"goal": "Other", "percentage": 7}
+    ]
+  },
+
+  "demoSlots": [
+    {
+      "id": "slot-001",
+      "date": "2026-01-13",
+      "time": "10:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "en"
+    },
+    {
+      "id": "slot-002",
+      "date": "2026-01-13",
+      "time": "14:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "en"
+    },
+    {
+      "id": "slot-003",
+      "date": "2026-01-13",
+      "time": "16:00",
+      "timezone": "CET",
+      "available": false,
+      "language": "fr"
+    },
+    {
+      "id": "slot-004",
+      "date": "2026-01-14",
+      "time": "09:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "de"
+    },
+    {
+      "id": "slot-005",
+      "date": "2026-01-14",
+      "time": "11:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "en"
+    },
+    {
+      "id": "slot-006",
+      "date": "2026-01-14",
+      "time": "15:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "fr"
+    },
+    {
+      "id": "slot-007",
+      "date": "2026-01-15",
+      "time": "10:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "en"
+    },
+    {
+      "id": "slot-008",
+      "date": "2026-01-15",
+      "time": "14:00",
+      "timezone": "CET",
+      "available": true,
+      "language": "it"
+    }
+  ],
+
+  "languages": [
+    {"code": "en", "name": "English", "flag": "🇬🇧", "default": true},
+    {"code": "fr", "name": "Français", "flag": "🇫🇷", "default": false},
+    {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "default": false},
+    {"code": "it", "name": "Italiano", "flag": "🇮🇹", "default": false},
+    {"code": "pt", "name": "Português", "flag": "🇵🇹", "default": false}
+  ],
+
+  "appDownload": {
+    "ios": {
+      "url": "https://apps.apple.com/app/circleup",
+      "badge": "/images/app-store-badge.svg"
+    },
+    "android": {
+      "url": "https://play.google.com/store/apps/details?id=com.circleup",
+      "badge": "/images/google-play-badge.svg"
+    },
+    "qrCode": "/images/app-qr-code.svg"
+  }
+}

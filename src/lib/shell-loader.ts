@@ -2,7 +2,7 @@
  * Shell loading and parsing utilities
  */
 
-import type { ShellSpec, ShellInfo } from '@/types/product'
+import type { ShellSpec, ShellInfo, ShellNavGroup, ShellNavItem } from '@/types/product'
 import type { ComponentType, ReactNode } from 'react'
 
 // Load shell spec markdown file at build time
@@ -48,16 +48,50 @@ export function parseShellSpec(md: string): ShellSpec | null {
     const overviewMatch = md.match(/## Overview\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const overview = overviewMatch?.[1]?.trim() || ''
 
-    // Extract navigation items
+    // Extract navigation items and groups
     const navSection = md.match(/## Navigation Structure\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
     const navigationItems: string[] = []
+    const navigationGroups: ShellNavGroup[] = []
 
     if (navSection?.[1]) {
       const lines = navSection[1].split('\n')
+      let currentGroup: ShellNavGroup | null = null
+
       for (const line of lines) {
         const trimmed = line.trim()
+
+        // Check for ### Group Header
+        const groupMatch = trimmed.match(/^###\s+(.+)$/)
+        if (groupMatch) {
+          currentGroup = { label: groupMatch[1].trim(), items: [] }
+          navigationGroups.push(currentGroup)
+          continue
+        }
+
+        // Check for navigation items: - **Label** → `/path` — Description
         if (trimmed.startsWith('- ')) {
-          navigationItems.push(trimmed.slice(2).trim())
+          const itemText = trimmed.slice(2).trim()
+          navigationItems.push(itemText)
+
+          // Parse label and href from: **Label** → `/path` — Description
+          const labelMatch = itemText.match(/\*\*([^*]+)\*\*/)
+          const hrefMatch = itemText.match(/[`→]?\s*`?([^`—]+)`?\s*[—]?/)
+          const label = labelMatch?.[1]?.trim() || itemText.split('→')[0]?.trim() || itemText
+          // Extract href from between backticks or after →
+          const hrefPart = itemText.match(/→\s*`([^`]+)`/) || itemText.match(/→\s*(\S+)/)
+          const href = hrefPart?.[1]?.trim() || `/${label.toLowerCase().replace(/\s+&\s+/g, '-and-').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`
+
+          const navItem: ShellNavItem = { label, href }
+
+          if (currentGroup) {
+            currentGroup.items.push(navItem)
+          } else {
+            // Items before any group header go into a default group
+            if (navigationGroups.length === 0 || navigationGroups[0].label !== 'Main') {
+              navigationGroups.unshift({ label: 'Main', items: [] })
+            }
+            navigationGroups[0].items.push(navItem)
+          }
         }
       }
     }
@@ -75,6 +109,7 @@ export function parseShellSpec(md: string): ShellSpec | null {
       raw: md,
       overview,
       navigationItems,
+      navigationGroups,
       layoutPattern,
     }
   } catch {

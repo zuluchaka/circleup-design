@@ -1,0 +1,632 @@
+{
+  "_meta": {
+    "models": {
+      "members": "Each member represents a user within an association, combining their profile info with their membership details and trust metrics.",
+      "trustScores": "The AI-generated reliability score (0-1000) with a breakdown of the six factors that contribute to it.",
+      "references": "Endorsements that members give or receive from other members, typically from circle organizers or long-standing members.",
+      "atRiskAlerts": "Flags raised when a member shows declining engagement, missed payments, or other warning signs that organizers should address.",
+      "disputes": "Formal complaints filed by members against other members or organizers, with evidence and a resolution timeline.",
+      "feedback": "Ratings and comments that members leave about their circle experience or specific organizers."
+    },
+    "relationships": [
+      "Each Member has exactly one Trust Score with factor breakdown",
+      "Members can give and receive multiple References",
+      "At-Risk Alerts flag specific Members for organizer attention",
+      "Disputes are filed by one Member against another Member",
+      "Feedback is submitted by Members about their circle experience"
+    ]
+  },
+  "members": [
+    {
+      "id": "usr-001",
+      "name": "Chukwuemeka Okonkwo",
+      "email": "c.okonkwo@email.com",
+      "phone": "+41 79 123 4567",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      "role": "president",
+      "status": "active",
+      "membershipType": "regular",
+      "kycStatus": "enhanced",
+      "joinedAt": "2021-03-15",
+      "duesPaidUntil": "2026-03-15",
+      "circlesActive": 3,
+      "circlesCompleted": 7,
+      "totalContributed": 45200,
+      "onTimePayments": 84,
+      "latePayments": 0,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-002",
+      "name": "Adaeze Nwosu",
+      "email": "adaeze.n@email.com",
+      "phone": "+41 78 234 5678",
+      "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face",
+      "role": "treasurer",
+      "status": "active",
+      "membershipType": "regular",
+      "kycStatus": "enhanced",
+      "joinedAt": "2021-04-02",
+      "duesPaidUntil": "2026-03-15",
+      "circlesActive": 2,
+      "circlesCompleted": 5,
+      "totalContributed": 32800,
+      "onTimePayments": 62,
+      "latePayments": 2,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-003",
+      "name": "Obinna Eze",
+      "email": "obinna.eze@email.com",
+      "phone": "+41 76 345 6789",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "role": "secretary",
+      "status": "active",
+      "membershipType": "regular",
+      "kycStatus": "basic",
+      "joinedAt": "2021-04-10",
+      "duesPaidUntil": "2026-01-15",
+      "circlesActive": 2,
+      "circlesCompleted": 4,
+      "totalContributed": 28400,
+      "onTimePayments": 48,
+      "latePayments": 4,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-004",
+      "name": "Ngozi Amadi",
+      "email": "ngozi.amadi@email.com",
+      "phone": "+41 79 456 7890",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+      "role": "admin",
+      "status": "active",
+      "membershipType": "regular",
+      "kycStatus": "enhanced",
+      "joinedAt": "2021-05-20",
+      "duesPaidUntil": "2026-03-15",
+      "circlesActive": 2,
+      "circlesCompleted": 3,
+      "totalContributed": 24600,
+      "onTimePayments": 41,
+      "latePayments": 1,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-005",
+      "name": "Ikenna Obi",
+      "email": "ikenna.obi@email.com",
+      "phone": "+41 78 567 8901",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "role": "member",
+      "status": "active",
+      "membershipType": "regular",
+      "kycStatus": "basic",
+      "joinedAt": "2022-01-08",
+      "duesPaidUntil": "2025-12-15",
+      "circlesActive": 1,
+      "circlesCompleted": 2,
+      "totalContributed": 14200,
+      "onTimePayments": 22,
+      "latePayments": 3,
+      "missedPayments": 1
+    },
+    {
+      "id": "usr-006",
+      "name": "Chiamaka Onyeka",
+      "email": "chiamaka.o@email.com",
+      "phone": "+41 76 678 9012",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      "role": "member",
+      "status": "active",
+      "membershipType": "student",
+      "kycStatus": "basic",
+      "joinedAt": "2023-09-01",
+      "duesPaidUntil": "2026-03-15",
+      "circlesActive": 1,
+      "circlesCompleted": 1,
+      "totalContributed": 6800,
+      "onTimePayments": 16,
+      "latePayments": 0,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-007",
+      "name": "Emeka Udoh",
+      "email": "emeka.udoh@email.com",
+      "phone": "+41 79 789 0123",
+      "avatar": null,
+      "role": "member",
+      "status": "pending",
+      "membershipType": "regular",
+      "kycStatus": "pending",
+      "joinedAt": "2025-12-28",
+      "duesPaidUntil": null,
+      "circlesActive": 0,
+      "circlesCompleted": 0,
+      "totalContributed": 0,
+      "onTimePayments": 0,
+      "latePayments": 0,
+      "missedPayments": 0
+    },
+    {
+      "id": "usr-008",
+      "name": "Chidi Okoro",
+      "email": "chidi.okoro@email.com",
+      "phone": "+41 78 890 1234",
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face",
+      "role": "member",
+      "status": "suspended",
+      "membershipType": "regular",
+      "kycStatus": "basic",
+      "joinedAt": "2022-06-15",
+      "duesPaidUntil": "2024-06-15",
+      "circlesActive": 0,
+      "circlesCompleted": 1,
+      "totalContributed": 4800,
+      "onTimePayments": 8,
+      "latePayments": 6,
+      "missedPayments": 4
+    }
+  ],
+  "trustScores": [
+    {
+      "memberId": "usr-001",
+      "score": 942,
+      "trend": "stable",
+      "factors": {
+        "paymentHistory": { "score": 100, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 100, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 95, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 88, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 85, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 80, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-002",
+      "score": 891,
+      "trend": "up",
+      "factors": {
+        "paymentHistory": { "score": 96, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 100, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 90, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 82, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 78, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 75, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-003",
+      "score": 823,
+      "trend": "stable",
+      "factors": {
+        "paymentHistory": { "score": 88, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 70, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 88, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 75, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 72, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 68, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-004",
+      "score": 867,
+      "trend": "up",
+      "factors": {
+        "paymentHistory": { "score": 98, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 100, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 82, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 70, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 65, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 72, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-005",
+      "score": 698,
+      "trend": "down",
+      "factors": {
+        "paymentHistory": { "score": 72, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 70, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 65, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 58, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 55, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 50, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-006",
+      "score": 756,
+      "trend": "up",
+      "factors": {
+        "paymentHistory": { "score": 100, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 70, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 35, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 62, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 48, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 40, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-007",
+      "score": 450,
+      "trend": "stable",
+      "factors": {
+        "paymentHistory": { "score": 50, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 30, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 10, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 20, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 15, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 50, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    },
+    {
+      "memberId": "usr-008",
+      "score": 412,
+      "trend": "down",
+      "factors": {
+        "paymentHistory": { "score": 35, "weight": 40, "label": "Payment History" },
+        "verification": { "score": 70, "weight": 20, "label": "Verification Level" },
+        "tenure": { "score": 60, "weight": 15, "label": "Membership Tenure" },
+        "engagement": { "score": 25, "weight": 10, "label": "Community Engagement" },
+        "network": { "score": 30, "weight": 10, "label": "Network Connections" },
+        "external": { "score": 35, "weight": 5, "label": "External Credit" }
+      },
+      "lastCalculated": "2026-01-05T14:30:00Z",
+      "modelVersion": "v2.3"
+    }
+  ],
+  "references": [
+    {
+      "id": "ref-001",
+      "fromMemberId": "usr-001",
+      "fromMemberName": "Chukwuemeka Okonkwo",
+      "toMemberId": "usr-002",
+      "toMemberName": "Adaeze Nwosu",
+      "relationship": "Circle Organizer",
+      "text": "Adaeze has been an exceptional treasurer for our association. She maintains impeccable records and has never missed a payment in the 4 years I've known her. Highly recommended for any circle.",
+      "createdAt": "2024-06-15"
+    },
+    {
+      "id": "ref-002",
+      "fromMemberId": "usr-001",
+      "fromMemberName": "Chukwuemeka Okonkwo",
+      "toMemberId": "usr-004",
+      "toMemberName": "Ngozi Amadi",
+      "relationship": "Association President",
+      "text": "Ngozi joined our community and quickly proved herself reliable. She's completed 3 circles without issue and actively participates in our events. A trustworthy member.",
+      "createdAt": "2024-09-20"
+    },
+    {
+      "id": "ref-003",
+      "fromMemberId": "usr-002",
+      "fromMemberName": "Adaeze Nwosu",
+      "toMemberId": "usr-006",
+      "toMemberName": "Chiamaka Onyeka",
+      "relationship": "Circle Organizer",
+      "text": "Despite being a student, Chiamaka has shown remarkable financial discipline. She's completed her first circle with all on-time payments and is a joy to have in our group.",
+      "createdAt": "2025-08-10"
+    },
+    {
+      "id": "ref-004",
+      "fromMemberId": "usr-004",
+      "fromMemberName": "Ngozi Amadi",
+      "toMemberId": "usr-001",
+      "toMemberName": "Chukwuemeka Okonkwo",
+      "relationship": "Fellow Member",
+      "text": "Chukwuemeka is the reason I joined CircleUp. His leadership and transparency in running our association sets the standard for what community finance should be.",
+      "createdAt": "2025-01-05"
+    }
+  ],
+  "atRiskAlerts": [
+    {
+      "id": "alert-001",
+      "memberId": "usr-005",
+      "memberName": "Ikenna Obi",
+      "riskLevel": "medium",
+      "riskIndicators": [
+        "Trust score declined 45 points in 3 months",
+        "1 missed payment in current cycle",
+        "3 late payments in last 6 months",
+        "Engagement dropped 40% from average"
+      ],
+      "recommendedActions": [
+        "Schedule a check-in call to understand their situation",
+        "Consider offering flexible payment arrangement",
+        "Suggest smaller contribution circle if financial stress"
+      ],
+      "createdAt": "2025-12-20",
+      "status": "open"
+    },
+    {
+      "id": "alert-002",
+      "memberId": "usr-008",
+      "memberName": "Chidi Okoro",
+      "riskLevel": "high",
+      "riskIndicators": [
+        "4 missed payments triggered Emergency Fund",
+        "Trust score below 450 threshold",
+        "No platform activity in 60+ days",
+        "Dues expired 18 months ago"
+      ],
+      "recommendedActions": [
+        "Attempt final contact via all channels",
+        "Review for formal suspension if unresponsive",
+        "Document for potential collection action"
+      ],
+      "createdAt": "2025-06-01",
+      "status": "escalated"
+    }
+  ],
+  "disputes": [
+    {
+      "id": "disp-001",
+      "filedBy": {
+        "id": "usr-005",
+        "name": "Ikenna Obi"
+      },
+      "against": {
+        "id": "usr-003",
+        "name": "Obinna Eze"
+      },
+      "type": "payment_dispute",
+      "subject": "Payout Not Received",
+      "description": "I was scheduled to receive my payout on December 1st but it has not arrived in my account. I've contacted the secretary multiple times but received no response. The circle dashboard shows the payout as 'completed' but my bank has no record of the transfer.",
+      "evidence": [
+        { "type": "screenshot", "name": "bank_statement_dec.pdf", "uploadedAt": "2025-12-15" },
+        { "type": "screenshot", "name": "circle_dashboard.png", "uploadedAt": "2025-12-15" }
+      ],
+      "status": "resolved",
+      "resolution": "After investigation, the transfer was sent to an outdated bank account. The secretary updated the payment details and the payout was re-processed successfully on December 18th.",
+      "timeline": [
+        { "date": "2025-12-15", "action": "Dispute filed", "actor": "Ikenna Obi" },
+        { "date": "2025-12-16", "action": "Assigned to support", "actor": "System" },
+        { "date": "2025-12-17", "action": "Investigation completed", "actor": "Support Team" },
+        { "date": "2025-12-18", "action": "Payout re-processed", "actor": "Obinna Eze" },
+        { "date": "2025-12-19", "action": "Dispute resolved", "actor": "Support Team" }
+      ],
+      "createdAt": "2025-12-15",
+      "resolvedAt": "2025-12-19"
+    },
+    {
+      "id": "disp-002",
+      "filedBy": {
+        "id": "usr-006",
+        "name": "Chiamaka Onyeka"
+      },
+      "against": {
+        "id": "usr-008",
+        "name": "Chidi Okoro"
+      },
+      "type": "conduct_dispute",
+      "subject": "Harassment in Circle Chat",
+      "description": "This member has been sending inappropriate messages in our circle group chat, making personal comments about my finances and questioning why a student should be in the circle. This has made me uncomfortable participating in discussions.",
+      "evidence": [
+        { "type": "screenshot", "name": "chat_screenshot_1.png", "uploadedAt": "2025-05-10" },
+        { "type": "screenshot", "name": "chat_screenshot_2.png", "uploadedAt": "2025-05-10" }
+      ],
+      "status": "resolved",
+      "resolution": "After review, the reported behavior violated community guidelines. The member received a formal warning and was subsequently suspended due to additional violations including payment defaults.",
+      "timeline": [
+        { "date": "2025-05-10", "action": "Dispute filed", "actor": "Chiamaka Onyeka" },
+        { "date": "2025-05-11", "action": "Evidence reviewed", "actor": "Admin Team" },
+        { "date": "2025-05-12", "action": "Warning issued to member", "actor": "Admin Team" },
+        { "date": "2025-06-01", "action": "Member suspended for multiple violations", "actor": "Admin Team" },
+        { "date": "2025-06-01", "action": "Dispute resolved", "actor": "Admin Team" }
+      ],
+      "createdAt": "2025-05-10",
+      "resolvedAt": "2025-06-01"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "fb-001",
+      "fromMemberId": "usr-004",
+      "fromMemberName": "Ngozi Amadi",
+      "circleId": "circle-001",
+      "circleName": "Unity Savings Circle",
+      "rating": 5,
+      "comment": "Excellent experience! The organizer was transparent throughout, payouts were always on time, and the group was supportive. This was my third circle and the best one yet.",
+      "createdAt": "2025-11-30"
+    },
+    {
+      "id": "fb-002",
+      "fromMemberId": "usr-005",
+      "fromMemberName": "Ikenna Obi",
+      "circleId": "circle-002",
+      "circleName": "Prosperity Circle",
+      "rating": 3,
+      "comment": "The circle itself was fine but communication could be better. Had trouble getting responses about my payout status. Resolved eventually but caused unnecessary stress.",
+      "createdAt": "2025-12-20"
+    },
+    {
+      "id": "fb-003",
+      "fromMemberId": "usr-006",
+      "fromMemberName": "Chiamaka Onyeka",
+      "circleId": "circle-003",
+      "circleName": "Student Savers",
+      "rating": 5,
+      "comment": "Perfect for students like me! Lower contribution amounts and very understanding group. Completed my first circle and already saved more than I ever have. Thank you!",
+      "createdAt": "2025-08-15"
+    }
+  ],
+  "memberDocuments": [
+    {
+      "id": "doc-001",
+      "title": "Monthly Contribution Receipt — January 2026",
+      "fileName": "receipt-jan-2026.pdf",
+      "fileSize": 48200,
+      "category": "financial",
+      "circleName": "Unity Savings Circle",
+      "uploadedByName": "System",
+      "isAutoGenerated": true,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "createdAt": "2026-01-15"
+    },
+    {
+      "id": "doc-002",
+      "title": "Monthly Contribution Receipt — December 2025",
+      "fileName": "receipt-dec-2025.pdf",
+      "fileSize": 47800,
+      "category": "financial",
+      "circleName": "Unity Savings Circle",
+      "uploadedByName": "System",
+      "isAutoGenerated": true,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "createdAt": "2025-12-15"
+    },
+    {
+      "id": "doc-003",
+      "title": "Circle Membership Agreement",
+      "fileName": "membership-agreement-unity.pdf",
+      "fileSize": 125400,
+      "category": "agreements",
+      "circleName": "Unity Savings Circle",
+      "uploadedByName": "Adaeze Nwosu",
+      "isAutoGenerated": false,
+      "acknowledged": true,
+      "signed": true,
+      "requiresAcknowledgment": true,
+      "requiresSignature": true,
+      "createdAt": "2024-03-10"
+    },
+    {
+      "id": "doc-004",
+      "title": "Payout Confirmation — Cycle 7",
+      "fileName": "payout-confirmation-c7.pdf",
+      "fileSize": 52100,
+      "category": "financial",
+      "circleName": "Prosperity Circle",
+      "uploadedByName": "System",
+      "isAutoGenerated": true,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "createdAt": "2025-11-01"
+    },
+    {
+      "id": "doc-005",
+      "title": "Updated Code of Conduct 2026",
+      "fileName": "code-of-conduct-2026.pdf",
+      "fileSize": 198300,
+      "category": "policies",
+      "circleName": "Association-wide",
+      "uploadedByName": "Ngozi Amadi",
+      "isAutoGenerated": false,
+      "acknowledged": true,
+      "signed": false,
+      "requiresAcknowledgment": true,
+      "requiresSignature": false,
+      "createdAt": "2026-01-05"
+    },
+    {
+      "id": "doc-006",
+      "title": "Q4 2025 Financial Report",
+      "fileName": "q4-2025-financial-report.pdf",
+      "fileSize": 342500,
+      "category": "financial",
+      "circleName": "Unity Savings Circle",
+      "uploadedByName": "Adaeze Nwosu",
+      "isAutoGenerated": false,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "createdAt": "2026-01-10"
+    },
+    {
+      "id": "doc-007",
+      "title": "Annual General Meeting Minutes",
+      "fileName": "agm-minutes-2025.pdf",
+      "fileSize": 87600,
+      "category": "minutes",
+      "circleName": "Association-wide",
+      "uploadedByName": "Chukwuemeka Okonkwo",
+      "isAutoGenerated": false,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "createdAt": "2025-12-20"
+    },
+    {
+      "id": "doc-008",
+      "title": "New Circle Participation Agreement",
+      "fileName": "participation-agreement-growth.pdf",
+      "fileSize": 110200,
+      "category": "agreements",
+      "circleName": "Growth Fund Circle",
+      "uploadedByName": "Obinna Eze",
+      "isAutoGenerated": false,
+      "acknowledged": false,
+      "signed": false,
+      "requiresAcknowledgment": true,
+      "requiresSignature": true,
+      "createdAt": "2026-02-01"
+    },
+    {
+      "id": "doc-009",
+      "title": "Member Onboarding Form",
+      "fileName": "onboarding-form-okonkwo.pdf",
+      "fileSize": 64300,
+      "category": "forms",
+      "circleName": "Association-wide",
+      "uploadedByName": "Chukwuemeka Okonkwo",
+      "isAutoGenerated": false,
+      "acknowledged": true,
+      "signed": true,
+      "requiresAcknowledgment": true,
+      "requiresSignature": true,
+      "createdAt": "2021-03-15"
+    }
+  ],
+  "scoreImprovementTips": [
+    {
+      "factor": "paymentHistory",
+      "tip": "Make all payments on time. Even one late payment can impact your score. Set up automatic payments to ensure you never miss a due date."
+    },
+    {
+      "factor": "verification",
+      "tip": "Complete enhanced KYC verification by uploading your ID and completing the video verification. This can boost your score by up to 200 points."
+    },
+    {
+      "factor": "tenure",
+      "tip": "This factor improves naturally over time. Stay active in the community and your tenure score will grow."
+    },
+    {
+      "factor": "engagement",
+      "tip": "Participate in circle discussions, attend events, and respond to announcements. Active members score higher."
+    },
+    {
+      "factor": "network",
+      "tip": "Get references from trusted members, especially circle organizers. Strong connections boost your network score."
+    },
+    {
+      "factor": "external",
+      "tip": "Link your external financial accounts to demonstrate creditworthiness from outside the platform."
+    }
+  ]
+}

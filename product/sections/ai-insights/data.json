@@ -1,0 +1,1031 @@
+{
+  "_meta": {
+    "models": {
+      "circleRecommendations": "AI-suggested circles that match a member's savings goals, income, and preferences with explanations for why each is a good fit.",
+      "financialHealthChat": "Conversation history with the AI financial health assistant, including questions, answers, and actionable advice.",
+      "contributionSuggestions": "AI-recommended contribution amounts based on income patterns, expenses, and savings capacity analysis.",
+      "cashFlowAlerts": "Predictive warnings when AI detects potential payment difficulties before contribution due dates.",
+      "savingsOpportunities": "Suggestions for increasing savings when AI detects surplus income or reduced expenses.",
+      "seasonalPatterns": "Historical trends showing how savings and spending vary across months and seasons.",
+      "crossCircleInsights": "Aggregated portfolio analysis across all circles a member participates in.",
+      "memberRiskScores": "AI-predicted default risk scores for prospective circle members with factor breakdowns.",
+      "circleHealthScores": "Overall health assessment for circles with improvement recommendations.",
+      "churnWarnings": "Early warning indicators for members at risk of leaving or defaulting.",
+      "configurationSuggestions": "AI recommendations for optimal circle setup based on similar successful circles.",
+      "payoutOrderRecommendations": "AI-predicted fair payout order for bidding circles based on member needs.",
+      "fraudAlerts": "Real-time anomaly detection alerts for suspicious activities.",
+      "behaviorClusters": "Member segmentation based on savings behavior patterns.",
+      "trustGraphNodes": "Social trust network data showing member connections and trust relationships.",
+      "aiChatMessages": "AI-powered customer support chatbot conversation history."
+    },
+    "relationships": [
+      "Circle Recommendations link to Circle entities and explain match factors",
+      "Cash Flow Alerts predict issues for upcoming Contributions",
+      "Member Risk Scores assess Users applying to join Circles",
+      "Circle Health Scores aggregate Participant and Contribution data",
+      "Churn Warnings identify at-risk Participants within Circles",
+      "Trust Graph Nodes map relationships between Users based on shared Circles"
+    ]
+  },
+
+  "circleRecommendations": [
+    {
+      "id": "rec-001",
+      "circleId": "circle-456",
+      "circleName": "Women's Professional Network Savings",
+      "matchPercentage": 94,
+      "contributionAmount": 200,
+      "frequency": "monthly",
+      "memberCount": 12,
+      "maxParticipants": 15,
+      "organizerName": "Marie Ndoye",
+      "organizerTrustScore": 892,
+      "matchReasons": [
+        "Contribution amount matches your suggested capacity (CHF 180-220)",
+        "Members share your professional background in finance",
+        "92% on-time payment rate aligns with your reliability",
+        "Similar savings goals: home purchase and emergency fund"
+      ],
+      "estimatedPayoutDate": "2026-07-15",
+      "riskLevel": "low",
+      "tags": ["professional", "women", "networking"],
+      "status": "open"
+    },
+    {
+      "id": "rec-002",
+      "circleId": "circle-789",
+      "circleName": "Diaspora Family Tontine",
+      "matchPercentage": 87,
+      "contributionAmount": 150,
+      "frequency": "bi_weekly",
+      "memberCount": 8,
+      "maxParticipants": 10,
+      "organizerName": "Kwame Asante",
+      "organizerTrustScore": 945,
+      "matchReasons": [
+        "Family-focused circle matches your savings purpose",
+        "Bi-weekly contributions suit your income schedule",
+        "3 mutual connections already in this circle",
+        "Strong emergency fund protection (2%)"
+      ],
+      "estimatedPayoutDate": "2026-05-20",
+      "riskLevel": "low",
+      "tags": ["family", "diaspora", "trusted"],
+      "status": "open"
+    },
+    {
+      "id": "rec-003",
+      "circleId": "circle-234",
+      "circleName": "Tech Professionals Savings Club",
+      "matchPercentage": 78,
+      "contributionAmount": 500,
+      "frequency": "monthly",
+      "memberCount": 20,
+      "maxParticipants": 24,
+      "organizerName": "Omar Diop",
+      "organizerTrustScore": 823,
+      "matchReasons": [
+        "Higher contribution for accelerated savings",
+        "Members from similar tech industry background",
+        "Flexible payout bidding system available"
+      ],
+      "estimatedPayoutDate": "2026-09-01",
+      "riskLevel": "medium",
+      "tags": ["tech", "high-value", "bidding"],
+      "status": "open"
+    }
+  ],
+
+  "financialHealthChat": {
+    "conversationId": "chat-001",
+    "userId": "user-123",
+    "messages": [
+      {
+        "id": "msg-001",
+        "role": "user",
+        "content": "How am I doing with my savings goals this month?",
+        "timestamp": "2026-01-08T09:15:00Z"
+      },
+      {
+        "id": "msg-002",
+        "role": "assistant",
+        "content": "Great question! Let me analyze your progress.\n\n**This Month's Summary:**\n- Total contributions: CHF 450 across 2 circles\n- On track for all payments ✓\n- Emergency fund growing: CHF 67 added\n\n**Compared to Last Month:**\n- You're contributing 12% more\n- Savings rate improved from 18% to 21% of income\n\n**Recommendation:** Consider putting your upcoming bonus toward your home purchase goal. Would you like me to calculate how much closer that would get you?",
+        "timestamp": "2026-01-08T09:15:05Z",
+        "insights": {
+          "savingsRate": 0.21,
+          "monthOverMonthChange": 0.12,
+          "goalsOnTrack": 2,
+          "goalsAtRisk": 0
+        }
+      },
+      {
+        "id": "msg-003",
+        "role": "user",
+        "content": "Yes, I'm expecting about CHF 2,000. How would that help?",
+        "timestamp": "2026-01-08T09:16:30Z"
+      },
+      {
+        "id": "msg-004",
+        "role": "assistant",
+        "content": "If you put CHF 2,000 toward your home purchase goal:\n\n**Current Progress:** CHF 12,450 of CHF 50,000 (24.9%)\n**After Bonus:** CHF 14,450 of CHF 50,000 (28.9%)\n\nThat's a **4% jump** in one month! At your current savings rate, this would move your target date from March 2028 to **January 2028** — 2 months earlier.\n\n**Options to consider:**\n1. Put full CHF 2,000 toward home goal\n2. Split: CHF 1,500 home + CHF 500 emergency fund\n3. Increase monthly circle contribution temporarily\n\nWould you like me to model any of these scenarios?",
+        "timestamp": "2026-01-08T09:16:35Z",
+        "insights": {
+          "currentGoalProgress": 0.249,
+          "projectedProgress": 0.289,
+          "timelineSavedMonths": 2
+        }
+      }
+    ],
+    "lastUpdated": "2026-01-08T09:16:35Z"
+  },
+
+  "contributionSuggestions": [
+    {
+      "id": "sug-001",
+      "userId": "user-123",
+      "suggestedAmount": 200,
+      "currentAmount": 150,
+      "changePercent": 33,
+      "confidence": 0.89,
+      "reasoning": "Based on your income increase last quarter and reduced rent expenses after moving, you have approximately CHF 180-220 additional monthly capacity.",
+      "incomePatterns": {
+        "averageMonthlyIncome": 6500,
+        "variability": "low",
+        "recentTrend": "increasing"
+      },
+      "affordabilityScore": 0.85,
+      "impactProjection": {
+        "additionalSavingsPerYear": 600,
+        "goalAcceleration": "3 months faster to home purchase goal"
+      },
+      "status": "pending",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "id": "sug-002",
+      "userId": "user-123",
+      "suggestedAmount": 100,
+      "currentAmount": 150,
+      "changePercent": -33,
+      "confidence": 0.72,
+      "reasoning": "Detected upcoming large expense (annual insurance premium in February). Temporarily reducing contribution could prevent payment stress.",
+      "incomePatterns": {
+        "averageMonthlyIncome": 6500,
+        "variability": "low",
+        "recentTrend": "stable"
+      },
+      "affordabilityScore": 0.65,
+      "impactProjection": {
+        "additionalSavingsPerYear": -600,
+        "goalAcceleration": "Maintains on-time payment streak"
+      },
+      "status": "dismissed",
+      "createdAt": "2026-01-02T08:00:00Z"
+    }
+  ],
+
+  "cashFlowAlerts": [
+    {
+      "id": "alert-001",
+      "userId": "user-456",
+      "severity": "warning",
+      "title": "Potential shortfall detected for February contribution",
+      "message": "Based on your spending patterns and upcoming bills, you may be CHF 85 short for your February 15th contribution to Solidarity Savings Circle.",
+      "predictedShortfall": 85,
+      "contributionDueDate": "2026-02-15",
+      "contributionAmount": 300,
+      "daysUntilDue": 38,
+      "confidence": 0.76,
+      "factors": [
+        "Higher than usual spending in dining category (+42%)",
+        "Annual gym membership renewal due Feb 10",
+        "Lower predicted income due to fewer working days"
+      ],
+      "suggestedActions": [
+        {
+          "action": "reduce_discretionary",
+          "description": "Reduce dining out by CHF 100 this month",
+          "impact": "Covers shortfall with CHF 15 buffer"
+        },
+        {
+          "action": "request_advance",
+          "description": "Request payout advance from another circle",
+          "impact": "Immediate CHF 200 available at 3% fee"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2026-01-08T06:00:00Z"
+    },
+    {
+      "id": "alert-002",
+      "userId": "user-789",
+      "severity": "critical",
+      "title": "High risk of missed payment next week",
+      "message": "Your bank balance is projected to be insufficient for the January 15th contribution. Immediate action recommended.",
+      "predictedShortfall": 250,
+      "contributionDueDate": "2026-01-15",
+      "contributionAmount": 400,
+      "daysUntilDue": 7,
+      "confidence": 0.91,
+      "factors": [
+        "Current balance significantly below typical pre-payment level",
+        "No expected income before due date",
+        "Recent large purchase depleted reserves"
+      ],
+      "suggestedActions": [
+        {
+          "action": "contact_organizer",
+          "description": "Discuss partial payment with circle organizer",
+          "impact": "Maintains good standing, payment plan possible"
+        },
+        {
+          "action": "emergency_fund",
+          "description": "Request emergency fund coverage",
+          "impact": "Covers payment, creates repayment obligation"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2026-01-08T06:00:00Z"
+    }
+  ],
+
+  "savingsOpportunities": [
+    {
+      "id": "opp-001",
+      "userId": "user-123",
+      "type": "surplus_detected",
+      "title": "Unused budget detected in December",
+      "description": "You spent CHF 340 less than usual last month. Consider directing this surplus toward your savings goals.",
+      "surplusAmount": 340,
+      "detectedDate": "2026-01-01",
+      "confidence": 0.88,
+      "suggestions": [
+        {
+          "allocation": "home_purchase",
+          "amount": 200,
+          "impact": "Moves goal date 2 weeks earlier"
+        },
+        {
+          "allocation": "emergency_fund",
+          "amount": 100,
+          "impact": "Reaches 3-month cushion target"
+        },
+        {
+          "allocation": "new_circle",
+          "amount": 40,
+          "impact": "Join Women's Professional Network circle"
+        }
+      ],
+      "status": "pending",
+      "expiresAt": "2026-01-15T23:59:59Z"
+    },
+    {
+      "id": "opp-002",
+      "userId": "user-123",
+      "type": "income_increase",
+      "title": "Salary increase detected",
+      "description": "Your January income is CHF 500 higher than previous months. This could accelerate your savings significantly.",
+      "surplusAmount": 500,
+      "detectedDate": "2026-01-05",
+      "confidence": 0.95,
+      "suggestions": [
+        {
+          "allocation": "increase_contribution",
+          "amount": 300,
+          "impact": "Boost monthly savings by 20%"
+        },
+        {
+          "allocation": "start_investing",
+          "amount": 200,
+          "impact": "Begin wealth building with partner banks"
+        }
+      ],
+      "status": "viewed",
+      "expiresAt": "2026-01-31T23:59:59Z"
+    }
+  ],
+
+  "seasonalPatterns": {
+    "userId": "user-123",
+    "analysisDate": "2026-01-08",
+    "dataMonths": 18,
+    "patterns": [
+      {
+        "type": "high_spending",
+        "months": ["December", "January"],
+        "averageIncrease": 0.35,
+        "description": "Holiday season spending typically 35% higher",
+        "recommendation": "Build buffer in November for holiday expenses"
+      },
+      {
+        "type": "low_spending",
+        "months": ["February", "March"],
+        "averageDecrease": 0.15,
+        "description": "Post-holiday recovery period with 15% less spending",
+        "recommendation": "Good months to increase circle contributions"
+      },
+      {
+        "type": "income_spike",
+        "months": ["June", "December"],
+        "averageIncrease": 0.25,
+        "description": "Bonus months with 25% higher income",
+        "recommendation": "Direct bonus toward long-term goals"
+      }
+    ],
+    "monthlyTrends": [
+      { "month": "Jan", "savingsRate": 0.18, "spending": 5200, "income": 6500 },
+      { "month": "Feb", "savingsRate": 0.22, "spending": 4800, "income": 6200 },
+      { "month": "Mar", "savingsRate": 0.24, "spending": 4600, "income": 6100 },
+      { "month": "Apr", "savingsRate": 0.21, "spending": 4900, "income": 6300 },
+      { "month": "May", "savingsRate": 0.20, "spending": 5100, "income": 6400 },
+      { "month": "Jun", "savingsRate": 0.28, "spending": 5300, "income": 7800 },
+      { "month": "Jul", "savingsRate": 0.19, "spending": 5500, "income": 6800 },
+      { "month": "Aug", "savingsRate": 0.17, "spending": 5600, "income": 6700 },
+      { "month": "Sep", "savingsRate": 0.21, "spending": 5000, "income": 6400 },
+      { "month": "Oct", "savingsRate": 0.23, "spending": 4700, "income": 6200 },
+      { "month": "Nov", "savingsRate": 0.20, "spending": 5200, "income": 6500 },
+      { "month": "Dec", "savingsRate": 0.15, "spending": 6800, "income": 8000 }
+    ],
+    "yearOverYearComparison": {
+      "previousYearSavings": 14200,
+      "currentYearSavings": 15800,
+      "improvement": 0.113
+    }
+  },
+
+  "crossCircleInsights": {
+    "userId": "user-123",
+    "analysisDate": "2026-01-08",
+    "summary": {
+      "totalCircles": 3,
+      "totalMonthlyContribution": 450,
+      "totalContributedAllTime": 8750,
+      "totalPayoutsReceived": 2,
+      "totalPayoutValue": 5400,
+      "netPosition": 3350,
+      "averageOnTimeRate": 0.96,
+      "overallTrustScore": 847
+    },
+    "circleBreakdown": [
+      {
+        "circleId": "circle-001",
+        "circleName": "Solidarity Savings Circle",
+        "contribution": 200,
+        "frequency": "monthly",
+        "position": 4,
+        "totalMembers": 12,
+        "nextPayoutDate": "2026-04-15",
+        "contributedToDate": 4200,
+        "payoutsReceived": 1,
+        "onTimeRate": 1.0,
+        "healthScore": 92
+      },
+      {
+        "circleId": "circle-002",
+        "circleName": "Diallo Family Tontine",
+        "contribution": 150,
+        "frequency": "bi_weekly",
+        "position": 2,
+        "totalMembers": 8,
+        "nextPayoutDate": "2026-02-28",
+        "contributedToDate": 3150,
+        "payoutsReceived": 1,
+        "onTimeRate": 0.94,
+        "healthScore": 88
+      },
+      {
+        "circleId": "circle-003",
+        "circleName": "Women's Empowerment Susu",
+        "contribution": 100,
+        "frequency": "monthly",
+        "position": 8,
+        "totalMembers": 10,
+        "nextPayoutDate": "2026-08-01",
+        "contributedToDate": 1400,
+        "payoutsReceived": 0,
+        "onTimeRate": 1.0,
+        "healthScore": 95
+      }
+    ],
+    "diversificationScore": 0.78,
+    "riskAssessment": "Well diversified across circle sizes and frequencies. Consider adding a higher-value circle to accelerate savings.",
+    "projectedAnnualSavings": 5400,
+    "projectedPayouts2026": [
+      { "circleId": "circle-002", "date": "2026-02-28", "amount": 1200 },
+      { "circleId": "circle-001", "date": "2026-04-15", "amount": 2400 },
+      { "circleId": "circle-003", "date": "2026-08-01", "amount": 1000 }
+    ]
+  },
+
+  "memberRiskScores": [
+    {
+      "id": "risk-001",
+      "applicantId": "user-new-001",
+      "applicantName": "Amadou Bah",
+      "circleId": "circle-001",
+      "circleName": "Solidarity Savings Circle",
+      "riskScore": 23,
+      "riskLevel": "low",
+      "confidence": 0.87,
+      "factors": [
+        { "name": "Payment History", "weight": 0.40, "score": 92, "detail": "36 on-time payments in previous circles" },
+        { "name": "Verification Level", "weight": 0.20, "score": 100, "detail": "Enhanced KYC completed" },
+        { "name": "Platform Tenure", "weight": 0.15, "score": 78, "detail": "Active for 14 months" },
+        { "name": "Network Trust", "weight": 0.10, "score": 85, "detail": "Connected to 8 trusted members" },
+        { "name": "Income Stability", "weight": 0.10, "score": 88, "detail": "Consistent income pattern detected" },
+        { "name": "External Credit", "weight": 0.05, "score": 72, "detail": "Good external credit history" }
+      ],
+      "recommendation": "approve",
+      "similarMemberComparison": "Risk profile similar to top 20% of successful members",
+      "requestedAt": "2026-01-07T14:30:00Z"
+    },
+    {
+      "id": "risk-002",
+      "applicantId": "user-new-002",
+      "applicantName": "Fatima Keita",
+      "circleId": "circle-001",
+      "circleName": "Solidarity Savings Circle",
+      "riskScore": 58,
+      "riskLevel": "medium",
+      "confidence": 0.72,
+      "factors": [
+        { "name": "Payment History", "weight": 0.40, "score": 65, "detail": "8 payments, 2 late (>3 days)" },
+        { "name": "Verification Level", "weight": 0.20, "score": 80, "detail": "Basic KYC completed" },
+        { "name": "Platform Tenure", "weight": 0.15, "score": 45, "detail": "New member (3 months)" },
+        { "name": "Network Trust", "weight": 0.10, "score": 60, "detail": "2 connections, limited network" },
+        { "name": "Income Stability", "weight": 0.10, "score": 55, "detail": "Variable income detected" },
+        { "name": "External Credit", "weight": 0.05, "score": 40, "detail": "Limited credit history" }
+      ],
+      "recommendation": "review",
+      "similarMemberComparison": "Members with similar profiles have 78% completion rate",
+      "requestedAt": "2026-01-06T09:15:00Z"
+    },
+    {
+      "id": "risk-003",
+      "applicantId": "user-new-003",
+      "applicantName": "Pierre Mensah",
+      "circleId": "circle-002",
+      "circleName": "Diallo Family Tontine",
+      "riskScore": 82,
+      "riskLevel": "high",
+      "confidence": 0.91,
+      "factors": [
+        { "name": "Payment History", "weight": 0.40, "score": 25, "detail": "Previous default in another circle" },
+        { "name": "Verification Level", "weight": 0.20, "score": 60, "detail": "Basic KYC pending documents" },
+        { "name": "Platform Tenure", "weight": 0.15, "score": 30, "detail": "New account (1 month)" },
+        { "name": "Network Trust", "weight": 0.10, "score": 20, "detail": "No trusted connections" },
+        { "name": "Income Stability", "weight": 0.10, "score": 35, "detail": "Inconsistent income pattern" },
+        { "name": "External Credit", "weight": 0.05, "score": 15, "detail": "Negative credit events found" }
+      ],
+      "recommendation": "deny",
+      "similarMemberComparison": "Members with similar profiles have 34% completion rate",
+      "requestedAt": "2026-01-08T11:00:00Z"
+    }
+  ],
+
+  "circleHealthScores": [
+    {
+      "id": "health-001",
+      "circleId": "circle-001",
+      "circleName": "Solidarity Savings Circle",
+      "healthScore": 92,
+      "healthLevel": "excellent",
+      "trend": "stable",
+      "analysisDate": "2026-01-08",
+      "metrics": {
+        "collectionRate": 0.98,
+        "onTimePaymentRate": 0.94,
+        "memberEngagement": 0.87,
+        "organizerResponsiveness": 0.95,
+        "memberRetention": 1.0,
+        "disputeRate": 0.02
+      },
+      "strengths": [
+        "98% collection rate exceeds platform average of 94%",
+        "No member departures in 12 months",
+        "Active group chat with 40+ messages/week"
+      ],
+      "improvements": [
+        {
+          "area": "On-time payments",
+          "currentValue": 0.94,
+          "targetValue": 0.97,
+          "suggestion": "Enable auto-pay reminders 3 days before due date",
+          "impact": "Could improve score by 3 points"
+        }
+      ],
+      "riskFactors": [],
+      "comparisonToSimilar": "Top 15% of circles with similar size and contribution amount"
+    },
+    {
+      "id": "health-002",
+      "circleId": "circle-004",
+      "circleName": "Newcomers Savings Group",
+      "healthScore": 64,
+      "healthLevel": "fair",
+      "trend": "declining",
+      "analysisDate": "2026-01-08",
+      "metrics": {
+        "collectionRate": 0.85,
+        "onTimePaymentRate": 0.72,
+        "memberEngagement": 0.45,
+        "organizerResponsiveness": 0.68,
+        "memberRetention": 0.80,
+        "disputeRate": 0.12
+      },
+      "strengths": [
+        "Diverse member base brings varied perspectives",
+        "Good emergency fund balance"
+      ],
+      "improvements": [
+        {
+          "area": "Collection rate",
+          "currentValue": 0.85,
+          "targetValue": 0.94,
+          "suggestion": "Implement automatic payment retries and personalized reminders",
+          "impact": "Could improve score by 8 points"
+        },
+        {
+          "area": "Member engagement",
+          "currentValue": 0.45,
+          "targetValue": 0.70,
+          "suggestion": "Schedule monthly virtual meetup to build community",
+          "impact": "Could improve score by 5 points"
+        },
+        {
+          "area": "Organizer responsiveness",
+          "currentValue": 0.68,
+          "targetValue": 0.85,
+          "suggestion": "Respond to member messages within 24 hours",
+          "impact": "Could improve score by 4 points"
+        }
+      ],
+      "riskFactors": [
+        "2 members have missed payments in last 3 months",
+        "Declining trend over past 60 days"
+      ],
+      "comparisonToSimilar": "Bottom 30% of circles with similar characteristics"
+    }
+  ],
+
+  "churnWarnings": [
+    {
+      "id": "churn-001",
+      "memberId": "user-567",
+      "memberName": "Ismail Toure",
+      "circleId": "circle-004",
+      "circleName": "Newcomers Savings Group",
+      "churnRisk": 0.72,
+      "riskLevel": "high",
+      "predictedChurnDate": "2026-02-15",
+      "confidence": 0.81,
+      "warningType": "likely_to_leave",
+      "indicators": [
+        { "signal": "Engagement drop", "detail": "No chat activity in 3 weeks (was weekly)" },
+        { "signal": "Payment delays", "detail": "Last 2 payments made on final day of grace period" },
+        { "signal": "Support inquiry", "detail": "Asked about early exit process 2 weeks ago" },
+        { "signal": "App usage decline", "detail": "App opens down 60% from baseline" }
+      ],
+      "suggestedActions": [
+        { "action": "personal_outreach", "description": "Organizer call to check on member", "priority": "high" },
+        { "action": "flexibility_offer", "description": "Offer temporary contribution reduction", "priority": "medium" }
+      ],
+      "status": "active",
+      "detectedAt": "2026-01-06T12:00:00Z"
+    },
+    {
+      "id": "churn-002",
+      "memberId": "user-890",
+      "memberName": "Aisha Diallo",
+      "circleId": "circle-002",
+      "circleName": "Diallo Family Tontine",
+      "churnRisk": 0.45,
+      "riskLevel": "medium",
+      "predictedChurnDate": "2026-04-01",
+      "confidence": 0.68,
+      "warningType": "likely_to_default",
+      "indicators": [
+        { "signal": "Income change", "detail": "Detected job change with lower income" },
+        { "signal": "Spending increase", "detail": "Medical expenses up 40% this month" }
+      ],
+      "suggestedActions": [
+        { "action": "proactive_support", "description": "Offer financial health consultation", "priority": "medium" },
+        { "action": "advance_option", "description": "Inform about payout advance availability", "priority": "low" }
+      ],
+      "status": "active",
+      "detectedAt": "2026-01-07T08:00:00Z"
+    }
+  ],
+
+  "configurationSuggestions": [
+    {
+      "id": "config-001",
+      "circleId": "new-circle",
+      "organizerId": "user-123",
+      "suggestionType": "new_circle",
+      "title": "Optimal configuration for your new circle",
+      "confidence": 0.84,
+      "basedOn": "Analysis of 2,400 similar circles",
+      "suggestions": {
+        "contributionAmount": {
+          "recommended": 200,
+          "range": { "min": 150, "max": 300 },
+          "reasoning": "Based on your members' average income and successful circles in your region"
+        },
+        "frequency": {
+          "recommended": "monthly",
+          "alternatives": ["bi_weekly"],
+          "reasoning": "Monthly matches most members' pay schedules"
+        },
+        "memberCount": {
+          "recommended": 12,
+          "range": { "min": 8, "max": 15 },
+          "reasoning": "12 members balances payout size with manageable cycle length"
+        },
+        "payoutMethod": {
+          "recommended": "fixed",
+          "alternatives": ["trust_score"],
+          "reasoning": "Fixed rotation preferred by 78% of similar circles"
+        },
+        "emergencyFundRate": {
+          "recommended": 0.02,
+          "range": { "min": 0.01, "max": 0.03 },
+          "reasoning": "2% provides strong protection without significantly reducing payouts"
+        }
+      },
+      "predictedSuccessRate": 0.89,
+      "createdAt": "2026-01-08T10:00:00Z"
+    }
+  ],
+
+  "payoutOrderRecommendations": [
+    {
+      "id": "payout-rec-001",
+      "circleId": "circle-005",
+      "circleName": "Bidding Circle Alpha",
+      "cycleNumber": 4,
+      "totalMembers": 10,
+      "analysisDate": "2026-01-08",
+      "fairnessScore": 0.91,
+      "recommendedOrder": [
+        {
+          "position": 1,
+          "memberId": "user-401",
+          "memberName": "Mamadou Sow",
+          "needScore": 0.92,
+          "factors": ["Medical emergency last month", "Has not received payout yet", "Excellent payment history"],
+          "suggestedDiscount": 0
+        },
+        {
+          "position": 2,
+          "memberId": "user-402",
+          "memberName": "Fatou Ba",
+          "needScore": 0.78,
+          "factors": ["School fees due next month", "Longest wait since last payout"],
+          "suggestedDiscount": 0.02
+        },
+        {
+          "position": 3,
+          "memberId": "user-403",
+          "memberName": "Ibrahim Ndiaye",
+          "needScore": 0.65,
+          "factors": ["Home repair needed", "Good payment history"],
+          "suggestedDiscount": 0.03
+        }
+      ],
+      "alternativeOrders": [
+        {
+          "method": "pure_rotation",
+          "description": "Based on original signup order",
+          "fairnessScore": 0.72
+        },
+        {
+          "method": "random",
+          "description": "Lottery-based selection",
+          "fairnessScore": 0.80
+        }
+      ],
+      "status": "pending_vote"
+    }
+  ],
+
+  "fraudAlerts": [
+    {
+      "id": "fraud-001",
+      "alertType": "account_takeover_attempt",
+      "severity": "critical",
+      "userId": "user-234",
+      "userName": "Aminata Camara",
+      "description": "Multiple failed login attempts from unusual location followed by password reset request",
+      "detectedAt": "2026-01-08T03:24:00Z",
+      "anomalies": [
+        { "type": "location", "detail": "Login attempt from Nigeria (user typically in Switzerland)" },
+        { "type": "device", "detail": "Unknown device fingerprint" },
+        { "type": "behavior", "detail": "5 failed password attempts in 2 minutes" },
+        { "type": "timing", "detail": "Activity at 3 AM user's local time (unusual)" }
+      ],
+      "riskScore": 0.94,
+      "automatedActions": [
+        "Account temporarily locked",
+        "Password reset link invalidated",
+        "Security alert sent to registered email and phone"
+      ],
+      "recommendedActions": [
+        "Contact user to verify identity",
+        "Review recent account activity",
+        "Enable additional verification for next login"
+      ],
+      "status": "investigating",
+      "assignedTo": "security-team"
+    },
+    {
+      "id": "fraud-002",
+      "alertType": "synthetic_identity",
+      "severity": "high",
+      "userId": "user-new-099",
+      "userName": "Jean Dubois",
+      "description": "New account shows signs of synthetic identity - document inconsistencies detected",
+      "detectedAt": "2026-01-07T16:45:00Z",
+      "anomalies": [
+        { "type": "document", "detail": "ID photo metadata inconsistent with claimed issue date" },
+        { "type": "address", "detail": "Address not found in postal database" },
+        { "type": "phone", "detail": "Phone number registered only 2 days ago" },
+        { "type": "behavior", "detail": "Attempted to join 3 high-value circles immediately" }
+      ],
+      "riskScore": 0.87,
+      "automatedActions": [
+        "Account placed in review status",
+        "Circle join requests held pending verification"
+      ],
+      "recommendedActions": [
+        "Request video verification call",
+        "Manual document review required",
+        "Cross-reference with fraud database"
+      ],
+      "status": "pending_review",
+      "assignedTo": "compliance-team"
+    },
+    {
+      "id": "fraud-003",
+      "alertType": "unusual_transaction",
+      "severity": "medium",
+      "userId": "user-567",
+      "userName": "Oumar Traore",
+      "description": "Payout immediately transferred to new external account not matching user profile",
+      "detectedAt": "2026-01-08T09:15:00Z",
+      "anomalies": [
+        { "type": "transfer", "detail": "CHF 2,400 payout transferred within 5 minutes of receipt" },
+        { "type": "destination", "detail": "Transfer to account in different country than user residence" },
+        { "type": "pattern", "detail": "First external transfer in 8 months of membership" }
+      ],
+      "riskScore": 0.62,
+      "automatedActions": [
+        "Transfer flagged for review (not blocked)"
+      ],
+      "recommendedActions": [
+        "Confirm transaction intent with user",
+        "Update user risk profile if legitimate"
+      ],
+      "status": "monitoring",
+      "assignedTo": null
+    }
+  ],
+
+  "behaviorClusters": [
+    {
+      "id": "cluster-001",
+      "name": "Steady Savers",
+      "description": "Consistent contributors with high reliability and moderate engagement",
+      "memberCount": 4250,
+      "percentageOfTotal": 0.34,
+      "characteristics": {
+        "averageTrustScore": 820,
+        "onTimePaymentRate": 0.97,
+        "averageCircles": 1.8,
+        "averageMonthlyContribution": 280,
+        "engagementLevel": "moderate",
+        "churnRate": 0.05
+      },
+      "typicalBehaviors": [
+        "Set up auto-pay early",
+        "Rarely use chat features",
+        "Prefer fixed rotation payouts",
+        "Join circles through referrals"
+      ],
+      "recommendedApproach": "Low-touch, reliability-focused messaging. Offer premium circles.",
+      "conversionOpportunities": ["Investment products", "Higher-value circles"]
+    },
+    {
+      "id": "cluster-002",
+      "name": "Social Connectors",
+      "description": "Highly engaged members who value community aspects as much as savings",
+      "memberCount": 2100,
+      "percentageOfTotal": 0.17,
+      "characteristics": {
+        "averageTrustScore": 785,
+        "onTimePaymentRate": 0.91,
+        "averageCircles": 3.2,
+        "averageMonthlyContribution": 220,
+        "engagementLevel": "high",
+        "churnRate": 0.08
+      },
+      "typicalBehaviors": [
+        "Active in circle chats daily",
+        "Organize community events",
+        "Refer 3+ new members per year",
+        "Participate in multiple small circles"
+      ],
+      "recommendedApproach": "Community-focused features. Highlight social badges and events.",
+      "conversionOpportunities": ["Circle organizer roles", "Community ambassador program"]
+    },
+    {
+      "id": "cluster-003",
+      "name": "Goal Seekers",
+      "description": "Purpose-driven savers with specific financial targets",
+      "memberCount": 3100,
+      "percentageOfTotal": 0.25,
+      "characteristics": {
+        "averageTrustScore": 798,
+        "onTimePaymentRate": 0.93,
+        "averageCircles": 2.1,
+        "averageMonthlyContribution": 420,
+        "engagementLevel": "moderate",
+        "churnRate": 0.12
+      },
+      "typicalBehaviors": [
+        "Set explicit savings goals",
+        "Use financial planning tools frequently",
+        "Higher contribution amounts",
+        "Leave after achieving goal"
+      ],
+      "recommendedApproach": "Goal progress updates. Suggest new goals upon completion.",
+      "conversionOpportunities": ["Wealth management products", "Partner bank introductions"]
+    },
+    {
+      "id": "cluster-004",
+      "name": "At-Risk Members",
+      "description": "Members showing signs of financial stress or disengagement",
+      "memberCount": 1500,
+      "percentageOfTotal": 0.12,
+      "characteristics": {
+        "averageTrustScore": 580,
+        "onTimePaymentRate": 0.72,
+        "averageCircles": 1.2,
+        "averageMonthlyContribution": 150,
+        "engagementLevel": "low",
+        "churnRate": 0.35
+      },
+      "typicalBehaviors": [
+        "Frequent late payments",
+        "Declining app engagement",
+        "Support ticket history",
+        "Requested payment extensions"
+      ],
+      "recommendedApproach": "Proactive support outreach. Offer flexible payment options.",
+      "conversionOpportunities": ["Financial health consultations", "Lower-commitment circles"]
+    }
+  ],
+
+  "trustGraphNodes": {
+    "centerUserId": "user-123",
+    "centerUserName": "Demo User",
+    "analysisDate": "2026-01-08",
+    "networkStrength": 0.82,
+    "totalConnections": 28,
+    "trustedConnections": 18,
+    "nodes": [
+      {
+        "userId": "user-201",
+        "userName": "Kwame Asante",
+        "connectionStrength": 0.95,
+        "sharedCircles": 2,
+        "relationshipDuration": 18,
+        "trustLevel": "strong",
+        "mutualConnections": 8
+      },
+      {
+        "userId": "user-202",
+        "userName": "Fatou Sow",
+        "connectionStrength": 0.88,
+        "sharedCircles": 1,
+        "relationshipDuration": 14,
+        "trustLevel": "strong",
+        "mutualConnections": 5
+      },
+      {
+        "userId": "user-203",
+        "userName": "Omar Diop",
+        "connectionStrength": 0.72,
+        "sharedCircles": 1,
+        "relationshipDuration": 8,
+        "trustLevel": "moderate",
+        "mutualConnections": 3
+      },
+      {
+        "userId": "user-204",
+        "userName": "Marie Ndoye",
+        "connectionStrength": 0.65,
+        "sharedCircles": 1,
+        "relationshipDuration": 6,
+        "trustLevel": "moderate",
+        "mutualConnections": 2
+      },
+      {
+        "userId": "user-205",
+        "userName": "Ibrahim Mbaye",
+        "connectionStrength": 0.45,
+        "sharedCircles": 0,
+        "relationshipDuration": 3,
+        "trustLevel": "developing",
+        "mutualConnections": 4
+      }
+    ],
+    "networkInsights": [
+      "Your strongest connection (Kwame) has introduced you to 5 other members",
+      "8 of your connections have trust scores above 800",
+      "Expanding your network could improve your trust score by ~15 points"
+    ],
+    "suggestedConnections": [
+      {
+        "userId": "user-301",
+        "userName": "Aminata Camara",
+        "reason": "6 mutual connections, similar savings goals",
+        "potentialStrength": 0.78
+      },
+      {
+        "userId": "user-302",
+        "userName": "Moussa Diallo",
+        "reason": "In your recommended circle, highly trusted",
+        "potentialStrength": 0.72
+      }
+    ]
+  },
+
+  "aiChatMessages": [
+    {
+      "id": "support-001",
+      "conversationId": "conv-support-001",
+      "userId": "user-456",
+      "messages": [
+        {
+          "id": "smsg-001",
+          "role": "user",
+          "content": "How do I change my payout method to mobile money?",
+          "timestamp": "2026-01-08T10:30:00Z"
+        },
+        {
+          "id": "smsg-002",
+          "role": "assistant",
+          "content": "I can help you set up mobile money for your payouts! Here's how:\n\n1. Go to **Settings** → **Payment Methods**\n2. Tap **Add Payment Method**\n3. Select **Mobile Money**\n4. Choose your provider (M-Pesa, Orange Money, etc.)\n5. Enter your mobile money number\n6. Verify with the code sent to your phone\n\nWould you like me to walk you through this step by step, or do you have a specific question about mobile money payouts?",
+          "timestamp": "2026-01-08T10:30:03Z",
+          "helpful": true,
+          "resolved": false
+        },
+        {
+          "id": "smsg-003",
+          "role": "user",
+          "content": "I don't see Orange Money in the list",
+          "timestamp": "2026-01-08T10:31:15Z"
+        },
+        {
+          "id": "smsg-004",
+          "role": "assistant",
+          "content": "Orange Money availability depends on your registered country. I can see your account is set to Switzerland.\n\nOrange Money is currently available for payouts to: Senegal, Côte d'Ivoire, Mali, Cameroon, and Burkina Faso.\n\n**Options for you:**\n1. If you have an Orange Money account in one of these countries, you can add it as a secondary payout destination\n2. For Switzerland-based payouts, we support: Bank transfer (SEPA), Wise, and Revolut\n\nWould you like to:\n- Add an Orange Money account for a supported country?\n- Set up one of the Switzerland options?\n- Speak with a human agent about other options?",
+          "timestamp": "2026-01-08T10:31:18Z",
+          "helpful": null,
+          "resolved": false,
+          "escalationOffered": true
+        }
+      ],
+      "status": "active",
+      "category": "payment_setup",
+      "sentiment": "neutral"
+    }
+  ],
+
+  "aiPreferences": {
+    "userId": "user-123",
+    "recommendations": {
+      "circleRecommendations": true,
+      "contributionSuggestions": true,
+      "savingsOpportunities": true
+    },
+    "alerts": {
+      "cashFlowAlerts": true,
+      "cashFlowAlertDays": 7,
+      "fraudAlerts": true
+    },
+    "dataConsent": {
+      "incomeAnalysis": true,
+      "spendingPatternAnalysis": true,
+      "creditBureauSharing": false,
+      "anonymizedResearch": true
+    },
+    "assistant": {
+      "proactiveInsights": true,
+      "weeklyDigest": true,
+      "insightFrequency": "balanced"
+    },
+    "lastUpdated": "2026-01-05T14:00:00Z"
+  }
+}

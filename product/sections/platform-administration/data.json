@@ -1,0 +1,1867 @@
+{
+  "_meta": {
+    "models": {
+      "supportTickets": "Customer support tickets from users needing help with the platform.",
+      "disputes": "Formal disputes between parties requiring mediation and resolution.",
+      "complianceAlerts": "AML, fraud, and risk alerts flagged for compliance review.",
+      "auditLogs": "Immutable record of all administrative actions on the platform.",
+      "regulatoryReports": "Scheduled and ad-hoc reports submitted to regulatory authorities.",
+      "gdprRequests": "Data subject requests under GDPR privacy regulations.",
+      "featureFlags": "Feature toggles for controlling rollout and A/B testing.",
+      "services": "Platform services and their current health status.",
+      "adminUsers": "Platform administrators, compliance officers, and support staff.",
+      "accessRoles": "Three system-defined access roles (Admin, Standard User, Invitee) that set ceiling permissions.",
+      "contextualRoles": "Scope-specific roles (Federation President, Association Treasurer, Circle Organizer, etc.) that grant feature access.",
+      "featureRegistry": "All platform features organized by scope (federation, association, circle) with sub-feature hierarchy.",
+      "permissionOverrides": "Individual user permission overrides that grant or restrict access beyond their contextual role.",
+      "permissionTemplates": "Reusable permission configuration templates for common role patterns.",
+      "accessRequests": "User requests for additional feature access with approval workflow.",
+      "rbacAuditEntries": "Audit trail for all RBAC-related changes (role assignments, overrides, reviews).",
+      "periodicReviews": "Scheduled access review campaigns for compliance.",
+      "sodRules": "Separation of Duties rules preventing conflicting permission assignments.",
+      "permissionAnomalies": "Detected unusual permission patterns flagged for review.",
+      "userPermissionSummaries": "Aggregated permission profiles for individual users."
+    },
+    "relationships": [
+      "SupportTickets are created by Users and assigned to AdminUsers (agents)",
+      "Disputes are linked to SupportTickets and involve multiple parties",
+      "ComplianceAlerts may reference Users and/or Transactions",
+      "AuditLogs record all actions by AdminUsers on platform resources",
+      "GDPRRequests are submitted by Users and processed by compliance staff",
+      "AccessRoles define ceiling permissions for all users",
+      "ContextualRoles grant feature access within AccessRole ceiling at federation/association/circle scope",
+      "PermissionOverrides grant or restrict individual user access with justification",
+      "AccessRequests are submitted by Users and reviewed by scope-appropriate admins",
+      "RBACauditEntries track all permission changes for compliance",
+      "SoDRules prevent conflicting permissions (e.g., create + approve transfers)"
+    ]
+  },
+
+  "systemMetrics": {
+    "activeUsers": 12847,
+    "totalTransactions": 45892,
+    "transactionVolume": 8750000,
+    "openTickets": 47,
+    "openAlerts": 12,
+    "systemLoad": 0.42,
+    "databaseConnections": 156
+  },
+
+  "services": [
+    {
+      "id": "svc-api",
+      "name": "Core API",
+      "description": "Main application programming interface",
+      "status": "operational",
+      "uptime": 99.98,
+      "metrics": {
+        "responseTime": 45,
+        "errorRate": 0.02,
+        "requestsPerMinute": 2340
+      }
+    },
+    {
+      "id": "svc-payments",
+      "name": "Payment Gateway",
+      "description": "Payment processing and collection",
+      "status": "operational",
+      "uptime": 99.99,
+      "metrics": {
+        "responseTime": 180,
+        "errorRate": 0.01,
+        "requestsPerMinute": 890
+      }
+    },
+    {
+      "id": "svc-notifications",
+      "name": "Notification Service",
+      "description": "Email, SMS, and push notifications",
+      "status": "degraded",
+      "uptime": 99.85,
+      "lastIncident": "2026-01-12T08:30:00Z",
+      "metrics": {
+        "responseTime": 250,
+        "errorRate": 0.15,
+        "requestsPerMinute": 4500
+      }
+    },
+    {
+      "id": "svc-ml",
+      "name": "ML Services",
+      "description": "Trust Score and prediction models",
+      "status": "operational",
+      "uptime": 99.95,
+      "metrics": {
+        "responseTime": 320,
+        "errorRate": 0.03,
+        "requestsPerMinute": 450
+      }
+    },
+    {
+      "id": "svc-storage",
+      "name": "Document Storage",
+      "description": "File storage and CDN",
+      "status": "operational",
+      "uptime": 99.99,
+      "metrics": {
+        "responseTime": 85,
+        "errorRate": 0.005,
+        "requestsPerMinute": 1200
+      }
+    }
+  ],
+
+  "adminUsers": [
+    {
+      "id": "admin-001",
+      "name": "Sarah Chen",
+      "email": "sarah.chen@circleup.ch",
+      "avatar": "https://i.pravatar.cc/150?u=sarah",
+      "role": "platform_admin",
+      "permissions": ["all"],
+      "lastActive": "2026-01-13T09:15:00Z"
+    },
+    {
+      "id": "admin-002",
+      "name": "Marcus Weber",
+      "email": "marcus.weber@circleup.ch",
+      "avatar": "https://i.pravatar.cc/150?u=marcus",
+      "role": "compliance_officer",
+      "permissions": ["compliance", "audit", "reports"],
+      "lastActive": "2026-01-13T08:45:00Z"
+    },
+    {
+      "id": "admin-003",
+      "name": "Amira Hassan",
+      "email": "amira.hassan@circleup.ch",
+      "avatar": "https://i.pravatar.cc/150?u=amira",
+      "role": "support_manager",
+      "permissions": ["support", "disputes", "users.view"],
+      "lastActive": "2026-01-13T09:30:00Z"
+    },
+    {
+      "id": "admin-004",
+      "name": "Lucas Müller",
+      "email": "lucas.muller@circleup.ch",
+      "avatar": "https://i.pravatar.cc/150?u=lucas",
+      "role": "support_agent",
+      "permissions": ["support.tickets", "users.view"],
+      "lastActive": "2026-01-13T09:20:00Z"
+    }
+  ],
+
+  "supportTickets": [
+    {
+      "id": "ticket-001",
+      "userId": "user-5847",
+      "userName": "Elena Rossi",
+      "userEmail": "elena.rossi@example.com",
+      "userAvatar": "https://i.pravatar.cc/150?u=elena",
+      "category": "payment_issue",
+      "priority": "high",
+      "status": "in_progress",
+      "subject": "Contribution payment failed but money deducted",
+      "description": "My January contribution payment for the Zurich Professionals Circle was declined, but the money was still taken from my bank account. The transaction shows as failed in the app but my bank statement shows CHF 500 deducted.",
+      "channel": "app",
+      "assignedTo": "admin-004",
+      "assignedToName": "Lucas Müller",
+      "slaDeadline": "2026-01-13T14:00:00Z",
+      "tags": ["payment", "urgent", "reconciliation"],
+      "messages": [
+        {
+          "id": "msg-001",
+          "ticketId": "ticket-001",
+          "authorId": "user-5847",
+          "authorName": "Elena Rossi",
+          "authorType": "user",
+          "content": "My January contribution payment for the Zurich Professionals Circle was declined, but the money was still taken from my bank account.",
+          "attachments": [
+            {
+              "id": "att-001",
+              "filename": "bank_statement.pdf",
+              "url": "/attachments/att-001.pdf",
+              "mimeType": "application/pdf",
+              "size": 245000
+            }
+          ],
+          "isInternal": false,
+          "createdAt": "2026-01-13T08:30:00Z"
+        },
+        {
+          "id": "msg-002",
+          "ticketId": "ticket-001",
+          "authorId": "admin-004",
+          "authorName": "Lucas Müller",
+          "authorType": "agent",
+          "content": "Hi Elena, thank you for reporting this. I can see the transaction in our system and it appears there was a timeout issue. I'm escalating this to our payment team for immediate resolution. We'll refund the duplicate charge within 24 hours.",
+          "attachments": [],
+          "isInternal": false,
+          "createdAt": "2026-01-13T09:15:00Z"
+        }
+      ],
+      "createdAt": "2026-01-13T08:30:00Z",
+      "updatedAt": "2026-01-13T09:15:00Z",
+      "resolvedAt": null
+    },
+    {
+      "id": "ticket-002",
+      "userId": "user-2341",
+      "userName": "Thomas Keller",
+      "userEmail": "thomas.keller@example.com",
+      "category": "account_access",
+      "priority": "medium",
+      "status": "open",
+      "subject": "Cannot reset password - email not received",
+      "description": "I've tried to reset my password multiple times but I never receive the reset email. I've checked spam folder.",
+      "channel": "email",
+      "assignedTo": null,
+      "slaDeadline": "2026-01-14T10:00:00Z",
+      "tags": ["access", "email"],
+      "messages": [],
+      "createdAt": "2026-01-13T10:00:00Z",
+      "updatedAt": "2026-01-13T10:00:00Z",
+      "resolvedAt": null
+    },
+    {
+      "id": "ticket-003",
+      "userId": "user-8923",
+      "userName": "Maria Santos",
+      "userEmail": "maria.santos@example.com",
+      "category": "circle_question",
+      "priority": "low",
+      "status": "resolved",
+      "subject": "How to increase my shares in a circle?",
+      "description": "I want to increase my contribution from 1 share to 3 shares. How do I do this?",
+      "channel": "chat",
+      "assignedTo": "admin-004",
+      "assignedToName": "Lucas Müller",
+      "slaDeadline": "2026-01-15T09:00:00Z",
+      "tags": ["multi-share", "how-to"],
+      "messages": [],
+      "createdAt": "2026-01-12T14:00:00Z",
+      "updatedAt": "2026-01-12T14:45:00Z",
+      "resolvedAt": "2026-01-12T14:45:00Z",
+      "satisfactionRating": 5
+    }
+  ],
+
+  "disputes": [
+    {
+      "id": "dispute-001",
+      "ticketId": "ticket-100",
+      "type": "payout",
+      "amount": 2500,
+      "currency": "CHF",
+      "parties": [
+        {
+          "userId": "user-1234",
+          "userName": "Andrea Bianchi",
+          "role": "requester",
+          "statement": "I was supposed to receive my payout on January 5th but it went to the wrong member."
+        },
+        {
+          "userId": "user-5678",
+          "userName": "Giovanni Russo",
+          "role": "respondent",
+          "statement": "I received a payout but I wasn't expecting it. I thought it was my scheduled payment."
+        }
+      ],
+      "status": "investigating",
+      "decision": null,
+      "evidence": [
+        {
+          "id": "ev-001",
+          "submittedBy": "user-1234",
+          "type": "screenshot",
+          "description": "Payout schedule showing my position",
+          "fileUrl": "/evidence/ev-001.png",
+          "createdAt": "2026-01-08T10:00:00Z"
+        },
+        {
+          "id": "ev-002",
+          "submittedBy": "admin-003",
+          "type": "transaction",
+          "description": "System transaction log",
+          "transactionId": "txn-payout-5678",
+          "createdAt": "2026-01-09T11:00:00Z"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "evt-001",
+          "type": "created",
+          "description": "Dispute opened by Andrea Bianchi",
+          "actorId": "user-1234",
+          "actorName": "Andrea Bianchi",
+          "createdAt": "2026-01-08T09:30:00Z"
+        },
+        {
+          "id": "evt-002",
+          "type": "evidence_added",
+          "description": "Screenshot evidence submitted",
+          "actorId": "user-1234",
+          "actorName": "Andrea Bianchi",
+          "createdAt": "2026-01-08T10:00:00Z"
+        },
+        {
+          "id": "evt-003",
+          "type": "status_changed",
+          "description": "Status changed to investigating",
+          "actorId": "admin-003",
+          "actorName": "Amira Hassan",
+          "createdAt": "2026-01-09T09:00:00Z"
+        }
+      ],
+      "createdAt": "2026-01-08T09:30:00Z",
+      "resolvedAt": null,
+      "resolvedBy": null
+    }
+  ],
+
+  "complianceAlerts": [
+    {
+      "id": "alert-001",
+      "type": "velocity",
+      "severity": "high",
+      "status": "open",
+      "userId": "user-9012",
+      "userName": "Unknown User",
+      "description": "Unusual transaction velocity: 15 payments in 2 hours totaling CHF 45,000",
+      "riskScore": 85,
+      "indicators": [
+        "Transaction count exceeds normal pattern",
+        "Total amount exceeds daily threshold",
+        "Multiple payment methods used"
+      ],
+      "assignedTo": "admin-002",
+      "assignedToName": "Marcus Weber",
+      "notes": [
+        {
+          "id": "note-001",
+          "authorId": "admin-002",
+          "authorName": "Marcus Weber",
+          "content": "Investigating account activity. Requested additional KYC verification.",
+          "createdAt": "2026-01-13T08:00:00Z"
+        }
+      ],
+      "createdAt": "2026-01-13T06:30:00Z",
+      "resolvedAt": null
+    },
+    {
+      "id": "alert-002",
+      "type": "aml",
+      "severity": "critical",
+      "status": "investigating",
+      "userId": "user-3456",
+      "userName": "Jean-Pierre Martin",
+      "transactionId": "txn-789012",
+      "transactionAmount": 48000,
+      "description": "Single transaction approaching CHF 50,000 AML reporting threshold",
+      "riskScore": 92,
+      "indicators": [
+        "Transaction just below reporting threshold",
+        "First large transaction from this user",
+        "Destination account in high-risk jurisdiction"
+      ],
+      "assignedTo": "admin-002",
+      "assignedToName": "Marcus Weber",
+      "notes": [],
+      "createdAt": "2026-01-12T15:00:00Z",
+      "resolvedAt": null
+    },
+    {
+      "id": "alert-003",
+      "type": "fraud",
+      "severity": "medium",
+      "status": "resolved",
+      "userId": "user-7890",
+      "userName": "Carlos Rodriguez",
+      "description": "Multiple failed login attempts followed by password reset",
+      "riskScore": 45,
+      "indicators": [
+        "12 failed login attempts in 10 minutes",
+        "Password reset from new IP address",
+        "Login from different country than usual"
+      ],
+      "assignedTo": "admin-002",
+      "assignedToName": "Marcus Weber",
+      "notes": [],
+      "resolution": "Contacted user who confirmed they were traveling and forgot password. Legitimate activity.",
+      "createdAt": "2026-01-11T22:00:00Z",
+      "resolvedAt": "2026-01-12T10:00:00Z"
+    }
+  ],
+
+  "gdprRequests": [
+    {
+      "id": "gdpr-001",
+      "userId": "user-4567",
+      "userName": "Sophie Dubois",
+      "userEmail": "sophie.dubois@example.com",
+      "requestType": "access",
+      "status": "processing",
+      "description": "I would like a copy of all personal data you hold about me.",
+      "deadline": "2026-02-10T23:59:59Z",
+      "assignedTo": "admin-002",
+      "dataExportUrl": null,
+      "completedAt": null,
+      "createdAt": "2026-01-11T09:00:00Z"
+    },
+    {
+      "id": "gdpr-002",
+      "userId": "user-8901",
+      "userName": "Former User",
+      "userEmail": "former@example.com",
+      "requestType": "erasure",
+      "status": "verifying",
+      "description": "Please delete all my personal data. I no longer use the service.",
+      "deadline": "2026-02-08T23:59:59Z",
+      "assignedTo": "admin-002",
+      "completedAt": null,
+      "createdAt": "2026-01-09T14:00:00Z"
+    }
+  ],
+
+  "regulatoryReports": [
+    {
+      "id": "report-001",
+      "type": "monthly",
+      "name": "December 2025 Monthly Report",
+      "reportingPeriod": {
+        "start": "2025-12-01",
+        "end": "2025-12-31"
+      },
+      "status": "submitted",
+      "submittedAt": "2026-01-05T10:00:00Z",
+      "submittedBy": "admin-002",
+      "fileUrl": "/reports/monthly-2025-12.pdf",
+      "dueDate": "2026-01-10T23:59:59Z",
+      "createdAt": "2026-01-03T09:00:00Z"
+    },
+    {
+      "id": "report-002",
+      "type": "quarterly",
+      "name": "Q4 2025 Quarterly Report",
+      "reportingPeriod": {
+        "start": "2025-10-01",
+        "end": "2025-12-31"
+      },
+      "status": "pending_review",
+      "submittedAt": null,
+      "submittedBy": null,
+      "fileUrl": "/reports/quarterly-2025-q4-draft.pdf",
+      "dueDate": "2026-01-31T23:59:59Z",
+      "createdAt": "2026-01-10T09:00:00Z"
+    }
+  ],
+
+  "featureFlags": [
+    {
+      "id": "flag-001",
+      "name": "multi_share_enabled",
+      "description": "Enable multiple contribution shares feature",
+      "enabled": true,
+      "targeting": {
+        "associationIds": []
+      },
+      "rolloutPercentage": 100,
+      "createdBy": "admin-001",
+      "createdAt": "2025-11-01T00:00:00Z",
+      "updatedAt": "2025-12-15T00:00:00Z"
+    },
+    {
+      "id": "flag-002",
+      "name": "ai_chat_support",
+      "description": "AI-powered customer support chat",
+      "enabled": true,
+      "targeting": {
+        "userSegments": ["premium", "enterprise"]
+      },
+      "rolloutPercentage": 50,
+      "createdBy": "admin-001",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-08T00:00:00Z"
+    },
+    {
+      "id": "flag-003",
+      "name": "instant_payouts",
+      "description": "Enable instant payout option (additional fee)",
+      "enabled": false,
+      "targeting": {},
+      "rolloutPercentage": 0,
+      "createdBy": "admin-001",
+      "createdAt": "2026-01-10T00:00:00Z",
+      "updatedAt": "2026-01-10T00:00:00Z"
+    }
+  ],
+
+  "rbacMetrics": {
+    "totalAccessRoles": 3,
+    "totalContextualRoles": 12,
+    "totalFeatures": 48,
+    "totalOverrides": 23,
+    "activeTemporaryGrants": 5,
+    "pendingAccessRequests": 7,
+    "pendingReviews": 2,
+    "sodViolations": 1,
+    "anomaliesDetected": 3,
+    "usersPerAccessRole": {
+      "admin": 14,
+      "standard_user": 12489,
+      "invitee": 344
+    },
+    "recentChanges": 47,
+    "cacheHitRate": 94.7
+  },
+
+  "accessRoles": [
+    {
+      "id": "ar-admin",
+      "name": "admin",
+      "label": "Admin",
+      "description": "Full platform access. Can manage all features, users, and configurations across all scopes.",
+      "ceilingPermissions": {
+        "federation.dashboard": "read_write",
+        "federation.associations": "read_write",
+        "federation.financial": "read_write",
+        "federation.governance": "read_write",
+        "federation.elections": "read_write",
+        "federation.events": "read_write",
+        "federation.reports": "read_write",
+        "federation.compliance": "read_write",
+        "association.members": "read_write",
+        "association.circles": "read_write",
+        "association.treasury": "read_write",
+        "association.credit": "read_write",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "read_write",
+        "association.ai_insights": "read_write",
+        "association.documents": "read_write",
+        "association.projects": "read_write",
+        "association.community": "read_write",
+        "association.multi_share": "read_write",
+        "circle.dashboard": "read_write",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read_write",
+        "circle.members": "read_write",
+        "circle.financial": "read_write",
+        "circle.settings": "read_write"
+      },
+      "userCount": 14,
+      "isSystem": true,
+      "color": "red"
+    },
+    {
+      "id": "ar-standard",
+      "name": "standard_user",
+      "label": "Standard User",
+      "description": "Normal platform user. Access determined by contextual roles within federations, associations, and circles.",
+      "ceilingPermissions": {
+        "federation.dashboard": "read",
+        "federation.associations": "read",
+        "federation.financial": "read",
+        "federation.governance": "read_write",
+        "federation.elections": "read_write",
+        "federation.events": "read_write",
+        "federation.reports": "read",
+        "federation.compliance": "none",
+        "association.members": "read_write",
+        "association.circles": "read_write",
+        "association.treasury": "read",
+        "association.credit": "read_write",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "read",
+        "association.ai_insights": "read",
+        "association.documents": "read_write",
+        "association.projects": "read_write",
+        "association.community": "read_write",
+        "association.multi_share": "read_write",
+        "circle.dashboard": "read_write",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read",
+        "circle.members": "read",
+        "circle.financial": "read",
+        "circle.settings": "read"
+      },
+      "userCount": 12489,
+      "isSystem": true,
+      "color": "indigo"
+    },
+    {
+      "id": "ar-invitee",
+      "name": "invitee",
+      "label": "Invitee",
+      "description": "Preview-only access for potential users. Can view selected public information but cannot modify anything.",
+      "ceilingPermissions": {
+        "federation.dashboard": "read",
+        "federation.associations": "none",
+        "federation.financial": "none",
+        "federation.governance": "none",
+        "federation.elections": "none",
+        "federation.events": "read",
+        "federation.reports": "none",
+        "federation.compliance": "none",
+        "association.members": "none",
+        "association.circles": "read",
+        "association.treasury": "none",
+        "association.credit": "none",
+        "association.communication": "read",
+        "association.governance": "none",
+        "association.analytics": "none",
+        "association.ai_insights": "none",
+        "association.documents": "none",
+        "association.projects": "read",
+        "association.community": "read",
+        "association.multi_share": "none",
+        "circle.dashboard": "read",
+        "circle.contributions": "none",
+        "circle.payouts": "none",
+        "circle.members": "none",
+        "circle.financial": "none",
+        "circle.settings": "none"
+      },
+      "userCount": 344,
+      "isSystem": true,
+      "color": "slate"
+    }
+  ],
+
+  "contextualRoles": [
+    {
+      "id": "cr-fed-president",
+      "name": "federation_president",
+      "label": "Federation President",
+      "description": "Elected leader of a federation with full federation management access.",
+      "scope": "federation",
+      "permissions": {
+        "federation.dashboard": "read_write",
+        "federation.associations": "read_write",
+        "federation.financial": "read_write",
+        "federation.governance": "read_write",
+        "federation.elections": "read_write",
+        "federation.events": "read_write",
+        "federation.reports": "read_write",
+        "federation.compliance": "read_write"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 2,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-fed-treasurer",
+      "name": "federation_treasurer",
+      "label": "Federation Treasurer",
+      "description": "Manages federation finances, budgets, and fund transfers.",
+      "scope": "federation",
+      "permissions": {
+        "federation.dashboard": "read",
+        "federation.associations": "read",
+        "federation.financial": "read_write",
+        "federation.governance": "read",
+        "federation.elections": "read",
+        "federation.events": "read",
+        "federation.reports": "read_write",
+        "federation.compliance": "read"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 2,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-fed-secretary",
+      "name": "federation_secretary",
+      "label": "Federation Secretary General",
+      "description": "Manages federation governance, communications, and administration.",
+      "scope": "federation",
+      "permissions": {
+        "federation.dashboard": "read",
+        "federation.associations": "read_write",
+        "federation.financial": "read",
+        "federation.governance": "read_write",
+        "federation.elections": "read_write",
+        "federation.events": "read_write",
+        "federation.reports": "read",
+        "federation.compliance": "read"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 2,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-assoc-admin",
+      "name": "association_admin",
+      "label": "Association Admin",
+      "description": "Full management access within an association.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read_write",
+        "association.circles": "read_write",
+        "association.treasury": "read_write",
+        "association.credit": "read_write",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "read_write",
+        "association.ai_insights": "read_write",
+        "association.documents": "read_write",
+        "association.projects": "read_write",
+        "association.community": "read_write",
+        "association.multi_share": "read_write"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 9,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-assoc-treasurer",
+      "name": "association_treasurer",
+      "label": "Association Treasurer",
+      "description": "Manages association finances and circle financial oversight.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read",
+        "association.circles": "read",
+        "association.treasury": "read_write",
+        "association.credit": "read_write",
+        "association.communication": "read",
+        "association.governance": "read",
+        "association.analytics": "read_write",
+        "association.ai_insights": "read",
+        "association.documents": "read",
+        "association.projects": "read",
+        "association.community": "read",
+        "association.multi_share": "read_write"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 9,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-assoc-secretary",
+      "name": "association_secretary",
+      "label": "Association Secretary",
+      "description": "Manages association records, communications, and governance processes.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read_write",
+        "association.circles": "read",
+        "association.treasury": "read",
+        "association.credit": "read",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "read",
+        "association.ai_insights": "read",
+        "association.documents": "read_write",
+        "association.projects": "read",
+        "association.community": "read_write",
+        "association.multi_share": "read"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 9,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-assoc-member",
+      "name": "association_member",
+      "label": "Association Member",
+      "description": "Standard member of an association with basic access.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read",
+        "association.circles": "read",
+        "association.treasury": "none",
+        "association.credit": "read",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "none",
+        "association.ai_insights": "none",
+        "association.documents": "read",
+        "association.projects": "read_write",
+        "association.community": "read_write",
+        "association.multi_share": "read"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 12100,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-circle-organizer",
+      "name": "circle_organizer",
+      "label": "Circle Organizer",
+      "description": "Manages circle operations, contributions, and payouts.",
+      "scope": "circle",
+      "permissions": {
+        "circle.dashboard": "read_write",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read_write",
+        "circle.members": "read_write",
+        "circle.financial": "read_write",
+        "circle.settings": "read_write"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 340,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-circle-treasurer",
+      "name": "circle_treasurer",
+      "label": "Circle Treasurer",
+      "description": "Manages circle financial operations and reporting.",
+      "scope": "circle",
+      "permissions": {
+        "circle.dashboard": "read",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read_write",
+        "circle.members": "read",
+        "circle.financial": "read_write",
+        "circle.settings": "read"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 340,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-circle-member",
+      "name": "circle_member",
+      "label": "Circle Member",
+      "description": "Participates in circle contributions and receives payouts.",
+      "scope": "circle",
+      "permissions": {
+        "circle.dashboard": "read",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read",
+        "circle.members": "read",
+        "circle.financial": "read",
+        "circle.settings": "none"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 11500,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-circle-observer",
+      "name": "circle_observer",
+      "label": "Circle Observer",
+      "description": "Can view circle information but cannot participate.",
+      "scope": "circle",
+      "permissions": {
+        "circle.dashboard": "read",
+        "circle.contributions": "none",
+        "circle.payouts": "none",
+        "circle.members": "read",
+        "circle.financial": "none",
+        "circle.settings": "none"
+      },
+      "isCustom": false,
+      "isSystem": true,
+      "createdBy": null,
+      "userCount": 120,
+      "createdAt": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "cr-assoc-auditor",
+      "name": "association_auditor",
+      "label": "Association Auditor",
+      "description": "Read-only access to all association data for audit purposes.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read",
+        "association.circles": "read",
+        "association.treasury": "read",
+        "association.credit": "read",
+        "association.communication": "read",
+        "association.governance": "read",
+        "association.analytics": "read",
+        "association.ai_insights": "read",
+        "association.documents": "read",
+        "association.projects": "read",
+        "association.community": "read",
+        "association.multi_share": "read"
+      },
+      "isCustom": true,
+      "isSystem": false,
+      "createdBy": "admin-001",
+      "userCount": 4,
+      "createdAt": "2025-09-15T10:00:00Z"
+    }
+  ],
+
+  "featureRegistry": [
+    {
+      "id": "feat-fed-dashboard",
+      "name": "Dashboard",
+      "slug": "federation.dashboard",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "View federation overview, metrics, and health indicators",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-fed-associations",
+      "name": "Member Associations",
+      "slug": "federation.associations",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Manage child associations, compliance, and cross-association data",
+      "defaultMode": "read",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-fed-financial",
+      "name": "Financial Overview",
+      "slug": "federation.financial",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Federation-level financial management, budgets, and fund transfers",
+      "defaultMode": "none",
+      "containsPersonalData": false,
+      "children": [
+        { "id": "feat-fed-fin-balances", "name": "View Balances", "slug": "federation.financial.view_balances", "scope": "federation", "category": "Federation", "parentId": "feat-fed-financial", "description": "View fund balances", "defaultMode": "read", "containsPersonalData": false },
+        { "id": "feat-fed-fin-transfers", "name": "Create Transfers", "slug": "federation.financial.create_transfers", "scope": "federation", "category": "Federation", "parentId": "feat-fed-financial", "description": "Initiate fund transfers", "defaultMode": "none", "containsPersonalData": false },
+        { "id": "feat-fed-fin-budgets", "name": "Manage Budgets", "slug": "federation.financial.manage_budgets", "scope": "federation", "category": "Federation", "parentId": "feat-fed-financial", "description": "Create and approve budgets", "defaultMode": "none", "containsPersonalData": false }
+      ]
+    },
+    {
+      "id": "feat-fed-governance",
+      "name": "Governance Policies",
+      "slug": "federation.governance",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Create and manage federation governance policies",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-fed-elections",
+      "name": "Elections",
+      "slug": "federation.elections",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Manage federation election processes",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-fed-events",
+      "name": "Events",
+      "slug": "federation.events",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Create and manage federation events",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-fed-reports",
+      "name": "Reports",
+      "slug": "federation.reports",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Generate and view federation reports",
+      "defaultMode": "read",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-fed-compliance",
+      "name": "Compliance",
+      "slug": "federation.compliance",
+      "scope": "federation",
+      "category": "Federation",
+      "parentId": null,
+      "description": "Monitor compliance across member associations",
+      "defaultMode": "none",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-assoc-members",
+      "name": "Members & Trust",
+      "slug": "association.members",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Member directory, trust scores, and profile management",
+      "defaultMode": "read",
+      "containsPersonalData": true,
+      "children": [
+        { "id": "feat-assoc-mem-dir", "name": "View Directory", "slug": "association.members.view_directory", "scope": "association", "category": "Association", "parentId": "feat-assoc-members", "description": "View member list", "defaultMode": "read", "containsPersonalData": true },
+        { "id": "feat-assoc-mem-edit", "name": "Edit Profiles", "slug": "association.members.edit_profiles", "scope": "association", "category": "Association", "parentId": "feat-assoc-members", "description": "Edit member profiles", "defaultMode": "none", "containsPersonalData": true },
+        { "id": "feat-assoc-mem-trust", "name": "Manage Trust Scores", "slug": "association.members.manage_trust", "scope": "association", "category": "Association", "parentId": "feat-assoc-members", "description": "View and manage trust scores", "defaultMode": "none", "containsPersonalData": false },
+        { "id": "feat-assoc-mem-sensitive", "name": "View Sensitive Data", "slug": "association.members.view_sensitive", "scope": "association", "category": "Association", "parentId": "feat-assoc-members", "description": "Access phone, email, and PII", "defaultMode": "none", "containsPersonalData": true }
+      ]
+    },
+    {
+      "id": "feat-assoc-circles",
+      "name": "ROSCA Circles",
+      "slug": "association.circles",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Create and manage ROSCA circles within the association",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-treasury",
+      "name": "Treasury & Funds",
+      "slug": "association.treasury",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Manage association treasury, accounts, and transactions",
+      "defaultMode": "none",
+      "containsPersonalData": false,
+      "children": [
+        { "id": "feat-assoc-treas-bal", "name": "View Balances", "slug": "association.treasury.view_balances", "scope": "association", "category": "Association", "parentId": "feat-assoc-treasury", "description": "View account balances", "defaultMode": "read", "containsPersonalData": false },
+        { "id": "feat-assoc-treas-txn", "name": "Create Transactions", "slug": "association.treasury.create_transactions", "scope": "association", "category": "Association", "parentId": "feat-assoc-treasury", "description": "Initiate transactions", "defaultMode": "none", "containsPersonalData": false },
+        { "id": "feat-assoc-treas-approve", "name": "Approve Transfers", "slug": "association.treasury.approve_transfers", "scope": "association", "category": "Association", "parentId": "feat-assoc-treasury", "description": "Approve pending transfers", "defaultMode": "none", "containsPersonalData": false }
+      ]
+    },
+    {
+      "id": "feat-assoc-credit",
+      "name": "Credit & Lending",
+      "slug": "association.credit",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Manage loan applications, approvals, and repayments",
+      "defaultMode": "read",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-assoc-communication",
+      "name": "Communication & Events",
+      "slug": "association.communication",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Announcements, events, and member communications",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-governance",
+      "name": "Governance & Voting",
+      "slug": "association.governance",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Proposals, voting, and governance processes",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-analytics",
+      "name": "Analytics & Reporting",
+      "slug": "association.analytics",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Dashboard, reports, and data exports",
+      "defaultMode": "none",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-assoc-ai",
+      "name": "AI Insights",
+      "slug": "association.ai_insights",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "AI-powered predictions and risk analysis",
+      "defaultMode": "none",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-docs",
+      "name": "Documents",
+      "slug": "association.documents",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Document management, templates, and file sharing",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-projects",
+      "name": "Projects & Fundraising",
+      "slug": "association.projects",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Community projects and fundraising campaigns",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-community",
+      "name": "Community & Social",
+      "slug": "association.community",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Community groups, discussions, and social features",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-assoc-multishare",
+      "name": "Multi-Share",
+      "slug": "association.multi_share",
+      "scope": "association",
+      "category": "Association",
+      "parentId": null,
+      "description": "Multiple share allocations and payout management",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-circle-dashboard",
+      "name": "Dashboard",
+      "slug": "circle.dashboard",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "Circle overview, status, and key metrics",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-circle-contributions",
+      "name": "Contributions",
+      "slug": "circle.contributions",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "Manage contribution schedules and payments",
+      "defaultMode": "read",
+      "containsPersonalData": false,
+      "children": [
+        { "id": "feat-circle-contrib-view", "name": "View Schedule", "slug": "circle.contributions.view_schedule", "scope": "circle", "category": "Circle", "parentId": "feat-circle-contributions", "description": "View contribution schedule", "defaultMode": "read", "containsPersonalData": false },
+        { "id": "feat-circle-contrib-pay", "name": "Make Payment", "slug": "circle.contributions.make_payment", "scope": "circle", "category": "Circle", "parentId": "feat-circle-contributions", "description": "Submit contribution payment", "defaultMode": "none", "containsPersonalData": false },
+        { "id": "feat-circle-contrib-manage", "name": "Manage Contributions", "slug": "circle.contributions.manage", "scope": "circle", "category": "Circle", "parentId": "feat-circle-contributions", "description": "Record manual payments, adjust amounts", "defaultMode": "none", "containsPersonalData": false }
+      ]
+    },
+    {
+      "id": "feat-circle-payouts",
+      "name": "Payouts",
+      "slug": "circle.payouts",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "View and manage payout schedules and disbursements",
+      "defaultMode": "read",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-circle-members",
+      "name": "Member List",
+      "slug": "circle.members",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "View circle members and their participation status",
+      "defaultMode": "read",
+      "containsPersonalData": true
+    },
+    {
+      "id": "feat-circle-financial",
+      "name": "Financial Summary",
+      "slug": "circle.financial",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "Circle financial overview and transaction history",
+      "defaultMode": "none",
+      "containsPersonalData": false
+    },
+    {
+      "id": "feat-circle-settings",
+      "name": "Settings",
+      "slug": "circle.settings",
+      "scope": "circle",
+      "category": "Circle",
+      "parentId": null,
+      "description": "Circle configuration, lifecycle management, and rules",
+      "defaultMode": "none",
+      "containsPersonalData": false
+    }
+  ],
+
+  "permissionOverrides": [
+    {
+      "id": "ov-001",
+      "userId": "user-5847",
+      "userName": "Elena Rossi",
+      "featureId": "feat-assoc-treasury",
+      "featureName": "Treasury & Funds",
+      "scopeType": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "accessMode": "read_write",
+      "previousMode": "none",
+      "reason": "Temporary treasury access during treasurer's leave of absence",
+      "grantedBy": "admin-001",
+      "grantedByName": "Sarah Chen",
+      "expiresAt": "2026-02-28T23:59:59Z",
+      "isTemporary": true,
+      "status": "active",
+      "createdAt": "2026-01-10T09:00:00Z"
+    },
+    {
+      "id": "ov-002",
+      "userId": "user-2341",
+      "userName": "Thomas Keller",
+      "featureId": "feat-assoc-analytics",
+      "featureName": "Analytics & Reporting",
+      "scopeType": "association",
+      "scopeId": "assoc-002",
+      "scopeName": "Basel Integration Circle Association",
+      "accessMode": "read",
+      "previousMode": "none",
+      "reason": "Granted read access for annual reporting preparation",
+      "grantedBy": "admin-001",
+      "grantedByName": "Sarah Chen",
+      "expiresAt": "2026-03-31T23:59:59Z",
+      "isTemporary": true,
+      "status": "active",
+      "createdAt": "2026-01-05T14:00:00Z"
+    },
+    {
+      "id": "ov-003",
+      "userId": "user-8923",
+      "userName": "Maria Santos",
+      "featureId": "feat-assoc-ai",
+      "featureName": "AI Insights",
+      "scopeType": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "accessMode": "read",
+      "previousMode": "none",
+      "reason": "Beta tester for AI insights feature rollout",
+      "grantedBy": "admin-001",
+      "grantedByName": "Sarah Chen",
+      "expiresAt": null,
+      "isTemporary": false,
+      "status": "active",
+      "createdAt": "2025-12-01T10:00:00Z"
+    },
+    {
+      "id": "ov-004",
+      "userId": "user-1234",
+      "userName": "Andrea Bianchi",
+      "featureId": "feat-circle-settings",
+      "featureName": "Settings",
+      "scopeType": "circle",
+      "scopeId": "circle-015",
+      "scopeName": "Zurich Professionals Circle",
+      "accessMode": "none",
+      "previousMode": "read",
+      "reason": "Restricted after policy violation - pending review",
+      "grantedBy": "admin-003",
+      "grantedByName": "Amira Hassan",
+      "expiresAt": null,
+      "isTemporary": false,
+      "status": "active",
+      "createdAt": "2026-01-12T16:00:00Z"
+    }
+  ],
+
+  "permissionTemplates": [
+    {
+      "id": "tpl-001",
+      "name": "Full Admin",
+      "description": "Complete access to all features within scope. Use for trusted administrators only.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read_write",
+        "association.circles": "read_write",
+        "association.treasury": "read_write",
+        "association.credit": "read_write",
+        "association.communication": "read_write",
+        "association.governance": "read_write",
+        "association.analytics": "read_write",
+        "association.ai_insights": "read_write",
+        "association.documents": "read_write",
+        "association.projects": "read_write",
+        "association.community": "read_write",
+        "association.multi_share": "read_write"
+      },
+      "version": 2,
+      "createdBy": "admin-001",
+      "createdByName": "Sarah Chen",
+      "usageCount": 9,
+      "createdAt": "2025-06-15T10:00:00Z",
+      "updatedAt": "2025-11-01T14:00:00Z"
+    },
+    {
+      "id": "tpl-002",
+      "name": "Read-Only Auditor",
+      "description": "Read access to all features for audit purposes. No write capabilities.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read",
+        "association.circles": "read",
+        "association.treasury": "read",
+        "association.credit": "read",
+        "association.communication": "read",
+        "association.governance": "read",
+        "association.analytics": "read",
+        "association.ai_insights": "read",
+        "association.documents": "read",
+        "association.projects": "read",
+        "association.community": "read",
+        "association.multi_share": "read"
+      },
+      "version": 1,
+      "createdBy": "admin-002",
+      "createdByName": "Marcus Weber",
+      "usageCount": 4,
+      "createdAt": "2025-09-15T10:00:00Z",
+      "updatedAt": "2025-09-15T10:00:00Z"
+    },
+    {
+      "id": "tpl-003",
+      "name": "Financial Manager",
+      "description": "Full financial access with read-only on non-financial features.",
+      "scope": "association",
+      "permissions": {
+        "association.members": "read",
+        "association.circles": "read",
+        "association.treasury": "read_write",
+        "association.credit": "read_write",
+        "association.communication": "read",
+        "association.governance": "read",
+        "association.analytics": "read_write",
+        "association.ai_insights": "read",
+        "association.documents": "read",
+        "association.projects": "read",
+        "association.community": "read",
+        "association.multi_share": "read_write"
+      },
+      "version": 1,
+      "createdBy": "admin-001",
+      "createdByName": "Sarah Chen",
+      "usageCount": 12,
+      "createdAt": "2025-07-01T10:00:00Z",
+      "updatedAt": "2025-07-01T10:00:00Z"
+    },
+    {
+      "id": "tpl-004",
+      "name": "Circle Participant",
+      "description": "Standard member access for circle participation.",
+      "scope": "circle",
+      "permissions": {
+        "circle.dashboard": "read",
+        "circle.contributions": "read_write",
+        "circle.payouts": "read",
+        "circle.members": "read",
+        "circle.financial": "read",
+        "circle.settings": "none"
+      },
+      "version": 1,
+      "createdBy": "admin-001",
+      "createdByName": "Sarah Chen",
+      "usageCount": 340,
+      "createdAt": "2025-06-01T10:00:00Z",
+      "updatedAt": "2025-06-01T10:00:00Z"
+    }
+  ],
+
+  "accessRequests": [
+    {
+      "id": "req-001",
+      "requesterId": "user-5847",
+      "requesterName": "Elena Rossi",
+      "requesterEmail": "elena.rossi@example.com",
+      "requesterAvatar": "https://i.pravatar.cc/150?u=elena",
+      "featureId": "feat-assoc-analytics",
+      "featureName": "Analytics & Reporting",
+      "scopeType": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "currentMode": "none",
+      "requestedMode": "read",
+      "justification": "I need access to analytics reports to prepare the quarterly member engagement summary for the board meeting.",
+      "status": "pending",
+      "reviewerId": null,
+      "reviewerName": null,
+      "reviewerComment": null,
+      "isTemporary": true,
+      "expiresAt": "2026-03-31T23:59:59Z",
+      "createdAt": "2026-01-12T10:00:00Z",
+      "reviewedAt": null
+    },
+    {
+      "id": "req-002",
+      "requesterId": "user-2341",
+      "requesterName": "Thomas Keller",
+      "requesterEmail": "thomas.keller@example.com",
+      "featureId": "feat-assoc-treasury",
+      "featureName": "Treasury & Funds",
+      "scopeType": "association",
+      "scopeId": "assoc-002",
+      "scopeName": "Basel Integration Circle Association",
+      "currentMode": "none",
+      "requestedMode": "read",
+      "justification": "As newly elected vice-president, I need visibility into the treasury for oversight purposes.",
+      "status": "pending",
+      "reviewerId": null,
+      "reviewerName": null,
+      "reviewerComment": null,
+      "isTemporary": false,
+      "expiresAt": null,
+      "createdAt": "2026-01-11T14:00:00Z",
+      "reviewedAt": null
+    },
+    {
+      "id": "req-003",
+      "requesterId": "user-8923",
+      "requesterName": "Maria Santos",
+      "requesterEmail": "maria.santos@example.com",
+      "featureId": "feat-assoc-governance",
+      "featureName": "Governance & Voting",
+      "scopeType": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "currentMode": "read_write",
+      "requestedMode": "read_write",
+      "justification": "Need write access to create a new proposal for the February general meeting agenda.",
+      "status": "approved",
+      "reviewerId": "admin-001",
+      "reviewerName": "Sarah Chen",
+      "reviewerComment": "Approved - Maria is the governance committee lead.",
+      "isTemporary": false,
+      "expiresAt": null,
+      "createdAt": "2026-01-08T09:00:00Z",
+      "reviewedAt": "2026-01-08T11:00:00Z"
+    },
+    {
+      "id": "req-004",
+      "requesterId": "user-7890",
+      "requesterName": "Carlos Rodriguez",
+      "requesterEmail": "carlos.rodriguez@example.com",
+      "featureId": "feat-circle-financial",
+      "featureName": "Financial Summary",
+      "scopeType": "circle",
+      "scopeId": "circle-020",
+      "scopeName": "Geneva Solidarity Circle",
+      "currentMode": "none",
+      "requestedMode": "read",
+      "justification": "As a member, I'd like to see the financial summary to understand circle health before committing to additional shares.",
+      "status": "denied",
+      "reviewerId": "admin-003",
+      "reviewerName": "Amira Hassan",
+      "reviewerComment": "Financial summaries at the detailed level are restricted to organizers and treasurers. You can see the overview on the circle dashboard.",
+      "isTemporary": false,
+      "expiresAt": null,
+      "createdAt": "2026-01-06T16:00:00Z",
+      "reviewedAt": "2026-01-07T09:00:00Z"
+    },
+    {
+      "id": "req-005",
+      "requesterId": "user-4567",
+      "requesterName": "Sophie Dubois",
+      "requesterEmail": "sophie.dubois@example.com",
+      "featureId": "feat-assoc-credit",
+      "featureName": "Credit & Lending",
+      "scopeType": "association",
+      "scopeId": "assoc-003",
+      "scopeName": "Bern Tontine Cooperative",
+      "currentMode": "read",
+      "requestedMode": "read_write",
+      "justification": "Elected as new credit committee chair. Need write access to approve loan applications.",
+      "status": "pending",
+      "reviewerId": null,
+      "reviewerName": null,
+      "reviewerComment": null,
+      "isTemporary": false,
+      "expiresAt": null,
+      "createdAt": "2026-01-13T08:00:00Z",
+      "reviewedAt": null
+    }
+  ],
+
+  "rbacAuditEntries": [
+    {
+      "id": "rbac-log-001",
+      "actorId": "admin-001",
+      "actorName": "Sarah Chen",
+      "actionType": "override_created",
+      "targetType": "override",
+      "targetId": "ov-001",
+      "targetName": "Elena Rossi - Treasury Access",
+      "changes": {
+        "accessMode": { "before": "none", "after": "read_write" }
+      },
+      "reason": "Temporary treasury access during treasurer's leave",
+      "scope": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "timestamp": "2026-01-10T09:00:00Z"
+    },
+    {
+      "id": "rbac-log-002",
+      "actorId": "admin-001",
+      "actorName": "Sarah Chen",
+      "actionType": "role_assigned",
+      "targetType": "user",
+      "targetId": "user-3456",
+      "targetName": "Jean-Pierre Martin",
+      "changes": {
+        "contextualRole": { "before": "association_member", "after": "association_treasurer" }
+      },
+      "reason": "Elected as new treasurer at January AGM",
+      "scope": "association",
+      "scopeId": "assoc-004",
+      "scopeName": "Lausanne Ubuntu Savings Group",
+      "timestamp": "2026-01-09T15:00:00Z"
+    },
+    {
+      "id": "rbac-log-003",
+      "actorId": "admin-001",
+      "actorName": "Sarah Chen",
+      "actionType": "template_applied",
+      "targetType": "role",
+      "targetId": "cr-assoc-auditor",
+      "targetName": "Association Auditor",
+      "changes": {
+        "template": { "before": null, "after": "Read-Only Auditor" }
+      },
+      "reason": "Applied standard audit template to new custom role",
+      "scope": "association",
+      "scopeId": null,
+      "scopeName": null,
+      "timestamp": "2025-09-15T10:00:00Z"
+    },
+    {
+      "id": "rbac-log-004",
+      "actorId": "admin-003",
+      "actorName": "Amira Hassan",
+      "actionType": "override_created",
+      "targetType": "override",
+      "targetId": "ov-004",
+      "targetName": "Andrea Bianchi - Settings Restriction",
+      "changes": {
+        "accessMode": { "before": "read", "after": "none" }
+      },
+      "reason": "Restricted after policy violation - pending review",
+      "scope": "circle",
+      "scopeId": "circle-015",
+      "scopeName": "Zurich Professionals Circle",
+      "timestamp": "2026-01-12T16:00:00Z"
+    },
+    {
+      "id": "rbac-log-005",
+      "actorId": "admin-001",
+      "actorName": "Sarah Chen",
+      "actionType": "access_granted",
+      "targetType": "user",
+      "targetId": "user-8923",
+      "targetName": "Maria Santos",
+      "changes": {
+        "governance_access": { "before": "read", "after": "read_write" }
+      },
+      "reason": "Approved access request - governance committee lead",
+      "scope": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "timestamp": "2026-01-08T11:00:00Z"
+    },
+    {
+      "id": "rbac-log-006",
+      "actorId": "admin-002",
+      "actorName": "Marcus Weber",
+      "actionType": "review_completed",
+      "targetType": "user",
+      "targetId": "user-9012",
+      "targetName": "Unknown User",
+      "changes": {
+        "review_result": { "before": "pending", "after": "permissions_confirmed" }
+      },
+      "reason": "Q4 2025 periodic access review - all permissions appropriate",
+      "scope": "association",
+      "scopeId": "assoc-001",
+      "scopeName": "Zurich African Community Association",
+      "timestamp": "2026-01-05T14:00:00Z"
+    },
+    {
+      "id": "rbac-log-007",
+      "actorId": "admin-001",
+      "actorName": "Sarah Chen",
+      "actionType": "permission_changed",
+      "targetType": "role",
+      "targetId": "cr-assoc-member",
+      "targetName": "Association Member",
+      "changes": {
+        "association.projects": { "before": "read", "after": "read_write" }
+      },
+      "reason": "Members should be able to create and contribute to community projects",
+      "scope": null,
+      "scopeId": null,
+      "scopeName": null,
+      "timestamp": "2026-01-03T10:00:00Z"
+    }
+  ],
+
+  "periodicReviews": [
+    {
+      "id": "review-001",
+      "name": "Q1 2026 Elevated Permissions Review",
+      "scope": "association",
+      "status": "in_progress",
+      "startDate": "2026-01-06T00:00:00Z",
+      "dueDate": "2026-01-31T23:59:59Z",
+      "reviewerId": "admin-002",
+      "reviewerName": "Marcus Weber",
+      "totalItems": 23,
+      "completedItems": 15,
+      "findings": [
+        {
+          "userId": "user-1111",
+          "userName": "Franz Huber",
+          "action": "revoked",
+          "featureId": "feat-assoc-treasury",
+          "featureName": "Treasury & Funds",
+          "previousMode": "read_write",
+          "newMode": null,
+          "note": "No longer serving as interim treasurer. Access no longer needed."
+        },
+        {
+          "userId": "user-2222",
+          "userName": "Leila Mbeki",
+          "action": "confirmed",
+          "featureId": "feat-assoc-analytics",
+          "featureName": "Analytics & Reporting",
+          "previousMode": "read",
+          "newMode": null,
+          "note": "Still serving as reporting officer. Access confirmed."
+        }
+      ],
+      "createdAt": "2026-01-06T00:00:00Z"
+    },
+    {
+      "id": "review-002",
+      "name": "Q1 2026 Temporary Grants Review",
+      "scope": "circle",
+      "status": "scheduled",
+      "startDate": "2026-02-01T00:00:00Z",
+      "dueDate": "2026-02-15T23:59:59Z",
+      "reviewerId": "admin-003",
+      "reviewerName": "Amira Hassan",
+      "totalItems": 5,
+      "completedItems": 0,
+      "findings": [],
+      "createdAt": "2026-01-13T00:00:00Z"
+    }
+  ],
+
+  "sodRules": [
+    {
+      "id": "sod-001",
+      "name": "Transfer Separation",
+      "description": "Users cannot both create and approve fund transfers within the same scope.",
+      "conflictingPermissions": ["association.treasury.create_transactions", "association.treasury.approve_transfers"],
+      "scope": "association",
+      "enforced": true,
+      "violations": 1,
+      "lastChecked": "2026-01-13T06:00:00Z"
+    },
+    {
+      "id": "sod-002",
+      "name": "Loan Separation",
+      "description": "Users cannot both apply for and approve loans within the same association.",
+      "conflictingPermissions": ["association.credit.apply", "association.credit.approve"],
+      "scope": "association",
+      "enforced": true,
+      "violations": 0,
+      "lastChecked": "2026-01-13T06:00:00Z"
+    },
+    {
+      "id": "sod-003",
+      "name": "Election Integrity",
+      "description": "Users managing elections cannot also cast votes in the same election.",
+      "conflictingPermissions": ["federation.elections.manage", "federation.elections.vote"],
+      "scope": "federation",
+      "enforced": true,
+      "violations": 0,
+      "lastChecked": "2026-01-13T06:00:00Z"
+    }
+  ],
+
+  "permissionAnomalies": [
+    {
+      "id": "anomaly-001",
+      "type": "accumulation",
+      "severity": "medium",
+      "userId": "user-5847",
+      "userName": "Elena Rossi",
+      "description": "User has 4 active permission overrides across 3 associations, which is above the platform average of 0.8 overrides per user.",
+      "detectedAt": "2026-01-13T06:00:00Z",
+      "acknowledged": false,
+      "acknowledgedBy": null
+    },
+    {
+      "id": "anomaly-002",
+      "type": "dormant_elevated",
+      "severity": "low",
+      "userId": "user-3333",
+      "userName": "Fatou Diallo",
+      "description": "User has had read_write access to Treasury & Funds for 90+ days but has not accessed the feature in 60 days.",
+      "detectedAt": "2026-01-12T06:00:00Z",
+      "acknowledged": true,
+      "acknowledgedBy": "admin-002"
+    },
+    {
+      "id": "anomaly-003",
+      "type": "rapid_changes",
+      "severity": "high",
+      "userId": "admin-001",
+      "userName": "Sarah Chen",
+      "description": "12 permission changes made in 30 minutes on Jan 10. Pattern may indicate bulk maintenance or potential account compromise.",
+      "detectedAt": "2026-01-10T09:30:00Z",
+      "acknowledged": true,
+      "acknowledgedBy": "admin-001"
+    }
+  ],
+
+  "userPermissionSummaries": [
+    {
+      "userId": "user-5847",
+      "userName": "Elena Rossi",
+      "userEmail": "elena.rossi@example.com",
+      "userAvatar": "https://i.pravatar.cc/150?u=elena",
+      "accessRole": "standard_user",
+      "accessRoleLabel": "Standard User",
+      "contextualRoles": [
+        { "roleId": "cr-assoc-member", "roleName": "Association Member", "scope": "association", "scopeId": "assoc-001", "scopeName": "Zurich African Community Association" },
+        { "roleId": "cr-circle-member", "roleName": "Circle Member", "scope": "circle", "scopeId": "circle-015", "scopeName": "Zurich Professionals Circle" }
+      ],
+      "overrideCount": 4,
+      "temporaryGrantCount": 1,
+      "lastPermissionChange": "2026-01-10T09:00:00Z",
+      "anomalyCount": 1
+    },
+    {
+      "userId": "user-2341",
+      "userName": "Thomas Keller",
+      "userEmail": "thomas.keller@example.com",
+      "accessRole": "standard_user",
+      "accessRoleLabel": "Standard User",
+      "contextualRoles": [
+        { "roleId": "cr-assoc-admin", "roleName": "Association Admin", "scope": "association", "scopeId": "assoc-002", "scopeName": "Basel Integration Circle Association" },
+        { "roleId": "cr-circle-organizer", "roleName": "Circle Organizer", "scope": "circle", "scopeId": "circle-008", "scopeName": "Basel Newcomers Circle" }
+      ],
+      "overrideCount": 1,
+      "temporaryGrantCount": 1,
+      "lastPermissionChange": "2026-01-05T14:00:00Z",
+      "anomalyCount": 0
+    },
+    {
+      "userId": "user-8923",
+      "userName": "Maria Santos",
+      "userEmail": "maria.santos@example.com",
+      "userAvatar": "https://i.pravatar.cc/150?u=maria",
+      "accessRole": "standard_user",
+      "accessRoleLabel": "Standard User",
+      "contextualRoles": [
+        { "roleId": "cr-assoc-secretary", "roleName": "Association Secretary", "scope": "association", "scopeId": "assoc-001", "scopeName": "Zurich African Community Association" },
+        { "roleId": "cr-circle-member", "roleName": "Circle Member", "scope": "circle", "scopeId": "circle-015", "scopeName": "Zurich Professionals Circle" },
+        { "roleId": "cr-circle-organizer", "roleName": "Circle Organizer", "scope": "circle", "scopeId": "circle-022", "scopeName": "Zurich Women's Circle" }
+      ],
+      "overrideCount": 1,
+      "temporaryGrantCount": 0,
+      "lastPermissionChange": "2026-01-08T11:00:00Z",
+      "anomalyCount": 0
+    },
+    {
+      "userId": "user-1234",
+      "userName": "Andrea Bianchi",
+      "userEmail": "andrea.bianchi@example.com",
+      "accessRole": "standard_user",
+      "accessRoleLabel": "Standard User",
+      "contextualRoles": [
+        { "roleId": "cr-assoc-member", "roleName": "Association Member", "scope": "association", "scopeId": "assoc-001", "scopeName": "Zurich African Community Association" },
+        { "roleId": "cr-circle-member", "roleName": "Circle Member", "scope": "circle", "scopeId": "circle-015", "scopeName": "Zurich Professionals Circle" }
+      ],
+      "overrideCount": 1,
+      "temporaryGrantCount": 0,
+      "lastPermissionChange": "2026-01-12T16:00:00Z",
+      "anomalyCount": 0
+    },
+    {
+      "userId": "user-9999",
+      "userName": "Platform Super Admin",
+      "userEmail": "superadmin@circleup.ch",
+      "accessRole": "admin",
+      "accessRoleLabel": "Admin",
+      "contextualRoles": [
+        { "roleId": "cr-fed-president", "roleName": "Federation President", "scope": "federation", "scopeId": "fed-001", "scopeName": "Swiss African Diaspora Federation" }
+      ],
+      "overrideCount": 0,
+      "temporaryGrantCount": 0,
+      "lastPermissionChange": "2025-06-01T00:00:00Z",
+      "anomalyCount": 0
+    }
+  ],
+
+  "auditLogs": [
+    {
+      "id": "log-001",
+      "userId": "admin-001",
+      "userName": "Sarah Chen",
+      "action": "user.suspend",
+      "resourceType": "User",
+      "resourceId": "user-9999",
+      "changes": {
+        "status": { "before": "active", "after": "suspended" }
+      },
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "timestamp": "2026-01-13T08:00:00Z"
+    },
+    {
+      "id": "log-002",
+      "userId": "admin-001",
+      "userName": "Sarah Chen",
+      "action": "config.update",
+      "resourceType": "PlatformConfig",
+      "resourceId": "config-fees",
+      "changes": {
+        "platformFeePercent": { "before": 1.5, "after": 1.25 }
+      },
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "timestamp": "2026-01-12T16:30:00Z"
+    }
+  ]
+}

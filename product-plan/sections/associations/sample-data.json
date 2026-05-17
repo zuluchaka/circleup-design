@@ -1,0 +1,2601 @@
+{
+  "_meta": {
+    "models": {
+      "associations": "Community organizations like diaspora associations, cultural clubs, or savings groups. Each association has its own branding, settings, and members.",
+      "members": "People who belong to an association, each with a specific role (president, treasurer, secretary, admin, or member) and membership status.",
+      "announcements": "Important messages posted by association admins to all members, with different priority levels.",
+      "activityItems": "Recent events within an association, like new members joining, circles being created, or announcements being posted.",
+      "pendingInvitations": "Invitations sent to potential members that haven't been accepted yet.",
+      "joinRequests": "Requests from users who want to join a private or invite-only association, awaiting approval.",
+      "migrationSession": "A migration session tracks the entire import process for one association, including which phase the organizer is on, overall progress, and go-live scheduling.",
+      "importedAssociation": "The association being imported with its identity, governance structure, privacy settings, and communication preferences.",
+      "importedMembers": "Member records parsed from a spreadsheet or added manually, with validation status, role assignment, and invitation tracking.",
+      "importedCircles": "ROSCA circle configurations imported with parameters, mid-cycle state, payout order, and financial summaries.",
+      "validationReport": "Pre-go-live validation results covering association config, members, circles, and permissions.",
+      "memberVerifications": "Records of imported members reviewing and confirming (or disputing) their imported data."
+    },
+    "relationships": [
+      "Each Association has many Members (through Membership)",
+      "Each Association has many Announcements",
+      "Each Association has many Activity Items tracking recent events",
+      "Pending Invitations belong to an Association and track who was invited",
+      "Join Requests belong to an Association and track who wants to join",
+      "Each MigrationSession contains one ImportedAssociation being migrated",
+      "Each MigrationSession contains multiple ImportedMembers and ImportedCircles",
+      "Each ImportedCircle has PaymentMatrix entries for mid-cycle state",
+      "MemberVerifications link ImportedMembers to their self-verification status"
+    ]
+  },
+  "associations": [
+    {
+      "id": "assoc-001",
+      "name": "Igbo Cultural Association Zürich",
+      "description": "Uniting the Igbo community in Zürich and surrounding areas. We preserve our cultural heritage through language classes, traditional celebrations, and mutual support programs.",
+      "logo": "https://images.unsplash.com/photo-1590845947676-fa0b632e7055?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1590845947676-fa0b632e7055?w=1200&h=400&fit=crop",
+      "type": "cultural",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 156,
+      "activeCircles": 4,
+      "totalFunds": 45200,
+      "currency": "CHF",
+      "createdAt": "2021-03-15T10:00:00Z",
+      "myRole": "president",
+      "hasUnreadActivity": true,
+      "settings": {
+        "culturalTerminology": "susu",
+        "allowPublicJoin": true,
+        "requireApproval": false
+      }
+    },
+    {
+      "id": "assoc-002",
+      "name": "Cameroonian Professionals Network",
+      "description": "A network of Cameroonian professionals in Switzerland fostering career growth, mentorship, and business opportunities within our community.",
+      "logo": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=400&fit=crop",
+      "type": "professional",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "fr",
+      "memberCount": 89,
+      "activeCircles": 2,
+      "totalFunds": 18500,
+      "currency": "CHF",
+      "createdAt": "2022-06-20T14:30:00Z",
+      "myRole": "member",
+      "hasUnreadActivity": false,
+      "settings": {
+        "culturalTerminology": "tontine",
+        "allowPublicJoin": true,
+        "requireApproval": true
+      }
+    },
+    {
+      "id": "assoc-003",
+      "name": "Ethiopian Orthodox Community Geneva",
+      "description": "Supporting Ethiopian Orthodox Christians in Geneva with spiritual fellowship, community events, and mutual aid during times of need.",
+      "logo": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&h=400&fit=crop",
+      "type": "religious",
+      "visibility": "private",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 234,
+      "activeCircles": 6,
+      "totalFunds": 78900,
+      "currency": "CHF",
+      "createdAt": "2019-11-08T09:15:00Z",
+      "myRole": "treasurer",
+      "hasUnreadActivity": true,
+      "settings": {
+        "culturalTerminology": "ekub",
+        "allowPublicJoin": false,
+        "requireApproval": true
+      }
+    },
+    {
+      "id": "assoc-004",
+      "name": "Senegalese Women's Savings Circle",
+      "description": "Empowering Senegalese women through collective savings and financial literacy. Together we build wealth for our families and future generations.",
+      "logo": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&h=400&fit=crop",
+      "type": "savings",
+      "visibility": "invite_only",
+      "country": "Switzerland",
+      "language": "fr",
+      "memberCount": 42,
+      "activeCircles": 3,
+      "totalFunds": 62300,
+      "currency": "CHF",
+      "createdAt": "2020-09-01T11:00:00Z",
+      "myRole": "admin",
+      "hasUnreadActivity": false,
+      "settings": {
+        "culturalTerminology": "tontine",
+        "allowPublicJoin": false,
+        "requireApproval": true
+      }
+    },
+    {
+      "id": "assoc-005",
+      "name": "Ghanaian Family Union Basel",
+      "description": "A close-knit family association supporting Ghanaian families in Basel with emergency funds, children's education, and cultural preservation.",
+      "logo": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&h=400&fit=crop",
+      "type": "family",
+      "visibility": "private",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 28,
+      "activeCircles": 1,
+      "totalFunds": 15800,
+      "currency": "CHF",
+      "createdAt": "2023-01-10T16:45:00Z",
+      "myRole": "member",
+      "hasUnreadActivity": true,
+      "settings": {
+        "culturalTerminology": "susu",
+        "allowPublicJoin": false,
+        "requireApproval": true
+      }
+    },
+    {
+      "id": "assoc-006",
+      "name": "African Social Club Bern",
+      "description": "Bringing together Africans from all nations in Bern for social events, networking, and community building. All are welcome!",
+      "logo": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=200&h=200&fit=crop",
+      "coverImage": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=400&fit=crop",
+      "type": "social",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 312,
+      "activeCircles": 0,
+      "totalFunds": 0,
+      "currency": "CHF",
+      "createdAt": "2024-02-28T13:20:00Z",
+      "myRole": "secretary",
+      "hasUnreadActivity": false,
+      "settings": {
+        "culturalTerminology": "circle",
+        "allowPublicJoin": true,
+        "requireApproval": false
+      }
+    }
+  ],
+  "members": [
+    {
+      "id": "member-001",
+      "userId": "user-001",
+      "associationId": "assoc-001",
+      "name": "Chukwuemeka Okonkwo",
+      "email": "c.okonkwo@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      "role": "president",
+      "status": "active",
+      "membershipType": "regular",
+      "joinedAt": "2021-03-15T10:00:00Z",
+      "duesPaidUntil": "2026-03-15T00:00:00Z"
+    },
+    {
+      "id": "member-002",
+      "userId": "user-002",
+      "associationId": "assoc-001",
+      "name": "Adaeze Nwosu",
+      "email": "adaeze.n@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop",
+      "role": "treasurer",
+      "status": "active",
+      "membershipType": "regular",
+      "joinedAt": "2021-04-02T14:30:00Z",
+      "duesPaidUntil": "2026-03-15T00:00:00Z"
+    },
+    {
+      "id": "member-003",
+      "userId": "user-003",
+      "associationId": "assoc-001",
+      "name": "Obinna Eze",
+      "email": "obinna.eze@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+      "role": "secretary",
+      "status": "active",
+      "membershipType": "regular",
+      "joinedAt": "2021-04-10T09:00:00Z",
+      "duesPaidUntil": "2026-01-15T00:00:00Z"
+    },
+    {
+      "id": "member-004",
+      "userId": "user-004",
+      "associationId": "assoc-001",
+      "name": "Ngozi Amadi",
+      "email": "ngozi.amadi@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+      "role": "admin",
+      "status": "active",
+      "membershipType": "regular",
+      "joinedAt": "2021-05-20T11:15:00Z",
+      "duesPaidUntil": "2026-03-15T00:00:00Z"
+    },
+    {
+      "id": "member-005",
+      "userId": "user-005",
+      "associationId": "assoc-001",
+      "name": "Ikenna Obi",
+      "email": "ikenna.obi@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+      "role": "member",
+      "status": "active",
+      "membershipType": "regular",
+      "joinedAt": "2022-01-08T16:00:00Z",
+      "duesPaidUntil": "2025-12-15T00:00:00Z"
+    },
+    {
+      "id": "member-006",
+      "userId": "user-006",
+      "associationId": "assoc-001",
+      "name": "Chiamaka Onyeka",
+      "email": "chiamaka.o@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+      "role": "member",
+      "status": "active",
+      "membershipType": "student",
+      "joinedAt": "2023-09-01T10:30:00Z",
+      "duesPaidUntil": "2026-03-15T00:00:00Z"
+    },
+    {
+      "id": "member-007",
+      "userId": "user-007",
+      "associationId": "assoc-001",
+      "name": "Emeka Udoh",
+      "email": "emeka.udoh@email.com",
+      "avatarUrl": null,
+      "role": "member",
+      "status": "pending",
+      "membershipType": "regular",
+      "joinedAt": "2025-12-28T08:45:00Z",
+      "duesPaidUntil": null
+    },
+    {
+      "id": "member-008",
+      "userId": "user-008",
+      "associationId": "assoc-001",
+      "name": "Chidi Okoro",
+      "email": "chidi.okoro@email.com",
+      "avatarUrl": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
+      "role": "member",
+      "status": "suspended",
+      "membershipType": "regular",
+      "joinedAt": "2022-06-15T13:00:00Z",
+      "duesPaidUntil": "2024-06-15T00:00:00Z"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ann-001",
+      "associationId": "assoc-001",
+      "title": "Annual General Meeting - Save the Date!",
+      "content": "Dear members, our Annual General Meeting will be held on February 15th, 2026 at the Community Center in Zürich. We will be electing new officers and reviewing our financial performance. Please mark your calendars and confirm your attendance.",
+      "priority": "high",
+      "authorId": "user-001",
+      "authorName": "Chukwuemeka Okonkwo",
+      "publishedAt": "2026-01-02T09:00:00Z",
+      "expiresAt": "2026-02-16T00:00:00Z"
+    },
+    {
+      "id": "ann-002",
+      "associationId": "assoc-001",
+      "title": "New Savings Circle Starting in February",
+      "content": "We're launching a new savings circle with CHF 200 monthly contributions. This is a great opportunity for members who have been waiting to join. Contact the treasurer for more details.",
+      "priority": "medium",
+      "authorId": "user-002",
+      "authorName": "Adaeze Nwosu",
+      "publishedAt": "2026-01-03T14:30:00Z",
+      "expiresAt": "2026-02-28T00:00:00Z"
+    },
+    {
+      "id": "ann-003",
+      "associationId": "assoc-001",
+      "title": "Office Hours Changed",
+      "content": "Please note that office hours are now Saturdays 10am-2pm instead of Sundays.",
+      "priority": "low",
+      "authorId": "user-003",
+      "authorName": "Obinna Eze",
+      "publishedAt": "2025-12-20T11:00:00Z",
+      "expiresAt": null
+    }
+  ],
+  "activityItems": [
+    {
+      "id": "act-001",
+      "associationId": "assoc-001",
+      "type": "member_joined",
+      "title": "New member joined",
+      "description": "Emeka Udoh requested to join the association",
+      "actorName": "Emeka Udoh",
+      "actorAvatarUrl": null,
+      "timestamp": "2025-12-28T08:45:00Z",
+      "isRead": false
+    },
+    {
+      "id": "act-002",
+      "associationId": "assoc-001",
+      "type": "announcement_posted",
+      "title": "New announcement",
+      "description": "Annual General Meeting - Save the Date!",
+      "actorName": "Chukwuemeka Okonkwo",
+      "actorAvatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      "timestamp": "2026-01-02T09:00:00Z",
+      "isRead": true
+    },
+    {
+      "id": "act-003",
+      "associationId": "assoc-001",
+      "type": "circle_created",
+      "title": "New circle created",
+      "description": "February Savings Circle (CHF 200/month) is now open for enrollment",
+      "actorName": "Adaeze Nwosu",
+      "actorAvatarUrl": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop",
+      "timestamp": "2026-01-03T14:30:00Z",
+      "isRead": false
+    },
+    {
+      "id": "act-004",
+      "associationId": "assoc-001",
+      "type": "payout_completed",
+      "title": "Payout completed",
+      "description": "Ikenna Obi received CHF 2,400 from Unity Savings Circle",
+      "actorName": "System",
+      "actorAvatarUrl": null,
+      "timestamp": "2026-01-01T12:00:00Z",
+      "isRead": true
+    },
+    {
+      "id": "act-005",
+      "associationId": "assoc-001",
+      "type": "role_changed",
+      "title": "Role updated",
+      "description": "Ngozi Amadi was promoted to Admin",
+      "actorName": "Chukwuemeka Okonkwo",
+      "actorAvatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+      "timestamp": "2025-12-15T10:00:00Z",
+      "isRead": true
+    }
+  ],
+  "pendingInvitations": [
+    {
+      "id": "inv-001",
+      "associationId": "assoc-001",
+      "email": "nkechi.ibe@email.com",
+      "phone": null,
+      "invitedBy": "Chukwuemeka Okonkwo",
+      "invitedAt": "2025-12-20T14:00:00Z",
+      "expiresAt": "2026-01-20T14:00:00Z",
+      "channel": "email",
+      "status": "pending"
+    },
+    {
+      "id": "inv-002",
+      "associationId": "assoc-001",
+      "email": null,
+      "phone": "+41791234567",
+      "invitedBy": "Adaeze Nwosu",
+      "invitedAt": "2025-12-28T09:30:00Z",
+      "expiresAt": "2026-01-28T09:30:00Z",
+      "channel": "sms",
+      "status": "pending"
+    },
+    {
+      "id": "inv-003",
+      "associationId": "assoc-001",
+      "email": "ugo.nwachukwu@email.com",
+      "phone": "+41797654321",
+      "invitedBy": "Obinna Eze",
+      "invitedAt": "2025-12-30T16:15:00Z",
+      "expiresAt": "2026-01-30T16:15:00Z",
+      "channel": "whatsapp",
+      "status": "pending"
+    }
+  ],
+  "joinRequests": [
+    {
+      "id": "req-001",
+      "associationId": "assoc-003",
+      "userId": "user-020",
+      "userName": "Yohannes Tadesse",
+      "userEmail": "y.tadesse@email.com",
+      "userAvatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
+      "message": "I recently moved to Geneva and would love to connect with the Ethiopian Orthodox community here. I've been a member of our church in Addis for 15 years.",
+      "requestedAt": "2025-12-29T11:00:00Z",
+      "status": "pending"
+    },
+    {
+      "id": "req-002",
+      "associationId": "assoc-003",
+      "userId": "user-021",
+      "userName": "Meron Haile",
+      "userEmail": "meron.h@email.com",
+      "userAvatarUrl": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
+      "message": "Looking to join the community. Referred by Tesfaye Bekele.",
+      "requestedAt": "2026-01-02T15:30:00Z",
+      "status": "pending"
+    }
+  ],
+  "discoverableAssociations": [
+    {
+      "id": "assoc-010",
+      "name": "Nigerian Union Switzerland",
+      "description": "The umbrella organization for all Nigerians living in Switzerland. We advocate for our community's interests and organize national day celebrations.",
+      "logo": "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=200&h=200&fit=crop",
+      "type": "cultural",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 892,
+      "activeCircles": 12
+    },
+    {
+      "id": "assoc-011",
+      "name": "Congolese Community Lausanne",
+      "description": "Bringing together Congolese families in Lausanne for cultural events, support, and community building.",
+      "logo": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=200&h=200&fit=crop",
+      "type": "cultural",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "fr",
+      "memberCount": 145,
+      "activeCircles": 3
+    },
+    {
+      "id": "assoc-012",
+      "name": "East African Entrepreneurs Hub",
+      "description": "A business network for entrepreneurs from Kenya, Uganda, Tanzania, and Rwanda. We share opportunities and support each other's ventures.",
+      "logo": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop",
+      "type": "professional",
+      "visibility": "public",
+      "country": "Switzerland",
+      "language": "en",
+      "memberCount": 67,
+      "activeCircles": 2
+    }
+  ],
+  "federations": [
+    {
+      "id": "fed-001",
+      "name": "African Diaspora Federation Switzerland",
+      "description": "The umbrella organization coordinating African diaspora associations across Switzerland. We provide shared resources, policy guidance, and cross-community collaboration.",
+      "logo": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=200&h=200&fit=crop",
+      "type": "national",
+      "status": "active",
+      "parentFederationId": null,
+      "chapterCount": 12,
+      "totalMembers": 2847,
+      "totalCircles": 45,
+      "foundedAt": "2018-06-15T00:00:00Z",
+      "createdAt": "2018-06-15T10:00:00Z"
+    },
+    {
+      "id": "fed-002",
+      "name": "West African Communities Alliance",
+      "description": "A regional alliance of West African community associations in the Zurich metropolitan area.",
+      "logo": "https://images.unsplash.com/photo-1590845947676-fa0b632e7055?w=200&h=200&fit=crop",
+      "type": "regional",
+      "status": "active",
+      "parentFederationId": "fed-001",
+      "chapterCount": 5,
+      "totalMembers": 890,
+      "totalCircles": 18,
+      "foundedAt": "2020-03-01T00:00:00Z",
+      "createdAt": "2020-03-01T14:00:00Z"
+    }
+  ],
+  "federationMemberships": [
+    {
+      "id": "fm-001",
+      "federationId": "fed-001",
+      "associationId": "assoc-001",
+      "associationName": "Igbo Cultural Association Zürich",
+      "associationLogo": "https://images.unsplash.com/photo-1590845947676-fa0b632e7055?w=200&h=200&fit=crop",
+      "status": "active",
+      "role": "chapter",
+      "memberCount": 156,
+      "activeCircles": 4,
+      "joinedAt": "2019-01-15T00:00:00Z",
+      "chapterAdminId": "user-001",
+      "chapterAdminName": "Chukwuemeka Okonkwo"
+    },
+    {
+      "id": "fm-002",
+      "federationId": "fed-001",
+      "associationId": "assoc-002",
+      "associationName": "Cameroonian Professionals Network",
+      "associationLogo": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&h=200&fit=crop",
+      "status": "active",
+      "role": "chapter",
+      "memberCount": 89,
+      "activeCircles": 2,
+      "joinedAt": "2022-08-01T00:00:00Z",
+      "chapterAdminId": "user-010",
+      "chapterAdminName": "Paul Mbarga"
+    },
+    {
+      "id": "fm-003",
+      "federationId": "fed-001",
+      "associationId": "assoc-003",
+      "associationName": "Ethiopian Orthodox Community Geneva",
+      "associationLogo": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=200&h=200&fit=crop",
+      "status": "active",
+      "role": "chapter",
+      "memberCount": 234,
+      "activeCircles": 6,
+      "joinedAt": "2019-06-20T00:00:00Z",
+      "chapterAdminId": "user-015",
+      "chapterAdminName": "Tesfaye Bekele"
+    },
+    {
+      "id": "fm-004",
+      "federationId": "fed-001",
+      "associationId": "assoc-020",
+      "associationName": "Rwandan Community Bern",
+      "associationLogo": null,
+      "status": "pending",
+      "role": "chapter",
+      "memberCount": 45,
+      "activeCircles": 1,
+      "joinedAt": "2026-01-05T00:00:00Z",
+      "chapterAdminId": "user-030",
+      "chapterAdminName": "Jean-Baptiste Niyonzima"
+    }
+  ],
+  "federationPolicies": [
+    {
+      "id": "policy-001",
+      "federationId": "fed-001",
+      "title": "Financial Transparency Standards",
+      "content": "All member associations must maintain transparent financial records and submit quarterly reports to the federation. Annual audits are required for associations with more than CHF 50,000 in annual transactions.",
+      "category": "finance",
+      "isRequired": true,
+      "effectiveDate": "2023-01-01T00:00:00Z",
+      "version": 2,
+      "acknowledgments": 11,
+      "totalChapters": 12,
+      "createdAt": "2022-11-15T00:00:00Z",
+      "updatedAt": "2024-01-10T00:00:00Z"
+    },
+    {
+      "id": "policy-002",
+      "federationId": "fed-001",
+      "title": "Member Code of Conduct",
+      "content": "All members of federation associations agree to uphold principles of mutual respect, cultural sensitivity, and community solidarity. Violations may result in suspension from savings circles and association events.",
+      "category": "membership",
+      "isRequired": true,
+      "effectiveDate": "2019-01-01T00:00:00Z",
+      "version": 1,
+      "acknowledgments": 12,
+      "totalChapters": 12,
+      "createdAt": "2018-12-01T00:00:00Z",
+      "updatedAt": "2018-12-01T00:00:00Z"
+    },
+    {
+      "id": "policy-003",
+      "federationId": "fed-001",
+      "title": "Data Privacy Guidelines",
+      "content": "Member associations must comply with Swiss data protection laws and GDPR. Personal data may only be shared within the federation for legitimate purposes with member consent.",
+      "category": "governance",
+      "isRequired": true,
+      "effectiveDate": "2020-06-01T00:00:00Z",
+      "version": 1,
+      "acknowledgments": 12,
+      "totalChapters": 12,
+      "createdAt": "2020-05-15T00:00:00Z",
+      "updatedAt": "2020-05-15T00:00:00Z"
+    }
+  ],
+  "federationAnnouncements": [
+    {
+      "id": "fed-ann-001",
+      "federationId": "fed-001",
+      "title": "Federation Annual Conference 2026",
+      "content": "Save the date! Our annual conference will be held in Geneva on March 20-22, 2026. This year's theme is 'Building Bridges: Cross-Cultural Collaboration in the Digital Age'. Registration opens February 1st.",
+      "authorId": "user-fed-001",
+      "authorName": "Dr. Amina Diallo (Federation President)",
+      "targetChapters": "all",
+      "publishedAt": "2026-01-08T09:00:00Z",
+      "readCount": 847
+    },
+    {
+      "id": "fed-ann-002",
+      "federationId": "fed-001",
+      "title": "New Policy: Emergency Fund Interoperability",
+      "content": "Starting February 2026, member associations can request emergency fund support from the federation when local funds are insufficient. Applications will be reviewed within 48 hours.",
+      "authorId": "user-fed-002",
+      "authorName": "Ibrahim Kone (Federation Treasurer)",
+      "targetChapters": "all",
+      "publishedAt": "2026-01-05T14:00:00Z",
+      "readCount": 623
+    }
+  ],
+  "federationMetrics": {
+    "federationId": "fed-001",
+    "period": "2026-01",
+    "totalMembers": 2847,
+    "memberGrowth": 5.2,
+    "activeCircles": 45,
+    "totalContributions": 245000,
+    "averageCircleHealth": 87,
+    "chapterPerformance": [
+      {
+        "associationId": "assoc-003",
+        "associationName": "Ethiopian Orthodox Community Geneva",
+        "memberCount": 234,
+        "activeCircles": 6,
+        "contributions": 78900,
+        "healthScore": 94
+      },
+      {
+        "associationId": "assoc-001",
+        "associationName": "Igbo Cultural Association Zürich",
+        "memberCount": 156,
+        "activeCircles": 4,
+        "contributions": 45200,
+        "healthScore": 91
+      },
+      {
+        "associationId": "assoc-002",
+        "associationName": "Cameroonian Professionals Network",
+        "memberCount": 89,
+        "activeCircles": 2,
+        "contributions": 18500,
+        "healthScore": 88
+      }
+    ]
+  },
+  "administrationAlerts": [
+    {
+      "id": "alert-001",
+      "type": "warning",
+      "title": "3 Join Requests Awaiting Approval",
+      "description": "New members want to join your association. Review their profiles and approve or reject their requests.",
+      "timestamp": "2026-01-31T10:30:00Z",
+      "actionLabel": "Review Requests",
+      "actionId": "view-join-requests"
+    },
+    {
+      "id": "alert-002",
+      "type": "info",
+      "title": "Association Analytics Report Ready",
+      "description": "Your January monthly report is now available with member growth and engagement insights.",
+      "timestamp": "2026-01-30T09:00:00Z",
+      "actionLabel": "View Report",
+      "actionId": "view-analytics"
+    },
+    {
+      "id": "alert-003",
+      "type": "success",
+      "title": "Member Milestone Reached",
+      "description": "Congratulations! Your association now has 150 active members.",
+      "timestamp": "2026-01-29T14:20:00Z"
+    }
+  ],
+  "currentAssociationFederationMembership": {
+    "id": "fedmem-003",
+    "federationId": "fed-001",
+    "associationId": "assoc-003",
+    "associationName": "West African Federation Switzerland",
+    "associationLogo": "https://images.unsplash.com/photo-1590845947676-fa0b632e7055?w=200&h=200&fit=crop",
+    "status": "active",
+    "role": "chapter",
+    "memberCount": 234,
+    "activeCircles": 6,
+    "joinedAt": "2022-03-15T10:00:00Z",
+    "chapterAdminId": "user-001",
+    "chapterAdminName": "Chukwu Okafor"
+  },
+  "associationAnalytics": {
+    "associationId": "assoc-001",
+    "period": "2026-01",
+    "memberGrowth": [
+      {
+        "month": "2025-07",
+        "totalMembers": 142,
+        "newMembers": 5,
+        "churnedMembers": 2
+      },
+      {
+        "month": "2025-08",
+        "totalMembers": 145,
+        "newMembers": 4,
+        "churnedMembers": 1
+      },
+      {
+        "month": "2025-09",
+        "totalMembers": 148,
+        "newMembers": 6,
+        "churnedMembers": 3
+      },
+      {
+        "month": "2025-10",
+        "totalMembers": 151,
+        "newMembers": 5,
+        "churnedMembers": 2
+      },
+      {
+        "month": "2025-11",
+        "totalMembers": 154,
+        "newMembers": 4,
+        "churnedMembers": 1
+      },
+      {
+        "month": "2025-12",
+        "totalMembers": 156,
+        "newMembers": 3,
+        "churnedMembers": 1
+      }
+    ],
+    "circleActivity": [
+      {
+        "month": "2025-07",
+        "activeCircles": 3,
+        "totalContributions": 38200,
+        "averageContribution": 850
+      },
+      {
+        "month": "2025-08",
+        "activeCircles": 3,
+        "totalContributions": 39100,
+        "averageContribution": 870
+      },
+      {
+        "month": "2025-09",
+        "activeCircles": 4,
+        "totalContributions": 42800,
+        "averageContribution": 890
+      },
+      {
+        "month": "2025-10",
+        "activeCircles": 4,
+        "totalContributions": 43500,
+        "averageContribution": 905
+      },
+      {
+        "month": "2025-11",
+        "activeCircles": 4,
+        "totalContributions": 44300,
+        "averageContribution": 920
+      },
+      {
+        "month": "2025-12",
+        "activeCircles": 4,
+        "totalContributions": 45200,
+        "averageContribution": 940
+      }
+    ],
+    "engagementMetrics": {
+      "averageLoginFrequency": 4.2,
+      "activeMembers": 142,
+      "inactiveMembers": 14,
+      "participationRate": 91
+    },
+    "topContributors": [
+      {
+        "memberId": "member-001",
+        "memberName": "Chukwuemeka Okonkwo",
+        "avatarUrl": "https://i.pravatar.cc/150?img=12",
+        "totalContributions": 12800,
+        "circlesParticipating": 3
+      },
+      {
+        "memberId": "member-002",
+        "memberName": "Amara Nwankwo",
+        "avatarUrl": "https://i.pravatar.cc/150?img=5",
+        "totalContributions": 11200,
+        "circlesParticipating": 2
+      },
+      {
+        "memberId": "member-003",
+        "memberName": "Obiora Eze",
+        "avatarUrl": "https://i.pravatar.cc/150?img=8",
+        "totalContributions": 10600,
+        "circlesParticipating": 2
+      },
+      {
+        "memberId": "member-004",
+        "memberName": "Ngozi Okoro",
+        "avatarUrl": "https://i.pravatar.cc/150?img=9",
+        "totalContributions": 9800,
+        "circlesParticipating": 2
+      },
+      {
+        "memberId": "member-005",
+        "memberName": "Ikenna Obi",
+        "avatarUrl": "https://i.pravatar.cc/150?img=15",
+        "totalContributions": 9200,
+        "circlesParticipating": 2
+      }
+    ],
+    "recentActivity": [
+      {
+        "date": "2026-01-30",
+        "type": "member_joined",
+        "count": 2,
+        "description": "2 new members joined"
+      },
+      {
+        "date": "2026-01-29",
+        "type": "circle_created",
+        "count": 1,
+        "description": "1 new circle created"
+      },
+      {
+        "date": "2026-01-28",
+        "type": "payout_completed",
+        "count": 4,
+        "description": "4 payouts completed"
+      },
+      {
+        "date": "2026-01-27",
+        "type": "announcement_posted",
+        "count": 1,
+        "description": "1 announcement posted"
+      },
+      {
+        "date": "2026-01-26",
+        "type": "member_joined",
+        "count": 1,
+        "description": "1 new member joined"
+      }
+    ]
+  },
+  "migration": {
+    "migrationSession": {
+      "id": "mig-001",
+      "organizerId": "usr-001",
+      "organizerName": "Jean-Claude Mbarga",
+      "status": "in_progress",
+      "currentPhase": 3,
+      "phases": [
+        {
+          "phase": 1,
+          "name": "Association Setup",
+          "status": "completed",
+          "completedAt": "2026-02-10T14:30:00Z"
+        },
+        {
+          "phase": 2,
+          "name": "Member Import",
+          "status": "completed",
+          "completedAt": "2026-02-12T09:15:00Z"
+        },
+        {
+          "phase": 3,
+          "name": "Circle Import",
+          "status": "in_progress",
+          "completedAt": null
+        },
+        {
+          "phase": 4,
+          "name": "Financial History",
+          "status": "locked",
+          "completedAt": null
+        },
+        {
+          "phase": 5,
+          "name": "Validation & Go-Live",
+          "status": "locked",
+          "completedAt": null
+        }
+      ],
+      "createdAt": "2026-02-10T10:00:00Z",
+      "scheduledGoLive": null,
+      "totalMembers": 32,
+      "totalCircles": 2,
+      "sourceFiles": [
+        {
+          "id": "file-001",
+          "fileName": "membres_association_2025.xlsx",
+          "fileSize": 245760,
+          "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "uploadedAt": "2026-02-11T08:20:00Z",
+          "sha256": "a3f2b8c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1",
+          "rowCount": 32,
+          "purpose": "member_roster"
+        },
+        {
+          "id": "file-002",
+          "fileName": "cotisations_tontine_mensuelle.xlsx",
+          "fileSize": 189440,
+          "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "uploadedAt": "2026-02-13T11:45:00Z",
+          "sha256": "b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3",
+          "rowCount": 144,
+          "purpose": "contribution_history"
+        }
+      ]
+    },
+    "importedAssociation": {
+      "id": "assoc-imp-001",
+      "migrationId": "mig-001",
+      "name": "Solidarité Camerounaise de Genève",
+      "description": "Association de la diaspora camerounaise à Genève, fondée en 2018. Nous réunissons les Camerounais et amis du Cameroun pour l'entraide, la préservation culturelle, et le développement communautaire. Notre association organise des tontines, des événements culturels, et offre un soutien aux nouveaux arrivants.",
+      "type": "cultural",
+      "logo": "/uploads/logos/solidarite-cam-ge.png",
+      "primaryLanguage": "fr",
+      "secondaryLanguages": [
+        "en",
+        "de"
+      ],
+      "website": "https://solidarite-camerounaise.ch",
+      "contactEmail": "info@solidarite-camerounaise.ch",
+      "country": "Switzerland",
+      "city": "Geneva",
+      "profileCompleteness": 85,
+      "visibility": "semi_private",
+      "privacySettings": {
+        "directoryListed": false,
+        "invitationLink": true,
+        "qrCode": true,
+        "memberListVisibility": "members_only",
+        "financialDataAccess": "admins_only",
+        "eventVisibility": "members_only"
+      },
+      "governance": {
+        "roles": [
+          {
+            "id": "role-01",
+            "name": "Président",
+            "permissions": [
+              "all"
+            ],
+            "hierarchy": 1,
+            "memberCount": 1
+          },
+          {
+            "id": "role-02",
+            "name": "Vice-Président",
+            "permissions": [
+              "view",
+              "create",
+              "edit"
+            ],
+            "hierarchy": 2,
+            "memberCount": 1
+          },
+          {
+            "id": "role-03",
+            "name": "Secrétaire Général",
+            "permissions": [
+              "view",
+              "create",
+              "edit"
+            ],
+            "hierarchy": 3,
+            "memberCount": 1
+          },
+          {
+            "id": "role-04",
+            "name": "Trésorier",
+            "permissions": [
+              "view",
+              "create",
+              "edit",
+              "financial"
+            ],
+            "hierarchy": 4,
+            "memberCount": 1
+          },
+          {
+            "id": "role-05",
+            "name": "Commissaire aux Comptes",
+            "permissions": [
+              "view",
+              "financial_audit"
+            ],
+            "hierarchy": 5,
+            "memberCount": 2
+          },
+          {
+            "id": "role-06",
+            "name": "Membre",
+            "permissions": [
+              "view"
+            ],
+            "hierarchy": 6,
+            "memberCount": 26
+          }
+        ],
+        "committees": [
+          {
+            "id": "com-01",
+            "name": "Comité des Fêtes",
+            "description": "Organisation des événements culturels",
+            "memberCount": 5
+          },
+          {
+            "id": "com-02",
+            "name": "Commission Financière",
+            "description": "Supervision des tontines et trésorerie",
+            "memberCount": 3
+          }
+        ],
+        "approvalWorkflow": "admin_approval",
+        "duesAmount": 50,
+        "duesCurrency": "CHF",
+        "duesFrequency": "monthly",
+        "duesGracePeriod": 7
+      },
+      "communication": {
+        "defaultChannels": [
+          "in_app",
+          "email"
+        ],
+        "announcementPermission": "admins_only",
+        "meetingSchedule": {
+          "day": "Saturday",
+          "frequency": "monthly",
+          "time": "14:00",
+          "week": "first"
+        }
+      },
+      "documents": [
+        {
+          "id": "doc-01",
+          "name": "Statuts de l'Association",
+          "category": "bylaws",
+          "fileType": "pdf",
+          "fileSize": 524288,
+          "uploadedAt": "2026-02-10T14:00:00Z",
+          "versionDate": "2023-01-15"
+        },
+        {
+          "id": "doc-02",
+          "name": "Règlement Intérieur",
+          "category": "code_of_conduct",
+          "fileType": "pdf",
+          "fileSize": 312400,
+          "uploadedAt": "2026-02-10T14:05:00Z",
+          "versionDate": "2024-06-01"
+        }
+      ],
+      "status": "importing"
+    },
+    "columnMappings": [
+      {
+        "id": "map-001",
+        "fileId": "file-001",
+        "sourceColumn": "Nom",
+        "targetField": "lastName",
+        "confidence": 0.95,
+        "sampleValues": [
+          "Mbarga",
+          "Nkoulou",
+          "Ekambi"
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-002",
+        "fileId": "file-001",
+        "sourceColumn": "Prénom",
+        "targetField": "firstName",
+        "confidence": 0.95,
+        "sampleValues": [
+          "Jean-Claude",
+          "Marie-Thérèse",
+          "Patrick"
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-003",
+        "fileId": "file-001",
+        "sourceColumn": "Courriel",
+        "targetField": "email",
+        "confidence": 0.88,
+        "sampleValues": [
+          "jc.mbarga@gmail.com",
+          "nkoulou.mt@outlook.com",
+          ""
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-004",
+        "fileId": "file-001",
+        "sourceColumn": "Téléphone",
+        "targetField": "phone",
+        "confidence": 0.92,
+        "sampleValues": [
+          "+41 79 234 56 78",
+          "079 345 67 89",
+          "0041793456790"
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-005",
+        "fileId": "file-001",
+        "sourceColumn": "Poste",
+        "targetField": "role",
+        "confidence": 0.72,
+        "sampleValues": [
+          "Président",
+          "Trésorier",
+          "Membre"
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-006",
+        "fileId": "file-001",
+        "sourceColumn": "Date d'adhésion",
+        "targetField": "joinDate",
+        "confidence": 0.85,
+        "sampleValues": [
+          "15/03/2018",
+          "22/06/2019",
+          "01/01/2020"
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "map-007",
+        "fileId": "file-001",
+        "sourceColumn": "Remarques",
+        "targetField": "notes",
+        "confidence": 0.6,
+        "sampleValues": [
+          "Membre fondateur",
+          "Cotisations en retard Q3",
+          ""
+        ],
+        "status": "needs_review"
+      }
+    ],
+    "importedMembers": [
+      {
+        "id": "imp-m001",
+        "firstName": "Jean-Claude",
+        "lastName": "Mbarga",
+        "email": "jc.mbarga@gmail.com",
+        "phone": "+41 79 234 56 78",
+        "role": "Président",
+        "mappedRole": "Président",
+        "joinDate": "2018-03-15",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-12T10:45:00Z",
+        "verificationStatus": "verified",
+        "circles": [
+          "circle-imp-001",
+          "circle-imp-002"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-03-31",
+        "bootstrappedTrustScore": 745,
+        "trustScoreBadge": "bootstrapped",
+        "notes": "Membre fondateur"
+      },
+      {
+        "id": "imp-m002",
+        "firstName": "Marie-Thérèse",
+        "lastName": "Nkoulou",
+        "email": "nkoulou.mt@outlook.com",
+        "phone": "+41 79 345 67 89",
+        "role": "Trésorier",
+        "mappedRole": "Trésorier",
+        "joinDate": "2018-03-15",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-12T14:30:00Z",
+        "verificationStatus": "verified",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 720,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m003",
+        "firstName": "Patrick",
+        "lastName": "Ekambi",
+        "email": "p.ekambi@yahoo.fr",
+        "phone": "+41 76 456 78 90",
+        "role": "Secrétaire Général",
+        "mappedRole": "Secrétaire Général",
+        "joinDate": "2018-06-22",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-13T08:00:00Z",
+        "verificationStatus": "pending",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 680,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m004",
+        "firstName": "Aïssatou",
+        "lastName": "Bello",
+        "email": "aissatou.bello@gmail.com",
+        "phone": "+41 78 567 89 01",
+        "role": "Vice-Président",
+        "mappedRole": "Vice-Président",
+        "joinDate": "2019-01-10",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email_sms",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-12T18:20:00Z",
+        "verificationStatus": "disputed",
+        "circles": [
+          "circle-imp-001",
+          "circle-imp-002"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-01-31",
+        "bootstrappedTrustScore": 710,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m005",
+        "firstName": "Samuel",
+        "lastName": "Tchoungang",
+        "email": "s.tchoungang@bluewin.ch",
+        "phone": "+41 79 678 90 12",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2019-04-15",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "delivered",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 620,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m006",
+        "firstName": "Cécile",
+        "lastName": "Fouda",
+        "email": "",
+        "phone": "+41 76 789 01 23",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2020-01-01",
+        "importSource": "file",
+        "validationStatus": "warning",
+        "validationErrors": [
+          "Email required for platform invitation"
+        ],
+        "invitationStatus": "code_generated",
+        "invitationChannel": "invitation_code",
+        "invitationCode": "SCG-7K2M",
+        "invitationSentAt": null,
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "overdue",
+        "duesOwedAmount": 150,
+        "duesOwedSince": "2025-11-01",
+        "bootstrappedTrustScore": 480,
+        "trustScoreBadge": "bootstrapped",
+        "notes": "Cotisations en retard Q4 2025"
+      },
+      {
+        "id": "imp-m007",
+        "firstName": "Emmanuel",
+        "lastName": "Nguema",
+        "email": "e.nguema@proton.me",
+        "phone": "+41 79 890 12 34",
+        "role": "Commissaire aux Comptes",
+        "mappedRole": "Commissaire aux Comptes",
+        "joinDate": "2018-09-01",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-12T20:10:00Z",
+        "verificationStatus": "verified",
+        "circles": [
+          "circle-imp-002"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 735,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m008",
+        "firstName": "Françoise",
+        "lastName": "Atangana",
+        "email": "f.atangana@gmail.com",
+        "phone": "+41 78 901 23 45",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2020-06-15",
+        "importSource": "file",
+        "validationStatus": "error",
+        "validationErrors": [
+          "Invalid email format: f.atangana@gmail,com"
+        ],
+        "invitationStatus": "not_sent",
+        "invitationChannel": null,
+        "invitationSentAt": null,
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [
+          "circle-imp-002"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": null,
+        "trustScoreBadge": "new_member",
+        "notes": ""
+      },
+      {
+        "id": "imp-m009",
+        "firstName": "Hervé",
+        "lastName": "Ndjock",
+        "email": "herve.ndjock@sunrise.ch",
+        "phone": "+41 79 012 34 56",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2021-03-01",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "opened",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 550,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m010",
+        "firstName": "Danielle",
+        "lastName": "Ebogo",
+        "email": "d.ebogo@hotmail.com",
+        "phone": "+41 76 123 45 67",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2022-09-15",
+        "importSource": "manual",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "clicked",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [],
+        "duesStatus": "no_history",
+        "bootstrappedTrustScore": 500,
+        "trustScoreBadge": "new_member",
+        "notes": "Ajoutée manuellement - pas dans le fichier Excel"
+      },
+      {
+        "id": "imp-m011",
+        "firstName": "Yves",
+        "lastName": "Kamga",
+        "email": "y.kamga@gmail.com",
+        "phone": "+41 79 234 56 00",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2020-02-01",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "bounced",
+        "invitationChannel": "email",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": null,
+        "verificationStatus": "not_started",
+        "circles": [
+          "circle-imp-001"
+        ],
+        "duesStatus": "partially_paid",
+        "duesOwedAmount": 50,
+        "duesPaidThrough": "2026-01-31",
+        "bootstrappedTrustScore": 490,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      },
+      {
+        "id": "imp-m012",
+        "firstName": "Pauline",
+        "lastName": "Onana",
+        "email": "p.onana@gmail.com",
+        "phone": "+41 78 345 67 00",
+        "role": "Membre",
+        "mappedRole": "Membre",
+        "joinDate": "2023-01-15",
+        "importSource": "file",
+        "validationStatus": "valid",
+        "validationErrors": [],
+        "invitationStatus": "registered",
+        "invitationChannel": "email_sms",
+        "invitationSentAt": "2026-02-12T09:20:00Z",
+        "registeredAt": "2026-02-14T16:30:00Z",
+        "verificationStatus": "pending",
+        "circles": [
+          "circle-imp-002"
+        ],
+        "duesStatus": "paid_up",
+        "duesPaidThrough": "2026-02-28",
+        "bootstrappedTrustScore": 580,
+        "trustScoreBadge": "bootstrapped",
+        "notes": ""
+      }
+    ],
+    "importedCircles": [
+      {
+        "id": "circle-imp-001",
+        "migrationId": "mig-001",
+        "name": "Tontine Mensuelle Solidarité",
+        "contributionAmount": 500,
+        "currency": "CHF",
+        "frequency": "monthly",
+        "totalPositions": 12,
+        "payoutMethod": "fixed",
+        "startDate": "2025-07-01",
+        "isMidCycle": true,
+        "currentCycle": 7,
+        "nextPaymentDueDate": "2026-03-01",
+        "gracePeriod": 7,
+        "lateFeeType": "fixed",
+        "lateFeeAmount": 25,
+        "maxLateOccurrences": 3,
+        "emergencyFundCoversLate": true,
+        "emergencyFundRate": 0.01,
+        "customRules": [
+          "En cas d'urgence médicale, le membre peut demander un avancement de tour",
+          "Les paiements doivent être effectués avant le 5 du mois"
+        ],
+        "calculatedValues": {
+          "totalCircleValue": 6000,
+          "payoutPerCycle": 5940,
+          "emergencyFundPerMember": 5,
+          "totalDuration": "12 months",
+          "estimatedEndDate": "2026-06-30"
+        },
+        "positions": [
+          {
+            "position": 1,
+            "memberId": "imp-m002",
+            "memberName": "Marie-Thérèse Nkoulou",
+            "status": "paid_out",
+            "payoutDate": "2025-07-28",
+            "payoutAmount": 5940,
+            "note": ""
+          },
+          {
+            "position": 2,
+            "memberId": "imp-m005",
+            "memberName": "Samuel Tchoungang",
+            "status": "paid_out",
+            "payoutDate": "2025-08-27",
+            "payoutAmount": 5940,
+            "note": ""
+          },
+          {
+            "position": 3,
+            "memberId": "imp-m009",
+            "memberName": "Hervé Ndjock",
+            "status": "paid_out",
+            "payoutDate": "2025-09-29",
+            "payoutAmount": 5940,
+            "note": ""
+          },
+          {
+            "position": 4,
+            "memberId": "imp-m011",
+            "memberName": "Yves Kamga",
+            "status": "paid_out",
+            "payoutDate": "2025-10-28",
+            "payoutAmount": 5915,
+            "note": "Réduction: 1 membre en retard"
+          },
+          {
+            "position": 5,
+            "memberId": "imp-m001",
+            "memberName": "Jean-Claude Mbarga",
+            "status": "paid_out",
+            "payoutDate": "2025-11-28",
+            "payoutAmount": 5940,
+            "note": ""
+          },
+          {
+            "position": 6,
+            "memberId": "imp-m006",
+            "memberName": "Cécile Fouda",
+            "status": "paid_out",
+            "payoutDate": "2025-12-29",
+            "payoutAmount": 5940,
+            "note": ""
+          },
+          {
+            "position": 7,
+            "memberId": "imp-m003",
+            "memberName": "Patrick Ekambi",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": "Next payout"
+          },
+          {
+            "position": 8,
+            "memberId": "imp-m004",
+            "memberName": "Aïssatou Bello",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 9,
+            "memberId": "imp-m013",
+            "memberName": "Robert Essomba",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 10,
+            "memberId": "imp-m014",
+            "memberName": "Nadine Tamba",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 11,
+            "memberId": "imp-m015",
+            "memberName": "Olivier Mbassi",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 12,
+            "memberId": "imp-m016",
+            "memberName": "Christine Eyenga",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          }
+        ],
+        "financialSummary": {
+          "totalCollected": 36000,
+          "totalPaidOut": 35615,
+          "emergencyFundBalance": 342,
+          "outstandingObligations": [
+            {
+              "memberId": "imp-m006",
+              "memberName": "Cécile Fouda",
+              "amount": 500,
+              "cycle": 7,
+              "status": "missed",
+              "reason": "Non-payment"
+            },
+            {
+              "memberId": "imp-m011",
+              "memberName": "Yves Kamga",
+              "amount": 250,
+              "cycle": 6,
+              "status": "partial",
+              "reason": "Partial payment — CHF 250 outstanding"
+            }
+          ],
+          "expectedEmergencyFund": 360,
+          "emergencyFundDiscrepancy": -18,
+          "emergencyFundDiscrepancyReason": "Used CHF 25 to cover Cécile's late fee in October"
+        },
+        "importStatus": "validated",
+        "validationErrors": [],
+        "validationWarnings": [
+          {
+            "code": "EF_DISCREPANCY",
+            "message": "Emergency Fund balance (CHF 342) is CHF 18 less than expected (CHF 360)",
+            "acknowledged": true,
+            "acknowledgedBy": "Jean-Claude Mbarga",
+            "acknowledgedReason": "CHF 25 utilisé pour couvrir le retard de Cécile en octobre, partiellement reconstitué",
+            "acknowledgedAt": "2026-02-14T10:30:00Z"
+          }
+        ]
+      },
+      {
+        "id": "circle-imp-002",
+        "migrationId": "mig-001",
+        "name": "Tontine Hebdomadaire Femmes",
+        "contributionAmount": 100,
+        "currency": "CHF",
+        "frequency": "weekly",
+        "totalPositions": 8,
+        "payoutMethod": "fixed",
+        "startDate": "2026-01-06",
+        "isMidCycle": true,
+        "currentCycle": 3,
+        "nextPaymentDueDate": "2026-02-24",
+        "gracePeriod": 3,
+        "lateFeeType": "none",
+        "lateFeeAmount": 0,
+        "maxLateOccurrences": 2,
+        "emergencyFundCoversLate": true,
+        "emergencyFundRate": 0.01,
+        "customRules": [
+          "Réservé aux femmes membres de l'association",
+          "Possibilité d'échanger les positions entre membres avec accord mutuel"
+        ],
+        "calculatedValues": {
+          "totalCircleValue": 800,
+          "payoutPerCycle": 792,
+          "emergencyFundPerMember": 1,
+          "totalDuration": "8 weeks",
+          "estimatedEndDate": "2026-02-24"
+        },
+        "positions": [
+          {
+            "position": 1,
+            "memberId": "imp-m004",
+            "memberName": "Aïssatou Bello",
+            "status": "paid_out",
+            "payoutDate": "2026-01-13",
+            "payoutAmount": 792,
+            "note": ""
+          },
+          {
+            "position": 2,
+            "memberId": "imp-m012",
+            "memberName": "Pauline Onana",
+            "status": "paid_out",
+            "payoutDate": "2026-01-20",
+            "payoutAmount": 792,
+            "note": ""
+          },
+          {
+            "position": 3,
+            "memberId": "imp-m007",
+            "memberName": "Emmanuel Nguema",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": "Next payout"
+          },
+          {
+            "position": 4,
+            "memberId": "imp-m008",
+            "memberName": "Françoise Atangana",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 5,
+            "memberId": "imp-m017",
+            "memberName": "Bernadette Ondobo",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 6,
+            "memberId": "imp-m018",
+            "memberName": "Sylvie Ngo Bama",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 7,
+            "memberId": "imp-m019",
+            "memberName": "Angèle Meka",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          },
+          {
+            "position": 8,
+            "memberId": "imp-m020",
+            "memberName": "Rosalie Ewondo",
+            "status": "pending",
+            "payoutDate": null,
+            "payoutAmount": null,
+            "note": ""
+          }
+        ],
+        "financialSummary": {
+          "totalCollected": 2400,
+          "totalPaidOut": 1584,
+          "emergencyFundBalance": 24,
+          "outstandingObligations": [],
+          "expectedEmergencyFund": 24,
+          "emergencyFundDiscrepancy": 0,
+          "emergencyFundDiscrepancyReason": null
+        },
+        "importStatus": "draft",
+        "validationErrors": [],
+        "validationWarnings": []
+      }
+    ],
+    "paymentMatrix": [
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 1,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-07-03"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 2,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-08-02"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 3,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-09-04"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 4,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-10-01"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 5,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-11-03"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 6,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-12-02"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 1,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-07-05"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 2,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-08-06"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 3,
+        "status": "late",
+        "amount": 500,
+        "paidDate": "2025-09-15"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 4,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-10-04"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 5,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-11-05"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 6,
+        "status": "partial",
+        "amount": 250,
+        "paidDate": "2025-12-10"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 7,
+        "status": "missed",
+        "amount": 0,
+        "paidDate": null
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 1,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-07-04"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 2,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-08-03"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 3,
+        "status": "late",
+        "amount": 500,
+        "paidDate": "2025-09-12"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 4,
+        "status": "paid",
+        "amount": 500,
+        "paidDate": "2025-10-02"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 5,
+        "status": "late",
+        "amount": 500,
+        "paidDate": "2025-11-10"
+      },
+      {
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "cycle": 6,
+        "status": "partial",
+        "amount": 250,
+        "paidDate": "2025-12-08"
+      }
+    ],
+    "importedContributions": [
+      {
+        "id": "contrib-001",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 1,
+        "amount": 500,
+        "paymentDate": "2025-07-03",
+        "paymentMethod": "bank_transfer",
+        "status": "completed",
+        "tag": "imported",
+        "sourceFile": "file-002",
+        "sourceRow": 2
+      },
+      {
+        "id": "contrib-002",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "cycle": 2,
+        "amount": 500,
+        "paymentDate": "2025-08-02",
+        "paymentMethod": "bank_transfer",
+        "status": "completed",
+        "tag": "imported",
+        "sourceFile": "file-002",
+        "sourceRow": 3
+      },
+      {
+        "id": "contrib-003",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m002",
+        "memberName": "Marie-Thérèse Nkoulou",
+        "cycle": 1,
+        "amount": 500,
+        "paymentDate": "2025-07-02",
+        "paymentMethod": "bank_transfer",
+        "status": "completed",
+        "tag": "imported",
+        "sourceFile": "file-002",
+        "sourceRow": 14
+      },
+      {
+        "id": "contrib-004",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 3,
+        "amount": 500,
+        "paymentDate": "2025-09-15",
+        "paymentMethod": "cash",
+        "status": "late",
+        "tag": "imported",
+        "sourceFile": "file-002",
+        "sourceRow": 72
+      },
+      {
+        "id": "contrib-005",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "cycle": 6,
+        "amount": 250,
+        "paymentDate": "2025-12-10",
+        "paymentMethod": "cash",
+        "status": "partial",
+        "tag": "imported",
+        "sourceFile": "file-002",
+        "sourceRow": 78
+      }
+    ],
+    "importedPayouts": [
+      {
+        "id": "payout-001",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m002",
+        "memberName": "Marie-Thérèse Nkoulou",
+        "position": 1,
+        "expectedAmount": 5940,
+        "actualAmount": 5940,
+        "payoutDate": "2025-07-28",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": null
+      },
+      {
+        "id": "payout-002",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m005",
+        "memberName": "Samuel Tchoungang",
+        "position": 2,
+        "expectedAmount": 5940,
+        "actualAmount": 5940,
+        "payoutDate": "2025-08-27",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": null
+      },
+      {
+        "id": "payout-003",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m009",
+        "memberName": "Hervé Ndjock",
+        "position": 3,
+        "expectedAmount": 5940,
+        "actualAmount": 5940,
+        "payoutDate": "2025-09-29",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": null
+      },
+      {
+        "id": "payout-004",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m011",
+        "memberName": "Yves Kamga",
+        "position": 4,
+        "expectedAmount": 5940,
+        "actualAmount": 5915,
+        "payoutDate": "2025-10-28",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": "Réduction de CHF 25: Cécile Fouda en retard de paiement ce mois"
+      },
+      {
+        "id": "payout-005",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "position": 5,
+        "expectedAmount": 5940,
+        "actualAmount": 5940,
+        "payoutDate": "2025-11-28",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": null
+      },
+      {
+        "id": "payout-006",
+        "circleId": "circle-imp-001",
+        "memberId": "imp-m006",
+        "memberName": "Cécile Fouda",
+        "position": 6,
+        "expectedAmount": 5940,
+        "actualAmount": 5940,
+        "payoutDate": "2025-12-29",
+        "paymentMethod": "bank_transfer",
+        "discrepancyReason": null
+      }
+    ],
+    "validationReport": {
+      "id": "val-001",
+      "migrationId": "mig-001",
+      "runAt": "2026-02-15T10:00:00Z",
+      "overallStatus": "warnings_present",
+      "totalChecks": 24,
+      "passed": 21,
+      "warnings": 2,
+      "blockingErrors": 1,
+      "sections": [
+        {
+          "name": "Association Configuration",
+          "status": "passed",
+          "checks": [
+            {
+              "id": "ck-01",
+              "description": "Association name and type are set",
+              "status": "passed"
+            },
+            {
+              "id": "ck-02",
+              "description": "At least one admin role is configured",
+              "status": "passed"
+            },
+            {
+              "id": "ck-03",
+              "description": "Privacy settings are complete",
+              "status": "passed"
+            },
+            {
+              "id": "ck-04",
+              "description": "Communication preferences are configured",
+              "status": "passed"
+            },
+            {
+              "id": "ck-05",
+              "description": "Governance roles have valid permissions",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "name": "Member Data Quality",
+          "status": "has_errors",
+          "checks": [
+            {
+              "id": "ck-06",
+              "description": "All members have valid names",
+              "status": "passed"
+            },
+            {
+              "id": "ck-07",
+              "description": "All members have valid contact method (email or phone)",
+              "status": "passed"
+            },
+            {
+              "id": "ck-08",
+              "description": "No duplicate member records",
+              "status": "passed"
+            },
+            {
+              "id": "ck-09",
+              "description": "All email addresses are valid format",
+              "status": "error",
+              "details": "1 member (Françoise Atangana) has an invalid email address",
+              "fixLink": "/import/members/imp-m008"
+            },
+            {
+              "id": "ck-10",
+              "description": "All members have been invited",
+              "status": "warning",
+              "details": "3 members have not registered yet (Samuel Tchoungang, Hervé Ndjock, Danielle Ebogo)",
+              "acknowledged": false
+            },
+            {
+              "id": "ck-11",
+              "description": "Role distribution includes at least one admin",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "name": "Circle Configuration",
+          "status": "passed",
+          "checks": [
+            {
+              "id": "ck-12",
+              "description": "Circle member count matches position count",
+              "status": "passed"
+            },
+            {
+              "id": "ck-13",
+              "description": "All circle positions are assigned to valid members",
+              "status": "passed"
+            },
+            {
+              "id": "ck-14",
+              "description": "Contribution amounts are consistent",
+              "status": "passed"
+            },
+            {
+              "id": "ck-15",
+              "description": "Mid-cycle state is correctly configured",
+              "status": "passed"
+            },
+            {
+              "id": "ck-16",
+              "description": "Payout order is complete and valid",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "name": "Financial Consistency",
+          "status": "has_warnings",
+          "checks": [
+            {
+              "id": "ck-17",
+              "description": "Total contributions match expected amount",
+              "status": "passed"
+            },
+            {
+              "id": "ck-18",
+              "description": "Payout amounts reconcile with contributions",
+              "status": "passed"
+            },
+            {
+              "id": "ck-19",
+              "description": "Emergency Fund balance is within expected range",
+              "status": "warning",
+              "details": "Tontine Mensuelle: Emergency Fund (CHF 342) is CHF 18 less than expected (CHF 360)",
+              "acknowledged": true,
+              "acknowledgedBy": "Jean-Claude Mbarga",
+              "acknowledgedReason": "CHF 25 utilisé pour couvrir le retard de Cécile en octobre"
+            },
+            {
+              "id": "ck-20",
+              "description": "Outstanding obligations are recorded for all overdue payments",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "name": "Permissions & Access",
+          "status": "passed",
+          "checks": [
+            {
+              "id": "ck-21",
+              "description": "All roles have valid permission sets",
+              "status": "passed"
+            },
+            {
+              "id": "ck-22",
+              "description": "At least one member is assigned Owner/Admin role",
+              "status": "passed"
+            },
+            {
+              "id": "ck-23",
+              "description": "Circle organizers have appropriate permissions",
+              "status": "passed"
+            },
+            {
+              "id": "ck-24",
+              "description": "Financial roles have audit access",
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "readinessSummary": {
+        "associationName": "Solidarité Camerounaise de Genève",
+        "totalMembers": 32,
+        "registeredMembers": 18,
+        "pendingMembers": 14,
+        "activeCircles": 2,
+        "totalMonthlyContributions": 2500,
+        "totalFinancialObligations": 750,
+        "estimatedFirstPaymentDate": "2026-03-01"
+      }
+    },
+    "memberVerifications": [
+      {
+        "id": "ver-001",
+        "memberId": "imp-m001",
+        "memberName": "Jean-Claude Mbarga",
+        "status": "verified",
+        "verifiedAt": "2026-02-13T08:30:00Z",
+        "sections": [
+          {
+            "name": "Profile & Role",
+            "status": "confirmed"
+          },
+          {
+            "name": "Circle Membership",
+            "status": "confirmed"
+          },
+          {
+            "name": "Contribution History",
+            "status": "confirmed"
+          }
+        ],
+        "trustScoreBoost": 25,
+        "disputes": []
+      },
+      {
+        "id": "ver-002",
+        "memberId": "imp-m004",
+        "memberName": "Aïssatou Bello",
+        "status": "disputed",
+        "verifiedAt": null,
+        "sections": [
+          {
+            "name": "Profile & Role",
+            "status": "confirmed"
+          },
+          {
+            "name": "Circle Membership",
+            "status": "disputed"
+          },
+          {
+            "name": "Contribution History",
+            "status": "confirmed"
+          }
+        ],
+        "trustScoreBoost": 0,
+        "disputes": [
+          {
+            "id": "disp-001",
+            "section": "Circle Membership",
+            "field": "Payout Position",
+            "currentValue": "Position #8 in Tontine Mensuelle Solidarité",
+            "memberClaim": "I should be position #7, not #8. I was supposed to receive the payout before Patrick because we exchanged positions in September.",
+            "status": "pending_review",
+            "submittedAt": "2026-02-13T19:00:00Z",
+            "resolvedAt": null,
+            "resolution": null
+          }
+        ]
+      },
+      {
+        "id": "ver-003",
+        "memberId": "imp-m002",
+        "memberName": "Marie-Thérèse Nkoulou",
+        "status": "verified",
+        "verifiedAt": "2026-02-14T15:00:00Z",
+        "sections": [
+          {
+            "name": "Profile & Role",
+            "status": "confirmed"
+          },
+          {
+            "name": "Circle Membership",
+            "status": "confirmed"
+          },
+          {
+            "name": "Contribution History",
+            "status": "confirmed"
+          }
+        ],
+        "trustScoreBoost": 25,
+        "disputes": []
+      },
+      {
+        "id": "ver-004",
+        "memberId": "imp-m007",
+        "memberName": "Emmanuel Nguema",
+        "status": "verified",
+        "verifiedAt": "2026-02-13T21:15:00Z",
+        "sections": [
+          {
+            "name": "Profile & Role",
+            "status": "confirmed"
+          },
+          {
+            "name": "Circle Membership",
+            "status": "confirmed"
+          },
+          {
+            "name": "Contribution History",
+            "status": "confirmed"
+          }
+        ],
+        "trustScoreBoost": 25,
+        "disputes": []
+      }
+    ],
+    "auditTrail": [
+      {
+        "id": "aud-001",
+        "action": "migration_started",
+        "description": "Migration session created",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-10T10:00:00Z",
+        "details": null
+      },
+      {
+        "id": "aud-002",
+        "action": "association_created",
+        "description": "Association identity saved in 'Importing' status",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-10T14:30:00Z",
+        "details": {
+          "name": "Solidarité Camerounaise de Genève",
+          "type": "cultural"
+        }
+      },
+      {
+        "id": "aud-003",
+        "action": "document_uploaded",
+        "description": "Uploaded 'Statuts de l'Association' (PDF, 512KB)",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-10T14:00:00Z",
+        "details": {
+          "fileName": "Statuts de l'Association",
+          "category": "bylaws"
+        }
+      },
+      {
+        "id": "aud-004",
+        "action": "file_uploaded",
+        "description": "Member roster uploaded: membres_association_2025.xlsx (32 rows)",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-11T08:20:00Z",
+        "details": {
+          "fileName": "membres_association_2025.xlsx",
+          "rowCount": 32,
+          "sha256": "a3f2b8c1..."
+        }
+      },
+      {
+        "id": "aud-005",
+        "action": "mapping_confirmed",
+        "description": "Column mapping confirmed: 7 columns mapped to CircleUp fields",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-11T09:00:00Z",
+        "details": {
+          "columnsCount": 7,
+          "overrides": 1
+        }
+      },
+      {
+        "id": "aud-006",
+        "action": "validation_run",
+        "description": "Member data validation: 29 valid, 2 warnings, 1 error",
+        "actor": "System",
+        "timestamp": "2026-02-11T09:05:00Z",
+        "details": {
+          "valid": 29,
+          "warnings": 2,
+          "errors": 1
+        }
+      },
+      {
+        "id": "aud-007",
+        "action": "roles_assigned",
+        "description": "Roles assigned: 1 Président, 1 VP, 1 Secrétaire, 1 Trésorier, 2 Commissaires, 26 Membres",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-11T10:30:00Z",
+        "details": null
+      },
+      {
+        "id": "aud-008",
+        "action": "invitations_sent",
+        "description": "Bulk invitations sent: 30 email, 1 email+SMS, 1 invitation code generated",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-12T09:20:00Z",
+        "details": {
+          "email": 30,
+          "email_sms": 1,
+          "code": 1
+        }
+      },
+      {
+        "id": "aud-009",
+        "action": "circle_created",
+        "description": "Circle 'Tontine Mensuelle Solidarité' created (12 positions, CHF 500/month, mid-cycle at 7/12)",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-13T11:00:00Z",
+        "details": {
+          "circleName": "Tontine Mensuelle Solidarité",
+          "positions": 12,
+          "amount": 500
+        }
+      },
+      {
+        "id": "aud-010",
+        "action": "warning_acknowledged",
+        "description": "Warning acknowledged: Emergency Fund discrepancy (CHF 18)",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-14T10:30:00Z",
+        "details": {
+          "warningCode": "EF_DISCREPANCY",
+          "reason": "CHF 25 utilisé pour couvrir le retard de Cécile en octobre"
+        }
+      },
+      {
+        "id": "aud-011",
+        "action": "circle_created",
+        "description": "Circle 'Tontine Hebdomadaire Femmes' created (8 positions, CHF 100/week, mid-cycle at 3/8)",
+        "actor": "Jean-Claude Mbarga",
+        "timestamp": "2026-02-14T14:00:00Z",
+        "details": {
+          "circleName": "Tontine Hebdomadaire Femmes",
+          "positions": 8,
+          "amount": 100
+        }
+      },
+      {
+        "id": "aud-012",
+        "action": "dispute_received",
+        "description": "Member dispute: Aïssatou Bello disputes payout position in Tontine Mensuelle",
+        "actor": "System",
+        "timestamp": "2026-02-13T19:00:00Z",
+        "details": {
+          "memberId": "imp-m004",
+          "field": "Payout Position"
+        }
+      }
+    ],
+    "invitationFunnel": {
+      "total": 32,
+      "invited": 31,
+      "delivered": 29,
+      "opened": 24,
+      "clicked": 22,
+      "registered": 18,
+      "profileComplete": 14,
+      "active": 12,
+      "notInvited": 1,
+      "bounced": 1,
+      "codeGenerated": 1
+    },
+    "goLiveConfig": {
+      "readyToGoLive": false,
+      "blockingIssues": 1,
+      "acknowledgedWarnings": 1,
+      "unacknowledgedWarnings": 1,
+      "scheduledDate": null,
+      "emergencyPauseAvailable": false,
+      "gracePeriodDays": 7,
+      "postMigrationChecklist": [
+        {
+          "item": "First Payment Cycle",
+          "status": "not_started",
+          "detail": "Scheduled for March 1, 2026"
+        },
+        {
+          "item": "Member Registration",
+          "status": "in_progress",
+          "detail": "18 of 32 members registered (56%)"
+        },
+        {
+          "item": "Data Disputes",
+          "status": "in_progress",
+          "detail": "1 open dispute (Aïssatou Bello — payout position)"
+        },
+        {
+          "item": "Trust Score Bootstrapping",
+          "status": "not_started",
+          "detail": "Requires historical financial data import (Phase 2)"
+        }
+      ]
+    },
+    "roleMapping": [
+      {
+        "sourceValue": "Président",
+        "targetRole": "Président",
+        "confidence": 0.98,
+        "memberCount": 1,
+        "status": "confirmed"
+      },
+      {
+        "sourceValue": "Vice-Président",
+        "targetRole": "Vice-Président",
+        "confidence": 0.97,
+        "memberCount": 1,
+        "status": "confirmed"
+      },
+      {
+        "sourceValue": "Secrétaire Général",
+        "targetRole": "Secrétaire Général",
+        "confidence": 0.95,
+        "memberCount": 1,
+        "status": "confirmed"
+      },
+      {
+        "sourceValue": "Trésorier",
+        "targetRole": "Trésorier",
+        "confidence": 0.98,
+        "memberCount": 1,
+        "status": "confirmed"
+      },
+      {
+        "sourceValue": "Commissaire",
+        "targetRole": "Commissaire aux Comptes",
+        "confidence": 0.82,
+        "memberCount": 2,
+        "status": "confirmed"
+      },
+      {
+        "sourceValue": "Membre",
+        "targetRole": "Membre",
+        "confidence": 0.99,
+        "memberCount": 26,
+        "status": "auto_mapped"
+      }
+    ]
+  }
+}

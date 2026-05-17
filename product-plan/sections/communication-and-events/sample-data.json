@@ -1,0 +1,1001 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Amara Okonkwo",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara",
+      "role": "president"
+    },
+    {
+      "id": "user-002",
+      "name": "Kwame Asante",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame",
+      "role": "treasurer"
+    },
+    {
+      "id": "user-003",
+      "name": "Fatima Diallo",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima",
+      "role": "secretary"
+    },
+    {
+      "id": "user-004",
+      "name": "Emmanuel Mensah",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmanuel",
+      "role": "member"
+    },
+    {
+      "id": "user-005",
+      "name": "Nia Kamau",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=nia",
+      "role": "member"
+    }
+  ],
+
+  "notifications": [
+    {
+      "id": "notif-001",
+      "type": "payment_reminder",
+      "category": "payments",
+      "title": "Contribution Due in 3 Days",
+      "body": "Your $200 contribution to Ubuntu Savings Circle is due on January 15th. Tap to make your payment now.",
+      "channel": "in_app",
+      "priority": "high",
+      "actionUrl": "/circles/circle-001/contribute",
+      "actionLabel": "Pay Now",
+      "read": false,
+      "createdAt": "2025-01-12T09:00:00Z"
+    },
+    {
+      "id": "notif-002",
+      "type": "payout_received",
+      "category": "payments",
+      "title": "Payout Received!",
+      "body": "Congratulations! You've received your $2,400 payout from Ubuntu Savings Circle.",
+      "channel": "in_app",
+      "priority": "normal",
+      "actionUrl": "/transactions/txn-456",
+      "actionLabel": "View Details",
+      "read": true,
+      "readAt": "2025-01-10T14:30:00Z",
+      "createdAt": "2025-01-10T10:00:00Z"
+    },
+    {
+      "id": "notif-003",
+      "type": "election_result",
+      "category": "governance",
+      "title": "Election Results Announced",
+      "body": "The results for the 2025 Board Election are in. Amara Okonkwo has been elected as President.",
+      "channel": "in_app",
+      "priority": "normal",
+      "actionUrl": "/governance/elections/elec-001",
+      "actionLabel": "View Results",
+      "read": false,
+      "createdAt": "2025-01-11T16:00:00Z"
+    },
+    {
+      "id": "notif-004",
+      "type": "new_member",
+      "category": "social",
+      "title": "New Member Joined",
+      "body": "Welcome Nia Kamau to the Diaspora Unity Association!",
+      "channel": "in_app",
+      "priority": "low",
+      "read": true,
+      "readAt": "2025-01-09T11:00:00Z",
+      "createdAt": "2025-01-09T10:00:00Z"
+    },
+    {
+      "id": "notif-005",
+      "type": "event_reminder",
+      "category": "events",
+      "title": "Event Tomorrow: Annual Gala",
+      "body": "Don't forget! The Annual Fundraising Gala starts tomorrow at 6:00 PM at Grand Ballroom.",
+      "channel": "in_app",
+      "priority": "high",
+      "actionUrl": "/events/event-001",
+      "actionLabel": "View Event",
+      "read": false,
+      "createdAt": "2025-01-14T09:00:00Z"
+    },
+    {
+      "id": "notif-006",
+      "type": "message_received",
+      "category": "messages",
+      "title": "New Message from Kwame",
+      "body": "Hey, can we discuss the treasury report before the meeting?",
+      "channel": "in_app",
+      "priority": "normal",
+      "actionUrl": "/messages/conv-001",
+      "actionLabel": "Reply",
+      "read": false,
+      "createdAt": "2025-01-12T11:30:00Z"
+    }
+  ],
+
+  "notificationPreferences": [
+    {
+      "id": "pref-001",
+      "userId": "user-001",
+      "category": "payments",
+      "channels": ["in_app", "push", "email"],
+      "frequency": "instant",
+      "enabled": true,
+      "quietHoursStart": "22:00",
+      "quietHoursEnd": "07:00"
+    },
+    {
+      "id": "pref-002",
+      "userId": "user-001",
+      "category": "governance",
+      "channels": ["in_app", "email"],
+      "frequency": "instant",
+      "enabled": true
+    },
+    {
+      "id": "pref-003",
+      "userId": "user-001",
+      "category": "social",
+      "channels": ["in_app"],
+      "frequency": "daily_digest",
+      "enabled": true
+    },
+    {
+      "id": "pref-004",
+      "userId": "user-001",
+      "category": "announcements",
+      "channels": ["in_app", "push", "email"],
+      "frequency": "instant",
+      "enabled": true
+    },
+    {
+      "id": "pref-005",
+      "userId": "user-001",
+      "category": "events",
+      "channels": ["in_app", "push"],
+      "frequency": "instant",
+      "enabled": true
+    },
+    {
+      "id": "pref-006",
+      "userId": "user-001",
+      "category": "messages",
+      "channels": ["in_app", "push"],
+      "frequency": "instant",
+      "enabled": true,
+      "quietHoursStart": "23:00",
+      "quietHoursEnd": "08:00"
+    }
+  ],
+
+  "conversations": [
+    {
+      "id": "conv-001",
+      "type": "direct",
+      "participants": [
+        {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        {
+          "id": "user-002",
+          "name": "Kwame Asante",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+        }
+      ],
+      "lastMessage": {
+        "id": "msg-010",
+        "conversationId": "conv-001",
+        "sender": {
+          "id": "user-002",
+          "name": "Kwame Asante",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+        },
+        "content": "Hey, can we discuss the treasury report before the meeting?",
+        "type": "text",
+        "readBy": ["user-002"],
+        "createdAt": "2025-01-12T11:30:00Z"
+      },
+      "unreadCount": 1,
+      "createdAt": "2025-01-05T10:00:00Z",
+      "updatedAt": "2025-01-12T11:30:00Z"
+    },
+    {
+      "id": "conv-002",
+      "type": "group",
+      "name": "Ubuntu Savings Circle",
+      "participants": [
+        {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        {
+          "id": "user-002",
+          "name": "Kwame Asante",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+        },
+        {
+          "id": "user-003",
+          "name": "Fatima Diallo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+        },
+        {
+          "id": "user-004",
+          "name": "Emmanuel Mensah",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmanuel"
+        },
+        {
+          "id": "user-005",
+          "name": "Nia Kamau",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=nia"
+        }
+      ],
+      "lastMessage": {
+        "id": "msg-020",
+        "conversationId": "conv-002",
+        "sender": {
+          "id": "user-003",
+          "name": "Fatima Diallo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+        },
+        "content": "Reminder: Contributions are due this Friday! Let's keep our perfect streak going.",
+        "type": "text",
+        "readBy": ["user-003", "user-001", "user-002"],
+        "createdAt": "2025-01-12T08:00:00Z"
+      },
+      "unreadCount": 0,
+      "pinnedAt": "2025-01-01T00:00:00Z",
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2025-01-12T08:00:00Z"
+    },
+    {
+      "id": "conv-003",
+      "type": "channel",
+      "name": "General Announcements",
+      "participants": [
+        {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        {
+          "id": "user-002",
+          "name": "Kwame Asante",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+        },
+        {
+          "id": "user-003",
+          "name": "Fatima Diallo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+        }
+      ],
+      "lastMessage": {
+        "id": "msg-030",
+        "conversationId": "conv-003",
+        "sender": {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        "content": "Board meeting minutes have been uploaded to the Documents section.",
+        "type": "text",
+        "readBy": ["user-001", "user-002", "user-003"],
+        "createdAt": "2025-01-11T15:00:00Z"
+      },
+      "unreadCount": 0,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2025-01-11T15:00:00Z"
+    },
+    {
+      "id": "conv-004",
+      "type": "direct",
+      "participants": [
+        {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        {
+          "id": "user-005",
+          "name": "Nia Kamau",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=nia"
+        }
+      ],
+      "lastMessage": {
+        "id": "msg-040",
+        "conversationId": "conv-004",
+        "sender": {
+          "id": "user-005",
+          "name": "Nia Kamau",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=nia"
+        },
+        "content": "Thank you for the warm welcome! Excited to be part of the community.",
+        "type": "text",
+        "readBy": ["user-005", "user-001"],
+        "createdAt": "2025-01-09T12:00:00Z"
+      },
+      "unreadCount": 0,
+      "createdAt": "2025-01-09T10:30:00Z",
+      "updatedAt": "2025-01-09T12:00:00Z"
+    }
+  ],
+
+  "messages": [
+    {
+      "id": "msg-001",
+      "conversationId": "conv-001",
+      "sender": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "content": "Hi Kwame, do you have the latest treasury figures?",
+      "type": "text",
+      "readBy": ["user-001", "user-002"],
+      "createdAt": "2025-01-12T10:00:00Z"
+    },
+    {
+      "id": "msg-002",
+      "conversationId": "conv-001",
+      "sender": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "content": "Yes! Let me send you the report.",
+      "type": "text",
+      "readBy": ["user-002", "user-001"],
+      "createdAt": "2025-01-12T10:05:00Z"
+    },
+    {
+      "id": "msg-003",
+      "conversationId": "conv-001",
+      "sender": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "content": "Here's the Q4 treasury report",
+      "type": "file",
+      "attachment": {
+        "id": "attach-001",
+        "name": "Q4_Treasury_Report.pdf",
+        "url": "/documents/Q4_Treasury_Report.pdf",
+        "mimeType": "application/pdf",
+        "size": 245000
+      },
+      "readBy": ["user-002", "user-001"],
+      "createdAt": "2025-01-12T10:06:00Z"
+    },
+    {
+      "id": "msg-004",
+      "conversationId": "conv-001",
+      "sender": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "content": "Perfect, thanks! The emergency fund is looking healthy.",
+      "type": "text",
+      "readBy": ["user-001", "user-002"],
+      "createdAt": "2025-01-12T10:15:00Z"
+    },
+    {
+      "id": "msg-010",
+      "conversationId": "conv-001",
+      "sender": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "content": "Hey, can we discuss the treasury report before the meeting?",
+      "type": "text",
+      "readBy": ["user-002"],
+      "createdAt": "2025-01-12T11:30:00Z"
+    }
+  ],
+
+  "quickReplies": [
+    {
+      "id": "qr-001",
+      "title": "Acknowledge",
+      "content": "Thank you, I've received this and will review it shortly.",
+      "shortcut": "/ack",
+      "isShared": true,
+      "createdBy": "user-001"
+    },
+    {
+      "id": "qr-002",
+      "title": "Payment Confirmation",
+      "content": "Your payment has been received. Thank you for your contribution!",
+      "shortcut": "/paid",
+      "isShared": true,
+      "createdBy": "user-002"
+    },
+    {
+      "id": "qr-003",
+      "title": "Meeting Reminder",
+      "content": "Reminder: We have a meeting scheduled. Please confirm your attendance.",
+      "shortcut": "/meet",
+      "isShared": true,
+      "createdBy": "user-001"
+    }
+  ],
+
+  "announcements": [
+    {
+      "id": "ann-001",
+      "associationId": "assoc-001",
+      "title": "Annual General Meeting - Save the Date",
+      "content": "Dear Members,\n\nWe are pleased to announce that our Annual General Meeting will be held on **February 15th, 2025** at the Community Center.\n\n**Agenda:**\n- Financial Year Review\n- Board Elections\n- 2025 Strategic Plan\n- Open Forum\n\nPlease mark your calendars and confirm your attendance. Your participation is crucial for our community's governance.\n\nLight refreshments will be served.",
+      "priority": "high",
+      "status": "published",
+      "author": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara",
+        "role": "president"
+      },
+      "targetAudience": {
+        "type": "all"
+      },
+      "requiresAcknowledgment": true,
+      "acknowledgedBy": ["user-002", "user-003", "user-004"],
+      "publishedAt": "2025-01-10T09:00:00Z",
+      "expiresAt": "2025-02-15T23:59:59Z",
+      "createdAt": "2025-01-09T14:00:00Z",
+      "updatedAt": "2025-01-10T09:00:00Z"
+    },
+    {
+      "id": "ann-002",
+      "associationId": "assoc-001",
+      "title": "New Member Welcome - Nia Kamau",
+      "content": "Please join us in welcoming **Nia Kamau** to our community!\n\nNia brings expertise in community organizing and is excited to contribute to our savings circles.\n\nFeel free to reach out and introduce yourself.",
+      "priority": "normal",
+      "status": "published",
+      "author": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima",
+        "role": "secretary"
+      },
+      "targetAudience": {
+        "type": "all"
+      },
+      "requiresAcknowledgment": false,
+      "acknowledgedBy": [],
+      "publishedAt": "2025-01-09T10:00:00Z",
+      "createdAt": "2025-01-09T09:30:00Z",
+      "updatedAt": "2025-01-09T10:00:00Z"
+    },
+    {
+      "id": "ann-003",
+      "associationId": "assoc-001",
+      "title": "Welfare Fund Update - Q4 2024",
+      "content": "The Welfare Fund has successfully supported **3 members** this quarter with a total disbursement of **$4,500**.\n\nCurrent fund balance: **$12,350**\n\nThank you all for your continued contributions to this vital community resource.",
+      "priority": "normal",
+      "status": "published",
+      "author": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame",
+        "role": "treasurer"
+      },
+      "targetAudience": {
+        "type": "all"
+      },
+      "requiresAcknowledgment": false,
+      "acknowledgedBy": [],
+      "publishedAt": "2025-01-05T14:00:00Z",
+      "createdAt": "2025-01-05T13:00:00Z",
+      "updatedAt": "2025-01-05T14:00:00Z"
+    },
+    {
+      "id": "ann-004",
+      "associationId": "assoc-001",
+      "title": "Holiday Office Hours",
+      "content": "Please note that our community office will have reduced hours during the holiday period.\n\n**December 23 - January 2:** Closed\n**January 3 onwards:** Regular hours (9 AM - 5 PM)\n\nFor urgent matters, contact the on-call committee member.",
+      "priority": "low",
+      "status": "expired",
+      "author": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima",
+        "role": "secretary"
+      },
+      "targetAudience": {
+        "type": "all"
+      },
+      "requiresAcknowledgment": false,
+      "acknowledgedBy": [],
+      "publishedAt": "2024-12-20T10:00:00Z",
+      "expiresAt": "2025-01-03T00:00:00Z",
+      "createdAt": "2024-12-20T09:00:00Z",
+      "updatedAt": "2024-12-20T10:00:00Z"
+    },
+    {
+      "id": "ann-005",
+      "associationId": "assoc-001",
+      "title": "Community Survey - Your Feedback Matters",
+      "content": "We want to hear from you! Please take 5 minutes to complete our annual community satisfaction survey.\n\nYour feedback helps us improve our services and plan for the future.\n\n[Survey Link]",
+      "priority": "normal",
+      "status": "scheduled",
+      "author": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara",
+        "role": "president"
+      },
+      "targetAudience": {
+        "type": "all"
+      },
+      "requiresAcknowledgment": false,
+      "acknowledgedBy": [],
+      "scheduledFor": "2025-01-20T09:00:00Z",
+      "createdAt": "2025-01-12T11:00:00Z",
+      "updatedAt": "2025-01-12T11:00:00Z"
+    }
+  ],
+
+  "events": [
+    {
+      "id": "event-001",
+      "associationId": "assoc-001",
+      "title": "Annual Fundraising Gala",
+      "description": "Join us for an elegant evening of celebration and fundraising! The Annual Gala brings together our community for dinner, entertainment, and supporting our scholarship fund.\n\n**Dress Code:** Semi-formal\n**Entertainment:** Live music by The Diaspora Band\n**Dinner:** Three-course meal with vegetarian options",
+      "type": "fundraiser",
+      "startDate": "2025-01-15T18:00:00Z",
+      "endDate": "2025-01-15T23:00:00Z",
+      "timezone": "America/New_York",
+      "location": {
+        "name": "Grand Ballroom",
+        "address": "123 Main Street",
+        "city": "New York",
+        "country": "USA",
+        "coordinates": {
+          "lat": 40.7128,
+          "lng": -74.006
+        }
+      },
+      "capacity": 150,
+      "registrationCount": 87,
+      "waitlistCount": 0,
+      "ticketOptions": [
+        {
+          "id": "ticket-001",
+          "name": "Member Ticket",
+          "type": "member",
+          "price": 75,
+          "currency": "USD",
+          "quantity": 100,
+          "soldCount": 65,
+          "description": "Includes dinner and entertainment"
+        },
+        {
+          "id": "ticket-002",
+          "name": "Non-Member Ticket",
+          "type": "non_member",
+          "price": 100,
+          "currency": "USD",
+          "quantity": 40,
+          "soldCount": 18,
+          "description": "Includes dinner and entertainment"
+        },
+        {
+          "id": "ticket-003",
+          "name": "VIP Table (8 seats)",
+          "type": "vip",
+          "price": 800,
+          "currency": "USD",
+          "quantity": 5,
+          "soldCount": 4,
+          "description": "Premium seating, champagne toast, recognition"
+        }
+      ],
+      "coverImage": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800",
+      "organizer": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "registrationDeadline": "2025-01-14T23:59:59Z",
+      "isRecurring": false,
+      "status": "published",
+      "createdAt": "2024-12-01T10:00:00Z",
+      "updatedAt": "2025-01-12T09:00:00Z"
+    },
+    {
+      "id": "event-002",
+      "associationId": "assoc-001",
+      "title": "Monthly Community Meeting",
+      "description": "Our regular monthly meeting to discuss community matters, updates, and upcoming initiatives.\n\n**Agenda:**\n- President's update\n- Treasury report\n- Committee reports\n- Open discussion\n\nAll members are encouraged to attend.",
+      "type": "meeting",
+      "startDate": "2025-01-20T19:00:00Z",
+      "endDate": "2025-01-20T21:00:00Z",
+      "timezone": "America/New_York",
+      "location": {
+        "name": "Community Center - Room 201",
+        "address": "456 Oak Avenue",
+        "city": "New York",
+        "country": "USA"
+      },
+      "virtualLink": "https://zoom.us/j/123456789",
+      "capacity": 50,
+      "registrationCount": 28,
+      "waitlistCount": 0,
+      "ticketOptions": [
+        {
+          "id": "ticket-004",
+          "name": "Free Registration",
+          "type": "free",
+          "price": 0,
+          "currency": "USD",
+          "soldCount": 28
+        }
+      ],
+      "organizer": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+      },
+      "isRecurring": true,
+      "recurringPattern": "Monthly on third Monday",
+      "status": "published",
+      "createdAt": "2025-01-01T10:00:00Z",
+      "updatedAt": "2025-01-10T15:00:00Z"
+    },
+    {
+      "id": "event-003",
+      "associationId": "assoc-001",
+      "title": "Financial Literacy Workshop",
+      "description": "Learn essential money management skills in this interactive workshop.\n\n**Topics covered:**\n- Budgeting basics\n- Savings strategies\n- Understanding credit\n- Investment fundamentals\n\nLed by certified financial planner Maria Santos.",
+      "type": "workshop",
+      "startDate": "2025-01-25T14:00:00Z",
+      "endDate": "2025-01-25T17:00:00Z",
+      "timezone": "America/New_York",
+      "location": {
+        "name": "Library Conference Room",
+        "address": "789 Pine Street",
+        "city": "New York",
+        "country": "USA"
+      },
+      "capacity": 30,
+      "registrationCount": 30,
+      "waitlistCount": 5,
+      "ticketOptions": [
+        {
+          "id": "ticket-005",
+          "name": "Workshop Registration",
+          "type": "member",
+          "price": 15,
+          "currency": "USD",
+          "quantity": 30,
+          "soldCount": 30,
+          "description": "Includes materials and refreshments"
+        }
+      ],
+      "organizer": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "registrationDeadline": "2025-01-23T23:59:59Z",
+      "isRecurring": false,
+      "status": "published",
+      "createdAt": "2025-01-05T10:00:00Z",
+      "updatedAt": "2025-01-12T08:00:00Z"
+    },
+    {
+      "id": "event-004",
+      "associationId": "assoc-001",
+      "title": "Annual General Meeting",
+      "description": "The most important meeting of the year where we review our progress, elect new board members, and plan for the future.\n\n**This is a mandatory meeting for all voting members.**\n\nProxy voting forms available for those who cannot attend.",
+      "type": "meeting",
+      "startDate": "2025-02-15T10:00:00Z",
+      "endDate": "2025-02-15T14:00:00Z",
+      "timezone": "America/New_York",
+      "location": {
+        "name": "Grand Hall - Community Center",
+        "address": "456 Oak Avenue",
+        "city": "New York",
+        "country": "USA"
+      },
+      "virtualLink": "https://zoom.us/j/987654321",
+      "capacity": 200,
+      "registrationCount": 45,
+      "waitlistCount": 0,
+      "ticketOptions": [
+        {
+          "id": "ticket-006",
+          "name": "Member Registration",
+          "type": "free",
+          "price": 0,
+          "currency": "USD",
+          "soldCount": 45
+        }
+      ],
+      "coverImage": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800",
+      "organizer": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "isRecurring": false,
+      "status": "published",
+      "createdAt": "2025-01-10T09:00:00Z",
+      "updatedAt": "2025-01-10T09:00:00Z"
+    },
+    {
+      "id": "event-005",
+      "associationId": "assoc-001",
+      "title": "Cultural Heritage Day",
+      "description": "Celebrate our diverse heritage with food, music, dance, and storytelling from across the diaspora.\n\nBring your family and a dish to share!",
+      "type": "celebration",
+      "startDate": "2025-02-28T12:00:00Z",
+      "endDate": "2025-02-28T18:00:00Z",
+      "timezone": "America/New_York",
+      "location": {
+        "name": "Riverside Park Pavilion",
+        "address": "Riverside Drive",
+        "city": "New York",
+        "country": "USA"
+      },
+      "capacity": 300,
+      "registrationCount": 0,
+      "waitlistCount": 0,
+      "ticketOptions": [
+        {
+          "id": "ticket-007",
+          "name": "Free Admission",
+          "type": "free",
+          "price": 0,
+          "currency": "USD",
+          "soldCount": 0
+        }
+      ],
+      "organizer": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "isRecurring": false,
+      "status": "draft",
+      "createdAt": "2025-01-12T10:00:00Z",
+      "updatedAt": "2025-01-12T10:00:00Z"
+    }
+  ],
+
+  "eventRegistrations": [
+    {
+      "id": "reg-001",
+      "eventId": "event-001",
+      "userId": "user-001",
+      "user": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "rsvpStatus": "going",
+      "ticketType": "vip",
+      "guestCount": 7,
+      "guestNames": ["Guest 1", "Guest 2", "Guest 3", "Guest 4", "Guest 5", "Guest 6", "Guest 7"],
+      "paymentStatus": "completed",
+      "paymentAmount": 800,
+      "createdAt": "2024-12-15T10:00:00Z",
+      "updatedAt": "2024-12-15T10:00:00Z"
+    },
+    {
+      "id": "reg-002",
+      "eventId": "event-001",
+      "userId": "user-002",
+      "user": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "rsvpStatus": "going",
+      "ticketType": "member",
+      "guestCount": 1,
+      "guestNames": ["Adwoa Asante"],
+      "paymentStatus": "completed",
+      "paymentAmount": 150,
+      "createdAt": "2024-12-20T14:00:00Z",
+      "updatedAt": "2024-12-20T14:00:00Z"
+    },
+    {
+      "id": "reg-003",
+      "eventId": "event-002",
+      "userId": "user-001",
+      "user": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "rsvpStatus": "going",
+      "ticketType": "free",
+      "guestCount": 0,
+      "createdAt": "2025-01-05T10:00:00Z",
+      "updatedAt": "2025-01-05T10:00:00Z"
+    },
+    {
+      "id": "reg-004",
+      "eventId": "event-003",
+      "userId": "user-005",
+      "user": {
+        "id": "user-005",
+        "name": "Nia Kamau",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=nia"
+      },
+      "rsvpStatus": "going",
+      "ticketType": "member",
+      "guestCount": 0,
+      "paymentStatus": "completed",
+      "paymentAmount": 15,
+      "createdAt": "2025-01-10T11:00:00Z",
+      "updatedAt": "2025-01-10T11:00:00Z"
+    }
+  ],
+
+  "messageTemplates": [
+    {
+      "id": "template-001",
+      "associationId": "assoc-001",
+      "name": "Payment Reminder - 3 Days",
+      "category": "payments",
+      "subject": "Contribution Due in 3 Days",
+      "content": "Hi {{member_name}},\n\nThis is a friendly reminder that your {{amount}} contribution to {{circle_name}} is due on {{due_date}}.\n\nClick here to make your payment: {{payment_link}}\n\nThank you for being a valued member of our community!",
+      "variables": ["member_name", "amount", "circle_name", "due_date", "payment_link"],
+      "language": "en",
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+      },
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "template-002",
+      "associationId": "assoc-001",
+      "name": "Welcome New Member",
+      "category": "social",
+      "subject": "Welcome to {{association_name}}!",
+      "content": "Dear {{member_name}},\n\nWelcome to {{association_name}}! We're thrilled to have you join our community.\n\n**Next Steps:**\n1. Complete your profile\n2. Join a savings circle\n3. Attend our next community meeting\n\nIf you have any questions, don't hesitate to reach out.\n\nWarm regards,\n{{association_name}} Team",
+      "variables": ["member_name", "association_name"],
+      "language": "en",
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+      },
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "template-003",
+      "associationId": "assoc-001",
+      "name": "Event Reminder",
+      "category": "events",
+      "subject": "Reminder: {{event_name}} is Tomorrow!",
+      "content": "Hi {{member_name}},\n\nThis is a reminder that {{event_name}} is happening tomorrow!\n\n**When:** {{event_date}} at {{event_time}}\n**Where:** {{event_location}}\n\nWe look forward to seeing you there!\n\n{{#if virtual_link}}Join online: {{virtual_link}}{{/if}}",
+      "variables": ["member_name", "event_name", "event_date", "event_time", "event_location", "virtual_link"],
+      "language": "en",
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=fatima"
+      },
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "template-004",
+      "associationId": "assoc-001",
+      "name": "Payout Notification",
+      "category": "payments",
+      "subject": "Your Payout Has Been Processed!",
+      "content": "Congratulations {{member_name}}!\n\nYour payout of {{amount}} from {{circle_name}} has been processed and should arrive in your account within 1-2 business days.\n\n**Transaction Details:**\n- Circle: {{circle_name}}\n- Cycle: {{cycle_number}}\n- Amount: {{amount}}\n- Date: {{payout_date}}\n\nThank you for your participation!",
+      "variables": ["member_name", "amount", "circle_name", "cycle_number", "payout_date"],
+      "language": "en",
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+      },
+      "createdAt": "2024-06-01T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    }
+  ],
+
+  "inboxItems": [
+    {
+      "id": "inbox-001",
+      "type": "notification",
+      "item": {
+        "id": "notif-001",
+        "type": "payment_reminder",
+        "category": "payments",
+        "title": "Contribution Due in 3 Days",
+        "body": "Your $200 contribution to Ubuntu Savings Circle is due on January 15th.",
+        "channel": "in_app",
+        "priority": "high",
+        "actionUrl": "/circles/circle-001/contribute",
+        "actionLabel": "Pay Now",
+        "read": false,
+        "createdAt": "2025-01-12T09:00:00Z"
+      },
+      "read": false,
+      "archived": false,
+      "createdAt": "2025-01-12T09:00:00Z"
+    },
+    {
+      "id": "inbox-002",
+      "type": "message",
+      "item": {
+        "id": "msg-010",
+        "conversationId": "conv-001",
+        "sender": {
+          "id": "user-002",
+          "name": "Kwame Asante",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=kwame"
+        },
+        "content": "Hey, can we discuss the treasury report before the meeting?",
+        "type": "text",
+        "readBy": ["user-002"],
+        "createdAt": "2025-01-12T11:30:00Z"
+      },
+      "read": false,
+      "archived": false,
+      "createdAt": "2025-01-12T11:30:00Z"
+    },
+    {
+      "id": "inbox-003",
+      "type": "announcement",
+      "item": {
+        "id": "ann-001",
+        "associationId": "assoc-001",
+        "title": "Annual General Meeting - Save the Date",
+        "content": "We are pleased to announce that our Annual General Meeting will be held on February 15th, 2025...",
+        "priority": "high",
+        "status": "published",
+        "author": {
+          "id": "user-001",
+          "name": "Amara Okonkwo",
+          "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=amara"
+        },
+        "targetAudience": {
+          "type": "all"
+        },
+        "requiresAcknowledgment": true,
+        "acknowledgedBy": ["user-002", "user-003", "user-004"],
+        "publishedAt": "2025-01-10T09:00:00Z",
+        "createdAt": "2025-01-09T14:00:00Z",
+        "updatedAt": "2025-01-10T09:00:00Z"
+      },
+      "read": true,
+      "archived": false,
+      "createdAt": "2025-01-10T09:00:00Z"
+    }
+  ],
+
+  "announcementStats": {
+    "ann-001": {
+      "totalRecipients": 156,
+      "viewCount": 134,
+      "viewRate": 85.9,
+      "acknowledgedCount": 98,
+      "acknowledgedRate": 62.8,
+      "channelBreakdown": [
+        { "channel": "in_app", "delivered": 156, "opened": 134 },
+        { "channel": "email", "delivered": 152, "opened": 89 },
+        { "channel": "push", "delivered": 145, "opened": 78 }
+      ]
+    }
+  }
+}

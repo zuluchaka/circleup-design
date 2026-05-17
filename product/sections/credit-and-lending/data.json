@@ -1,0 +1,521 @@
+{
+  "_meta": {
+    "models": {
+      "creditScore": "The member's CircleUp credit score (0-1000) used for lending decisions, with a breakdown of contributing factors and historical trend.",
+      "payoutAdvances": "Advances on upcoming circle payouts that members can request based on their contribution history, with instant approval and flexible repayment.",
+      "loans": "Personal loans backed by circle participation history, with full amortization schedules and optional guarantor support.",
+      "loanApplications": "Pending loan applications with document uploads, status tracking, and decision workflow.",
+      "scheduledPayments": "Individual payments in a loan's repayment schedule showing principal, interest, and payment status.",
+      "collectiveLoans": "Circle-based group lending where members vote to approve loans backed by the collective guarantee of the circle.",
+      "collectiveLoanVotes": "Individual member votes on collective loan requests within their circle.",
+      "guarantors": "Co-signer relationships where trusted circle members vouch for a loan applicant.",
+      "preQualificationOffers": "Available credit products the member may qualify for based on their credit score and participation history.",
+      "creditBureauStatus": "Opt-in status and reporting history for building external credit through CircleUp activity.",
+      "creditTips": "Educational content with actionable advice for improving credit score and financial health.",
+      "simulatorScenarios": "What-if scenarios for the credit score simulator showing how actions affect the score.",
+      "portfolioMetrics": "Admin dashboard data showing loan portfolio health, risk indicators, and collection statistics.",
+      "partnerBanks": "Partner financial institutions offering products to high-performing CircleUp members."
+    },
+    "relationships": [
+      "Each User has one CreditScore that tracks their lending eligibility",
+      "Users can have multiple PayoutAdvances linked to their upcoming circle Payouts",
+      "Loans have multiple ScheduledPayments (the amortization schedule)",
+      "Loans can have one or more Guarantors who are other CircleUp members",
+      "CollectiveLoans belong to a Circle and have CollectiveLoanVotes from Participants",
+      "PreQualificationOffers are generated based on CreditScore thresholds",
+      "CreditBureauStatus tracks which bureaus receive positive payment reporting"
+    ]
+  },
+  "currentUser": {
+    "id": "usr-7f3a9b2c",
+    "name": "Amara Diallo",
+    "email": "amara.diallo@email.com",
+    "avatarUrl": "/avatars/amara.jpg",
+    "kycStatus": "enhanced"
+  },
+  "creditScore": {
+    "userId": "usr-7f3a9b2c",
+    "score": 742,
+    "maxScore": 1000,
+    "tier": "good",
+    "lastUpdated": "2026-01-07T14:30:00Z",
+    "factors": {
+      "paymentHistory": { "weight": 40, "score": 85, "label": "Payment History", "description": "Based on 47 on-time contributions across 3 circles" },
+      "verification": { "weight": 20, "score": 100, "label": "Identity Verification", "description": "Enhanced KYC verification completed" },
+      "tenure": { "weight": 15, "score": 65, "label": "Platform Tenure", "description": "Active member for 18 months" },
+      "engagement": { "weight": 10, "score": 70, "label": "Community Engagement", "description": "Regular participation in 2 active circles" },
+      "network": { "weight": 10, "score": 55, "label": "Network Strength", "description": "Connected to 12 trusted members" },
+      "external": { "weight": 5, "score": 40, "label": "External Credit", "description": "Limited external credit history" }
+    },
+    "history": [
+      { "date": "2026-01-01", "score": 738 },
+      { "date": "2025-12-01", "score": 725 },
+      { "date": "2025-11-01", "score": 710 },
+      { "date": "2025-10-01", "score": 695 },
+      { "date": "2025-09-01", "score": 680 },
+      { "date": "2025-08-01", "score": 662 }
+    ],
+    "improvementTips": [
+      "Make your next 3 contributions on time to boost your score by ~15 points",
+      "Invite a trusted friend to join your circle to strengthen your network score"
+    ]
+  },
+  "payoutAdvances": [
+    {
+      "id": "adv-001",
+      "userId": "usr-7f3a9b2c",
+      "circleId": "cir-solidarity",
+      "circleName": "Solidarity Savings Circle",
+      "payoutId": "pay-upcoming-feb",
+      "scheduledPayoutDate": "2026-02-15",
+      "scheduledPayoutAmount": 2400.00,
+      "advanceAmount": 1800.00,
+      "feeAmount": 54.00,
+      "feePercentage": 3.0,
+      "netAdvanceAmount": 1746.00,
+      "status": "active",
+      "requestedAt": "2026-01-05T09:15:00Z",
+      "approvedAt": "2026-01-05T09:15:32Z",
+      "disbursedAt": "2026-01-05T09:20:00Z",
+      "repaymentMethod": "auto_from_payout",
+      "repaymentDate": "2026-02-15"
+    },
+    {
+      "id": "adv-002",
+      "userId": "usr-7f3a9b2c",
+      "circleId": "cir-family",
+      "circleName": "Diallo Family Tontine",
+      "payoutId": "pay-completed-dec",
+      "scheduledPayoutDate": "2025-12-20",
+      "scheduledPayoutAmount": 1500.00,
+      "advanceAmount": 1000.00,
+      "feeAmount": 25.00,
+      "feePercentage": 2.5,
+      "netAdvanceAmount": 975.00,
+      "status": "repaid",
+      "requestedAt": "2025-12-01T11:30:00Z",
+      "approvedAt": "2025-12-01T11:30:45Z",
+      "disbursedAt": "2025-12-01T11:35:00Z",
+      "repaymentMethod": "auto_from_payout",
+      "repaymentDate": "2025-12-20",
+      "repaidAt": "2025-12-20T10:00:00Z"
+    },
+    {
+      "id": "adv-003",
+      "userId": "usr-7f3a9b2c",
+      "circleId": "cir-women",
+      "circleName": "Women's Empowerment Susu",
+      "payoutId": "pay-upcoming-apr",
+      "scheduledPayoutDate": "2026-04-10",
+      "scheduledPayoutAmount": 3000.00,
+      "advanceAmount": null,
+      "feeAmount": null,
+      "feePercentage": 3.5,
+      "netAdvanceAmount": null,
+      "status": "eligible",
+      "maxAdvanceAmount": 2250.00,
+      "eligibilityScore": 92,
+      "eligibilityFactors": [
+        "18 consecutive on-time payments",
+        "Credit score above 700",
+        "No outstanding advances"
+      ]
+    }
+  ],
+  "loans": [
+    {
+      "id": "loan-001",
+      "userId": "usr-7f3a9b2c",
+      "type": "personal",
+      "purpose": "Home renovation",
+      "principalAmount": 5000.00,
+      "interestRate": 8.5,
+      "termMonths": 12,
+      "monthlyPayment": 436.22,
+      "totalInterest": 234.64,
+      "totalRepayment": 5234.64,
+      "remainingBalance": 2618.32,
+      "paidAmount": 2616.32,
+      "status": "active",
+      "disbursedAt": "2025-07-15T10:00:00Z",
+      "nextPaymentDate": "2026-01-15",
+      "nextPaymentAmount": 436.22,
+      "paymentsCompleted": 6,
+      "paymentsRemaining": 6,
+      "autoRepaymentEnabled": true,
+      "repaymentSourceType": "payment_method",
+      "repaymentSourceId": "pm-visa-4242",
+      "repaymentSourceLabel": "Visa ending in 4242",
+      "guarantors": [
+        {
+          "id": "guar-001",
+          "memberId": "usr-kwame-123",
+          "memberName": "Kwame Asante",
+          "memberAvatarUrl": "/avatars/kwame.jpg",
+          "status": "confirmed",
+          "guaranteedAmount": 2500.00,
+          "confirmedAt": "2025-07-10T14:00:00Z"
+        }
+      ],
+      "circleBackings": [
+        { "circleId": "cir-solidarity", "circleName": "Solidarity Savings Circle", "contributionHistory": 24, "onTimePercentage": 96 },
+        { "circleId": "cir-family", "circleName": "Diallo Family Tontine", "contributionHistory": 18, "onTimePercentage": 100 }
+      ]
+    },
+    {
+      "id": "loan-002",
+      "userId": "usr-7f3a9b2c",
+      "type": "personal",
+      "purpose": "Education expenses",
+      "principalAmount": 2000.00,
+      "interestRate": 7.5,
+      "termMonths": 6,
+      "monthlyPayment": 342.86,
+      "totalInterest": 57.16,
+      "totalRepayment": 2057.16,
+      "remainingBalance": 0,
+      "paidAmount": 2057.16,
+      "status": "completed",
+      "disbursedAt": "2025-03-01T10:00:00Z",
+      "completedAt": "2025-08-15T10:00:00Z",
+      "paymentsCompleted": 6,
+      "paymentsRemaining": 0,
+      "autoRepaymentEnabled": true,
+      "repaymentSourceType": "payment_method",
+      "repaymentSourceId": "pm-visa-4242",
+      "repaymentSourceLabel": "Visa ending in 4242",
+      "guarantors": [],
+      "circleBackings": [
+        { "circleId": "cir-solidarity", "circleName": "Solidarity Savings Circle", "contributionHistory": 18, "onTimePercentage": 94 }
+      ]
+    }
+  ],
+  "scheduledPayments": [
+    { "id": "sp-001", "loanId": "loan-001", "paymentNumber": 1, "dueDate": "2025-08-15", "principalAmount": 396.89, "interestAmount": 39.33, "totalAmount": 436.22, "status": "paid", "paidAt": "2025-08-15T10:00:00Z" },
+    { "id": "sp-002", "loanId": "loan-001", "paymentNumber": 2, "dueDate": "2025-09-15", "principalAmount": 399.70, "interestAmount": 36.52, "totalAmount": 436.22, "status": "paid", "paidAt": "2025-09-15T10:00:00Z" },
+    { "id": "sp-003", "loanId": "loan-001", "paymentNumber": 3, "dueDate": "2025-10-15", "principalAmount": 402.53, "interestAmount": 33.69, "totalAmount": 436.22, "status": "paid", "paidAt": "2025-10-15T10:00:00Z" },
+    { "id": "sp-004", "loanId": "loan-001", "paymentNumber": 4, "dueDate": "2025-11-15", "principalAmount": 405.38, "interestAmount": 30.84, "totalAmount": 436.22, "status": "paid", "paidAt": "2025-11-15T10:00:00Z" },
+    { "id": "sp-005", "loanId": "loan-001", "paymentNumber": 5, "dueDate": "2025-12-15", "principalAmount": 408.25, "interestAmount": 27.97, "totalAmount": 436.22, "status": "paid", "paidAt": "2025-12-15T10:00:00Z" },
+    { "id": "sp-006", "loanId": "loan-001", "paymentNumber": 6, "dueDate": "2026-01-15", "principalAmount": 411.14, "interestAmount": 25.08, "totalAmount": 436.22, "status": "upcoming", "paidAt": null },
+    { "id": "sp-007", "loanId": "loan-001", "paymentNumber": 7, "dueDate": "2026-02-15", "principalAmount": 414.05, "interestAmount": 22.17, "totalAmount": 436.22, "status": "scheduled", "paidAt": null },
+    { "id": "sp-008", "loanId": "loan-001", "paymentNumber": 8, "dueDate": "2026-03-15", "principalAmount": 416.98, "interestAmount": 19.24, "totalAmount": 436.22, "status": "scheduled", "paidAt": null },
+    { "id": "sp-009", "loanId": "loan-001", "paymentNumber": 9, "dueDate": "2026-04-15", "principalAmount": 419.93, "interestAmount": 16.29, "totalAmount": 436.22, "status": "scheduled", "paidAt": null },
+    { "id": "sp-010", "loanId": "loan-001", "paymentNumber": 10, "dueDate": "2026-05-15", "principalAmount": 422.90, "interestAmount": 13.32, "totalAmount": 436.22, "status": "scheduled", "paidAt": null },
+    { "id": "sp-011", "loanId": "loan-001", "paymentNumber": 11, "dueDate": "2026-06-15", "principalAmount": 425.89, "interestAmount": 10.33, "totalAmount": 436.22, "status": "scheduled", "paidAt": null },
+    { "id": "sp-012", "loanId": "loan-001", "paymentNumber": 12, "dueDate": "2026-07-15", "principalAmount": 428.91, "interestAmount": 7.31, "totalAmount": 436.22, "status": "scheduled", "paidAt": null }
+  ],
+  "loanApplications": [
+    {
+      "id": "app-001",
+      "userId": "usr-7f3a9b2c",
+      "type": "personal",
+      "purpose": "Business equipment purchase",
+      "requestedAmount": 8000.00,
+      "requestedTermMonths": 18,
+      "status": "under_review",
+      "submittedAt": "2026-01-06T16:00:00Z",
+      "estimatedDecisionDate": "2026-01-10",
+      "documents": [
+        { "id": "doc-001", "name": "Proof of income", "fileName": "income_statement_2025.pdf", "status": "verified", "uploadedAt": "2026-01-06T16:05:00Z" },
+        { "id": "doc-002", "name": "Business plan", "fileName": "equipment_business_plan.pdf", "status": "verified", "uploadedAt": "2026-01-06T16:10:00Z" },
+        { "id": "doc-003", "name": "Bank statements", "fileName": "bank_statements_q4.pdf", "status": "pending", "uploadedAt": "2026-01-06T16:15:00Z" }
+      ],
+      "proposedTerms": {
+        "approvedAmount": 7500.00,
+        "interestRate": 9.0,
+        "termMonths": 18,
+        "monthlyPayment": 456.78,
+        "totalRepayment": 8222.04
+      },
+      "guarantorRequests": [
+        {
+          "id": "greq-001",
+          "memberId": "usr-fatou-456",
+          "memberName": "Fatou Sow",
+          "memberAvatarUrl": "/avatars/fatou.jpg",
+          "guaranteeAmount": 4000.00,
+          "status": "pending",
+          "requestedAt": "2026-01-06T17:00:00Z"
+        }
+      ]
+    }
+  ],
+  "collectiveLoans": [
+    {
+      "id": "cloan-001",
+      "circleId": "cir-solidarity",
+      "circleName": "Solidarity Savings Circle",
+      "requesterId": "usr-ibrahim-789",
+      "requesterName": "Ibrahim Mbaye",
+      "requesterAvatarUrl": "/avatars/ibrahim.jpg",
+      "purpose": "Medical emergency - family surgery",
+      "requestedAmount": 3500.00,
+      "proposedTermMonths": 8,
+      "interestRate": 5.0,
+      "monthlyRepayment": 450.63,
+      "status": "voting",
+      "requestedAt": "2026-01-04T09:00:00Z",
+      "votingDeadline": "2026-01-11T23:59:59Z",
+      "votesRequired": 8,
+      "votesReceived": 5,
+      "votesApproved": 4,
+      "votesDenied": 1,
+      "currentUserVoted": false,
+      "collectiveGuaranteePool": 12000.00,
+      "memberGuaranteeShare": 437.50
+    },
+    {
+      "id": "cloan-002",
+      "circleId": "cir-solidarity",
+      "circleName": "Solidarity Savings Circle",
+      "requesterId": "usr-aisha-321",
+      "requesterName": "Aisha Traore",
+      "requesterAvatarUrl": "/avatars/aisha.jpg",
+      "purpose": "Daughter's university tuition",
+      "requestedAmount": 5000.00,
+      "proposedTermMonths": 12,
+      "interestRate": 5.0,
+      "monthlyRepayment": 428.04,
+      "status": "approved",
+      "requestedAt": "2025-11-15T14:00:00Z",
+      "votingDeadline": "2025-11-22T23:59:59Z",
+      "approvedAt": "2025-11-22T10:00:00Z",
+      "disbursedAt": "2025-11-25T09:00:00Z",
+      "votesRequired": 8,
+      "votesReceived": 8,
+      "votesApproved": 7,
+      "votesDenied": 1,
+      "currentUserVoted": true,
+      "remainingBalance": 2140.20,
+      "paymentsCompleted": 2
+    }
+  ],
+  "collectiveLoanVotes": [
+    { "id": "vote-001", "collectiveLoanId": "cloan-001", "memberId": "usr-kwame-123", "memberName": "Kwame Asante", "vote": "approve", "comment": "Ibrahim has been a reliable member for 3 years", "votedAt": "2026-01-05T10:00:00Z" },
+    { "id": "vote-002", "collectiveLoanId": "cloan-001", "memberId": "usr-fatou-456", "memberName": "Fatou Sow", "vote": "approve", "comment": null, "votedAt": "2026-01-05T11:30:00Z" },
+    { "id": "vote-003", "collectiveLoanId": "cloan-001", "memberId": "usr-omar-654", "memberName": "Omar Diop", "vote": "approve", "comment": "Family medical emergencies should be supported", "votedAt": "2026-01-06T08:00:00Z" },
+    { "id": "vote-004", "collectiveLoanId": "cloan-001", "memberId": "usr-marie-987", "memberName": "Marie Ndoye", "vote": "deny", "comment": "Concerned about the repayment term being too short", "votedAt": "2026-01-06T14:00:00Z" },
+    { "id": "vote-005", "collectiveLoanId": "cloan-001", "memberId": "usr-moussa-111", "memberName": "Moussa Camara", "vote": "approve", "comment": null, "votedAt": "2026-01-07T09:00:00Z" }
+  ],
+  "preQualificationOffers": [
+    {
+      "id": "pq-001",
+      "type": "payout_advance",
+      "title": "Payout Advance",
+      "description": "Get up to 75% of your upcoming payout early",
+      "maxAmount": 2250.00,
+      "minCreditScore": 650,
+      "feeRange": "2.5% - 4%",
+      "termRange": "Until payout date",
+      "status": "qualified",
+      "qualificationMessage": "Based on your upcoming April payout of CHF 3,000"
+    },
+    {
+      "id": "pq-002",
+      "type": "personal_loan",
+      "title": "Personal Loan",
+      "description": "Borrow up to 3x your monthly circle contributions",
+      "maxAmount": 10000.00,
+      "minCreditScore": 700,
+      "feeRange": "7.5% - 12% APR",
+      "termRange": "6 - 24 months",
+      "status": "qualified",
+      "qualificationMessage": "Your credit score of 742 qualifies you for preferred rates"
+    },
+    {
+      "id": "pq-003",
+      "type": "business_loan",
+      "title": "Small Business Loan",
+      "description": "Fund your business with competitive rates",
+      "maxAmount": 25000.00,
+      "minCreditScore": 800,
+      "feeRange": "9% - 15% APR",
+      "termRange": "12 - 36 months",
+      "status": "not_qualified",
+      "qualificationMessage": "Increase your score by 58 points to qualify",
+      "requiredScoreIncrease": 58
+    },
+    {
+      "id": "pq-004",
+      "type": "partner_credit_card",
+      "title": "Partner Bank Credit Card",
+      "description": "Build external credit with our partner bank",
+      "maxAmount": 5000.00,
+      "minCreditScore": 720,
+      "feeRange": "No annual fee",
+      "termRange": "Revolving credit",
+      "status": "qualified",
+      "qualificationMessage": "You're eligible for an introduction to our partner bank",
+      "partnerName": "Swiss Community Bank"
+    }
+  ],
+  "creditBureauStatus": {
+    "userId": "usr-7f3a9b2c",
+    "optedIn": true,
+    "optedInAt": "2025-06-15T10:00:00Z",
+    "bureaus": [
+      { "id": "bureau-crif", "name": "CRIF", "country": "Switzerland", "status": "active", "lastReportedAt": "2026-01-01T00:00:00Z", "paymentsReported": 24 },
+      { "id": "bureau-experian", "name": "Experian", "country": "International", "status": "pending", "lastReportedAt": null, "paymentsReported": 0 }
+    ],
+    "creditBuildingProgress": {
+      "currentLevel": 2,
+      "maxLevel": 5,
+      "currentLevelName": "Building",
+      "nextLevelName": "Established",
+      "progressPercent": 65,
+      "milestonesCompleted": [
+        { "name": "Opt-in to reporting", "completedAt": "2025-06-15T10:00:00Z" },
+        { "name": "First 6 months of on-time payments", "completedAt": "2025-12-15T10:00:00Z" }
+      ],
+      "milestonesRemaining": [
+        { "name": "12 consecutive on-time payments", "progressPercent": 50 },
+        { "name": "Complete a loan with no late payments", "progressPercent": 50 }
+      ]
+    }
+  },
+  "creditTips": [
+    {
+      "id": "tip-001",
+      "category": "payment_history",
+      "title": "Never miss a contribution",
+      "description": "Payment history accounts for 40% of your credit score. Set up auto-pay to ensure you never miss a due date.",
+      "actionLabel": "Enable auto-pay",
+      "actionType": "enable_autopay",
+      "impactLevel": "high",
+      "estimatedScoreImpact": "+15 to +25 points"
+    },
+    {
+      "id": "tip-002",
+      "category": "network",
+      "title": "Grow your trusted network",
+      "description": "Inviting reliable friends and family to join your circles strengthens your network score and shows lenders you're connected to trustworthy people.",
+      "actionLabel": "Invite a friend",
+      "actionType": "invite_member",
+      "impactLevel": "medium",
+      "estimatedScoreImpact": "+5 to +10 points"
+    },
+    {
+      "id": "tip-003",
+      "category": "external",
+      "title": "Opt-in to credit bureau reporting",
+      "description": "Let your on-time CircleUp payments build your formal credit history. This is especially valuable if you have limited credit history.",
+      "actionLabel": "Learn more",
+      "actionType": "view_bureau_info",
+      "impactLevel": "high",
+      "estimatedScoreImpact": "Builds external credit"
+    },
+    {
+      "id": "tip-004",
+      "category": "tenure",
+      "title": "Stay active in your circles",
+      "description": "Your tenure score improves the longer you actively participate. Completing full circle cycles shows commitment and reliability.",
+      "actionLabel": null,
+      "actionType": null,
+      "impactLevel": "low",
+      "estimatedScoreImpact": "+2 to +5 points per year"
+    },
+    {
+      "id": "tip-005",
+      "category": "verification",
+      "title": "Complete your verification",
+      "description": "Enhanced KYC verification unlocks higher borrowing limits and better rates. You've already completed this step!",
+      "actionLabel": null,
+      "actionType": null,
+      "impactLevel": "high",
+      "estimatedScoreImpact": "Completed",
+      "completed": true
+    }
+  ],
+  "simulatorScenarios": [
+    {
+      "id": "sim-001",
+      "action": "make_on_time_payments",
+      "label": "Make 3 on-time payments",
+      "currentValue": 0,
+      "targetValue": 3,
+      "scoreImpact": 15,
+      "newProjectedScore": 757
+    },
+    {
+      "id": "sim-002",
+      "action": "join_new_circle",
+      "label": "Join another circle",
+      "currentValue": 2,
+      "targetValue": 3,
+      "scoreImpact": 8,
+      "newProjectedScore": 750
+    },
+    {
+      "id": "sim-003",
+      "action": "complete_loan",
+      "label": "Complete current loan without late payments",
+      "currentValue": 6,
+      "targetValue": 12,
+      "scoreImpact": 25,
+      "newProjectedScore": 767
+    },
+    {
+      "id": "sim-004",
+      "action": "invite_members",
+      "label": "Invite 2 trusted members",
+      "currentValue": 0,
+      "targetValue": 2,
+      "scoreImpact": 10,
+      "newProjectedScore": 752
+    }
+  ],
+  "portfolioMetrics": {
+    "totalLoansOutstanding": 847500.00,
+    "totalActiveLoans": 156,
+    "totalAdvancesOutstanding": 124300.00,
+    "totalActiveAdvances": 89,
+    "averageLoanAmount": 5432.69,
+    "averageInterestRate": 8.7,
+    "delinquencyRate": 2.3,
+    "defaultRate": 0.8,
+    "collectionsAmount": 18750.00,
+    "writeOffsYTD": 4200.00,
+    "riskDistribution": {
+      "low": { "count": 98, "amount": 412500.00, "percentage": 62.8 },
+      "medium": { "count": 42, "amount": 285000.00, "percentage": 26.9 },
+      "high": { "count": 16, "amount": 150000.00, "percentage": 10.3 }
+    },
+    "collectionQueue": [
+      { "id": "col-001", "loanId": "loan-ext-001", "borrowerName": "Jean-Pierre Kouassi", "amount": 2340.00, "daysOverdue": 15, "status": "first_notice_sent", "lastContactAt": "2026-01-03T10:00:00Z" },
+      { "id": "col-002", "loanId": "loan-ext-002", "borrowerName": "Mariama Balde", "amount": 1875.00, "daysOverdue": 32, "status": "payment_plan_offered", "lastContactAt": "2026-01-05T14:30:00Z" },
+      { "id": "col-003", "loanId": "loan-ext-003", "borrowerName": "Ousmane Cisse", "amount": 4100.00, "daysOverdue": 45, "status": "escalated", "lastContactAt": "2026-01-06T09:00:00Z" }
+    ],
+    "earlyWarningIndicators": [
+      { "id": "ew-001", "borrowerName": "Adama Toure", "loanId": "loan-ext-004", "indicator": "missed_circle_contribution", "riskLevel": "medium", "detectedAt": "2026-01-07T08:00:00Z" },
+      { "id": "ew-002", "borrowerName": "Bintu Diallo", "loanId": "loan-ext-005", "indicator": "credit_score_decline", "riskLevel": "low", "detectedAt": "2026-01-06T12:00:00Z" }
+    ]
+  },
+  "partnerBanks": [
+    {
+      "id": "bank-001",
+      "name": "Swiss Community Bank",
+      "logo": "/logos/swiss-community-bank.png",
+      "description": "A community-focused bank offering special rates for CircleUp members with strong credit scores.",
+      "productsOffered": ["Credit cards", "Personal loans", "Savings accounts"],
+      "minCreditScore": 720,
+      "specialOffer": "0% APR for first 6 months on credit cards"
+    },
+    {
+      "id": "bank-002",
+      "name": "Diaspora Finance",
+      "logo": "/logos/diaspora-finance.png",
+      "description": "Specialized in serving diaspora communities with cross-border financial products.",
+      "productsOffered": ["Remittance services", "Multi-currency accounts", "Business loans"],
+      "minCreditScore": 680,
+      "specialOffer": "50% off remittance fees for first 3 transfers"
+    }
+  ],
+  "paymentMethods": [
+    { "id": "pm-visa-4242", "type": "card", "brand": "Visa", "last4": "4242", "expiryMonth": 12, "expiryYear": 2027, "isDefault": true },
+    { "id": "pm-sepa-8901", "type": "sepa_debit", "bankName": "PostFinance", "last4": "8901", "isDefault": false }
+  ],
+  "upcomingPayouts": [
+    { "id": "pay-upcoming-feb", "circleId": "cir-solidarity", "circleName": "Solidarity Savings Circle", "amount": 2400.00, "scheduledDate": "2026-02-15", "position": 8 },
+    { "id": "pay-upcoming-apr", "circleId": "cir-women", "circleName": "Women's Empowerment Susu", "amount": 3000.00, "scheduledDate": "2026-04-10", "position": 4 }
+  ]
+}

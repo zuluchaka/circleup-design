@@ -3,10 +3,77 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Maximize2, GripVertical, Layout, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { loadScreenDesignComponent, sectionUsesShell } from '@/lib/section-loader'
+import { loadScreenDesignComponent, sectionUsesShell, getSectionScreenDesigns } from '@/lib/section-loader'
 import { loadAppShell, hasShellComponents, loadShellInfo } from '@/lib/shell-loader'
 import { loadProductData } from '@/lib/product-loader'
 import React from 'react'
+
+/**
+ * Build a map from shell nav href → fullscreen screen design URL.
+ * Also builds a reverse map from href → sectionId for active state detection.
+ */
+function buildNavRoutes(): { hrefToUrl: Map<string, string>; hrefToSectionId: Map<string, string> } {
+  const hrefToUrl = new Map<string, string>()
+  const hrefToSectionId = new Map<string, string>()
+
+  const shellInfo = loadShellInfo()
+  const productData = loadProductData()
+  const specGroups = shellInfo?.spec?.navigationGroups || []
+  const sections = productData.roadmap?.sections || []
+
+  // Build lookup: lowercase title → section, and section id → section
+  const sectionByTitle = new Map<string, { id: string; title: string }>()
+  const sectionBySlug = new Map<string, { id: string; title: string }>()
+  for (const sec of sections) {
+    sectionByTitle.set(sec.title.toLowerCase(), sec)
+    sectionBySlug.set(sec.id, sec)
+  }
+
+  // For each nav item, find the matching section and its first screen design
+  for (const group of specGroups) {
+    for (const item of group.items) {
+      const label = item.label.toLowerCase()
+
+      // Strategy 1: Direct title match
+      let matched = sectionByTitle.get(label)
+
+      // Strategy 2: Slug match (e.g., "Multi-Share" → "multi-share")
+      if (!matched) {
+        const slugLabel = label.replace(/\s+&\s+/g, '-and-').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+        matched = sectionBySlug.get(slugLabel)
+      }
+
+      // Strategy 3: Partial match (e.g., "Platform Admin" matches "Platform Administration")
+      if (!matched) {
+        for (const [title, sec] of sectionByTitle) {
+          if (title.startsWith(label) || label.startsWith(title.split(' ')[0])) {
+            matched = sec
+            break
+          }
+        }
+      }
+
+      // Strategy 4: href-based match (e.g., /federations → federations)
+      if (!matched) {
+        const hrefSlug = item.href.replace(/^\//, '')
+        matched = sectionBySlug.get(hrefSlug)
+      }
+
+      if (matched) {
+        hrefToSectionId.set(item.href, matched.id)
+        const screenDesigns = getSectionScreenDesigns(matched.id)
+        if (screenDesigns.length > 0) {
+          hrefToUrl.set(item.href, `/sections/${matched.id}/screen-designs/${screenDesigns[0].name}/fullscreen`)
+        }
+      }
+    }
+  }
+
+  return { hrefToUrl, hrefToSectionId }
+}
+
+// Build routes once at module level (build-time data, never changes)
+const navRoutes = buildNavRoutes()
 
 const MIN_WIDTH = 320
 const DEFAULT_WIDTH_PERCENT = 100
@@ -249,38 +316,51 @@ export function ScreenDesignFullscreen() {
 
         // Create a wrapper that provides default props to the shell
         const ShellWrapper = ({ children }: { children?: React.ReactNode }) => {
-          // Try to get navigation items from shell spec
-          const shellInfo = loadShellInfo()
-          const specNavItems = shellInfo?.spec?.navigationItems || []
+          const navigate = useNavigate()
 
-          // Parse navigation items from spec (format: "**Label** → Description")
-          const navigationItems = specNavItems.length > 0
-            ? specNavItems.map((item, index) => {
-                // Extract label from **Label** format
-                const labelMatch = item.match(/\*\*([^*]+)\*\*/)
-                const label = labelMatch ? labelMatch[1] : item.split('→')[0]?.trim() || `Item ${index + 1}`
-                return {
-                  label,
-                  href: `/${label.toLowerCase().replace(/\s+/g, '-')}`,
-                  isActive: index === 0,
-                }
-              })
+          // Get navigation groups from shell spec
+          const shellInfo = loadShellInfo()
+          const specGroups = shellInfo?.spec?.navigationGroups || []
+
+          // Build navigation groups with isActive based on current section
+          const navigationGroups = specGroups.length > 0
+            ? specGroups.map((group) => ({
+                label: group.label,
+                items: group.items.map((item) => ({
+                  label: item.label,
+                  href: item.href,
+                  isActive: sectionId ? navRoutes.hrefToSectionId.get(item.href) === sectionId : false,
+                })),
+              }))
             : [
-                { label: 'Dashboard', href: '/', isActive: true },
-                { label: 'Items', href: '/items' },
-                { label: 'Settings', href: '/settings' },
+                {
+                  label: 'Main',
+                  items: [
+                    { label: 'Dashboard', href: '/', isActive: true },
+                    { label: 'Items', href: '/items' },
+                    { label: 'Settings', href: '/settings' },
+                  ],
+                },
               ]
 
           const defaultUser = {
             name: 'Demo User',
           }
 
+          // Handle navigation using the pre-built route map
+          const handleNavigate = (href: string) => {
+            const targetUrl = navRoutes.hrefToUrl.get(href)
+            if (targetUrl) {
+              navigate(targetUrl)
+            }
+          }
+
           // Pass props dynamically - the shell component decides what it needs
           return (
             <ShellComponent
-              navigationItems={navigationItems}
+              navigationGroups={navigationGroups}
               user={defaultUser}
-              onNavigate={() => {}}
+              onNavigate={handleNavigate}
               onLogout={() => {}}
             >
               {children}

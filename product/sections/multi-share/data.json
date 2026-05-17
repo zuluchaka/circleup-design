@@ -1,0 +1,1139 @@
+{
+  "_meta": {
+    "models": {
+      "circles": "ROSCA savings circles with multi-share configuration. Each circle can allow members to hold multiple shares of the base contribution amount.",
+      "members": "Circle participants with their share allocations, payment history, and payout positions.",
+      "shareRequests": "Requests from members to increase, decrease, or transfer their share holdings. These go through an approval workflow.",
+      "shareHistory": "Historical timeline of all share allocation changes for audit and transparency.",
+      "contributions": "Payment records for each cycle, showing share-based breakdowns of amounts due and paid.",
+      "payouts": "Disbursement records showing share-proportional payout amounts and positions.",
+      "shareWaitlist": "Queue of members waiting for shares when a circle has reached its maximum capacity.",
+      "shareTransfers": "Requests to transfer shares from one member to another within the same circle.",
+      "platformConfig": "Platform-wide settings for multi-share limits, Trust Score requirements, and feature toggles.",
+      "platformMetrics": "Aggregated statistics about multi-share usage across the platform.",
+      "complianceAlerts": "Flagged patterns and risk assessments for potential fraud or abuse detection.",
+      "educationContent": "Onboarding materials, quiz questions, and contextual tips for multi-share members."
+    },
+    "relationships": [
+      "Each Circle contains multiple Members (participants) with their share allocations",
+      "Members can submit ShareRequests to change their share count",
+      "ShareHistory tracks all changes to a member's shares over time",
+      "Contributions are calculated based on member's current share count",
+      "Payouts are proportional to the member's shares relative to total circle shares",
+      "ShareWaitlist queues members when circle capacity is reached",
+      "ShareTransfers link a sender and recipient member for share movement",
+      "ComplianceAlerts reference specific members, circles, or patterns for investigation"
+    ]
+  },
+
+  "circles": [
+    {
+      "id": "circle-001",
+      "name": "Zurich Professionals Circle",
+      "associationId": "assoc-001",
+      "associationName": "Swiss Tech Professionals",
+      "status": "active",
+      "baseContribution": 500,
+      "currency": "CHF",
+      "frequency": "monthly",
+      "totalCycles": 12,
+      "currentCycle": 4,
+      "maxMembers": 12,
+      "currentMemberCount": 10,
+      "multiShareConfig": {
+        "enabled": true,
+        "maxSharesPerMember": 4,
+        "approvalMode": "organizer_approval",
+        "totalSharesLimit": 30,
+        "currentTotalShares": 18,
+        "shareLockPeriod": {
+          "startLockCycles": 2,
+          "endLockCycles": 2
+        },
+        "minimumHoldPeriod": "3_cycles",
+        "allowTransfers": true,
+        "payoutMode": "consolidated"
+      },
+      "emergencyFundRate": 0.01,
+      "emergencyFundBalance": 2340.00,
+      "totalCollected": 36000.00,
+      "totalDisbursed": 27000.00,
+      "createdAt": "2025-09-15T10:00:00Z",
+      "startedAt": "2025-10-01T00:00:00Z"
+    },
+    {
+      "id": "circle-002",
+      "name": "Family Savings Circle",
+      "associationId": "assoc-002",
+      "associationName": "Diallo Extended Family",
+      "status": "forming",
+      "baseContribution": 200,
+      "currency": "CHF",
+      "frequency": "monthly",
+      "totalCycles": 8,
+      "currentCycle": 0,
+      "maxMembers": 8,
+      "currentMemberCount": 6,
+      "multiShareConfig": {
+        "enabled": true,
+        "maxSharesPerMember": 3,
+        "approvalMode": "auto_approve",
+        "totalSharesLimit": 20,
+        "currentTotalShares": 10,
+        "shareLockPeriod": {
+          "startLockCycles": 1,
+          "endLockCycles": 1
+        },
+        "minimumHoldPeriod": "none",
+        "allowTransfers": true,
+        "payoutMode": "distributed"
+      },
+      "emergencyFundRate": 0.01,
+      "emergencyFundBalance": 0,
+      "totalCollected": 0,
+      "totalDisbursed": 0,
+      "createdAt": "2026-01-05T14:30:00Z",
+      "startedAt": null
+    },
+    {
+      "id": "circle-003",
+      "name": "Geneva Community Tontine",
+      "associationId": "assoc-003",
+      "associationName": "West African Diaspora Geneva",
+      "status": "active",
+      "baseContribution": 300,
+      "currency": "CHF",
+      "frequency": "monthly",
+      "totalCycles": 15,
+      "currentCycle": 8,
+      "maxMembers": 15,
+      "currentMemberCount": 15,
+      "multiShareConfig": {
+        "enabled": true,
+        "maxSharesPerMember": 5,
+        "approvalMode": "organizer_approval",
+        "totalSharesLimit": 50,
+        "currentTotalShares": 42,
+        "shareLockPeriod": {
+          "startLockCycles": 3,
+          "endLockCycles": 3
+        },
+        "minimumHoldPeriod": "until_payout",
+        "allowTransfers": false,
+        "payoutMode": "consolidated"
+      },
+      "emergencyFundRate": 0.01,
+      "emergencyFundBalance": 8820.00,
+      "totalCollected": 100800.00,
+      "totalDisbursed": 75600.00,
+      "createdAt": "2025-05-01T09:00:00Z",
+      "startedAt": "2025-06-01T00:00:00Z"
+    }
+  ],
+
+  "members": [
+    {
+      "id": "member-001",
+      "circleId": "circle-001",
+      "userId": "user-001",
+      "name": "Marco Bernasconi",
+      "email": "marco.b@techcorp.ch",
+      "avatarUrl": "/avatars/marco-b.jpg",
+      "role": "organizer",
+      "shares": 2,
+      "maxEligibleShares": 4,
+      "trustScore": 890,
+      "kycStatus": "enhanced",
+      "payoutPosition": 3,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 4000.00,
+      "joinedAt": "2025-09-15T10:00:00Z",
+      "sharePercentage": 11.1
+    },
+    {
+      "id": "member-002",
+      "circleId": "circle-001",
+      "userId": "user-002",
+      "name": "Sophie Müller",
+      "email": "sophie.m@startup.io",
+      "avatarUrl": "/avatars/sophie-m.jpg",
+      "role": "member",
+      "shares": 4,
+      "maxEligibleShares": 4,
+      "trustScore": 920,
+      "kycStatus": "enhanced",
+      "payoutPosition": 1,
+      "payoutStatus": "received",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 8000.00,
+      "payoutReceived": 9000.00,
+      "payoutDate": "2025-11-01T00:00:00Z",
+      "joinedAt": "2025-09-16T11:30:00Z",
+      "sharePercentage": 22.2
+    },
+    {
+      "id": "member-003",
+      "circleId": "circle-001",
+      "userId": "user-003",
+      "name": "Thomas Weber",
+      "email": "t.weber@consulting.ch",
+      "avatarUrl": "/avatars/thomas-w.jpg",
+      "role": "member",
+      "shares": 1,
+      "maxEligibleShares": 3,
+      "trustScore": 720,
+      "kycStatus": "basic",
+      "payoutPosition": 8,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 3,
+        "late": 1,
+        "missed": 0
+      },
+      "totalContributed": 2000.00,
+      "joinedAt": "2025-09-17T09:15:00Z",
+      "sharePercentage": 5.6
+    },
+    {
+      "id": "member-004",
+      "circleId": "circle-001",
+      "userId": "user-004",
+      "name": "Elena Rossi",
+      "email": "elena.r@finance.ch",
+      "avatarUrl": "/avatars/elena-r.jpg",
+      "role": "member",
+      "shares": 3,
+      "maxEligibleShares": 4,
+      "trustScore": 850,
+      "kycStatus": "enhanced",
+      "payoutPosition": 2,
+      "payoutStatus": "received",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 6000.00,
+      "payoutReceived": 6750.00,
+      "payoutDate": "2025-12-01T00:00:00Z",
+      "joinedAt": "2025-09-18T14:00:00Z",
+      "sharePercentage": 16.7
+    },
+    {
+      "id": "member-005",
+      "circleId": "circle-001",
+      "userId": "user-005",
+      "name": "Luca Fontana",
+      "email": "luca.f@devhub.ch",
+      "avatarUrl": "/avatars/luca-f.jpg",
+      "role": "member",
+      "shares": 2,
+      "maxEligibleShares": 4,
+      "trustScore": 810,
+      "kycStatus": "enhanced",
+      "payoutPosition": 5,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 4000.00,
+      "joinedAt": "2025-09-19T16:45:00Z",
+      "sharePercentage": 11.1,
+      "pendingShareRequest": {
+        "requestId": "req-001",
+        "type": "increase",
+        "requestedShares": 1,
+        "status": "pending"
+      }
+    },
+    {
+      "id": "member-006",
+      "circleId": "circle-001",
+      "userId": "user-006",
+      "name": "Anna Schmidt",
+      "email": "anna.s@media.ch",
+      "avatarUrl": "/avatars/anna-s.jpg",
+      "role": "member",
+      "shares": 1,
+      "maxEligibleShares": 2,
+      "trustScore": 680,
+      "kycStatus": "basic",
+      "payoutPosition": 10,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 2000.00,
+      "joinedAt": "2025-09-20T10:00:00Z",
+      "sharePercentage": 5.6
+    },
+    {
+      "id": "member-007",
+      "circleId": "circle-001",
+      "userId": "user-007",
+      "name": "David Keller",
+      "email": "david.k@architect.ch",
+      "avatarUrl": "/avatars/david-k.jpg",
+      "role": "member",
+      "shares": 2,
+      "maxEligibleShares": 4,
+      "trustScore": 875,
+      "kycStatus": "enhanced",
+      "payoutPosition": 4,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 4000.00,
+      "joinedAt": "2025-09-21T11:30:00Z",
+      "sharePercentage": 11.1
+    },
+    {
+      "id": "member-008",
+      "circleId": "circle-001",
+      "userId": "user-008",
+      "name": "Maria Santos",
+      "email": "maria.s@healthcare.ch",
+      "avatarUrl": "/avatars/maria-s.jpg",
+      "role": "member",
+      "shares": 1,
+      "maxEligibleShares": 3,
+      "trustScore": 760,
+      "kycStatus": "basic",
+      "payoutPosition": 9,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 3,
+        "late": 1,
+        "missed": 0
+      },
+      "totalContributed": 2000.00,
+      "joinedAt": "2025-09-22T09:00:00Z",
+      "sharePercentage": 5.6
+    },
+    {
+      "id": "member-009",
+      "circleId": "circle-001",
+      "userId": "user-009",
+      "name": "Philippe Dubois",
+      "email": "philippe.d@legal.ch",
+      "avatarUrl": "/avatars/philippe-d.jpg",
+      "role": "member",
+      "shares": 1,
+      "maxEligibleShares": 4,
+      "trustScore": 830,
+      "kycStatus": "enhanced",
+      "payoutPosition": 7,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 2000.00,
+      "joinedAt": "2025-09-23T14:15:00Z",
+      "sharePercentage": 5.6
+    },
+    {
+      "id": "member-010",
+      "circleId": "circle-001",
+      "userId": "user-010",
+      "name": "Claire Bonnet",
+      "email": "claire.b@education.ch",
+      "avatarUrl": "/avatars/claire-b.jpg",
+      "role": "member",
+      "shares": 1,
+      "maxEligibleShares": 3,
+      "trustScore": 790,
+      "kycStatus": "basic",
+      "payoutPosition": 6,
+      "payoutStatus": "pending",
+      "contributionStats": {
+        "onTime": 4,
+        "late": 0,
+        "missed": 0
+      },
+      "totalContributed": 2000.00,
+      "joinedAt": "2025-09-24T16:00:00Z",
+      "sharePercentage": 5.6
+    }
+  ],
+
+  "shareRequests": [
+    {
+      "id": "req-001",
+      "circleId": "circle-001",
+      "circleName": "Zurich Professionals Circle",
+      "memberId": "member-005",
+      "memberName": "Luca Fontana",
+      "memberAvatar": "/avatars/luca-f.jpg",
+      "memberTrustScore": 810,
+      "type": "increase",
+      "currentShares": 2,
+      "requestedShares": 1,
+      "newTotal": 3,
+      "status": "pending",
+      "contributionImpact": {
+        "currentAmount": 1000,
+        "newAmount": 1500,
+        "difference": 500
+      },
+      "payoutImpact": {
+        "currentProjected": 9000,
+        "newProjected": 13500,
+        "difference": 4500
+      },
+      "requestedAt": "2026-01-08T10:30:00Z",
+      "effectiveFrom": "cycle_5",
+      "expiresAt": "2026-01-15T10:30:00Z",
+      "notes": "Would like to increase savings before my wedding in June"
+    },
+    {
+      "id": "req-002",
+      "circleId": "circle-001",
+      "circleName": "Zurich Professionals Circle",
+      "memberId": "member-003",
+      "memberName": "Thomas Weber",
+      "memberAvatar": "/avatars/thomas-w.jpg",
+      "memberTrustScore": 720,
+      "type": "increase",
+      "currentShares": 1,
+      "requestedShares": 1,
+      "newTotal": 2,
+      "status": "rejected",
+      "contributionImpact": {
+        "currentAmount": 500,
+        "newAmount": 1000,
+        "difference": 500
+      },
+      "payoutImpact": {
+        "currentProjected": 4500,
+        "newProjected": 9000,
+        "difference": 4500
+      },
+      "requestedAt": "2025-12-15T14:00:00Z",
+      "decidedAt": "2025-12-16T09:30:00Z",
+      "decidedBy": "Marco Bernasconi",
+      "rejectionReason": "trust_concerns",
+      "rejectionNote": "Please maintain on-time payments for 3 more cycles to be eligible for additional shares."
+    },
+    {
+      "id": "req-003",
+      "circleId": "circle-003",
+      "circleName": "Geneva Community Tontine",
+      "memberId": "member-020",
+      "memberName": "Fatou Ndiaye",
+      "memberAvatar": "/avatars/fatou-n.jpg",
+      "memberTrustScore": 865,
+      "type": "reduction",
+      "currentShares": 3,
+      "requestedShares": -1,
+      "newTotal": 2,
+      "status": "approved",
+      "isEmergency": true,
+      "emergencyReason": "job_loss",
+      "emergencyDocumentation": "termination_letter.pdf",
+      "contributionImpact": {
+        "currentAmount": 900,
+        "newAmount": 600,
+        "difference": -300
+      },
+      "payoutImpact": {
+        "currentProjected": 12600,
+        "newProjected": 8400,
+        "difference": -4200
+      },
+      "requestedAt": "2026-01-05T11:00:00Z",
+      "decidedAt": "2026-01-05T15:30:00Z",
+      "decidedBy": "Amadou Diallo",
+      "effectiveFrom": "current_cycle",
+      "notes": "Emergency reduction approved due to documented job loss."
+    },
+    {
+      "id": "req-004",
+      "circleId": "circle-001",
+      "circleName": "Zurich Professionals Circle",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "memberAvatar": "/avatars/sophie-m.jpg",
+      "memberTrustScore": 920,
+      "type": "increase",
+      "currentShares": 3,
+      "requestedShares": 1,
+      "newTotal": 4,
+      "status": "approved",
+      "contributionImpact": {
+        "currentAmount": 1500,
+        "newAmount": 2000,
+        "difference": 500
+      },
+      "payoutImpact": {
+        "currentProjected": 13500,
+        "newProjected": 18000,
+        "difference": 4500
+      },
+      "requestedAt": "2025-10-10T09:00:00Z",
+      "decidedAt": "2025-10-10T14:00:00Z",
+      "decidedBy": "Marco Bernasconi",
+      "effectiveFrom": "cycle_2"
+    }
+  ],
+
+  "shareHistory": [
+    {
+      "id": "hist-001",
+      "circleId": "circle-001",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "eventType": "initial_allocation",
+      "previousShares": 0,
+      "newShares": 2,
+      "change": 2,
+      "timestamp": "2025-09-16T11:30:00Z",
+      "cycle": 0,
+      "note": "Joined circle with 2 shares"
+    },
+    {
+      "id": "hist-002",
+      "circleId": "circle-001",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "eventType": "increase_approved",
+      "previousShares": 2,
+      "newShares": 3,
+      "change": 1,
+      "timestamp": "2025-10-05T10:00:00Z",
+      "cycle": 1,
+      "requestId": "req-old-001",
+      "approvedBy": "Marco Bernasconi"
+    },
+    {
+      "id": "hist-003",
+      "circleId": "circle-001",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "eventType": "increase_approved",
+      "previousShares": 3,
+      "newShares": 4,
+      "change": 1,
+      "timestamp": "2025-10-10T14:00:00Z",
+      "cycle": 1,
+      "requestId": "req-004",
+      "approvedBy": "Marco Bernasconi"
+    },
+    {
+      "id": "hist-004",
+      "circleId": "circle-001",
+      "memberId": "member-003",
+      "memberName": "Thomas Weber",
+      "eventType": "increase_rejected",
+      "previousShares": 1,
+      "newShares": 1,
+      "change": 0,
+      "timestamp": "2025-12-16T09:30:00Z",
+      "cycle": 3,
+      "requestId": "req-002",
+      "rejectedBy": "Marco Bernasconi",
+      "reason": "Trust Score below threshold after late payment"
+    },
+    {
+      "id": "hist-005",
+      "circleId": "circle-003",
+      "memberId": "member-020",
+      "memberName": "Fatou Ndiaye",
+      "eventType": "emergency_reduction",
+      "previousShares": 3,
+      "newShares": 2,
+      "change": -1,
+      "timestamp": "2026-01-05T15:30:00Z",
+      "cycle": 8,
+      "requestId": "req-003",
+      "approvedBy": "Amadou Diallo",
+      "reason": "Emergency reduction - job loss"
+    }
+  ],
+
+  "contributions": [
+    {
+      "id": "contrib-001",
+      "circleId": "circle-001",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "cycle": 4,
+      "shareCount": 4,
+      "baseAmount": 500,
+      "breakdown": {
+        "sharesContribution": 2000.00,
+        "emergencyFund": 20.00,
+        "platformFee": 30.00,
+        "totalDue": 2050.00
+      },
+      "status": "completed",
+      "dueDate": "2026-01-15T23:59:59Z",
+      "paidAt": "2026-01-10T09:15:00Z",
+      "paymentMethod": "card_visa_4242",
+      "transactionRef": "pi_3Nq8kL2eZvKYlo2C1234abcd",
+      "isLate": false
+    },
+    {
+      "id": "contrib-002",
+      "circleId": "circle-001",
+      "memberId": "member-005",
+      "memberName": "Luca Fontana",
+      "cycle": 4,
+      "shareCount": 2,
+      "baseAmount": 500,
+      "breakdown": {
+        "sharesContribution": 1000.00,
+        "emergencyFund": 10.00,
+        "platformFee": 15.00,
+        "totalDue": 1025.00
+      },
+      "status": "pending",
+      "dueDate": "2026-01-15T23:59:59Z",
+      "paidAt": null,
+      "isLate": false,
+      "reminderSent": true,
+      "reminderSentAt": "2026-01-08T10:00:00Z"
+    },
+    {
+      "id": "contrib-003",
+      "circleId": "circle-001",
+      "memberId": "member-003",
+      "memberName": "Thomas Weber",
+      "cycle": 3,
+      "shareCount": 1,
+      "baseAmount": 500,
+      "breakdown": {
+        "sharesContribution": 500.00,
+        "emergencyFund": 5.00,
+        "platformFee": 7.50,
+        "totalDue": 512.50
+      },
+      "status": "completed",
+      "dueDate": "2025-12-15T23:59:59Z",
+      "paidAt": "2025-12-17T14:30:00Z",
+      "paymentMethod": "bank_transfer",
+      "transactionRef": "pi_3Nq8kL2eZvKYlo2C5678efgh",
+      "isLate": true,
+      "daysLate": 2
+    },
+    {
+      "id": "contrib-004",
+      "circleId": "circle-001",
+      "memberId": "member-004",
+      "memberName": "Elena Rossi",
+      "cycle": 4,
+      "shareCount": 3,
+      "baseAmount": 500,
+      "breakdown": {
+        "sharesContribution": 1500.00,
+        "emergencyFund": 15.00,
+        "platformFee": 22.50,
+        "totalDue": 1537.50
+      },
+      "status": "completed",
+      "dueDate": "2026-01-15T23:59:59Z",
+      "paidAt": "2026-01-12T11:00:00Z",
+      "paymentMethod": "card_mastercard_5555",
+      "transactionRef": "pi_3Nq8kL2eZvKYlo2C9012ijkl",
+      "isLate": false
+    }
+  ],
+
+  "payouts": [
+    {
+      "id": "payout-001",
+      "circleId": "circle-001",
+      "memberId": "member-002",
+      "memberName": "Sophie Müller",
+      "cycle": 1,
+      "position": 1,
+      "shareCount": 4,
+      "totalCircleShares": 18,
+      "sharePercentage": 22.2,
+      "calculation": {
+        "cyclePool": 9000.00,
+        "memberPortion": 2000.00,
+        "platformFee": 30.00,
+        "netPayout": 1970.00
+      },
+      "status": "completed",
+      "scheduledDate": "2025-11-01T00:00:00Z",
+      "disbursedAt": "2025-11-01T10:30:00Z",
+      "bankAccount": "CH93 0076 2011 6238 5295 7 (****5295)",
+      "transferRef": "tr_3Nq8kL2eZvKYlo2Cabcd1234"
+    },
+    {
+      "id": "payout-002",
+      "circleId": "circle-001",
+      "memberId": "member-004",
+      "memberName": "Elena Rossi",
+      "cycle": 2,
+      "position": 2,
+      "shareCount": 3,
+      "totalCircleShares": 18,
+      "sharePercentage": 16.7,
+      "calculation": {
+        "cyclePool": 9000.00,
+        "memberPortion": 1500.00,
+        "platformFee": 22.50,
+        "netPayout": 1477.50
+      },
+      "status": "completed",
+      "scheduledDate": "2025-12-01T00:00:00Z",
+      "disbursedAt": "2025-12-01T11:15:00Z",
+      "bankAccount": "CH93 0076 2011 6238 5295 8 (****5296)",
+      "transferRef": "tr_3Nq8kL2eZvKYlo2Cefgh5678"
+    },
+    {
+      "id": "payout-003",
+      "circleId": "circle-001",
+      "memberId": "member-001",
+      "memberName": "Marco Bernasconi",
+      "cycle": 3,
+      "position": 3,
+      "shareCount": 2,
+      "totalCircleShares": 18,
+      "sharePercentage": 11.1,
+      "calculation": {
+        "cyclePool": 9000.00,
+        "memberPortion": 1000.00,
+        "platformFee": 15.00,
+        "netPayout": 985.00
+      },
+      "status": "scheduled",
+      "scheduledDate": "2026-01-15T00:00:00Z",
+      "disbursedAt": null
+    },
+    {
+      "id": "payout-004",
+      "circleId": "circle-001",
+      "memberId": "member-007",
+      "memberName": "David Keller",
+      "cycle": 4,
+      "position": 4,
+      "shareCount": 2,
+      "totalCircleShares": 18,
+      "sharePercentage": 11.1,
+      "calculation": {
+        "cyclePool": 9000.00,
+        "memberPortion": 1000.00,
+        "platformFee": 15.00,
+        "netPayout": 985.00
+      },
+      "status": "pending",
+      "scheduledDate": "2026-02-01T00:00:00Z",
+      "disbursedAt": null
+    }
+  ],
+
+  "shareWaitlist": [
+    {
+      "id": "waitlist-001",
+      "circleId": "circle-003",
+      "memberId": "member-025",
+      "memberName": "Ibrahim Sow",
+      "memberTrustScore": 780,
+      "position": 1,
+      "requestedShares": 2,
+      "joinedWaitlistAt": "2025-12-20T10:00:00Z",
+      "status": "waiting",
+      "notifiedOfAvailability": false,
+      "expiresAt": null
+    },
+    {
+      "id": "waitlist-002",
+      "circleId": "circle-003",
+      "memberId": "member-026",
+      "memberName": "Mariam Toure",
+      "memberTrustScore": 820,
+      "position": 2,
+      "requestedShares": 1,
+      "joinedWaitlistAt": "2025-12-22T14:30:00Z",
+      "status": "waiting",
+      "notifiedOfAvailability": false,
+      "expiresAt": null
+    },
+    {
+      "id": "waitlist-003",
+      "circleId": "circle-003",
+      "memberId": "member-027",
+      "memberName": "Ousmane Ba",
+      "memberTrustScore": 750,
+      "position": 3,
+      "requestedShares": 1,
+      "joinedWaitlistAt": "2026-01-02T09:00:00Z",
+      "status": "offer_pending",
+      "notifiedOfAvailability": true,
+      "notifiedAt": "2026-01-06T10:00:00Z",
+      "expiresAt": "2026-01-08T10:00:00Z",
+      "availableShare": {
+        "fromMemberId": "member-020",
+        "fromMemberName": "Fatou Ndiaye",
+        "reason": "emergency_reduction"
+      }
+    }
+  ],
+
+  "shareTransfers": [
+    {
+      "id": "transfer-001",
+      "circleId": "circle-001",
+      "fromMemberId": "member-004",
+      "fromMemberName": "Elena Rossi",
+      "toMemberId": "member-009",
+      "toMemberName": "Philippe Dubois",
+      "shareCount": 1,
+      "status": "pending_acceptance",
+      "initiatedAt": "2026-01-07T16:00:00Z",
+      "expiresAt": "2026-01-10T16:00:00Z",
+      "fromMemberCurrentShares": 3,
+      "fromMemberNewShares": 2,
+      "toMemberCurrentShares": 1,
+      "toMemberNewShares": 2,
+      "reason": "Adjusting commitment levels between family members"
+    }
+  ],
+
+  "platformConfig": {
+    "globalMaxSharesPerMember": 10,
+    "globalMaxSharesPerCircle": 100,
+    "multiShareFeatureEnabled": true,
+    "trustScoreTiers": [
+      { "minShares": 1, "maxShares": 2, "minTrustScore": 500 },
+      { "minShares": 3, "maxShares": 4, "minTrustScore": 700 },
+      { "minShares": 5, "maxShares": 10, "minTrustScore": 800 }
+    ],
+    "kycRequirements": {
+      "sharesThreshold": 3,
+      "requiredLevel": "enhanced"
+    },
+    "defaultLockPeriods": {
+      "startCycles": 2,
+      "endCycles": 2
+    },
+    "defaultMinimumHoldPeriod": "3_cycles",
+    "emergencyReductionEnabled": true,
+    "shareTransfersEnabled": true,
+    "waitlistEnabled": true,
+    "updatedAt": "2025-11-15T14:00:00Z",
+    "updatedBy": "admin-001"
+  },
+
+  "platformMetrics": {
+    "period": "2026-01",
+    "overview": {
+      "totalCircles": 1247,
+      "multiShareEnabledCircles": 412,
+      "multiShareAdoptionRate": 33.0,
+      "totalPlatformShares": 15840,
+      "averageSharesPerMember": 1.8,
+      "totalAUM": 4520000
+    },
+    "shareRequests": {
+      "totalRequests": 342,
+      "increaseRequests": 285,
+      "reductionRequests": 45,
+      "transferRequests": 12,
+      "approvalRate": 87.2,
+      "averageProcessingTimeHours": 18.5,
+      "pendingRequests": 28
+    },
+    "concentration": {
+      "circlesWithHighConcentration": 15,
+      "averageGiniCoefficient": 0.32,
+      "membersAtMaxShares": 189
+    },
+    "defaults": {
+      "multiShareDefaultRate": 2.1,
+      "singleShareDefaultRate": 3.4,
+      "emergencyFundUtilization": 12.5,
+      "totalDefaultsCovered": 45600
+    },
+    "trends": {
+      "monthlyShareGrowth": 8.2,
+      "newMultiShareCircles": 45,
+      "membersAddingShares": 156
+    }
+  },
+
+  "complianceAlerts": [
+    {
+      "id": "alert-001",
+      "type": "rapid_accumulation",
+      "severity": "medium",
+      "status": "open",
+      "title": "Unusual share accumulation pattern",
+      "description": "Member added 8 shares across 4 circles in 5 days",
+      "memberId": "member-100",
+      "memberName": "Jean-Pierre Martin",
+      "memberTrustScore": 750,
+      "affectedCircles": ["circle-001", "circle-005", "circle-012", "circle-018"],
+      "detectedAt": "2026-01-08T03:00:00Z",
+      "details": {
+        "sharesAdded": 8,
+        "timeframeDays": 5,
+        "totalCommitment": 12000,
+        "patternScore": 0.78
+      },
+      "assignedTo": null,
+      "notes": []
+    },
+    {
+      "id": "alert-002",
+      "type": "payout_reduce_pattern",
+      "severity": "high",
+      "status": "investigating",
+      "title": "Payout-and-reduce pattern detected",
+      "description": "Member reduced shares within 1 cycle of payout 3 times",
+      "memberId": "member-101",
+      "memberName": "Carlos Rodriguez",
+      "memberTrustScore": 680,
+      "affectedCircles": ["circle-007", "circle-019", "circle-023"],
+      "detectedAt": "2026-01-05T15:30:00Z",
+      "details": {
+        "occurrences": 3,
+        "totalPayoutsReceived": 18500,
+        "totalSharesReduced": 5,
+        "patternScore": 0.92
+      },
+      "assignedTo": "admin-002",
+      "assignedAt": "2026-01-06T09:00:00Z",
+      "notes": [
+        {
+          "author": "admin-002",
+          "authorName": "Sarah Chen",
+          "content": "Reviewing transaction history. Member claims financial difficulties each time.",
+          "timestamp": "2026-01-06T14:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "alert-003",
+      "type": "related_accounts",
+      "severity": "high",
+      "status": "resolved",
+      "title": "Potential coordination: Related accounts",
+      "description": "3 members from same household hold 55% of circle shares",
+      "circleId": "circle-045",
+      "circleName": "Basel Savings Group",
+      "affectedMembers": ["member-201", "member-202", "member-203"],
+      "detectedAt": "2025-12-28T10:00:00Z",
+      "resolvedAt": "2026-01-03T16:45:00Z",
+      "resolvedBy": "admin-001",
+      "details": {
+        "sharedIPAddresses": true,
+        "sharedPaymentMethod": true,
+        "combinedSharePercentage": 55,
+        "patternScore": 0.85
+      },
+      "resolution": "Verified as legitimate family savings arrangement. Organizer confirmed all members. Added monitoring flag."
+    }
+  ],
+
+  "educationContent": {
+    "quizQuestions": [
+      {
+        "id": "quiz-001",
+        "question": "If you hold 3 shares in a circle with CHF 500 base contribution, how much will you contribute each cycle?",
+        "options": [
+          { "id": "a", "text": "CHF 500", "isCorrect": false },
+          { "id": "b", "text": "CHF 1,000", "isCorrect": false },
+          { "id": "c", "text": "CHF 1,500", "isCorrect": true },
+          { "id": "d", "text": "CHF 2,000", "isCorrect": false }
+        ],
+        "explanation": "Your contribution is calculated as: Number of shares × Base contribution. So 3 shares × CHF 500 = CHF 1,500 per cycle.",
+        "category": "contribution_calculation"
+      },
+      {
+        "id": "quiz-002",
+        "question": "What happens to your payout if you hold multiple shares?",
+        "options": [
+          { "id": "a", "text": "It stays the same as everyone else", "isCorrect": false },
+          { "id": "b", "text": "It increases proportionally to your share count", "isCorrect": true },
+          { "id": "c", "text": "You receive multiple smaller payouts", "isCorrect": false },
+          { "id": "d", "text": "You receive your payout faster", "isCorrect": false }
+        ],
+        "explanation": "Your payout is proportional to your shares. If you hold 3 of 15 total shares (20%), you receive 20% of the cycle pool.",
+        "category": "payout_calculation"
+      },
+      {
+        "id": "quiz-003",
+        "question": "When can you request additional shares in a circle?",
+        "options": [
+          { "id": "a", "text": "Only when joining the circle", "isCorrect": false },
+          { "id": "b", "text": "Anytime, but changes apply from the next cycle", "isCorrect": true },
+          { "id": "c", "text": "Only after receiving your payout", "isCorrect": false },
+          { "id": "d", "text": "Never - shares are fixed", "isCorrect": false }
+        ],
+        "explanation": "You can request additional shares at any time (unless locked). If approved, the change takes effect from the next cycle to maintain fair accounting.",
+        "category": "share_requests"
+      },
+      {
+        "id": "quiz-004",
+        "question": "What is the Emergency Fund and how does it relate to shares?",
+        "options": [
+          { "id": "a", "text": "A savings bonus for members with more shares", "isCorrect": false },
+          { "id": "b", "text": "A 1% contribution that covers defaults, scaled to your share count", "isCorrect": true },
+          { "id": "c", "text": "An optional insurance you can purchase", "isCorrect": false },
+          { "id": "d", "text": "A penalty fund for late payments", "isCorrect": false }
+        ],
+        "explanation": "The Emergency Fund is 1% of each contribution, used to cover missed payments. If you have 3 shares, you contribute 3× the base Emergency Fund amount.",
+        "category": "emergency_fund"
+      },
+      {
+        "id": "quiz-005",
+        "question": "What happens if you can't afford your multi-share contribution due to financial hardship?",
+        "options": [
+          { "id": "a", "text": "You're immediately removed from the circle", "isCorrect": false },
+          { "id": "b", "text": "You can request an emergency share reduction", "isCorrect": true },
+          { "id": "c", "text": "The organizer pays for you", "isCorrect": false },
+          { "id": "d", "text": "Your Trust Score is permanently ruined", "isCorrect": false }
+        ],
+        "explanation": "CircleUp offers emergency share reduction for documented hardship (job loss, medical issues, etc.). This allows you to reduce your commitment without defaulting.",
+        "category": "emergency_reduction"
+      }
+    ],
+    "onboardingTips": [
+      {
+        "id": "tip-001",
+        "trigger": "first_multishare_cycle",
+        "title": "Your First Multi-Share Contribution",
+        "message": "Remember, your contribution is {amount} ({shares} shares × {base}). Consider setting up auto-pay for peace of mind.",
+        "icon": "wallet"
+      },
+      {
+        "id": "tip-002",
+        "trigger": "payment_completed",
+        "title": "Great Job!",
+        "message": "You've completed your first multi-share contribution. Your payout will be {multiplier}× larger!",
+        "icon": "celebration"
+      },
+      {
+        "id": "tip-003",
+        "trigger": "cycle_3_start",
+        "title": "Commitment Check",
+        "message": "You're doing great with your multi-share commitment! Is {amount}/month still comfortable? [Adjust Shares]",
+        "icon": "check-circle"
+      },
+      {
+        "id": "tip-004",
+        "trigger": "payout_approaching",
+        "title": "Payout Coming Soon!",
+        "message": "Your multi-share payout of {amount} is coming in {days} days. Make sure your bank details are up to date.",
+        "icon": "bank"
+      },
+      {
+        "id": "tip-005",
+        "trigger": "circle_completed",
+        "title": "Congratulations!",
+        "message": "You've completed your first multi-share circle! Your reliability has boosted your Trust Score by {points} points.",
+        "icon": "trophy"
+      }
+    ],
+    "simulatorDefaults": {
+      "baseContribution": 500,
+      "shareCount": 2,
+      "circleSize": 10,
+      "frequency": "monthly",
+      "totalCycles": 10
+    }
+  },
+
+  "calculatorScenarios": [
+    {
+      "id": "scenario-001",
+      "name": "Conservative Starter",
+      "description": "Low commitment, single share to test the waters",
+      "config": {
+        "baseContribution": 200,
+        "shares": 1,
+        "members": 8,
+        "cycles": 8,
+        "frequency": "monthly"
+      },
+      "projections": {
+        "monthlyContribution": 200,
+        "totalContributed": 1600,
+        "expectedPayout": 1600,
+        "emergencyFundContribution": 16
+      }
+    },
+    {
+      "id": "scenario-002",
+      "name": "Balanced Saver",
+      "description": "Moderate commitment with 2 shares for faster savings",
+      "config": {
+        "baseContribution": 500,
+        "shares": 2,
+        "members": 10,
+        "cycles": 10,
+        "frequency": "monthly"
+      },
+      "projections": {
+        "monthlyContribution": 1000,
+        "totalContributed": 10000,
+        "expectedPayout": 10000,
+        "emergencyFundContribution": 100
+      }
+    },
+    {
+      "id": "scenario-003",
+      "name": "Aggressive Saver",
+      "description": "Maximum shares for serious savings goals",
+      "config": {
+        "baseContribution": 500,
+        "shares": 4,
+        "members": 12,
+        "cycles": 12,
+        "frequency": "monthly"
+      },
+      "projections": {
+        "monthlyContribution": 2000,
+        "totalContributed": 24000,
+        "expectedPayout": 24000,
+        "emergencyFundContribution": 240
+      }
+    }
+  ],
+
+  "shareDistributionExample": {
+    "circleId": "circle-001",
+    "totalShares": 18,
+    "members": [
+      { "name": "Sophie M.", "shares": 4, "percentage": 22.2, "color": "#6366f1" },
+      { "name": "Elena R.", "shares": 3, "percentage": 16.7, "color": "#8b5cf6" },
+      { "name": "Marco B.", "shares": 2, "percentage": 11.1, "color": "#a855f7" },
+      { "name": "Luca F.", "shares": 2, "percentage": 11.1, "color": "#d946ef" },
+      { "name": "David K.", "shares": 2, "percentage": 11.1, "color": "#ec4899" },
+      { "name": "Thomas W.", "shares": 1, "percentage": 5.6, "color": "#f43f5e" },
+      { "name": "Anna S.", "shares": 1, "percentage": 5.6, "color": "#f97316" },
+      { "name": "Maria S.", "shares": 1, "percentage": 5.6, "color": "#eab308" },
+      { "name": "Philippe D.", "shares": 1, "percentage": 5.6, "color": "#22c55e" },
+      { "name": "Claire B.", "shares": 1, "percentage": 5.6, "color": "#14b8a6" }
+    ],
+    "concentrationMetrics": {
+      "giniCoefficient": 0.28,
+      "topMemberPercentage": 22.2,
+      "top3MembersPercentage": 50.0,
+      "isBalanced": true,
+      "warning": null
+    }
+  }
+}

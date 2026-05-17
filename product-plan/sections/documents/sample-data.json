@@ -1,0 +1,963 @@
+{
+  "_meta": {
+    "models": {
+      "documents": "Files uploaded to the platform including meeting minutes, financial reports, agreements, and policies. Each document belongs to a circle or association.",
+      "folders": "Organizational containers for documents. Folders can be nested to create a hierarchy within each circle's document space.",
+      "documentTemplates": "Reusable templates for creating standardized documents like meeting minutes, membership agreements, and financial reports.",
+      "documentVersions": "Historical versions of documents, tracking changes over time with version numbers and change descriptions.",
+      "documentAcknowledgments": "Records of members who have read and acknowledged important documents like policies and agreements.",
+      "documentSignatures": "Digital signatures captured when members sign agreements, contracts, or other official documents.",
+      "circleDocumentSpaces": "Per-circle document organization with storage tracking, categories, and retention policies.",
+      "users": "Platform users who upload, view, and interact with documents."
+    },
+    "relationships": [
+      "Each Document belongs to a Folder and was uploaded by a User",
+      "Each Document may have multiple Document Versions tracking its history",
+      "Documents requiring acknowledgment have Document Acknowledgments from members",
+      "Signable documents have Document Signatures from signing members",
+      "Each Circle has one Circle Document Space containing all its documents",
+      "Folders can contain other Folders (parent-child hierarchy)",
+      "Document Templates can be used to create new Documents"
+    ]
+  },
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Amara Okonkwo",
+      "email": "amara.okonkwo@email.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara",
+      "role": "organizer"
+    },
+    {
+      "id": "user-002",
+      "name": "Kwame Asante",
+      "email": "kwame.asante@email.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame",
+      "role": "treasurer"
+    },
+    {
+      "id": "user-003",
+      "name": "Fatima Diallo",
+      "email": "fatima.diallo@email.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima",
+      "role": "secretary"
+    },
+    {
+      "id": "user-004",
+      "name": "Nia Kamau",
+      "email": "nia.kamau@email.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nia",
+      "role": "member"
+    },
+    {
+      "id": "user-005",
+      "name": "Kofi Mensah",
+      "email": "kofi.mensah@email.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kofi",
+      "role": "member"
+    }
+  ],
+  "circles": [
+    {
+      "id": "circle-001",
+      "name": "Ubuntu Savings Circle",
+      "memberCount": 12
+    },
+    {
+      "id": "circle-002",
+      "name": "Diaspora Investment Group",
+      "memberCount": 8
+    }
+  ],
+  "circleDocumentSpaces": [
+    {
+      "id": "space-001",
+      "circleId": "circle-001",
+      "circleName": "Ubuntu Savings Circle",
+      "totalDocuments": 12,
+      "storageUsedBytes": 15728640,
+      "storageQuotaBytes": 104857600,
+      "categories": ["agreements", "minutes", "financial", "policies"],
+      "retentionPolicy": {
+        "enabled": true,
+        "archiveAfterDays": 365,
+        "deleteAfterDays": 730
+      },
+      "lastActivityAt": "2025-01-10T14:30:00Z"
+    },
+    {
+      "id": "space-002",
+      "circleId": "circle-002",
+      "circleName": "Diaspora Investment Group",
+      "totalDocuments": 6,
+      "storageUsedBytes": 8388608,
+      "storageQuotaBytes": 104857600,
+      "categories": ["agreements", "minutes", "financial", "policies"],
+      "retentionPolicy": {
+        "enabled": false,
+        "archiveAfterDays": null,
+        "deleteAfterDays": null
+      },
+      "lastActivityAt": "2025-01-08T09:15:00Z"
+    }
+  ],
+  "folders": [
+    {
+      "id": "folder-001",
+      "name": "Agreements",
+      "circleId": "circle-001",
+      "parentId": null,
+      "documentCount": 3,
+      "icon": "file-signature",
+      "color": "indigo",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "folder-002",
+      "name": "Meeting Minutes",
+      "circleId": "circle-001",
+      "parentId": null,
+      "documentCount": 4,
+      "icon": "clipboard-list",
+      "color": "emerald",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "folder-003",
+      "name": "Financial Reports",
+      "circleId": "circle-001",
+      "parentId": null,
+      "documentCount": 3,
+      "icon": "chart-bar",
+      "color": "amber",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "folder-004",
+      "name": "Policies & Bylaws",
+      "circleId": "circle-001",
+      "parentId": null,
+      "documentCount": 2,
+      "icon": "scale",
+      "color": "rose",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "folder-005",
+      "name": "2024 Minutes",
+      "circleId": "circle-001",
+      "parentId": "folder-002",
+      "documentCount": 3,
+      "icon": "folder",
+      "color": "slate",
+      "createdAt": "2024-01-20T10:00:00Z"
+    },
+    {
+      "id": "folder-006",
+      "name": "Agreements",
+      "circleId": "circle-002",
+      "parentId": null,
+      "documentCount": 2,
+      "icon": "file-signature",
+      "color": "indigo",
+      "createdAt": "2024-03-01T10:00:00Z"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-001",
+      "title": "Circle Constitution & Bylaws",
+      "description": "The official governing document of the Ubuntu Savings Circle, outlining membership requirements, contribution rules, payout procedures, and dispute resolution processes.",
+      "fileName": "ubuntu-circle-constitution-v2.pdf",
+      "fileUrl": "/documents/circle-001/ubuntu-circle-constitution-v2.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 245760,
+      "folderId": "folder-004",
+      "circleId": "circle-001",
+      "category": "policies",
+      "tags": ["constitution", "bylaws", "governance", "official"],
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": true,
+      "requiresSignature": false,
+      "acknowledgmentCount": 10,
+      "totalMembers": 12,
+      "currentVersion": 2,
+      "isStarred": true,
+      "isArchived": false,
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-06-01T14:00:00Z"
+    },
+    {
+      "id": "doc-002",
+      "title": "Membership Agreement - 2025",
+      "description": "Standard membership agreement that all circle members must sign to participate in the savings circle.",
+      "fileName": "membership-agreement-2025.pdf",
+      "fileUrl": "/documents/circle-001/membership-agreement-2025.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 156672,
+      "folderId": "folder-001",
+      "circleId": "circle-001",
+      "category": "agreements",
+      "tags": ["membership", "agreement", "contract", "2025"],
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": true,
+      "signatureCount": 11,
+      "totalMembers": 12,
+      "currentVersion": 1,
+      "isStarred": true,
+      "isArchived": false,
+      "createdAt": "2025-01-02T09:00:00Z",
+      "updatedAt": "2025-01-02T09:00:00Z"
+    },
+    {
+      "id": "doc-003",
+      "title": "December 2024 Meeting Minutes",
+      "description": "Minutes from the monthly community meeting held on December 15, 2024. Topics included year-end financial review, 2025 planning, and new member introductions.",
+      "fileName": "meeting-minutes-dec-2024.pdf",
+      "fileUrl": "/documents/circle-001/meeting-minutes-dec-2024.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 89088,
+      "folderId": "folder-005",
+      "circleId": "circle-001",
+      "category": "minutes",
+      "tags": ["meeting", "minutes", "december", "2024"],
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-12-16T10:00:00Z",
+      "updatedAt": "2024-12-16T10:00:00Z"
+    },
+    {
+      "id": "doc-004",
+      "title": "Q4 2024 Financial Statement",
+      "description": "Comprehensive financial report for Q4 2024 including contribution summary, payout records, emergency fund status, and balance sheet.",
+      "fileName": "q4-2024-financial-statement.pdf",
+      "fileUrl": "/documents/circle-001/q4-2024-financial-statement.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 312320,
+      "folderId": "folder-003",
+      "circleId": "circle-001",
+      "category": "financial",
+      "tags": ["financial", "statement", "q4", "2024", "report"],
+      "uploadedBy": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": true,
+      "requiresSignature": false,
+      "acknowledgmentCount": 8,
+      "totalMembers": 12,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2025-01-05T11:30:00Z",
+      "updatedAt": "2025-01-05T11:30:00Z"
+    },
+    {
+      "id": "doc-005",
+      "title": "Contribution Receipt - Nia Kamau - January 2025",
+      "description": "Auto-generated receipt for monthly contribution payment.",
+      "fileName": "receipt-nia-kamau-jan-2025.pdf",
+      "fileUrl": "/documents/circle-001/receipts/receipt-nia-kamau-jan-2025.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 45056,
+      "folderId": "folder-003",
+      "circleId": "circle-001",
+      "category": "financial",
+      "tags": ["receipt", "contribution", "january", "2025", "auto-generated"],
+      "uploadedBy": {
+        "id": "system",
+        "name": "CircleUp System",
+        "avatar": null
+      },
+      "permissions": {
+        "visibility": "owner_only",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "isAutoGenerated": true,
+      "createdAt": "2025-01-10T08:00:00Z",
+      "updatedAt": "2025-01-10T08:00:00Z"
+    },
+    {
+      "id": "doc-006",
+      "title": "Payout Confirmation - Kofi Mensah - Cycle 8",
+      "description": "Auto-generated confirmation for payout disbursement.",
+      "fileName": "payout-kofi-mensah-cycle-8.pdf",
+      "fileUrl": "/documents/circle-001/payouts/payout-kofi-mensah-cycle-8.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 52224,
+      "folderId": "folder-003",
+      "circleId": "circle-001",
+      "category": "financial",
+      "tags": ["payout", "confirmation", "cycle-8", "auto-generated"],
+      "uploadedBy": {
+        "id": "system",
+        "name": "CircleUp System",
+        "avatar": null
+      },
+      "permissions": {
+        "visibility": "owner_only",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "isAutoGenerated": true,
+      "createdAt": "2025-01-08T15:30:00Z",
+      "updatedAt": "2025-01-08T15:30:00Z"
+    },
+    {
+      "id": "doc-007",
+      "title": "Emergency Fund Policy",
+      "description": "Policy document explaining how the emergency fund works, eligibility criteria, claim procedures, and repayment terms.",
+      "fileName": "emergency-fund-policy.pdf",
+      "fileUrl": "/documents/circle-001/emergency-fund-policy.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 118784,
+      "folderId": "folder-004",
+      "circleId": "circle-001",
+      "category": "policies",
+      "tags": ["emergency", "fund", "policy", "insurance"],
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": true,
+      "requiresSignature": false,
+      "acknowledgmentCount": 12,
+      "totalMembers": 12,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-02-01T10:00:00Z",
+      "updatedAt": "2024-02-01T10:00:00Z"
+    },
+    {
+      "id": "doc-008",
+      "title": "November 2024 Meeting Minutes",
+      "description": "Minutes from the monthly meeting discussing contribution schedule adjustments and upcoming holiday arrangements.",
+      "fileName": "meeting-minutes-nov-2024.pdf",
+      "fileUrl": "/documents/circle-001/meeting-minutes-nov-2024.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 76800,
+      "folderId": "folder-005",
+      "circleId": "circle-001",
+      "category": "minutes",
+      "tags": ["meeting", "minutes", "november", "2024"],
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-11-16T10:00:00Z",
+      "updatedAt": "2024-11-16T10:00:00Z"
+    },
+    {
+      "id": "doc-009",
+      "title": "October 2024 Meeting Minutes",
+      "description": "Minutes covering the election of new circle officers and review of Q3 financial performance.",
+      "fileName": "meeting-minutes-oct-2024.pdf",
+      "fileUrl": "/documents/circle-001/meeting-minutes-oct-2024.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 94208,
+      "folderId": "folder-005",
+      "circleId": "circle-001",
+      "category": "minutes",
+      "tags": ["meeting", "minutes", "october", "2024", "elections"],
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 2,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-10-16T10:00:00Z",
+      "updatedAt": "2024-10-18T14:30:00Z"
+    },
+    {
+      "id": "doc-010",
+      "title": "Code of Conduct Agreement",
+      "description": "Agreement outlining expected member behavior, communication guidelines, and consequences for violations.",
+      "fileName": "code-of-conduct.pdf",
+      "fileUrl": "/documents/circle-001/code-of-conduct.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 67584,
+      "folderId": "folder-001",
+      "circleId": "circle-001",
+      "category": "agreements",
+      "tags": ["conduct", "behavior", "agreement", "rules"],
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": true,
+      "signatureCount": 12,
+      "totalMembers": 12,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-01-20T10:00:00Z",
+      "updatedAt": "2024-01-20T10:00:00Z"
+    },
+    {
+      "id": "doc-011",
+      "title": "Late Payment Authorization Form",
+      "description": "Form template for members to request authorization for late payment with explanation and proposed makeup schedule.",
+      "fileName": "late-payment-auth-form.pdf",
+      "fileUrl": "/documents/circle-001/late-payment-auth-form.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 38912,
+      "folderId": "folder-001",
+      "circleId": "circle-001",
+      "category": "agreements",
+      "tags": ["late", "payment", "authorization", "form"],
+      "uploadedBy": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "createdAt": "2024-03-15T10:00:00Z",
+      "updatedAt": "2024-03-15T10:00:00Z"
+    },
+    {
+      "id": "doc-012",
+      "title": "January 2025 Meeting Minutes",
+      "description": "First meeting of 2025 covering annual goals, new member onboarding, and contribution schedule for the year.",
+      "fileName": "meeting-minutes-jan-2025.pdf",
+      "fileUrl": "/documents/circle-001/meeting-minutes-jan-2025.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 102400,
+      "folderId": "folder-002",
+      "circleId": "circle-001",
+      "category": "minutes",
+      "tags": ["meeting", "minutes", "january", "2025", "annual-planning"],
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": true,
+      "isArchived": false,
+      "createdAt": "2025-01-12T11:00:00Z",
+      "updatedAt": "2025-01-12T11:00:00Z"
+    },
+    {
+      "id": "doc-013",
+      "title": "Investment Group Membership Agreement",
+      "description": "Membership agreement for the Diaspora Investment Group circle.",
+      "fileName": "dig-membership-agreement.pdf",
+      "fileUrl": "/documents/circle-002/dig-membership-agreement.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 143360,
+      "folderId": "folder-006",
+      "circleId": "circle-002",
+      "category": "agreements",
+      "tags": ["membership", "agreement", "investment"],
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": false
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": true,
+      "signatureCount": 8,
+      "totalMembers": 8,
+      "currentVersion": 1,
+      "isStarred": true,
+      "isArchived": false,
+      "createdAt": "2024-03-01T10:00:00Z",
+      "updatedAt": "2024-03-01T10:00:00Z"
+    },
+    {
+      "id": "doc-014",
+      "title": "Annual Report 2024",
+      "description": "Comprehensive annual report covering all circle activities, financial performance, member achievements, and 2025 outlook. This document provides a complete overview of the circle's progress throughout the year.",
+      "fileName": "annual-report-2024.pdf",
+      "fileUrl": "/documents/circle-001/annual-report-2024.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 2097152,
+      "folderId": "folder-003",
+      "circleId": "circle-001",
+      "category": "financial",
+      "tags": ["annual", "report", "2024", "comprehensive"],
+      "uploadedBy": {
+        "id": "user-002",
+        "name": "Kwame Asante",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": true,
+      "requiresSignature": false,
+      "acknowledgmentCount": 5,
+      "totalMembers": 12,
+      "currentVersion": 1,
+      "isStarred": true,
+      "isArchived": false,
+      "createdAt": "2025-01-10T09:00:00Z",
+      "updatedAt": "2025-01-10T09:00:00Z"
+    },
+    {
+      "id": "doc-015",
+      "title": "Meeting Agenda - February 2025",
+      "description": "Upcoming meeting agenda draft for member review.",
+      "fileName": "meeting-agenda-feb-2025.docx",
+      "fileUrl": "/documents/circle-001/meeting-agenda-feb-2025.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "fileSize": 28672,
+      "folderId": "folder-002",
+      "circleId": "circle-001",
+      "category": "minutes",
+      "tags": ["agenda", "meeting", "february", "2025", "draft"],
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo",
+        "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima"
+      },
+      "permissions": {
+        "visibility": "all_members",
+        "canDownload": true,
+        "canComment": true
+      },
+      "requiresAcknowledgment": false,
+      "requiresSignature": false,
+      "currentVersion": 1,
+      "isStarred": false,
+      "isArchived": false,
+      "isDraft": true,
+      "createdAt": "2025-01-12T14:00:00Z",
+      "updatedAt": "2025-01-12T14:00:00Z"
+    }
+  ],
+  "documentTemplates": [
+    {
+      "id": "template-001",
+      "name": "Meeting Minutes Template",
+      "description": "Standard template for recording meeting minutes with sections for attendance, agenda items, discussions, decisions, and action items.",
+      "category": "minutes",
+      "fileUrl": "/templates/meeting-minutes-template.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "fileSize": 35840,
+      "fields": ["meeting_date", "attendees", "agenda_items", "decisions", "action_items", "next_meeting"],
+      "usageCount": 24,
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo"
+      },
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "template-002",
+      "name": "Membership Agreement Template",
+      "description": "Legal agreement template for new members joining the circle, including terms, obligations, and signature fields.",
+      "category": "agreements",
+      "fileUrl": "/templates/membership-agreement-template.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "fileSize": 51200,
+      "fields": ["member_name", "circle_name", "contribution_amount", "start_date", "signature", "witness"],
+      "usageCount": 15,
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo"
+      },
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "template-003",
+      "name": "Monthly Financial Report Template",
+      "description": "Template for generating monthly financial summaries including contributions collected, payouts made, and fund balances.",
+      "category": "financial",
+      "fileUrl": "/templates/monthly-financial-template.xlsx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "fileSize": 45056,
+      "fields": ["report_month", "contributions_collected", "payouts_made", "emergency_fund_balance", "pending_amounts"],
+      "usageCount": 12,
+      "isDefault": true,
+      "createdBy": {
+        "id": "user-002",
+        "name": "Kwame Asante"
+      },
+      "createdAt": "2024-01-20T10:00:00Z",
+      "updatedAt": "2024-01-20T10:00:00Z"
+    },
+    {
+      "id": "template-004",
+      "name": "Emergency Fund Request Form",
+      "description": "Form template for members requesting emergency fund assistance, including reason, amount needed, and repayment plan.",
+      "category": "forms",
+      "fileUrl": "/templates/emergency-fund-request.pdf",
+      "mimeType": "application/pdf",
+      "fileSize": 32768,
+      "fields": ["member_name", "amount_requested", "reason", "supporting_docs", "repayment_proposal"],
+      "usageCount": 3,
+      "isDefault": false,
+      "createdBy": {
+        "id": "user-002",
+        "name": "Kwame Asante"
+      },
+      "createdAt": "2024-02-01T10:00:00Z",
+      "updatedAt": "2024-02-01T10:00:00Z"
+    }
+  ],
+  "documentVersions": [
+    {
+      "id": "version-001",
+      "documentId": "doc-001",
+      "versionNumber": 1,
+      "fileName": "ubuntu-circle-constitution-v1.pdf",
+      "fileUrl": "/documents/circle-001/versions/ubuntu-circle-constitution-v1.pdf",
+      "fileSize": 220160,
+      "changeDescription": "Initial version of circle constitution",
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo"
+      },
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "version-002",
+      "documentId": "doc-001",
+      "versionNumber": 2,
+      "fileName": "ubuntu-circle-constitution-v2.pdf",
+      "fileUrl": "/documents/circle-001/ubuntu-circle-constitution-v2.pdf",
+      "fileSize": 245760,
+      "changeDescription": "Updated emergency fund policy section and added late payment grace period",
+      "uploadedBy": {
+        "id": "user-001",
+        "name": "Amara Okonkwo"
+      },
+      "createdAt": "2024-06-01T14:00:00Z"
+    },
+    {
+      "id": "version-003",
+      "documentId": "doc-009",
+      "versionNumber": 1,
+      "fileName": "meeting-minutes-oct-2024-v1.pdf",
+      "fileUrl": "/documents/circle-001/versions/meeting-minutes-oct-2024-v1.pdf",
+      "fileSize": 89088,
+      "changeDescription": "Initial draft",
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo"
+      },
+      "createdAt": "2024-10-16T10:00:00Z"
+    },
+    {
+      "id": "version-004",
+      "documentId": "doc-009",
+      "versionNumber": 2,
+      "fileName": "meeting-minutes-oct-2024.pdf",
+      "fileUrl": "/documents/circle-001/meeting-minutes-oct-2024.pdf",
+      "fileSize": 94208,
+      "changeDescription": "Added corrections to election results and attendance list",
+      "uploadedBy": {
+        "id": "user-003",
+        "name": "Fatima Diallo"
+      },
+      "createdAt": "2024-10-18T14:30:00Z"
+    }
+  ],
+  "documentAcknowledgments": [
+    {
+      "id": "ack-001",
+      "documentId": "doc-001",
+      "userId": "user-001",
+      "userName": "Amara Okonkwo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara",
+      "acknowledgedAt": "2024-06-02T09:00:00Z"
+    },
+    {
+      "id": "ack-002",
+      "documentId": "doc-001",
+      "userId": "user-002",
+      "userName": "Kwame Asante",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame",
+      "acknowledgedAt": "2024-06-02T10:15:00Z"
+    },
+    {
+      "id": "ack-003",
+      "documentId": "doc-001",
+      "userId": "user-003",
+      "userName": "Fatima Diallo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima",
+      "acknowledgedAt": "2024-06-02T11:30:00Z"
+    },
+    {
+      "id": "ack-004",
+      "documentId": "doc-001",
+      "userId": "user-004",
+      "userName": "Nia Kamau",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nia",
+      "acknowledgedAt": "2024-06-03T08:45:00Z"
+    },
+    {
+      "id": "ack-005",
+      "documentId": "doc-004",
+      "userId": "user-001",
+      "userName": "Amara Okonkwo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara",
+      "acknowledgedAt": "2025-01-06T09:00:00Z"
+    },
+    {
+      "id": "ack-006",
+      "documentId": "doc-004",
+      "userId": "user-003",
+      "userName": "Fatima Diallo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima",
+      "acknowledgedAt": "2025-01-06T14:20:00Z"
+    },
+    {
+      "id": "ack-007",
+      "documentId": "doc-007",
+      "userId": "user-004",
+      "userName": "Nia Kamau",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nia",
+      "acknowledgedAt": "2024-02-05T10:00:00Z"
+    },
+    {
+      "id": "ack-008",
+      "documentId": "doc-014",
+      "userId": "user-001",
+      "userName": "Amara Okonkwo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara",
+      "acknowledgedAt": "2025-01-10T10:30:00Z"
+    }
+  ],
+  "documentSignatures": [
+    {
+      "id": "sig-001",
+      "documentId": "doc-002",
+      "userId": "user-001",
+      "userName": "Amara Okonkwo",
+      "userEmail": "amara.okonkwo@email.com",
+      "signatureImageUrl": "/signatures/sig-amara-doc002.png",
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0)",
+      "signedAt": "2025-01-02T10:00:00Z"
+    },
+    {
+      "id": "sig-002",
+      "documentId": "doc-002",
+      "userId": "user-002",
+      "userName": "Kwame Asante",
+      "userEmail": "kwame.asante@email.com",
+      "signatureImageUrl": "/signatures/sig-kwame-doc002.png",
+      "ipAddress": "192.168.1.101",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "signedAt": "2025-01-02T11:30:00Z"
+    },
+    {
+      "id": "sig-003",
+      "documentId": "doc-002",
+      "userId": "user-003",
+      "userName": "Fatima Diallo",
+      "userEmail": "fatima.diallo@email.com",
+      "signatureImageUrl": "/signatures/sig-fatima-doc002.png",
+      "ipAddress": "192.168.1.102",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "signedAt": "2025-01-02T14:15:00Z"
+    },
+    {
+      "id": "sig-004",
+      "documentId": "doc-002",
+      "userId": "user-004",
+      "userName": "Nia Kamau",
+      "userEmail": "nia.kamau@email.com",
+      "signatureImageUrl": "/signatures/sig-nia-doc002.png",
+      "ipAddress": "192.168.1.103",
+      "userAgent": "Mozilla/5.0 (Android 14; Mobile)",
+      "signedAt": "2025-01-03T09:00:00Z"
+    },
+    {
+      "id": "sig-005",
+      "documentId": "doc-010",
+      "userId": "user-005",
+      "userName": "Kofi Mensah",
+      "userEmail": "kofi.mensah@email.com",
+      "signatureImageUrl": "/signatures/sig-kofi-doc010.png",
+      "ipAddress": "192.168.1.104",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0)",
+      "signedAt": "2024-01-22T16:45:00Z"
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "activity-001",
+      "type": "document_uploaded",
+      "documentId": "doc-015",
+      "documentTitle": "Meeting Agenda - February 2025",
+      "userId": "user-003",
+      "userName": "Fatima Diallo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima",
+      "circleName": "Ubuntu Savings Circle",
+      "timestamp": "2025-01-12T14:00:00Z"
+    },
+    {
+      "id": "activity-002",
+      "type": "document_acknowledged",
+      "documentId": "doc-014",
+      "documentTitle": "Annual Report 2024",
+      "userId": "user-001",
+      "userName": "Amara Okonkwo",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amara",
+      "circleName": "Ubuntu Savings Circle",
+      "timestamp": "2025-01-10T10:30:00Z"
+    },
+    {
+      "id": "activity-003",
+      "type": "document_uploaded",
+      "documentId": "doc-014",
+      "documentTitle": "Annual Report 2024",
+      "userId": "user-002",
+      "userName": "Kwame Asante",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kwame",
+      "circleName": "Ubuntu Savings Circle",
+      "timestamp": "2025-01-10T09:00:00Z"
+    },
+    {
+      "id": "activity-004",
+      "type": "document_signed",
+      "documentId": "doc-002",
+      "documentTitle": "Membership Agreement - 2025",
+      "userId": "user-004",
+      "userName": "Nia Kamau",
+      "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nia",
+      "circleName": "Ubuntu Savings Circle",
+      "timestamp": "2025-01-03T09:00:00Z"
+    },
+    {
+      "id": "activity-005",
+      "type": "auto_generated",
+      "documentId": "doc-005",
+      "documentTitle": "Contribution Receipt - Nia Kamau - January 2025",
+      "userId": "system",
+      "userName": "CircleUp System",
+      "userAvatar": null,
+      "circleName": "Ubuntu Savings Circle",
+      "timestamp": "2025-01-10T08:00:00Z"
+    }
+  ],
+  "storageStats": {
+    "totalUsedBytes": 24117248,
+    "totalQuotaBytes": 209715200,
+    "documentCount": 15,
+    "folderCount": 6,
+    "byCategory": {
+      "agreements": { "count": 5, "sizeBytes": 562176 },
+      "minutes": { "count": 5, "sizeBytes": 391168 },
+      "financial": { "count": 4, "sizeBytes": 2506752 },
+      "policies": { "count": 2, "sizeBytes": 364544 }
+    },
+    "byFileType": {
+      "pdf": { "count": 14, "sizeBytes": 24088576 },
+      "docx": { "count": 1, "sizeBytes": 28672 }
+    }
+  }
+}

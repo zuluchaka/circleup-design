@@ -1,0 +1,18 @@
+// Auto-generated: aligned with circleup components
+
+export { AccessRequests } from './AccessRequests'
+export { AdminDashboard } from './AdminDashboard'
+export { ComplianceDashboard } from './ComplianceDashboard'
+export { ConfigurationPanel } from './ConfigurationPanel'
+export { DisputeCenter } from './DisputeCenter'
+export { FeatureFlags } from './FeatureFlags'
+export { PermissionMatrix } from './PermissionMatrix'
+export { PermissionSimulator } from './PermissionSimulator'
+export { RBACAuditTrail } from './RBACAuditTrail'
+export { RBACDashboard } from './RBACDashboard'
+export { RoleManager } from './RoleManager'
+export { SupportInbox } from './SupportInbox'
+export { SystemHealth } from './SystemHealth'
+export { TransactionMonitor } from './TransactionMonitor'
+export { UserManagement } from './UserManagement'
+export { UserPermissions } from './UserPermissions'

@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": "usr_01HQXYZ123456789ABCDEF01",
+      "email": "amara.diallo@example.com",
+      "phone": "+41791234567",
+      "name": "Amara Diallo",
+      "profilePhoto": null,
+      "trustScore": 847,
+      "kycStatus": "enhanced",
+      "role": "organizer"
+    },
+    {
+      "id": "usr_01HQXYZ123456789ABCDEF02",
+      "email": "fatou.mbaye@example.com",
+      "phone": "+41791234568",
+      "name": "Fatou Mbaye",
+      "profilePhoto": null,
+      "trustScore": 723,
+      "kycStatus": "basic",
+      "role": "member"
+    }
+  ],
+  "associations": [
+    {
+      "id": "assoc_01HQXYZ123456789ABCDEF01",
+      "name": "Senegalese Community Zurich",
+      "description": "Cultural association for the Senegalese diaspora in Zurich",
+      "type": "cultural",
+      "visibility": "public",
+      "country": "CH",
+      "language": "fr",
+      "memberCount": 45
+    }
+  ],
+  "circles": [
+    {
+      "id": "circle_01HQXYZ123456789ABCDEF01",
+      "associationId": "assoc_01HQXYZ123456789ABCDEF01",
+      "name": "Tontine Teranga",
+      "contributionAmount": 500,
+      "frequency": "monthly",
+      "duration": 12,
+      "maxParticipants": 12,
+      "currentCycle": 4,
+      "status": "active",
+      "payoutMethod": "fixed",
+      "emergencyFundRate": 0.01,
+      "totalCollected": 24000,
+      "totalDisbursed": 6000,
+      "emergencyFundBalance": 240
+    }
+  ]
+}

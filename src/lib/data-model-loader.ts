@@ -37,8 +37,8 @@ export function parseDataModel(md: string): DataModel | null {
     const entities: Entity[] = []
     const relationships: string[] = []
 
-    // Extract entities section
-    const entitiesSection = md.match(/## Entities\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
+    // Extract entities section (supports "## Entities" or "## Core Entities")
+    const entitiesSection = md.match(/## (?:Core )?Entities\s*\n+([\s\S]*?)(?=\n## |\n#[^#]|$)/)
 
     if (entitiesSection?.[1]) {
       // Match ### EntityName followed by description
@@ -58,8 +58,25 @@ export function parseDataModel(md: string): DataModel | null {
       const lines = relationshipsSection[1].split('\n')
       for (const line of lines) {
         const trimmed = line.trim()
+        // Support bullet point format
         if (trimmed.startsWith('- ')) {
           relationships.push(trimmed.slice(2).trim())
+        }
+      }
+
+      // If no bullet points found, try extracting from code block diagram
+      if (relationships.length === 0) {
+        // Remove code block markers and extract meaningful lines
+        const codeBlockContent = relationshipsSection[1].replace(/```\w*/g, '').trim()
+        const diagramLines = codeBlockContent.split('\n')
+          .map(line => line.trim())
+          .filter(line => line && !line.startsWith('```'))
+
+        // Add diagram lines as relationships (they contain relationship info)
+        for (const line of diagramLines) {
+          if (line) {
+            relationships.push(line)
+          }
         }
       }
     }

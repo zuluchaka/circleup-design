@@ -1,0 +1,18 @@
+// Auto-generated: aligned with circleup components
+
+export { BenefitsSection } from './BenefitsSection'
+export { CircleExamplesSection } from './CircleExamplesSection'
+export { CommunityShowcaseSection } from './CommunityShowcaseSection'
+export { ComparisonSection } from './ComparisonSection'
+export { CtaSection } from './CtaSection'
+export { DemoVideo } from './DemoVideo'
+export { FaqSection } from './FaqSection'
+export { Footer } from './Footer'
+export { HeroSection } from './HeroSection'
+export { Homepage } from './Homepage'
+export { HowItWorksSection } from './HowItWorksSection'
+export { PricingSection } from './PricingSection'
+export { QuizSection } from './QuizSection'
+export { StatsSection } from './StatsSection'
+export { TestimonialsSection } from './TestimonialsSection'
+export { TrustSection } from './TrustSection'

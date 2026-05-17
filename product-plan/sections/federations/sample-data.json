@@ -1,0 +1,2234 @@
+{
+  "_meta": {
+    "models": {
+      "federations": "Array of umbrella organizations that coordinate multiple child associations under unified governance structures.",
+      "childAssociations": "Associations linked to a federation as chapters, each retaining operational independence while sharing governance standards.",
+      "leaders": "Federation leadership team with assigned roles, permissions, and term dates.",
+      "policies": "Governance policies created at the federation level that cascade to child associations with configurable enforcement levels.",
+      "funds": "Federation-level fund accounts for managing shared financial resources across all child associations.",
+      "duesInvoices": "Individual dues invoices sent to child associations with payment status tracking.",
+      "transfers": "Financial transfers and grants between the federation and child associations with multi-approval workflows.",
+      "elections": "Federation-wide elections for leadership positions and referendums with nomination and voting periods.",
+      "candidates": "Candidates nominated for federation elections with statements and endorsement counts.",
+      "events": "Federation-wide events targeting multiple associations with RSVP and attendance tracking per chapter.",
+      "announcements": "Federation-wide announcements broadcast to all or selected child associations.",
+      "reports": "Generated federation reports (AGM, financial, membership) with export and scheduling options.",
+      "alerts": "Dashboard alerts for threshold breaches, compliance issues, and action items requiring federation leadership attention.",
+      "aggregatedMembers": "Consolidated member directory entries across all child associations with cross-membership indicators.",
+      "complianceItems": "Compliance tracking for each child association against federation policies.",
+      "duesConfigs": "Configuration for federation dues collected from child associations, including invoicing rules and payment tracking. One per federation.",
+      "budgets": "Annual budgets with categorized allocations and actual spending tracked against approved amounts. One per federation per year.",
+      "cashFlowHistories": "12-month rolling cash flow entries per federation, showing monthly income and expenses."
+    },
+    "relationships": [
+      "A Federation has many Child Associations linked via FederationMembership",
+      "A Federation has many Leaders assigned to governance roles",
+      "A Federation has many Policies that cascade to child associations",
+      "A Federation has many Funds for managing shared financial resources",
+      "DuesConfig defines how dues are collected; DuesInvoices track per-association payments",
+      "A Budget contains category allocations with actual spending tracked against them",
+      "Transfers move funds between the federation and specific child associations",
+      "Elections contain Candidates and produce results aggregated by association",
+      "Events target specific associations and track RSVPs per chapter",
+      "Alerts are triggered by threshold breaches, compliance violations, and overdue items",
+      "AggregatedMembers show users across all child associations with their respective roles"
+    ]
+  },
+  "federations": [
+    {
+      "id": "fed-001",
+      "name": "Swiss African Diaspora Federation",
+      "description": "A coordinating body for African diaspora associations across Switzerland, promoting financial inclusion, cultural preservation, and community solidarity through shared governance and collaborative initiatives.",
+      "logo": "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=200",
+      "governanceType": "democratic",
+      "status": "active",
+      "foundedAt": "2022-03-15",
+      "charterUrl": "/documents/federation-charter-v2.pdf",
+      "totalMembers": 2847,
+      "totalAssociations": 5,
+      "totalActiveCircles": 34,
+      "totalFunds": 187450.0,
+      "currency": "CHF",
+      "healthScore": 87,
+      "createdAt": "2022-03-15T09:00:00Z"
+    },
+    {
+      "id": "fed-002",
+      "name": "European Filipino Community Federation",
+      "description": "A representative federation connecting Filipino community associations across Germany, fostering cultural heritage, mutual support, and economic empowerment through collective governance and shared resources.",
+      "logo": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200",
+      "governanceType": "representative",
+      "status": "active",
+      "foundedAt": "2023-06-01",
+      "charterUrl": "/documents/efcf-charter-v1.pdf",
+      "totalMembers": 1847,
+      "totalAssociations": 4,
+      "totalActiveCircles": 21,
+      "totalFunds": 124800.0,
+      "currency": "EUR",
+      "healthScore": 79,
+      "createdAt": "2023-06-01T10:00:00Z"
+    }
+  ],
+  "childAssociations": [
+    {
+      "id": "assoc-001",
+      "federationId": "fed-001",
+      "name": "Solidarité Camerounaise Zürich",
+      "logo": "https://images.unsplash.com/photo-1523365280197-f1783db9f461?w=100",
+      "type": "cultural",
+      "country": "Switzerland",
+      "city": "Zürich",
+      "language": "fr",
+      "memberCount": 842,
+      "activeCircles": 12,
+      "totalFunds": 68200.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 94,
+      "avgTrustScore": 756,
+      "memberGrowthPercent": 12.3,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2022-03-15",
+      "presidentName": "Amina Diallo",
+      "presidentId": "usr-001",
+      "complianceScore": 95
+    },
+    {
+      "id": "assoc-002",
+      "federationId": "fed-001",
+      "name": "Union des Ivoiriens de Genève",
+      "logo": "https://images.unsplash.com/photo-1590099033615-be195f8d575c?w=100",
+      "type": "cultural",
+      "country": "Switzerland",
+      "city": "Genève",
+      "language": "fr",
+      "memberCount": 634,
+      "activeCircles": 8,
+      "totalFunds": 45100.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 89,
+      "avgTrustScore": 721,
+      "memberGrowthPercent": 8.7,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2022-04-10",
+      "presidentName": "Kouadio Yao",
+      "presidentId": "usr-010",
+      "complianceScore": 88
+    },
+    {
+      "id": "assoc-003",
+      "federationId": "fed-001",
+      "name": "Accra Community Association Bern",
+      "logo": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=100",
+      "type": "cultural",
+      "country": "Switzerland",
+      "city": "Bern",
+      "language": "en",
+      "memberCount": 521,
+      "activeCircles": 6,
+      "totalFunds": 32800.0,
+      "duesStatus": "overdue",
+      "duesCollectionRate": 58,
+      "avgTrustScore": 698,
+      "memberGrowthPercent": -2.1,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2022-06-20",
+      "presidentName": "Carlos Mensah",
+      "presidentId": "usr-004",
+      "complianceScore": 62
+    },
+    {
+      "id": "assoc-004",
+      "federationId": "fed-001",
+      "name": "Pan-African Association Lausanne",
+      "logo": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=100",
+      "type": "professional",
+      "country": "Switzerland",
+      "city": "Lausanne",
+      "language": "fr",
+      "memberCount": 398,
+      "activeCircles": 5,
+      "totalFunds": 24350.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 91,
+      "avgTrustScore": 743,
+      "memberGrowthPercent": 15.6,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2022-09-01",
+      "presidentName": "Kwame Asante",
+      "presidentId": "usr-006",
+      "complianceScore": 91
+    },
+    {
+      "id": "assoc-005",
+      "federationId": "fed-001",
+      "name": "Solidarité Genève",
+      "logo": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=100",
+      "type": "savings",
+      "country": "Switzerland",
+      "city": "Genève",
+      "language": "fr",
+      "memberCount": 452,
+      "activeCircles": 3,
+      "totalFunds": 17000.0,
+      "duesStatus": "pending",
+      "duesCollectionRate": 82,
+      "avgTrustScore": 712,
+      "memberGrowthPercent": 6.4,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2023-01-15",
+      "presidentName": "Fatou Barry",
+      "presidentId": "usr-003",
+      "complianceScore": 78
+    },
+    {
+      "id": "assoc-006",
+      "federationId": "fed-002",
+      "name": "Kabayan Munich Association",
+      "logo": "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=100",
+      "type": "cultural",
+      "country": "Germany",
+      "city": "Munich",
+      "language": "en",
+      "memberCount": 567,
+      "activeCircles": 7,
+      "totalFunds": 42300.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 87,
+      "avgTrustScore": 729,
+      "memberGrowthPercent": 9.2,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2023-06-01",
+      "presidentName": "Maria Santos",
+      "presidentId": "usr-020",
+      "complianceScore": 92
+    },
+    {
+      "id": "assoc-007",
+      "federationId": "fed-002",
+      "name": "Pinoy Berlin Community",
+      "logo": "https://images.unsplash.com/photo-1555992336-fb0d29498b13?w=100",
+      "type": "cultural",
+      "country": "Germany",
+      "city": "Berlin",
+      "language": "en",
+      "memberCount": 493,
+      "activeCircles": 6,
+      "totalFunds": 35600.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 83,
+      "avgTrustScore": 718,
+      "memberGrowthPercent": 7.5,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2023-07-15",
+      "presidentName": "Jose Reyes",
+      "presidentId": "usr-021",
+      "complianceScore": 85
+    },
+    {
+      "id": "assoc-008",
+      "federationId": "fed-002",
+      "name": "Frankfurt Filipino Circle",
+      "logo": "https://images.unsplash.com/photo-1603899122634-f086ca5f5ddd?w=100",
+      "type": "savings",
+      "country": "Germany",
+      "city": "Frankfurt",
+      "language": "en",
+      "memberCount": 412,
+      "activeCircles": 5,
+      "totalFunds": 28700.0,
+      "duesStatus": "pending",
+      "duesCollectionRate": 76,
+      "avgTrustScore": 695,
+      "memberGrowthPercent": 4.1,
+      "federationRole": "chapter",
+      "status": "pending",
+      "joinedAt": "2024-02-01",
+      "presidentName": "Carmen dela Cruz",
+      "presidentId": "usr-022",
+      "complianceScore": 71
+    },
+    {
+      "id": "assoc-009",
+      "federationId": "fed-002",
+      "name": "Hamburg Kababayan Society",
+      "logo": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=100",
+      "type": "professional",
+      "country": "Germany",
+      "city": "Hamburg",
+      "language": "en",
+      "memberCount": 375,
+      "activeCircles": 3,
+      "totalFunds": 18200.0,
+      "duesStatus": "paid",
+      "duesCollectionRate": 89,
+      "avgTrustScore": 741,
+      "memberGrowthPercent": 11.8,
+      "federationRole": "chapter",
+      "status": "active",
+      "joinedAt": "2023-09-10",
+      "presidentName": "Antonio Cruz",
+      "presidentId": "usr-023",
+      "complianceScore": 88
+    }
+  ],
+  "leaders": [
+    {
+      "id": "lead-001",
+      "federationId": "fed-001",
+      "userId": "usr-001",
+      "name": "Amina Diallo",
+      "email": "amina.diallo@gmail.com",
+      "photo": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200",
+      "role": "president",
+      "roleLabel": "Federation President",
+      "permissions": [
+        "all"
+      ],
+      "termStart": "2024-01-01",
+      "termEnd": "2025-12-31",
+      "termStatus": "active",
+      "assignedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "lead-002",
+      "federationId": "fed-001",
+      "userId": "usr-002",
+      "name": "Jean-Pierre Konan",
+      "email": "jean-pierre.konan@bluewin.ch",
+      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
+      "role": "treasurer_general",
+      "roleLabel": "Treasurer General",
+      "permissions": [
+        "finance",
+        "reports",
+        "dues",
+        "budget",
+        "transfers"
+      ],
+      "termStart": "2024-01-01",
+      "termEnd": "2025-12-31",
+      "termStatus": "active",
+      "assignedAt": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "lead-003",
+      "federationId": "fed-001",
+      "userId": "usr-011",
+      "name": "Marie-Claire Ngoma",
+      "email": "mc.ngoma@outlook.com",
+      "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200",
+      "role": "vice_president",
+      "roleLabel": "Vice-President",
+      "permissions": [
+        "governance",
+        "members",
+        "events",
+        "announcements"
+      ],
+      "termStart": "2024-01-01",
+      "termEnd": "2025-12-31",
+      "termStatus": "active",
+      "assignedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "lead-004",
+      "federationId": "fed-001",
+      "userId": "usr-012",
+      "name": "Ousmane Bah",
+      "email": "ousmane.bah@proton.me",
+      "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
+      "role": "secretary_general",
+      "roleLabel": "Secretary General",
+      "permissions": [
+        "governance",
+        "policies",
+        "documents",
+        "meetings"
+      ],
+      "termStart": "2024-01-01",
+      "termEnd": "2025-12-31",
+      "termStatus": "active",
+      "assignedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "lead-005",
+      "federationId": "fed-001",
+      "userId": "usr-013",
+      "name": "Aïssatou Camara",
+      "email": "aissatou.c@gmail.com",
+      "photo": "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=200",
+      "role": "committee_chair",
+      "roleLabel": "Youth & Engagement Committee Chair",
+      "permissions": [
+        "events",
+        "announcements",
+        "members"
+      ],
+      "termStart": "2024-06-01",
+      "termEnd": "2025-12-31",
+      "termStatus": "active",
+      "assignedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "lead-006",
+      "federationId": "fed-001",
+      "userId": "usr-014",
+      "name": "Philippe Dumont",
+      "email": "p.dumont@bluewin.ch",
+      "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200",
+      "role": "committee_chair",
+      "roleLabel": "Compliance & Audit Committee Chair",
+      "permissions": [
+        "compliance",
+        "reports",
+        "audit"
+      ],
+      "termStart": "2024-03-01",
+      "termEnd": "2025-02-28",
+      "termStatus": "expiring_soon",
+      "assignedAt": "2024-03-01T00:00:00Z"
+    },
+    {
+      "id": "lead-007",
+      "federationId": "fed-002",
+      "userId": "usr-024",
+      "name": "Maria Santos",
+      "email": "maria.santos@gmail.com",
+      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200",
+      "role": "president",
+      "roleLabel": "Federation President",
+      "permissions": [
+        "all"
+      ],
+      "termStart": "2024-06-01",
+      "termEnd": "2026-05-31",
+      "termStatus": "active",
+      "assignedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "lead-008",
+      "federationId": "fed-002",
+      "userId": "usr-025",
+      "name": "Roberto Aquino",
+      "email": "roberto.aquino@web.de",
+      "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+      "role": "treasurer_general",
+      "roleLabel": "Treasurer General",
+      "permissions": [
+        "finance",
+        "reports",
+        "dues",
+        "budget",
+        "transfers"
+      ],
+      "termStart": "2024-06-01",
+      "termEnd": "2026-05-31",
+      "termStatus": "active",
+      "assignedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "lead-009",
+      "federationId": "fed-002",
+      "userId": "usr-026",
+      "name": "Isabella Garcia",
+      "email": "isabella.garcia@gmx.de",
+      "photo": "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=200",
+      "role": "secretary_general",
+      "roleLabel": "Secretary General",
+      "permissions": [
+        "governance",
+        "policies",
+        "documents",
+        "meetings"
+      ],
+      "termStart": "2024-06-01",
+      "termEnd": "2026-05-31",
+      "termStatus": "active",
+      "assignedAt": "2024-06-01T00:00:00Z"
+    },
+    {
+      "id": "lead-010",
+      "federationId": "fed-002",
+      "userId": "usr-027",
+      "name": "Paolo Villanueva",
+      "email": "paolo.v@outlook.com",
+      "photo": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200",
+      "role": "committee_chair",
+      "roleLabel": "Cultural Affairs Committee Chair",
+      "permissions": [
+        "events",
+        "announcements",
+        "members"
+      ],
+      "termStart": "2024-09-01",
+      "termEnd": "2026-05-31",
+      "termStatus": "active",
+      "assignedAt": "2024-09-01T00:00:00Z"
+    }
+  ],
+  "policies": [
+    {
+      "id": "pol-001",
+      "federationId": "fed-001",
+      "title": "Minimum Trust Score for Circle Participation",
+      "description": "All child associations must enforce a minimum Trust Score of 500 for members joining ROSCA circles to reduce default risk across the federation.",
+      "category": "membership",
+      "enforcementLevel": "mandatory",
+      "effectiveDate": "2024-04-01",
+      "version": 2,
+      "status": "active",
+      "acknowledgedCount": 5,
+      "totalAssociations": 5,
+      "compliantCount": 4,
+      "nonCompliantAssociations": [
+        "Accra Community Association Bern"
+      ],
+      "createdAt": "2024-03-15T10:00:00Z",
+      "updatedAt": "2024-09-01T14:30:00Z"
+    },
+    {
+      "id": "pol-002",
+      "federationId": "fed-001",
+      "title": "KYC Verification Standards",
+      "description": "Members holding treasurer or president roles in any child association must complete enhanced KYC verification (identity document + proof of address) within 30 days of role assignment.",
+      "category": "governance",
+      "enforcementLevel": "mandatory",
+      "effectiveDate": "2024-01-15",
+      "version": 1,
+      "status": "active",
+      "acknowledgedCount": 5,
+      "totalAssociations": 5,
+      "compliantCount": 5,
+      "nonCompliantAssociations": [],
+      "createdAt": "2024-01-10T09:00:00Z",
+      "updatedAt": "2024-01-10T09:00:00Z"
+    },
+    {
+      "id": "pol-003",
+      "federationId": "fed-001",
+      "title": "Emergency Fund Minimum Rate",
+      "description": "All ROSCA circles operating under federation associations should maintain a minimum emergency fund rate of 1.5% of contributions, above the platform default of 1%.",
+      "category": "finance",
+      "enforcementLevel": "recommended",
+      "effectiveDate": "2024-06-01",
+      "version": 1,
+      "status": "active",
+      "acknowledgedCount": 4,
+      "totalAssociations": 5,
+      "compliantCount": 3,
+      "nonCompliantAssociations": [
+        "Accra Community Association Bern",
+        "Solidarité Genève"
+      ],
+      "createdAt": "2024-05-20T11:00:00Z",
+      "updatedAt": "2024-05-20T11:00:00Z"
+    },
+    {
+      "id": "pol-004",
+      "federationId": "fed-001",
+      "title": "Annual General Meeting Requirements",
+      "description": "Each child association must hold at least one Annual General Meeting per calendar year and submit meeting minutes to the federation within 14 days.",
+      "category": "governance",
+      "enforcementLevel": "mandatory",
+      "effectiveDate": "2024-01-01",
+      "version": 1,
+      "status": "active",
+      "acknowledgedCount": 5,
+      "totalAssociations": 5,
+      "compliantCount": 4,
+      "nonCompliantAssociations": [
+        "Solidarité Genève"
+      ],
+      "createdAt": "2023-12-01T08:00:00Z",
+      "updatedAt": "2023-12-01T08:00:00Z"
+    },
+    {
+      "id": "pol-005",
+      "federationId": "fed-002",
+      "title": "Member Trust Score Requirement",
+      "description": "All members participating in ROSCA circles must maintain a minimum Trust Score of 550. Members below this threshold may observe but not participate in payouts.",
+      "category": "membership",
+      "enforcementLevel": "mandatory",
+      "effectiveDate": "2024-01-01",
+      "version": 1,
+      "status": "active",
+      "acknowledgedCount": 4,
+      "totalAssociations": 4,
+      "compliantCount": 3,
+      "nonCompliantAssociations": [
+        "Frankfurt Filipino Circle"
+      ],
+      "createdAt": "2023-11-15T10:00:00Z",
+      "updatedAt": "2023-11-15T10:00:00Z"
+    },
+    {
+      "id": "pol-006",
+      "federationId": "fed-002",
+      "title": "Cultural Event Participation Guidelines",
+      "description": "Each child association is encouraged to organize at least two cultural heritage events annually and participate in federation-wide celebrations.",
+      "category": "governance",
+      "enforcementLevel": "recommended",
+      "effectiveDate": "2024-07-01",
+      "version": 1,
+      "status": "active",
+      "acknowledgedCount": 4,
+      "totalAssociations": 4,
+      "compliantCount": 3,
+      "nonCompliantAssociations": [
+        "Frankfurt Filipino Circle"
+      ],
+      "createdAt": "2024-06-10T09:00:00Z",
+      "updatedAt": "2024-06-10T09:00:00Z"
+    },
+    {
+      "id": "pol-007",
+      "federationId": "fed-002",
+      "title": "Financial Transparency Standards",
+      "description": "Draft policy requiring all child associations to publish quarterly financial summaries accessible to all members, with detailed reports submitted to the federation treasurer.",
+      "category": "finance",
+      "enforcementLevel": "mandatory",
+      "effectiveDate": null,
+      "version": 1,
+      "status": "draft",
+      "acknowledgedCount": 0,
+      "totalAssociations": 4,
+      "compliantCount": 0,
+      "nonCompliantAssociations": [],
+      "createdAt": "2025-04-05T11:00:00Z",
+      "updatedAt": "2025-04-05T11:00:00Z"
+    }
+  ],
+  "funds": [
+    {
+      "id": "fund-001",
+      "federationId": "fed-001",
+      "name": "General Fund",
+      "description": "Core operating fund for federation administration, meetings, and shared services.",
+      "balance": 94500.0,
+      "allocationPercent": 60,
+      "minimumThreshold": 20000.0,
+      "belowThreshold": false,
+      "currency": "CHF",
+      "ytdIncome": 112000.0,
+      "ytdExpenses": 67500.0
+    },
+    {
+      "id": "fund-002",
+      "federationId": "fed-001",
+      "name": "Event Fund",
+      "description": "Dedicated fund for federation-wide events, cultural celebrations, and inter-association gatherings.",
+      "balance": 38200.0,
+      "allocationPercent": 20,
+      "minimumThreshold": 10000.0,
+      "belowThreshold": false,
+      "currency": "CHF",
+      "ytdIncome": 45000.0,
+      "ytdExpenses": 31800.0
+    },
+    {
+      "id": "fund-003",
+      "federationId": "fed-001",
+      "name": "Reserve Fund",
+      "description": "Emergency reserve for unexpected expenses and financial stability across the federation.",
+      "balance": 42750.0,
+      "allocationPercent": 15,
+      "minimumThreshold": 50000.0,
+      "belowThreshold": true,
+      "currency": "CHF",
+      "ytdIncome": 33750.0,
+      "ytdExpenses": 8000.0
+    },
+    {
+      "id": "fund-004",
+      "federationId": "fed-001",
+      "name": "Special Projects Fund",
+      "description": "Fund for grants to child associations, community initiatives, and cross-association projects.",
+      "balance": 12000.0,
+      "allocationPercent": 5,
+      "minimumThreshold": 5000.0,
+      "belowThreshold": false,
+      "currency": "CHF",
+      "ytdIncome": 18000.0,
+      "ytdExpenses": 14500.0
+    },
+    {
+      "id": "fund-005",
+      "federationId": "fed-002",
+      "name": "General Fund",
+      "description": "Core operational fund for federation administration, coordination, and member services.",
+      "balance": 62800.0,
+      "allocationPercent": 55,
+      "minimumThreshold": 15000.0,
+      "belowThreshold": false,
+      "currency": "EUR",
+      "ytdIncome": 78400.0,
+      "ytdExpenses": 48200.0
+    },
+    {
+      "id": "fund-006",
+      "federationId": "fed-002",
+      "name": "Event Fund",
+      "description": "Fund for cultural events, festivals, and inter-chapter gatherings celebrating Filipino heritage.",
+      "balance": 38500.0,
+      "allocationPercent": 25,
+      "minimumThreshold": 8000.0,
+      "belowThreshold": false,
+      "currency": "EUR",
+      "ytdIncome": 42600.0,
+      "ytdExpenses": 27100.0
+    },
+    {
+      "id": "fund-007",
+      "federationId": "fed-002",
+      "name": "Reserve Fund",
+      "description": "Emergency reserve for unexpected expenses and financial contingencies.",
+      "balance": 23500.0,
+      "allocationPercent": 20,
+      "minimumThreshold": 25000.0,
+      "belowThreshold": true,
+      "currency": "EUR",
+      "ytdIncome": 24800.0,
+      "ytdExpenses": 5300.0
+    }
+  ],
+  "duesConfigs": [
+    {
+      "amount": 500.0,
+      "type": "per_member",
+      "ratePerMember": 0.5,
+      "frequency": "quarterly",
+      "currency": "CHF",
+      "gracePeriodDays": 14,
+      "nextDueDate": "2025-07-01",
+      "autoEscalation": true,
+      "federationId": "fed-001"
+    },
+    {
+      "federationId": "fed-002",
+      "amount": 200.0,
+      "type": "flat",
+      "ratePerMember": 0,
+      "frequency": "annual",
+      "currency": "EUR",
+      "gracePeriodDays": 30,
+      "nextDueDate": "2026-01-01",
+      "autoEscalation": false
+    }
+  ],
+  "duesInvoices": [
+    {
+      "id": "inv-001",
+      "federationId": "fed-001",
+      "associationId": "assoc-001",
+      "associationName": "Solidarité Camerounaise Zürich",
+      "amount": 421.0,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-03-28T14:22:00Z",
+      "receiptUrl": "/receipts/inv-001.pdf"
+    },
+    {
+      "id": "inv-002",
+      "federationId": "fed-001",
+      "associationId": "assoc-002",
+      "associationName": "Union des Ivoiriens de Genève",
+      "amount": 317.0,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-04-01T09:15:00Z",
+      "receiptUrl": "/receipts/inv-002.pdf"
+    },
+    {
+      "id": "inv-003",
+      "federationId": "fed-001",
+      "associationId": "assoc-003",
+      "associationName": "Accra Community Association Bern",
+      "amount": 260.5,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "overdue",
+      "paidAt": null,
+      "receiptUrl": null
+    },
+    {
+      "id": "inv-004",
+      "federationId": "fed-001",
+      "associationId": "assoc-004",
+      "associationName": "Pan-African Association Lausanne",
+      "amount": 199.0,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-03-30T16:45:00Z",
+      "receiptUrl": "/receipts/inv-004.pdf"
+    },
+    {
+      "id": "inv-005",
+      "federationId": "fed-001",
+      "associationId": "assoc-005",
+      "associationName": "Solidarité Genève",
+      "amount": 226.0,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "pending",
+      "paidAt": null,
+      "receiptUrl": null
+    },
+    {
+      "id": "inv-006",
+      "federationId": "fed-002",
+      "associationId": "assoc-006",
+      "associationName": "Kabayan Munich Association",
+      "amount": 283.5,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-03-29T11:30:00Z",
+      "receiptUrl": "/receipts/inv-006.pdf"
+    },
+    {
+      "id": "inv-007",
+      "federationId": "fed-002",
+      "associationId": "assoc-007",
+      "associationName": "Pinoy Berlin Community",
+      "amount": 246.5,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-04-02T08:45:00Z",
+      "receiptUrl": "/receipts/inv-007.pdf"
+    },
+    {
+      "id": "inv-008",
+      "federationId": "fed-002",
+      "associationId": "assoc-008",
+      "associationName": "Frankfurt Filipino Circle",
+      "amount": 206.0,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "pending",
+      "paidAt": null,
+      "receiptUrl": null
+    },
+    {
+      "id": "inv-009",
+      "federationId": "fed-002",
+      "associationId": "assoc-009",
+      "associationName": "Hamburg Kababayan Society",
+      "amount": 187.5,
+      "period": "Q2 2025",
+      "dueDate": "2025-04-01",
+      "status": "paid",
+      "paidAt": "2025-03-31T15:20:00Z",
+      "receiptUrl": "/receipts/inv-009.pdf"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "budget-2025",
+      "year": 2025,
+      "status": "approved",
+      "totalBudget": 225000.0,
+      "totalSpent": 121800.0,
+      "currency": "CHF",
+      "categories": [
+        {
+          "name": "Operations",
+          "budgeted": 80000.0,
+          "spent": 48200.0,
+          "percentUsed": 60.3
+        },
+        {
+          "name": "Events & Culture",
+          "budgeted": 55000.0,
+          "spent": 31800.0,
+          "percentUsed": 57.8
+        },
+        {
+          "name": "Reserves",
+          "budgeted": 45000.0,
+          "spent": 8000.0,
+          "percentUsed": 17.8
+        },
+        {
+          "name": "Grants & Projects",
+          "budgeted": 30000.0,
+          "spent": 24500.0,
+          "percentUsed": 81.7
+        },
+        {
+          "name": "Administration",
+          "budgeted": 15000.0,
+          "spent": 9300.0,
+          "percentUsed": 62.0
+        }
+      ],
+      "approvedAt": "2025-01-15T10:00:00Z",
+      "approvedBy": "Federation Board",
+      "federationId": "fed-001"
+    },
+    {
+      "federationId": "fed-002",
+      "id": "budget-2025-fed2",
+      "year": 2025,
+      "status": "draft",
+      "totalBudget": 145000.0,
+      "totalSpent": 62400.0,
+      "currency": "EUR",
+      "categories": [
+        {
+          "name": "Operations",
+          "budgeted": 55000.0,
+          "spent": 28100.0,
+          "percentUsed": 51.1
+        },
+        {
+          "name": "Events & Culture",
+          "budgeted": 40000.0,
+          "spent": 18500.0,
+          "percentUsed": 46.3
+        },
+        {
+          "name": "Reserves",
+          "budgeted": 25000.0,
+          "spent": 5800.0,
+          "percentUsed": 23.2
+        },
+        {
+          "name": "Administration",
+          "budgeted": 25000.0,
+          "spent": 10000.0,
+          "percentUsed": 40.0
+        }
+      ],
+      "approvedAt": null,
+      "approvedBy": null
+    }
+  ],
+  "transfers": [
+    {
+      "id": "xfer-001",
+      "federationId": "fed-001",
+      "type": "grant",
+      "sourceFundId": "fund-004",
+      "sourceFundName": "Special Projects Fund",
+      "targetAssociationId": "assoc-003",
+      "targetAssociationName": "Accra Community Association Bern",
+      "amount": 5000.0,
+      "currency": "CHF",
+      "purpose": "Emergency support for declining membership — community outreach and event sponsorship",
+      "status": "completed",
+      "approvals": [
+        {
+          "role": "Federation President",
+          "name": "Amina Diallo",
+          "approved": true,
+          "date": "2025-03-10T09:00:00Z"
+        },
+        {
+          "role": "Treasurer General",
+          "name": "Jean-Pierre Konan",
+          "approved": true,
+          "date": "2025-03-10T14:30:00Z"
+        }
+      ],
+      "createdAt": "2025-03-09T16:00:00Z",
+      "completedAt": "2025-03-11T10:00:00Z"
+    },
+    {
+      "id": "xfer-002",
+      "federationId": "fed-001",
+      "type": "grant",
+      "sourceFundId": "fund-004",
+      "sourceFundName": "Special Projects Fund",
+      "targetAssociationId": "assoc-005",
+      "targetAssociationName": "Solidarité Genève",
+      "amount": 3500.0,
+      "currency": "CHF",
+      "purpose": "Youth mentorship program seed funding",
+      "status": "pending_approval",
+      "approvals": [
+        {
+          "role": "Federation President",
+          "name": "Amina Diallo",
+          "approved": true,
+          "date": "2025-05-01T11:00:00Z"
+        },
+        {
+          "role": "Treasurer General",
+          "name": "Jean-Pierre Konan",
+          "approved": false,
+          "date": null
+        }
+      ],
+      "createdAt": "2025-05-01T10:00:00Z",
+      "completedAt": null
+    },
+    {
+      "id": "xfer-003",
+      "federationId": "fed-001",
+      "type": "inter_fund",
+      "sourceFundId": "fund-001",
+      "sourceFundName": "General Fund",
+      "targetFundId": "fund-003",
+      "targetFundName": "Reserve Fund",
+      "amount": 8000.0,
+      "currency": "CHF",
+      "purpose": "Reserve fund replenishment — below minimum threshold",
+      "status": "completed",
+      "approvals": [
+        {
+          "role": "Treasurer General",
+          "name": "Jean-Pierre Konan",
+          "approved": true,
+          "date": "2025-04-15T09:00:00Z"
+        }
+      ],
+      "createdAt": "2025-04-14T16:00:00Z",
+      "completedAt": "2025-04-15T10:00:00Z"
+    },
+    {
+      "id": "xfer-004",
+      "federationId": "fed-002",
+      "type": "grant",
+      "sourceFundId": "fund-005",
+      "sourceFundName": "General Fund",
+      "targetAssociationId": "assoc-008",
+      "targetAssociationName": "Frankfurt Filipino Circle",
+      "amount": 3200.0,
+      "currency": "EUR",
+      "purpose": "Support for establishing new chapter operations and member onboarding initiatives",
+      "status": "completed",
+      "approvals": [
+        {
+          "role": "Federation President",
+          "name": "Maria Santos",
+          "approved": true,
+          "date": "2024-12-15T10:00:00Z"
+        },
+        {
+          "role": "Treasurer General",
+          "name": "Roberto Aquino",
+          "approved": true,
+          "date": "2024-12-15T15:00:00Z"
+        }
+      ],
+      "createdAt": "2024-12-14T11:00:00Z",
+      "completedAt": "2024-12-16T09:00:00Z"
+    },
+    {
+      "id": "xfer-005",
+      "federationId": "fed-002",
+      "type": "inter_fund",
+      "sourceFundId": "fund-005",
+      "sourceFundName": "General Fund",
+      "targetFundId": "fund-007",
+      "targetFundName": "Reserve Fund",
+      "amount": 4500.0,
+      "currency": "EUR",
+      "purpose": "Reserve fund replenishment to approach minimum threshold",
+      "status": "pending_approval",
+      "approvals": [
+        {
+          "role": "Treasurer General",
+          "name": "Roberto Aquino",
+          "approved": false,
+          "date": null
+        }
+      ],
+      "createdAt": "2025-05-02T14:00:00Z",
+      "completedAt": null
+    }
+  ],
+  "elections": [
+    {
+      "id": "elec-001",
+      "federationId": "fed-001",
+      "title": "Federation President 2026-2027",
+      "type": "president",
+      "status": "upcoming",
+      "nominationStart": "2025-09-01",
+      "nominationEnd": "2025-10-15",
+      "votingStart": "2025-11-01",
+      "votingEnd": "2025-11-15",
+      "eligibleVoters": 2847,
+      "candidateCount": 0,
+      "participationRate": null,
+      "createdAt": "2025-05-01T10:00:00Z"
+    },
+    {
+      "id": "elec-002",
+      "federationId": "fed-001",
+      "title": "Federation Board Election 2024",
+      "type": "board",
+      "status": "completed",
+      "nominationStart": "2023-09-01",
+      "nominationEnd": "2023-10-15",
+      "votingStart": "2023-11-01",
+      "votingEnd": "2023-11-15",
+      "eligibleVoters": 2134,
+      "candidateCount": 8,
+      "participationRate": 72.4,
+      "results": [
+        {
+          "position": "President",
+          "winner": "Amina Diallo",
+          "votes": 1102,
+          "totalVotes": 1544
+        },
+        {
+          "position": "Vice-President",
+          "winner": "Marie-Claire Ngoma",
+          "votes": 987,
+          "totalVotes": 1544
+        },
+        {
+          "position": "Secretary General",
+          "winner": "Ousmane Bah",
+          "votes": 856,
+          "totalVotes": 1544
+        },
+        {
+          "position": "Treasurer General",
+          "winner": "Jean-Pierre Konan",
+          "votes": 1231,
+          "totalVotes": 1544
+        }
+      ],
+      "participationByAssociation": [
+        {
+          "associationName": "Solidarité Camerounaise Zürich",
+          "rate": 81.2
+        },
+        {
+          "associationName": "Union des Ivoiriens de Genève",
+          "rate": 74.5
+        },
+        {
+          "associationName": "Accra Community Association Bern",
+          "rate": 65.3
+        },
+        {
+          "associationName": "Pan-African Association Lausanne",
+          "rate": 68.9
+        }
+      ],
+      "createdAt": "2023-08-15T10:00:00Z"
+    },
+    {
+      "id": "elec-003",
+      "federationId": "fed-001",
+      "title": "Referendum: Increase Federation Dues",
+      "type": "referendum",
+      "status": "completed",
+      "nominationStart": null,
+      "nominationEnd": null,
+      "votingStart": "2024-06-01",
+      "votingEnd": "2024-06-14",
+      "eligibleVoters": 2450,
+      "candidateCount": 0,
+      "participationRate": 58.7,
+      "results": [
+        {
+          "position": "Increase dues by CHF 0.10/member/quarter",
+          "winner": "Yes",
+          "votes": 892,
+          "totalVotes": 1438
+        }
+      ],
+      "createdAt": "2024-05-01T10:00:00Z"
+    },
+    {
+      "id": "elec-004",
+      "federationId": "fed-002",
+      "title": "Federation President Election 2026",
+      "type": "president",
+      "status": "upcoming",
+      "nominationStart": "2025-10-01",
+      "nominationEnd": "2025-11-01",
+      "votingStart": "2025-11-15",
+      "votingEnd": "2025-11-30",
+      "eligibleVoters": 1847,
+      "candidateCount": 0,
+      "participationRate": null,
+      "createdAt": "2025-04-15T10:00:00Z"
+    },
+    {
+      "id": "elec-005",
+      "federationId": "fed-002",
+      "title": "Federation Board Election 2024",
+      "type": "board",
+      "status": "completed",
+      "nominationStart": "2024-03-01",
+      "nominationEnd": "2024-04-15",
+      "votingStart": "2024-05-01",
+      "votingEnd": "2024-05-15",
+      "eligibleVoters": 1652,
+      "candidateCount": 6,
+      "participationRate": 68.9,
+      "results": [
+        {
+          "position": "President",
+          "winner": "Maria Santos",
+          "votes": 712,
+          "totalVotes": 1139
+        },
+        {
+          "position": "Secretary General",
+          "winner": "Isabella Garcia",
+          "votes": 645,
+          "totalVotes": 1139
+        },
+        {
+          "position": "Treasurer General",
+          "winner": "Roberto Aquino",
+          "votes": 823,
+          "totalVotes": 1139
+        }
+      ],
+      "participationByAssociation": [
+        {
+          "associationName": "Kabayan Munich Association",
+          "rate": 74.2
+        },
+        {
+          "associationName": "Pinoy Berlin Community",
+          "rate": 69.1
+        },
+        {
+          "associationName": "Hamburg Kababayan Society",
+          "rate": 71.5
+        }
+      ],
+      "createdAt": "2024-02-01T10:00:00Z"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "cand-001",
+      "federationId": "fed-001",
+      "electionId": "elec-002",
+      "name": "Amina Diallo",
+      "photo": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200",
+      "position": "President",
+      "statement": "I will strengthen cross-association collaboration and expand our financial inclusion programs to reach every diaspora community in Switzerland.",
+      "endorsements": 23,
+      "associationName": "Solidarité Camerounaise Zürich"
+    },
+    {
+      "id": "cand-002",
+      "federationId": "fed-001",
+      "electionId": "elec-002",
+      "name": "Jean-Pierre Konan",
+      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
+      "position": "Treasurer General",
+      "statement": "With 15 years in Swiss banking, I will bring financial rigor and transparency to every franc managed by our federation.",
+      "endorsements": 31,
+      "associationName": "Union des Ivoiriens de Genève"
+    },
+    {
+      "id": "cand-003",
+      "federationId": "fed-002",
+      "electionId": "elec-005",
+      "name": "Maria Santos",
+      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200",
+      "position": "President",
+      "statement": "As a community organizer for 10 years, I will unite our Filipino communities across Germany and create stronger support networks for every member.",
+      "endorsements": 18,
+      "associationName": "Kabayan Munich Association"
+    },
+    {
+      "id": "cand-004",
+      "federationId": "fed-002",
+      "electionId": "elec-005",
+      "name": "Roberto Aquino",
+      "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+      "position": "Treasurer General",
+      "statement": "Financial transparency and member trust are my priorities. Every euro will be accounted for and used to strengthen our community bonds.",
+      "endorsements": 27,
+      "associationName": "Pinoy Berlin Community"
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-001",
+      "federationId": "fed-001",
+      "title": "Federation Annual General Meeting 2025",
+      "description": "The AGM brings together leaders and members from all child associations to review the year, elect leadership, and set priorities for the coming year.",
+      "type": "agm",
+      "date": "2025-06-14T14:00:00Z",
+      "endDate": "2025-06-14T18:00:00Z",
+      "location": "Kongresshaus, Zürich",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "capacity": 500,
+      "rsvpCount": 342,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Solidarité Camerounaise Zürich",
+          "count": 112
+        },
+        {
+          "associationName": "Union des Ivoiriens de Genève",
+          "count": 78
+        },
+        {
+          "associationName": "Accra Community Association Bern",
+          "count": 54
+        },
+        {
+          "associationName": "Pan-African Association Lausanne",
+          "count": 61
+        },
+        {
+          "associationName": "Solidarité Genève",
+          "count": 37
+        }
+      ],
+      "status": "upcoming",
+      "createdAt": "2025-03-01T10:00:00Z"
+    },
+    {
+      "id": "evt-002",
+      "federationId": "fed-001",
+      "title": "African Heritage Day Celebration",
+      "description": "A federation-wide cultural celebration featuring traditional music, food, storytelling, and community awards across all chapters.",
+      "type": "cultural",
+      "date": "2025-05-25T11:00:00Z",
+      "endDate": "2025-05-25T22:00:00Z",
+      "location": "Parc La Grange, Genève",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "capacity": 1200,
+      "rsvpCount": 867,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Solidarité Camerounaise Zürich",
+          "count": 245
+        },
+        {
+          "associationName": "Union des Ivoiriens de Genève",
+          "count": 198
+        },
+        {
+          "associationName": "Accra Community Association Bern",
+          "count": 156
+        },
+        {
+          "associationName": "Pan-African Association Lausanne",
+          "count": 142
+        },
+        {
+          "associationName": "Solidarité Genève",
+          "count": 126
+        }
+      ],
+      "status": "upcoming",
+      "createdAt": "2025-02-15T10:00:00Z"
+    },
+    {
+      "id": "evt-003",
+      "federationId": "fed-001",
+      "title": "Financial Literacy Workshop Series",
+      "description": "Three-part workshop series on ROSCA best practices, personal budgeting, and Swiss banking for newcomers.",
+      "type": "workshop",
+      "date": "2025-04-12T09:00:00Z",
+      "endDate": "2025-04-12T12:00:00Z",
+      "location": "Online (Zoom)",
+      "targetAssociations": [
+        "assoc-003",
+        "assoc-005"
+      ],
+      "capacity": 200,
+      "rsvpCount": 89,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Accra Community Association Bern",
+          "count": 52
+        },
+        {
+          "associationName": "Solidarité Genève",
+          "count": 37
+        }
+      ],
+      "status": "completed",
+      "createdAt": "2025-03-20T10:00:00Z"
+    },
+    {
+      "id": "evt-004",
+      "federationId": "fed-001",
+      "title": "Inter-Association Football Tournament",
+      "description": "Annual friendly football tournament between federation chapters to build cross-association bonds.",
+      "type": "social",
+      "date": "2025-08-16T10:00:00Z",
+      "endDate": "2025-08-16T18:00:00Z",
+      "location": "Sportanlage Sihlhölzli, Zürich",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "capacity": 300,
+      "rsvpCount": 0,
+      "rsvpByAssociation": [],
+      "status": "draft",
+      "createdAt": "2025-05-01T10:00:00Z"
+    },
+    {
+      "id": "evt-005",
+      "federationId": "fed-001",
+      "title": "Treasurer Training & Compliance Summit",
+      "description": "Mandatory training for all association treasurers on federation financial policies, FINMA compliance, and reporting requirements.",
+      "type": "training",
+      "date": "2025-03-08T09:00:00Z",
+      "endDate": "2025-03-08T16:00:00Z",
+      "location": "Hotel Schweizerhof, Bern",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "capacity": 50,
+      "rsvpCount": 23,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Solidarité Camerounaise Zürich",
+          "count": 5
+        },
+        {
+          "associationName": "Union des Ivoiriens de Genève",
+          "count": 5
+        },
+        {
+          "associationName": "Accra Community Association Bern",
+          "count": 4
+        },
+        {
+          "associationName": "Pan-African Association Lausanne",
+          "count": 5
+        },
+        {
+          "associationName": "Solidarité Genève",
+          "count": 4
+        }
+      ],
+      "status": "completed",
+      "createdAt": "2025-01-20T10:00:00Z"
+    },
+    {
+      "id": "evt-006",
+      "federationId": "fed-002",
+      "title": "Federation Annual General Assembly 2025",
+      "description": "Annual assembly bringing together all chapters to review federation activities, approve budgets, and plan for the coming year.",
+      "type": "agm",
+      "date": "2025-07-12T13:00:00Z",
+      "endDate": "2025-07-12T17:00:00Z",
+      "location": "Munich Congress Centre",
+      "targetAssociations": [
+        "assoc-006",
+        "assoc-007",
+        "assoc-008",
+        "assoc-009"
+      ],
+      "capacity": 350,
+      "rsvpCount": 198,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Kabayan Munich Association",
+          "count": 72
+        },
+        {
+          "associationName": "Pinoy Berlin Community",
+          "count": 61
+        },
+        {
+          "associationName": "Frankfurt Filipino Circle",
+          "count": 38
+        },
+        {
+          "associationName": "Hamburg Kababayan Society",
+          "count": 27
+        }
+      ],
+      "status": "upcoming",
+      "createdAt": "2025-03-20T10:00:00Z"
+    },
+    {
+      "id": "evt-007",
+      "federationId": "fed-002",
+      "title": "Buwan ng Wika Festival",
+      "description": "Federation-wide celebration of Filipino language and culture month with traditional performances, food, and language workshops for all ages.",
+      "type": "cultural",
+      "date": "2024-08-18T12:00:00Z",
+      "endDate": "2024-08-18T20:00:00Z",
+      "location": "Olympiapark, Munich",
+      "targetAssociations": [
+        "assoc-006",
+        "assoc-007",
+        "assoc-009"
+      ],
+      "capacity": 800,
+      "rsvpCount": 654,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Kabayan Munich Association",
+          "count": 298
+        },
+        {
+          "associationName": "Pinoy Berlin Community",
+          "count": 212
+        },
+        {
+          "associationName": "Hamburg Kababayan Society",
+          "count": 144
+        }
+      ],
+      "status": "completed",
+      "createdAt": "2024-06-10T10:00:00Z"
+    },
+    {
+      "id": "evt-008",
+      "federationId": "fed-002",
+      "title": "Financial Planning Workshop for New Members",
+      "description": "Introduction to ROSCA practices, budgeting basics, and German banking system for Filipino newcomers.",
+      "type": "workshop",
+      "date": "2025-06-20T10:00:00Z",
+      "endDate": "2025-06-20T13:00:00Z",
+      "location": "Online (Zoom)",
+      "targetAssociations": [
+        "assoc-008"
+      ],
+      "capacity": 100,
+      "rsvpCount": 47,
+      "rsvpByAssociation": [
+        {
+          "associationName": "Frankfurt Filipino Circle",
+          "count": 47
+        }
+      ],
+      "status": "upcoming",
+      "createdAt": "2025-04-25T14:00:00Z"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ann-001",
+      "federationId": "fed-001",
+      "title": "AGM 2025 Registration Now Open",
+      "content": "Registration for the 2025 Annual General Meeting is now open. All association presidents and delegates are expected to attend. Please confirm your chapter's delegation by May 31.",
+      "priority": "high",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "authorName": "Amina Diallo",
+      "authorRole": "Federation President",
+      "publishedAt": "2025-04-15T10:00:00Z",
+      "expiresAt": "2025-06-14T18:00:00Z"
+    },
+    {
+      "id": "ann-002",
+      "federationId": "fed-001",
+      "title": "Updated Emergency Fund Policy — Action Required",
+      "content": "The federation board has approved an updated recommended minimum emergency fund rate of 1.5%. All associations are encouraged to review and adjust their circle settings. Non-compliant associations will be flagged in the next compliance review.",
+      "priority": "medium",
+      "targetAssociations": [
+        "assoc-003",
+        "assoc-005"
+      ],
+      "authorName": "Ousmane Bah",
+      "authorRole": "Secretary General",
+      "publishedAt": "2025-04-01T14:00:00Z",
+      "expiresAt": "2025-07-01T00:00:00Z"
+    },
+    {
+      "id": "ann-003",
+      "federationId": "fed-001",
+      "title": "Congratulations to Lausanne Chapter on 15% Growth!",
+      "content": "We celebrate the Pan-African Association Lausanne for achieving 15.6% membership growth this quarter — the highest in the federation. Their community outreach initiatives are a model for all chapters.",
+      "priority": "low",
+      "targetAssociations": [
+        "assoc-001",
+        "assoc-002",
+        "assoc-003",
+        "assoc-004",
+        "assoc-005"
+      ],
+      "authorName": "Marie-Claire Ngoma",
+      "authorRole": "Vice-President",
+      "publishedAt": "2025-04-20T11:00:00Z",
+      "expiresAt": null
+    },
+    {
+      "id": "ann-004",
+      "federationId": "fed-002",
+      "title": "Annual Assembly Registration Deadline Extended",
+      "content": "Due to high interest, we have extended the registration deadline for the 2025 Annual General Assembly to June 30. All chapter representatives are encouraged to register and participate in shaping our federation's future.",
+      "priority": "high",
+      "targetAssociations": [
+        "assoc-006",
+        "assoc-007",
+        "assoc-008",
+        "assoc-009"
+      ],
+      "authorName": "Maria Santos",
+      "authorRole": "Federation President",
+      "publishedAt": "2025-05-05T09:00:00Z",
+      "expiresAt": "2025-07-12T17:00:00Z"
+    },
+    {
+      "id": "ann-005",
+      "federationId": "fed-002",
+      "title": "Welcome Frankfurt Chapter to the Federation",
+      "content": "We are pleased to announce that Frankfurt Filipino Circle has completed its onboarding process and is now a full chapter member. Please join us in welcoming our newest community to the federation family!",
+      "priority": "medium",
+      "targetAssociations": [
+        "assoc-006",
+        "assoc-007",
+        "assoc-008",
+        "assoc-009"
+      ],
+      "authorName": "Isabella Garcia",
+      "authorRole": "Secretary General",
+      "publishedAt": "2024-03-01T11:00:00Z",
+      "expiresAt": null
+    }
+  ],
+  "reports": [
+    {
+      "id": "rpt-001",
+      "federationId": "fed-001",
+      "title": "2024 Annual Report",
+      "type": "annual",
+      "status": "completed",
+      "generatedAt": "2025-01-20T10:00:00Z",
+      "period": "2024",
+      "downloadUrl": "/reports/annual-2024.pdf",
+      "scheduled": false
+    },
+    {
+      "id": "rpt-002",
+      "federationId": "fed-001",
+      "title": "Q1 2025 Financial Summary",
+      "type": "financial",
+      "status": "completed",
+      "generatedAt": "2025-04-05T09:00:00Z",
+      "period": "Q1 2025",
+      "downloadUrl": "/reports/financial-q1-2025.pdf",
+      "scheduled": true
+    },
+    {
+      "id": "rpt-003",
+      "federationId": "fed-001",
+      "title": "Membership Growth Report",
+      "type": "membership",
+      "status": "completed",
+      "generatedAt": "2025-04-10T10:00:00Z",
+      "period": "2024-2025",
+      "downloadUrl": "/reports/membership-growth-2025.xlsx",
+      "scheduled": false
+    },
+    {
+      "id": "rpt-004",
+      "federationId": "fed-001",
+      "title": "Circle Performance Report",
+      "type": "circle_performance",
+      "status": "generating",
+      "generatedAt": null,
+      "period": "Q2 2025",
+      "downloadUrl": null,
+      "scheduled": true
+    },
+    {
+      "id": "rpt-005",
+      "federationId": "fed-002",
+      "title": "2024 Annual Federation Report",
+      "type": "annual",
+      "status": "completed",
+      "generatedAt": "2025-01-25T10:00:00Z",
+      "period": "2024",
+      "downloadUrl": "/reports/efcf-annual-2024.pdf",
+      "scheduled": false
+    },
+    {
+      "id": "rpt-006",
+      "federationId": "fed-002",
+      "title": "Q1 2025 Financial Report",
+      "type": "financial",
+      "status": "completed",
+      "generatedAt": "2025-04-08T09:00:00Z",
+      "period": "Q1 2025",
+      "downloadUrl": "/reports/efcf-financial-q1-2025.pdf",
+      "scheduled": true
+    },
+    {
+      "id": "rpt-007",
+      "federationId": "fed-002",
+      "title": "Chapter Growth Analysis",
+      "type": "membership",
+      "status": "generating",
+      "generatedAt": null,
+      "period": "2024-2025",
+      "downloadUrl": null,
+      "scheduled": true
+    }
+  ],
+  "alerts": [
+    {
+      "id": "alert-001",
+      "federationId": "fed-001",
+      "type": "financial",
+      "severity": "high",
+      "title": "Overdue Federation Dues",
+      "description": "Accra Community Association Bern has overdue Q2 2025 federation dues of CHF 260.50. Grace period expired 28 days ago.",
+      "associationId": "assoc-003",
+      "associationName": "Accra Community Association Bern",
+      "actionUrl": "/federations/dues",
+      "actionLabel": "View Dues",
+      "createdAt": "2025-04-15T00:00:00Z",
+      "acknowledged": false
+    },
+    {
+      "id": "alert-002",
+      "federationId": "fed-001",
+      "type": "compliance",
+      "severity": "medium",
+      "title": "Policy Non-Compliance: Trust Score Minimum",
+      "description": "Accra Community Association Bern has 3 circle participants below the mandatory minimum Trust Score of 500.",
+      "associationId": "assoc-003",
+      "associationName": "Accra Community Association Bern",
+      "actionUrl": "/federations/compliance",
+      "actionLabel": "Review Compliance",
+      "createdAt": "2025-04-20T10:00:00Z",
+      "acknowledged": false
+    },
+    {
+      "id": "alert-003",
+      "federationId": "fed-001",
+      "type": "financial",
+      "severity": "medium",
+      "title": "Reserve Fund Below Minimum Threshold",
+      "description": "The Reserve Fund balance (CHF 42,750) is below the configured minimum of CHF 50,000. Consider a fund transfer.",
+      "associationId": null,
+      "associationName": null,
+      "actionUrl": "/federations/funds",
+      "actionLabel": "Manage Funds",
+      "createdAt": "2025-04-25T08:00:00Z",
+      "acknowledged": true
+    },
+    {
+      "id": "alert-004",
+      "federationId": "fed-001",
+      "type": "governance",
+      "severity": "low",
+      "title": "Leadership Term Expiring Soon",
+      "description": "Philippe Dumont's term as Compliance & Audit Committee Chair expires on Feb 28, 2025. Initiate reappointment or election.",
+      "associationId": null,
+      "associationName": null,
+      "actionUrl": "/federations/leadership",
+      "actionLabel": "Manage Leadership",
+      "createdAt": "2025-01-28T10:00:00Z",
+      "acknowledged": true
+    },
+    {
+      "id": "alert-005",
+      "federationId": "fed-001",
+      "type": "financial",
+      "severity": "high",
+      "title": "Budget Category Near Limit",
+      "description": "The 'Grants & Projects' budget category has reached 81.7% of its annual allocation (CHF 24,500 of CHF 30,000) with 7 months remaining.",
+      "associationId": null,
+      "associationName": null,
+      "actionUrl": "/federations/budget",
+      "actionLabel": "Review Budget",
+      "createdAt": "2025-05-01T09:00:00Z",
+      "acknowledged": false
+    },
+    {
+      "id": "alert-006",
+      "federationId": "fed-002",
+      "type": "financial",
+      "severity": "medium",
+      "title": "Reserve Fund Below Minimum Threshold",
+      "description": "The Reserve Fund balance (EUR 23,500) is below the configured minimum of EUR 25,000. A transfer proposal is pending approval.",
+      "associationId": null,
+      "associationName": null,
+      "actionUrl": "/federations/funds",
+      "actionLabel": "Manage Funds",
+      "createdAt": "2025-05-02T14:00:00Z",
+      "acknowledged": false
+    },
+    {
+      "id": "alert-007",
+      "federationId": "fed-002",
+      "type": "compliance",
+      "severity": "medium",
+      "title": "Policy Non-Compliance: Trust Score Requirement",
+      "description": "Frankfurt Filipino Circle has 2 circle participants below the mandatory minimum Trust Score of 550.",
+      "associationId": "assoc-008",
+      "associationName": "Frankfurt Filipino Circle",
+      "actionUrl": "/federations/compliance",
+      "actionLabel": "Review Compliance",
+      "createdAt": "2025-04-18T10:00:00Z",
+      "acknowledged": false
+    },
+    {
+      "id": "alert-008",
+      "federationId": "fed-002",
+      "type": "governance",
+      "severity": "low",
+      "title": "Pending Chapter Approval",
+      "description": "Frankfurt Filipino Circle has completed onboarding requirements and is awaiting final federation board approval for full chapter status.",
+      "associationId": "assoc-008",
+      "associationName": "Frankfurt Filipino Circle",
+      "actionUrl": "/federations/associations",
+      "actionLabel": "Review Application",
+      "createdAt": "2024-01-15T10:00:00Z",
+      "acknowledged": true
+    }
+  ],
+  "aggregatedMembers": [
+    {
+      "id": "usr-001",
+      "federationId": "fed-001",
+      "name": "Amina Diallo",
+      "email": "amina.diallo@gmail.com",
+      "photo": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200",
+      "trustScore": 945,
+      "associations": [
+        {
+          "name": "Solidarité Camerounaise Zürich",
+          "role": "member"
+        }
+      ],
+      "federationRole": "Federation President",
+      "totalCircles": 1,
+      "status": "active"
+    },
+    {
+      "id": "usr-002",
+      "federationId": "fed-001",
+      "name": "Jean-Pierre Konan",
+      "email": "jean-pierre.konan@bluewin.ch",
+      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
+      "trustScore": 912,
+      "associations": [
+        {
+          "name": "Union des Ivoiriens de Genève",
+          "role": "member"
+        }
+      ],
+      "federationRole": "Treasurer General",
+      "totalCircles": 1,
+      "status": "active"
+    },
+    {
+      "id": "usr-003",
+      "federationId": "fed-001",
+      "name": "Fatou Barry",
+      "email": "fatou.barry@icloud.com",
+      "photo": "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=200",
+      "trustScore": 891,
+      "associations": [
+        {
+          "name": "Solidarité Genève",
+          "role": "president"
+        }
+      ],
+      "federationRole": null,
+      "totalCircles": 2,
+      "status": "active"
+    },
+    {
+      "id": "usr-015",
+      "federationId": "fed-001",
+      "name": "Grace Okafor",
+      "email": "grace.okafor@outlook.com",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200",
+      "trustScore": 734,
+      "associations": [
+        {
+          "name": "Accra Community Association Bern",
+          "role": "member"
+        },
+        {
+          "name": "Solidarité Genève",
+          "role": "member"
+        }
+      ],
+      "federationRole": null,
+      "totalCircles": 3,
+      "status": "active"
+    },
+    {
+      "id": "usr-016",
+      "federationId": "fed-001",
+      "name": "Moussa Traoré",
+      "email": "moussa.t@proton.me",
+      "photo": null,
+      "trustScore": 468,
+      "associations": [
+        {
+          "name": "Accra Community Association Bern",
+          "role": "member"
+        }
+      ],
+      "federationRole": null,
+      "totalCircles": 1,
+      "status": "active"
+    },
+    {
+      "id": "usr-024",
+      "federationId": "fed-002",
+      "name": "Maria Santos",
+      "email": "maria.santos@gmail.com",
+      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200",
+      "trustScore": 887,
+      "associations": [
+        {
+          "name": "Kabayan Munich Association",
+          "role": "president"
+        }
+      ],
+      "federationRole": "Federation President",
+      "totalCircles": 2,
+      "status": "active"
+    },
+    {
+      "id": "usr-025",
+      "federationId": "fed-002",
+      "name": "Roberto Aquino",
+      "email": "roberto.aquino@web.de",
+      "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+      "trustScore": 864,
+      "associations": [
+        {
+          "name": "Pinoy Berlin Community",
+          "role": "member"
+        }
+      ],
+      "federationRole": "Treasurer General",
+      "totalCircles": 1,
+      "status": "active"
+    },
+    {
+      "id": "usr-028",
+      "federationId": "fed-002",
+      "name": "Elena Reyes",
+      "email": "elena.reyes@gmx.de",
+      "photo": "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=200",
+      "trustScore": 792,
+      "associations": [
+        {
+          "name": "Kabayan Munich Association",
+          "role": "member"
+        },
+        {
+          "name": "Frankfurt Filipino Circle",
+          "role": "member"
+        }
+      ],
+      "federationRole": null,
+      "totalCircles": 2,
+      "status": "active"
+    },
+    {
+      "id": "usr-029",
+      "federationId": "fed-002",
+      "name": "Carlos Mendoza",
+      "email": "carlos.mendoza@outlook.com",
+      "photo": null,
+      "trustScore": 523,
+      "associations": [
+        {
+          "name": "Frankfurt Filipino Circle",
+          "role": "member"
+        }
+      ],
+      "federationRole": null,
+      "totalCircles": 1,
+      "status": "active"
+    }
+  ],
+  "complianceItems": [
+    {
+      "id": "comp-001",
+      "federationId": "fed-001",
+      "associationId": "assoc-003",
+      "associationName": "Accra Community Association Bern",
+      "policyId": "pol-001",
+      "policyTitle": "Minimum Trust Score for Circle Participation",
+      "status": "non_compliant",
+      "details": "3 circle participants have Trust Scores below 500 (minimum: 468)",
+      "deadline": "2025-06-01",
+      "lastChecked": "2025-04-20T10:00:00Z"
+    },
+    {
+      "id": "comp-002",
+      "federationId": "fed-001",
+      "associationId": "assoc-005",
+      "associationName": "Solidarité Genève",
+      "policyId": "pol-004",
+      "policyTitle": "Annual General Meeting Requirements",
+      "status": "non_compliant",
+      "details": "No AGM held in 2024. Meeting minutes overdue.",
+      "deadline": "2025-03-31",
+      "lastChecked": "2025-04-01T08:00:00Z"
+    },
+    {
+      "id": "comp-003",
+      "federationId": "fed-001",
+      "associationId": "assoc-001",
+      "associationName": "Solidarité Camerounaise Zürich",
+      "policyId": "pol-001",
+      "policyTitle": "Minimum Trust Score for Circle Participation",
+      "status": "compliant",
+      "details": "All circle participants meet the minimum Trust Score of 500",
+      "deadline": null,
+      "lastChecked": "2025-04-20T10:00:00Z"
+    },
+    {
+      "id": "comp-004",
+      "federationId": "fed-002",
+      "associationId": "assoc-008",
+      "associationName": "Frankfurt Filipino Circle",
+      "policyId": "pol-005",
+      "policyTitle": "Member Trust Score Requirement",
+      "status": "non_compliant",
+      "details": "2 circle participants have Trust Scores below 550 (minimum: 523)",
+      "deadline": "2025-06-15",
+      "lastChecked": "2025-04-18T10:00:00Z"
+    },
+    {
+      "id": "comp-005",
+      "federationId": "fed-002",
+      "associationId": "assoc-006",
+      "associationName": "Kabayan Munich Association",
+      "policyId": "pol-005",
+      "policyTitle": "Member Trust Score Requirement",
+      "status": "compliant",
+      "details": "All circle participants meet the minimum Trust Score of 550",
+      "deadline": null,
+      "lastChecked": "2025-04-18T10:00:00Z"
+    }
+  ],
+  "cashFlowHistories": [
+    {
+      "federationId": "fed-001",
+      "entries": [
+        {
+          "month": "2024-06",
+          "income": 18200,
+          "expenses": 12400
+        },
+        {
+          "month": "2024-07",
+          "income": 17800,
+          "expenses": 14100
+        },
+        {
+          "month": "2024-08",
+          "income": 16500,
+          "expenses": 11800
+        },
+        {
+          "month": "2024-09",
+          "income": 19400,
+          "expenses": 15600
+        },
+        {
+          "month": "2024-10",
+          "income": 18100,
+          "expenses": 13200
+        },
+        {
+          "month": "2024-11",
+          "income": 20200,
+          "expenses": 16800
+        },
+        {
+          "month": "2024-12",
+          "income": 22500,
+          "expenses": 19400
+        },
+        {
+          "month": "2025-01",
+          "income": 21000,
+          "expenses": 14200
+        },
+        {
+          "month": "2025-02",
+          "income": 18700,
+          "expenses": 12600
+        },
+        {
+          "month": "2025-03",
+          "income": 19500,
+          "expenses": 15100
+        },
+        {
+          "month": "2025-04",
+          "income": 20800,
+          "expenses": 13900
+        },
+        {
+          "month": "2025-05",
+          "income": 17300,
+          "expenses": 11700
+        },
+        {
+          "month": "2024-06",
+          "income": 12800,
+          "expenses": 8200
+        },
+        {
+          "month": "2024-07",
+          "income": 11900,
+          "expenses": 9400
+        },
+        {
+          "month": "2024-08",
+          "income": 13200,
+          "expenses": 7800
+        },
+        {
+          "month": "2024-09",
+          "income": 14100,
+          "expenses": 10200
+        },
+        {
+          "month": "2024-10",
+          "income": 12700,
+          "expenses": 8900
+        },
+        {
+          "month": "2024-11",
+          "income": 13900,
+          "expenses": 11200
+        },
+        {
+          "month": "2024-12",
+          "income": 15600,
+          "expenses": 12800
+        },
+        {
+          "month": "2025-01",
+          "income": 14500,
+          "expenses": 9600
+        },
+        {
+          "month": "2025-02",
+          "income": 13100,
+          "expenses": 8400
+        },
+        {
+          "month": "2025-03",
+          "income": 13800,
+          "expenses": 10100
+        },
+        {
+          "month": "2025-04",
+          "income": 14600,
+          "expenses": 9200
+        },
+        {
+          "month": "2025-05",
+          "income": 12300,
+          "expenses": 7800
+        }
+      ]
+    },
+    {
+      "federationId": "fed-002",
+      "entries": [
+        {
+          "month": "2024-06",
+          "income": 11200,
+          "expenses": 8400
+        },
+        {
+          "month": "2024-07",
+          "income": 10800,
+          "expenses": 9100
+        },
+        {
+          "month": "2024-08",
+          "income": 12500,
+          "expenses": 7800
+        },
+        {
+          "month": "2024-09",
+          "income": 13400,
+          "expenses": 10600
+        },
+        {
+          "month": "2024-10",
+          "income": 11100,
+          "expenses": 9200
+        },
+        {
+          "month": "2024-11",
+          "income": 14200,
+          "expenses": 11800
+        },
+        {
+          "month": "2024-12",
+          "income": 15500,
+          "expenses": 13400
+        },
+        {
+          "month": "2025-01",
+          "income": 13000,
+          "expenses": 9200
+        },
+        {
+          "month": "2025-02",
+          "income": 11700,
+          "expenses": 8600
+        },
+        {
+          "month": "2025-03",
+          "income": 12500,
+          "expenses": 10100
+        },
+        {
+          "month": "2025-04",
+          "income": 13800,
+          "expenses": 9900
+        },
+        {
+          "month": "2025-05",
+          "income": 10300,
+          "expenses": 7700
+        }
+      ]
+    }
+  ]
+}

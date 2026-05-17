@@ -72,10 +72,21 @@ export interface DesignSystem {
 // Application Shell
 // =============================================================================
 
+export interface ShellNavItem {
+  label: string
+  href: string
+}
+
+export interface ShellNavGroup {
+  label: string
+  items: ShellNavItem[]
+}
+
 export interface ShellSpec {
   raw: string
   overview: string
   navigationItems: string[]
+  navigationGroups: ShellNavGroup[]
   layoutPattern: string
 }
 

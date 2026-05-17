@@ -1,0 +1,706 @@
+{
+  "_meta": {
+    "models": {
+      "currentUser": "The logged-in user viewing the analytics dashboards, with their profile and role information.",
+      "personalDashboard": "Aggregated savings metrics for a member including total savings, active circles, contribution history, and upcoming payouts.",
+      "savingsGoals": "User-defined savings targets with progress tracking, milestones, and recommendations to stay on track.",
+      "contributionHistory": "Monthly breakdown of contributions made by the user across all their circles.",
+      "upcomingPayouts": "Scheduled payouts the user will receive from their circles.",
+      "circleParticipations": "Summary of user's participation in each circle with key metrics.",
+      "circleHealthMetrics": "Performance data for a circle including collection rates, engagement scores, and payment trends.",
+      "memberContributions": "Per-member contribution summary for circle organizers to track individual participation.",
+      "associationMetrics": "Aggregate statistics across all circles within an association.",
+      "federationMetrics": "High-level statistics across all associations in the federation.",
+      "associationBenchmarks": "Comparison data for benchmarking associations against each other.",
+      "statements": "Generated financial statements with transaction details and date ranges.",
+      "scheduledReports": "Configured recurring reports with schedule, recipients, and format options.",
+      "aiInsights": "AI-powered predictions and recommendations for savings optimization."
+    },
+    "relationships": [
+      "PersonalDashboard belongs to a User and aggregates data from their CircleParticipations",
+      "SavingsGoals belong to a User and track progress toward financial targets",
+      "ContributionHistory contains monthly totals derived from individual Contributions",
+      "CircleHealthMetrics belongs to a Circle and aggregates MemberContributions",
+      "AssociationMetrics aggregates data from all Circles in an Association",
+      "FederationMetrics aggregates data from all Associations in the federation",
+      "Statements are generated for a User and contain Transaction records",
+      "ScheduledReports are configured by organizers/admins and distributed to recipients"
+    ]
+  },
+  "currentUser": {
+    "id": "user-004",
+    "name": "Nia Kamau",
+    "email": "nia.kamau@email.com",
+    "avatar": null,
+    "role": "member",
+    "trustScore": 847,
+    "memberSince": "2023-06-15"
+  },
+  "personalDashboard": {
+    "totalSavings": 12450.00,
+    "totalContributions": 14200.00,
+    "totalPayoutsReceived": 8500.00,
+    "netSavingsThisYear": 4850.00,
+    "activeCircles": 3,
+    "completedCircles": 2,
+    "onTimePaymentRate": 98.5,
+    "trustScoreTrend": "up",
+    "trustScoreChange": 23,
+    "nextPayoutAmount": 2400.00,
+    "nextPayoutDate": "2025-02-15",
+    "nextPayoutCircle": "Ubuntu Savings Circle",
+    "savingsGrowthPercent": 18.5,
+    "comparedToPreviousYear": {
+      "contributions": 12100.00,
+      "payouts": 6000.00,
+      "netSavings": 3200.00
+    }
+  },
+  "contributionHistory": [
+    { "month": "2024-01", "amount": 600.00, "onTime": true },
+    { "month": "2024-02", "amount": 600.00, "onTime": true },
+    { "month": "2024-03", "amount": 600.00, "onTime": true },
+    { "month": "2024-04", "amount": 600.00, "onTime": true },
+    { "month": "2024-05", "amount": 600.00, "onTime": true },
+    { "month": "2024-06", "amount": 600.00, "onTime": false },
+    { "month": "2024-07", "amount": 600.00, "onTime": true },
+    { "month": "2024-08", "amount": 600.00, "onTime": true },
+    { "month": "2024-09", "amount": 600.00, "onTime": true },
+    { "month": "2024-10", "amount": 600.00, "onTime": true },
+    { "month": "2024-11", "amount": 600.00, "onTime": true },
+    { "month": "2024-12", "amount": 600.00, "onTime": true },
+    { "month": "2025-01", "amount": 600.00, "onTime": true }
+  ],
+  "upcomingPayouts": [
+    {
+      "id": "payout-upcoming-001",
+      "circleId": "circle-001",
+      "circleName": "Ubuntu Savings Circle",
+      "amount": 2400.00,
+      "scheduledDate": "2025-02-15",
+      "position": 5,
+      "totalPositions": 12,
+      "status": "scheduled"
+    },
+    {
+      "id": "payout-upcoming-002",
+      "circleId": "circle-003",
+      "circleName": "Harambee Growth Fund",
+      "amount": 5000.00,
+      "scheduledDate": "2025-06-01",
+      "position": 8,
+      "totalPositions": 10,
+      "status": "scheduled"
+    }
+  ],
+  "circleParticipations": [
+    {
+      "circleId": "circle-001",
+      "circleName": "Ubuntu Savings Circle",
+      "associationName": "Ubuntu Diaspora Association",
+      "contributionAmount": 200.00,
+      "frequency": "monthly",
+      "status": "active",
+      "currentCycle": 8,
+      "totalCycles": 12,
+      "myPosition": 5,
+      "totalContributed": 1600.00,
+      "payoutReceived": false,
+      "expectedPayoutDate": "2025-02-15",
+      "onTimeRate": 100,
+      "nextDueDate": "2025-01-25"
+    },
+    {
+      "circleId": "circle-002",
+      "circleName": "Diaspora Investment Group",
+      "associationName": "Pan-African Professionals Network",
+      "contributionAmount": 500.00,
+      "frequency": "monthly",
+      "status": "active",
+      "currentCycle": 4,
+      "totalCycles": 8,
+      "myPosition": 2,
+      "totalContributed": 2000.00,
+      "payoutReceived": true,
+      "payoutReceivedDate": "2024-10-15",
+      "payoutAmount": 4000.00,
+      "onTimeRate": 100,
+      "nextDueDate": "2025-01-20"
+    },
+    {
+      "circleId": "circle-003",
+      "circleName": "Harambee Growth Fund",
+      "associationName": "Ubuntu Diaspora Association",
+      "contributionAmount": 500.00,
+      "frequency": "monthly",
+      "status": "active",
+      "currentCycle": 3,
+      "totalCycles": 10,
+      "myPosition": 8,
+      "totalContributed": 1500.00,
+      "payoutReceived": false,
+      "expectedPayoutDate": "2025-06-01",
+      "onTimeRate": 100,
+      "nextDueDate": "2025-01-28"
+    }
+  ],
+  "savingsGoals": [
+    {
+      "id": "goal-001",
+      "title": "Emergency Fund",
+      "targetAmount": 5000.00,
+      "currentAmount": 3200.00,
+      "targetDate": "2025-06-30",
+      "createdAt": "2024-01-15",
+      "status": "on_track",
+      "progressPercent": 64,
+      "monthlyTarget": 300.00,
+      "actualMonthlyAverage": 320.00,
+      "milestones": [
+        { "amount": 1000.00, "reached": true, "reachedDate": "2024-03-20" },
+        { "amount": 2500.00, "reached": true, "reachedDate": "2024-08-15" },
+        { "amount": 5000.00, "reached": false, "reachedDate": null }
+      ],
+      "linkedCircles": ["circle-001"]
+    },
+    {
+      "id": "goal-002",
+      "title": "Home Down Payment",
+      "targetAmount": 25000.00,
+      "currentAmount": 8750.00,
+      "targetDate": "2026-12-31",
+      "createdAt": "2024-01-01",
+      "status": "on_track",
+      "progressPercent": 35,
+      "monthlyTarget": 680.00,
+      "actualMonthlyAverage": 729.00,
+      "milestones": [
+        { "amount": 5000.00, "reached": true, "reachedDate": "2024-07-10" },
+        { "amount": 12500.00, "reached": false, "reachedDate": null },
+        { "amount": 25000.00, "reached": false, "reachedDate": null }
+      ],
+      "linkedCircles": ["circle-002", "circle-003"]
+    },
+    {
+      "id": "goal-003",
+      "title": "Family Visit to Kenya",
+      "targetAmount": 3500.00,
+      "currentAmount": 500.00,
+      "targetDate": "2025-08-15",
+      "createdAt": "2025-01-05",
+      "status": "at_risk",
+      "progressPercent": 14,
+      "monthlyTarget": 428.00,
+      "actualMonthlyAverage": 500.00,
+      "milestones": [
+        { "amount": 1000.00, "reached": false, "reachedDate": null },
+        { "amount": 2500.00, "reached": false, "reachedDate": null },
+        { "amount": 3500.00, "reached": false, "reachedDate": null }
+      ],
+      "linkedCircles": []
+    }
+  ],
+  "circleHealthMetrics": {
+    "circleId": "circle-001",
+    "circleName": "Ubuntu Savings Circle",
+    "associationName": "Ubuntu Diaspora Association",
+    "status": "active",
+    "currentCycle": 8,
+    "totalCycles": 12,
+    "memberCount": 12,
+    "collectionRate": 97.5,
+    "collectionRateTrend": "stable",
+    "onTimePaymentRate": 94.2,
+    "onTimePaymentTrend": "up",
+    "totalCollected": 19200.00,
+    "totalDisbursed": 16800.00,
+    "emergencyFundBalance": 192.00,
+    "averageEngagementScore": 82,
+    "benchmarkComparison": {
+      "collectionRate": { "value": 97.5, "benchmark": 95.0, "status": "above" },
+      "onTimePayment": { "value": 94.2, "benchmark": 90.0, "status": "above" },
+      "engagement": { "value": 82, "benchmark": 75, "status": "above" }
+    },
+    "monthlyTrends": [
+      { "month": "2024-06", "collectionRate": 100, "onTimeRate": 91.7 },
+      { "month": "2024-07", "collectionRate": 100, "onTimeRate": 100 },
+      { "month": "2024-08", "collectionRate": 100, "onTimeRate": 91.7 },
+      { "month": "2024-09", "collectionRate": 91.7, "onTimeRate": 91.7 },
+      { "month": "2024-10", "collectionRate": 100, "onTimeRate": 100 },
+      { "month": "2024-11", "collectionRate": 100, "onTimeRate": 91.7 },
+      { "month": "2024-12", "collectionRate": 100, "onTimeRate": 100 },
+      { "month": "2025-01", "collectionRate": 100, "onTimeRate": 91.7 }
+    ],
+    "riskIndicators": {
+      "membersAtRisk": 1,
+      "latePaymentsThisMonth": 1,
+      "emergencyFundUsage": 0
+    }
+  },
+  "memberContributions": [
+    {
+      "userId": "user-001",
+      "name": "Amara Okonkwo",
+      "avatar": null,
+      "role": "organizer",
+      "totalContributed": 1600.00,
+      "onTimePayments": 8,
+      "latePayments": 0,
+      "missedPayments": 0,
+      "onTimeRate": 100,
+      "payoutReceived": true,
+      "payoutPosition": 1,
+      "trustScore": 892,
+      "status": "excellent"
+    },
+    {
+      "userId": "user-002",
+      "name": "Kwame Asante",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 7,
+      "latePayments": 1,
+      "missedPayments": 0,
+      "onTimeRate": 87.5,
+      "payoutReceived": true,
+      "payoutPosition": 2,
+      "trustScore": 834,
+      "status": "good"
+    },
+    {
+      "userId": "user-003",
+      "name": "Fatima Diallo",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 8,
+      "latePayments": 0,
+      "missedPayments": 0,
+      "onTimeRate": 100,
+      "payoutReceived": true,
+      "payoutPosition": 3,
+      "trustScore": 878,
+      "status": "excellent"
+    },
+    {
+      "userId": "user-004",
+      "name": "Nia Kamau",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 8,
+      "latePayments": 0,
+      "missedPayments": 0,
+      "onTimeRate": 100,
+      "payoutReceived": false,
+      "payoutPosition": 5,
+      "trustScore": 847,
+      "status": "excellent"
+    },
+    {
+      "userId": "user-005",
+      "name": "Kofi Mensah",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 7,
+      "latePayments": 1,
+      "missedPayments": 0,
+      "onTimeRate": 87.5,
+      "payoutReceived": true,
+      "payoutPosition": 4,
+      "trustScore": 812,
+      "status": "good"
+    },
+    {
+      "userId": "user-006",
+      "name": "Zainab Ahmed",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1400.00,
+      "onTimePayments": 6,
+      "latePayments": 1,
+      "missedPayments": 1,
+      "onTimeRate": 75,
+      "payoutReceived": false,
+      "payoutPosition": 6,
+      "trustScore": 756,
+      "status": "at_risk"
+    },
+    {
+      "userId": "user-007",
+      "name": "Emmanuel Osei",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 8,
+      "latePayments": 0,
+      "missedPayments": 0,
+      "onTimeRate": 100,
+      "payoutReceived": false,
+      "payoutPosition": 7,
+      "trustScore": 865,
+      "status": "excellent"
+    },
+    {
+      "userId": "user-008",
+      "name": "Aisha Diop",
+      "avatar": null,
+      "role": "member",
+      "totalContributed": 1600.00,
+      "onTimePayments": 7,
+      "latePayments": 1,
+      "missedPayments": 0,
+      "onTimeRate": 87.5,
+      "payoutReceived": false,
+      "payoutPosition": 8,
+      "trustScore": 823,
+      "status": "good"
+    }
+  ],
+  "associationMetrics": {
+    "associationId": "assoc-001",
+    "associationName": "Ubuntu Diaspora Association",
+    "totalMembers": 156,
+    "activeMembers": 142,
+    "totalCircles": 8,
+    "activeCircles": 6,
+    "completedCircles": 2,
+    "totalFundsUnderManagement": 245000.00,
+    "totalContributionsThisYear": 186500.00,
+    "totalPayoutsThisYear": 164000.00,
+    "averageCollectionRate": 96.2,
+    "averageOnTimeRate": 92.8,
+    "defaultRate": 1.2,
+    "defaultRateTrend": "down",
+    "emergencyFundBalance": 4850.00,
+    "emergencyFundUsageThisYear": 2,
+    "memberGrowthRate": 12.5,
+    "topPerformingCircles": [
+      { "id": "circle-001", "name": "Ubuntu Savings Circle", "collectionRate": 97.5 },
+      { "id": "circle-003", "name": "Harambee Growth Fund", "collectionRate": 96.8 },
+      { "id": "circle-004", "name": "Women's Empowerment Circle", "collectionRate": 95.5 }
+    ],
+    "circlesNeedingAttention": [
+      { "id": "circle-006", "name": "New Members Circle", "issue": "Low engagement", "collectionRate": 88.2 }
+    ],
+    "monthlyTrends": [
+      { "month": "2024-07", "contributions": 15200.00, "payouts": 12000.00, "members": 134 },
+      { "month": "2024-08", "contributions": 15800.00, "payouts": 14000.00, "members": 138 },
+      { "month": "2024-09", "contributions": 15400.00, "payouts": 12000.00, "members": 140 },
+      { "month": "2024-10", "contributions": 16200.00, "payouts": 16000.00, "members": 142 },
+      { "month": "2024-11", "contributions": 15900.00, "payouts": 14000.00, "members": 145 },
+      { "month": "2024-12", "contributions": 16500.00, "payouts": 18000.00, "members": 148 },
+      { "month": "2025-01", "contributions": 16800.00, "payouts": 14000.00, "members": 156 }
+    ]
+  },
+  "federationMetrics": {
+    "federationName": "CircleUp Global Federation",
+    "totalAssociations": 24,
+    "totalCircles": 186,
+    "totalMembers": 3842,
+    "totalFundsUnderManagement": 4250000.00,
+    "totalContributionsThisYear": 3180000.00,
+    "totalPayoutsThisYear": 2890000.00,
+    "averageCollectionRate": 94.8,
+    "averageDefaultRate": 1.8,
+    "kycCompletionRate": 87.5,
+    "regionalBreakdown": [
+      { "region": "Western Europe", "associations": 8, "members": 1245, "fundsUnderManagement": 1850000.00, "collectionRate": 96.2 },
+      { "region": "North America", "associations": 6, "members": 892, "fundsUnderManagement": 1420000.00, "collectionRate": 95.1 },
+      { "region": "East Africa", "associations": 5, "members": 986, "fundsUnderManagement": 580000.00, "collectionRate": 93.8 },
+      { "region": "West Africa", "associations": 3, "members": 524, "fundsUnderManagement": 285000.00, "collectionRate": 92.4 },
+      { "region": "Southern Africa", "associations": 2, "members": 195, "fundsUnderManagement": 115000.00, "collectionRate": 94.5 }
+    ],
+    "growthTrends": {
+      "memberGrowthRate": 18.5,
+      "associationGrowthRate": 12.0,
+      "fundsGrowthRate": 24.2
+    },
+    "complianceStatus": {
+      "associationsFullyCompliant": 21,
+      "associationsPendingReview": 2,
+      "associationsRequiringAction": 1
+    }
+  },
+  "associationBenchmarks": [
+    {
+      "associationId": "assoc-001",
+      "associationName": "Ubuntu Diaspora Association",
+      "region": "Western Europe",
+      "members": 156,
+      "circles": 8,
+      "collectionRate": 96.2,
+      "onTimeRate": 92.8,
+      "defaultRate": 1.2,
+      "engagementScore": 84,
+      "kycCompletionRate": 94.5,
+      "rank": 3
+    },
+    {
+      "associationId": "assoc-002",
+      "associationName": "Pan-African Professionals Network",
+      "region": "North America",
+      "members": 234,
+      "circles": 12,
+      "collectionRate": 97.8,
+      "onTimeRate": 95.2,
+      "defaultRate": 0.8,
+      "engagementScore": 89,
+      "kycCompletionRate": 98.2,
+      "rank": 1
+    },
+    {
+      "associationId": "assoc-003",
+      "associationName": "Susu Savings Collective",
+      "region": "Western Europe",
+      "members": 98,
+      "circles": 5,
+      "collectionRate": 94.5,
+      "onTimeRate": 91.0,
+      "defaultRate": 2.1,
+      "engagementScore": 76,
+      "kycCompletionRate": 89.8,
+      "rank": 8
+    },
+    {
+      "associationId": "assoc-004",
+      "associationName": "Tontine France",
+      "region": "Western Europe",
+      "members": 312,
+      "circles": 18,
+      "collectionRate": 96.8,
+      "onTimeRate": 94.1,
+      "defaultRate": 1.0,
+      "engagementScore": 86,
+      "kycCompletionRate": 96.5,
+      "rank": 2
+    },
+    {
+      "associationId": "assoc-005",
+      "associationName": "Chama Kenya Connect",
+      "region": "East Africa",
+      "members": 445,
+      "circles": 28,
+      "collectionRate": 93.2,
+      "onTimeRate": 88.5,
+      "defaultRate": 2.5,
+      "engagementScore": 78,
+      "kycCompletionRate": 82.1,
+      "rank": 5
+    }
+  ],
+  "statements": [
+    {
+      "id": "stmt-001",
+      "title": "Annual Statement 2024",
+      "type": "annual",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "generatedAt": "2025-01-02T10:30:00Z",
+      "format": "pdf",
+      "fileSize": "245 KB",
+      "downloadUrl": "/statements/stmt-001.pdf",
+      "summary": {
+        "totalContributions": 7200.00,
+        "totalPayoutsReceived": 4000.00,
+        "netSavings": 3200.00,
+        "transactionCount": 24
+      }
+    },
+    {
+      "id": "stmt-002",
+      "title": "Q4 2024 Statement",
+      "type": "quarterly",
+      "startDate": "2024-10-01",
+      "endDate": "2024-12-31",
+      "generatedAt": "2025-01-02T10:32:00Z",
+      "format": "pdf",
+      "fileSize": "128 KB",
+      "downloadUrl": "/statements/stmt-002.pdf",
+      "summary": {
+        "totalContributions": 1800.00,
+        "totalPayoutsReceived": 0.00,
+        "netSavings": 1800.00,
+        "transactionCount": 6
+      }
+    },
+    {
+      "id": "stmt-003",
+      "title": "December 2024 Statement",
+      "type": "monthly",
+      "startDate": "2024-12-01",
+      "endDate": "2024-12-31",
+      "generatedAt": "2025-01-01T08:00:00Z",
+      "format": "pdf",
+      "fileSize": "86 KB",
+      "downloadUrl": "/statements/stmt-003.pdf",
+      "summary": {
+        "totalContributions": 600.00,
+        "totalPayoutsReceived": 0.00,
+        "netSavings": 600.00,
+        "transactionCount": 2
+      }
+    },
+    {
+      "id": "stmt-004",
+      "title": "Custom Export - All Transactions",
+      "type": "custom",
+      "startDate": "2023-06-15",
+      "endDate": "2025-01-12",
+      "generatedAt": "2025-01-12T14:22:00Z",
+      "format": "csv",
+      "fileSize": "52 KB",
+      "downloadUrl": "/statements/stmt-004.csv",
+      "summary": {
+        "totalContributions": 14200.00,
+        "totalPayoutsReceived": 8500.00,
+        "netSavings": 5700.00,
+        "transactionCount": 48
+      }
+    }
+  ],
+  "scheduledReports": [
+    {
+      "id": "report-001",
+      "name": "Monthly Circle Health Report",
+      "type": "circle_health",
+      "circleId": "circle-001",
+      "circleName": "Ubuntu Savings Circle",
+      "frequency": "monthly",
+      "dayOfMonth": 1,
+      "format": "pdf",
+      "recipients": ["amara.okonkwo@email.com", "treasurer@ubuntu-assoc.org"],
+      "lastGenerated": "2025-01-01T06:00:00Z",
+      "nextGeneration": "2025-02-01T06:00:00Z",
+      "status": "active",
+      "createdBy": "Amara Okonkwo"
+    },
+    {
+      "id": "report-002",
+      "name": "Weekly Contribution Summary",
+      "type": "contribution_summary",
+      "circleId": "circle-001",
+      "circleName": "Ubuntu Savings Circle",
+      "frequency": "weekly",
+      "dayOfWeek": "monday",
+      "format": "pdf",
+      "recipients": ["amara.okonkwo@email.com"],
+      "lastGenerated": "2025-01-13T06:00:00Z",
+      "nextGeneration": "2025-01-20T06:00:00Z",
+      "status": "active",
+      "createdBy": "Amara Okonkwo"
+    },
+    {
+      "id": "report-003",
+      "name": "Quarterly Association Report",
+      "type": "association_summary",
+      "associationId": "assoc-001",
+      "associationName": "Ubuntu Diaspora Association",
+      "frequency": "quarterly",
+      "monthOfQuarter": 1,
+      "dayOfMonth": 5,
+      "format": "pdf",
+      "recipients": ["admin@ubuntu-assoc.org", "board@ubuntu-assoc.org"],
+      "lastGenerated": "2025-01-05T06:00:00Z",
+      "nextGeneration": "2025-04-05T06:00:00Z",
+      "status": "active",
+      "createdBy": "Association Admin"
+    },
+    {
+      "id": "report-004",
+      "name": "Annual Compliance Report",
+      "type": "compliance",
+      "associationId": "assoc-001",
+      "associationName": "Ubuntu Diaspora Association",
+      "frequency": "annually",
+      "monthOfYear": 1,
+      "dayOfMonth": 15,
+      "format": "pdf",
+      "recipients": ["compliance@ubuntu-assoc.org", "admin@circleup.com"],
+      "lastGenerated": "2024-01-15T06:00:00Z",
+      "nextGeneration": "2025-01-15T06:00:00Z",
+      "status": "active",
+      "createdBy": "Association Admin"
+    }
+  ],
+  "aiInsights": [
+    {
+      "id": "insight-001",
+      "type": "savings_projection",
+      "title": "You're on track for your Emergency Fund goal",
+      "description": "At your current savings rate, you'll reach your CHF 5,000 Emergency Fund goal by May 2025 — one month ahead of schedule!",
+      "priority": "positive",
+      "actionable": false,
+      "createdAt": "2025-01-12T08:00:00Z",
+      "relatedGoalId": "goal-001"
+    },
+    {
+      "id": "insight-002",
+      "type": "contribution_optimization",
+      "title": "Consider increasing your Harambee contribution",
+      "description": "Your payout from Harambee Growth Fund is scheduled for June. Increasing your contribution by CHF 100/month would boost your payout by CHF 300 and accelerate your Home Down Payment goal.",
+      "priority": "suggestion",
+      "actionable": true,
+      "action": {
+        "label": "Adjust Contribution",
+        "type": "adjust_contribution",
+        "circleId": "circle-003"
+      },
+      "createdAt": "2025-01-10T08:00:00Z",
+      "relatedGoalId": "goal-002"
+    },
+    {
+      "id": "insight-003",
+      "type": "risk_alert",
+      "title": "Family Visit goal needs attention",
+      "description": "Your Family Visit to Kenya goal is at risk. To meet your August deadline, you'd need to save CHF 428/month. Consider linking this goal to a circle or adjusting the target date.",
+      "priority": "warning",
+      "actionable": true,
+      "action": {
+        "label": "Adjust Goal",
+        "type": "edit_goal",
+        "goalId": "goal-003"
+      },
+      "createdAt": "2025-01-12T08:00:00Z",
+      "relatedGoalId": "goal-003"
+    },
+    {
+      "id": "insight-004",
+      "type": "payout_reminder",
+      "title": "Payout coming in 33 days",
+      "description": "Your CHF 2,400 payout from Ubuntu Savings Circle is scheduled for February 15. Make sure your bank details are up to date.",
+      "priority": "info",
+      "actionable": true,
+      "action": {
+        "label": "Verify Bank Details",
+        "type": "verify_payment_method"
+      },
+      "createdAt": "2025-01-13T08:00:00Z",
+      "relatedCircleId": "circle-001"
+    },
+    {
+      "id": "insight-005",
+      "type": "year_end_summary",
+      "title": "2024 was a great savings year!",
+      "description": "You contributed CHF 7,200 across 3 circles and received CHF 4,000 in payouts. Your net savings of CHF 3,200 was 51% higher than 2023. Keep up the great work!",
+      "priority": "positive",
+      "actionable": false,
+      "createdAt": "2025-01-02T08:00:00Z"
+    }
+  ],
+  "reportTypes": [
+    { "id": "personal_statement", "name": "Personal Statement", "description": "Your transaction history and savings summary" },
+    { "id": "circle_health", "name": "Circle Health Report", "description": "Collection rates, member engagement, and performance metrics" },
+    { "id": "contribution_summary", "name": "Contribution Summary", "description": "Detailed breakdown of contributions by member" },
+    { "id": "association_summary", "name": "Association Summary", "description": "Aggregate metrics across all circles" },
+    { "id": "compliance", "name": "Compliance Report", "description": "KYC status, transaction volumes, and regulatory data" },
+    { "id": "federation_overview", "name": "Federation Overview", "description": "Cross-association metrics and benchmarks" }
+  ],
+  "exportFormats": [
+    { "id": "pdf", "name": "PDF", "description": "Formatted document for printing or sharing" },
+    { "id": "csv", "name": "CSV", "description": "Spreadsheet-compatible data export" },
+    { "id": "xlsx", "name": "Excel", "description": "Excel workbook with multiple sheets" }
+  ]
+}

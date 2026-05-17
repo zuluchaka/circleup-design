@@ -1,0 +1,396 @@
+{
+  "_meta": {
+    "models": {
+      "users": "Platform user accounts at various stages of the registration and login journey — from brand new sign-ups to fully onboarded members.",
+      "trustScore": "The AI-generated reliability score assigned to each user, starting at 650 for new accounts and increasing as they complete profile steps.",
+      "onboardingSteps": "The steps in the profile completion wizard that new users walk through after verifying their email.",
+      "languages": "The available UI languages users can select from on any authentication page.",
+      "heroContent": "Value propositions, statistics, and testimonials displayed on the hero side of the split-layout auth pages.",
+      "passwordRequirements": "The validation rules shown to users when creating or resetting their password.",
+      "activeSessions": "Active login sessions for a user, showing device, location, and activity details.",
+      "referralCodes": "Referral codes that new users can enter during registration to earn Trust Score bonuses."
+    },
+    "relationships": [
+      "Each User has one TrustScore that starts at 650 and improves as they complete onboarding steps",
+      "Each User can have multiple ActiveSessions across different devices",
+      "OnboardingSteps are completed sequentially by a User after email verification",
+      "ReferralCodes link a referring User to a new registrant, granting both a +25 Trust Score bonus"
+    ]
+  },
+  "users": [
+    {
+      "id": "usr-001",
+      "email": "amina.diallo@gmail.com",
+      "firstName": "Amina",
+      "lastName": "Diallo",
+      "phone": "+41 78 912 3456",
+      "profilePhoto": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200",
+      "bio": "Leading the Swiss African Diaspora Federation since 2021. Passionate about financial inclusion and cross-association collaboration.",
+      "location": "Zürich, Switzerland",
+      "language": "fr",
+      "platformRole": "organizer",
+      "contextualRoles": [
+        { "scope": "federation", "title": "president", "entityName": "Swiss African Diaspora Federation" },
+        { "scope": "association", "title": "member", "entityName": "Solidarité Camerounaise Zürich" },
+        { "scope": "circle", "title": "participant", "entityName": "Tontine Espoir" }
+      ],
+      "authProvider": "email",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 945,
+      "kycStatus": "enhanced",
+      "createdAt": "2023-06-15T10:30:00Z",
+      "lastLoginAt": "2025-05-02T08:15:00Z"
+    },
+    {
+      "id": "usr-002",
+      "email": "jean-pierre.konan@bluewin.ch",
+      "firstName": "Jean-Pierre",
+      "lastName": "Konan",
+      "phone": "+41 79 234 5678",
+      "profilePhoto": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
+      "bio": "Federation treasurer managing collective funds across 12 associations. CPA with 15 years in Swiss banking.",
+      "location": "Genève, Switzerland",
+      "language": "fr",
+      "platformRole": "organizer",
+      "contextualRoles": [
+        { "scope": "federation", "title": "treasurer", "entityName": "Swiss African Diaspora Federation" },
+        { "scope": "association", "title": "member", "entityName": "Union des Ivoiriens de Genève" },
+        { "scope": "circle", "title": "participant", "entityName": "Susu Fraternité" }
+      ],
+      "authProvider": "email",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 912,
+      "kycStatus": "enhanced",
+      "createdAt": "2023-08-20T14:00:00Z",
+      "lastLoginAt": "2025-05-02T07:45:00Z"
+    },
+    {
+      "id": "usr-003",
+      "email": "fatou.barry@icloud.com",
+      "firstName": "Fatou",
+      "lastName": "Barry",
+      "phone": "+41 79 456 7890",
+      "profilePhoto": "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=200",
+      "bio": "President of Solidarité Genève since 2022. Building bridges between generations through community savings and cultural events.",
+      "location": "Genève, Switzerland",
+      "language": "fr",
+      "platformRole": "organizer",
+      "contextualRoles": [
+        { "scope": "association", "title": "president", "entityName": "Solidarité Genève" },
+        { "scope": "circle", "title": "organizer", "entityName": "Tontine Solidarité Mensuelle" },
+        { "scope": "circle", "title": "participant", "entityName": "Cercle des Mamans" }
+      ],
+      "authProvider": "apple",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 891,
+      "kycStatus": "enhanced",
+      "createdAt": "2024-03-10T09:00:00Z",
+      "lastLoginAt": "2025-04-30T19:45:00Z"
+    },
+    {
+      "id": "usr-004",
+      "email": "carlos.mensah@outlook.com",
+      "firstName": "Carlos",
+      "lastName": "Mensah",
+      "phone": "+41 76 789 0123",
+      "profilePhoto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
+      "bio": "Treasurer of the Accra Community Association Bern. Meticulous record keeper and advocate for financial transparency.",
+      "location": "Bern, Switzerland",
+      "language": "en",
+      "platformRole": "member",
+      "contextualRoles": [
+        { "scope": "association", "title": "treasurer", "entityName": "Accra Community Association Bern" },
+        { "scope": "circle", "title": "participant", "entityName": "Susu Savings Circle" }
+      ],
+      "authProvider": "google",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 782,
+      "kycStatus": "basic",
+      "createdAt": "2024-07-01T14:22:00Z",
+      "lastLoginAt": "2025-05-01T14:22:00Z"
+    },
+    {
+      "id": "usr-005",
+      "email": "sarah.weber@bluewin.ch",
+      "firstName": "Sarah",
+      "lastName": "Weber",
+      "phone": "+41 76 333 2211",
+      "profilePhoto": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
+      "bio": "Interested in community savings. New to ROSCAs but excited to learn!",
+      "location": "Bern, Switzerland",
+      "language": "de",
+      "platformRole": "member",
+      "contextualRoles": [
+        { "scope": "association", "title": "member", "entityName": "Accra Community Association Bern" },
+        { "scope": "circle", "title": "participant", "entityName": "Susu Savings Circle" }
+      ],
+      "authProvider": "google",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 710,
+      "kycStatus": "basic",
+      "createdAt": "2025-01-20T16:30:00Z",
+      "lastLoginAt": "2025-05-01T07:00:00Z"
+    },
+    {
+      "id": "usr-006",
+      "email": "kwame.asante@gmail.com",
+      "firstName": "Kwame",
+      "lastName": "Asante",
+      "phone": "+41 78 555 6677",
+      "profilePhoto": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+      "bio": "Circle organizer running 3 active tontines. Helping newcomers understand the power of community savings.",
+      "location": "Lausanne, Switzerland",
+      "language": "en",
+      "platformRole": "organizer",
+      "contextualRoles": [
+        { "scope": "circle", "title": "organizer", "entityName": "Lausanne Susu Weekly" },
+        { "scope": "circle", "title": "organizer", "entityName": "Diaspora Savings Monthly" },
+        { "scope": "circle", "title": "organizer", "entityName": "Newcomers Circle" },
+        { "scope": "association", "title": "member", "entityName": "Pan-African Association Lausanne" }
+      ],
+      "authProvider": "email",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 856,
+      "kycStatus": "basic",
+      "createdAt": "2024-01-15T11:00:00Z",
+      "lastLoginAt": "2025-05-02T06:30:00Z"
+    },
+    {
+      "id": "usr-007",
+      "email": "elena.martinez@circleup.ch",
+      "firstName": "Elena",
+      "lastName": "Martinez",
+      "phone": "+41 79 111 2233",
+      "profilePhoto": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200",
+      "bio": "CircleUp platform administrator. Ensuring compliance, resolving disputes, and keeping the community safe.",
+      "location": "Zürich, Switzerland",
+      "language": "en",
+      "platformRole": "admin",
+      "contextualRoles": [
+        { "scope": "platform", "title": "admin", "entityName": "CircleUp" }
+      ],
+      "authProvider": "email",
+      "emailVerified": true,
+      "onboardingComplete": true,
+      "trustScore": 1000,
+      "kycStatus": "enhanced",
+      "createdAt": "2023-01-01T09:00:00Z",
+      "lastLoginAt": "2025-05-02T09:00:00Z"
+    },
+    {
+      "id": "usr-008",
+      "email": "ibrahim.silva@proton.me",
+      "firstName": "Ibrahim",
+      "lastName": "Silva",
+      "phone": null,
+      "profilePhoto": null,
+      "bio": null,
+      "location": null,
+      "language": "pt",
+      "platformRole": "member",
+      "contextualRoles": [],
+      "authProvider": "email",
+      "emailVerified": false,
+      "onboardingComplete": false,
+      "trustScore": 650,
+      "kycStatus": "none",
+      "createdAt": "2025-05-02T11:05:00Z",
+      "lastLoginAt": null
+    },
+    {
+      "id": "usr-009",
+      "email": "marco.rossi@proton.me",
+      "firstName": "Marco",
+      "lastName": "Rossi",
+      "phone": "+41 77 888 9900",
+      "profilePhoto": null,
+      "bio": null,
+      "location": "Lugano, Switzerland",
+      "language": "it",
+      "platformRole": "member",
+      "contextualRoles": [
+        { "scope": "circle", "title": "participant", "entityName": "Tontine Ticino" }
+      ],
+      "authProvider": "email",
+      "emailVerified": true,
+      "onboardingComplete": false,
+      "trustScore": 650,
+      "kycStatus": "none",
+      "failedLoginAttempts": 5,
+      "lockedUntil": "2025-05-02T12:15:00Z",
+      "createdAt": "2025-04-28T10:00:00Z",
+      "lastLoginAt": "2025-04-28T10:05:00Z"
+    }
+  ],
+  "trustScore": {
+    "defaultScore": 650,
+    "maxScore": 1000,
+    "factors": {
+      "paymentHistory": { "weight": 0.40, "label": "Payment History" },
+      "verification": { "weight": 0.20, "label": "Verification" },
+      "tenure": { "weight": 0.15, "label": "Tenure" },
+      "engagement": { "weight": 0.10, "label": "Engagement" },
+      "network": { "weight": 0.10, "label": "Network" },
+      "external": { "weight": 0.05, "label": "External" }
+    },
+    "onboardingBonuses": {
+      "emailVerified": 0,
+      "profilePhoto": 15,
+      "phoneNumber": 20,
+      "bio": 10,
+      "location": 10,
+      "languagePreference": 5,
+      "referralBonus": 25
+    }
+  },
+  "onboardingSteps": [
+    {
+      "id": "step-photo",
+      "order": 1,
+      "title": "Add a Profile Photo",
+      "description": "Help your community recognize you. A photo builds trust with fellow circle members.",
+      "field": "profilePhoto",
+      "trustScoreBonus": 15,
+      "required": false,
+      "icon": "camera"
+    },
+    {
+      "id": "step-phone",
+      "order": 2,
+      "title": "Verify Your Phone Number",
+      "description": "Add a phone number for payment reminders and important notifications about your circles.",
+      "field": "phone",
+      "trustScoreBonus": 20,
+      "required": false,
+      "icon": "phone"
+    },
+    {
+      "id": "step-bio",
+      "order": 3,
+      "title": "Tell Us About Yourself",
+      "description": "A short bio helps association leaders and circle organizers get to know you.",
+      "field": "bio",
+      "trustScoreBonus": 10,
+      "required": false,
+      "icon": "user"
+    },
+    {
+      "id": "step-location",
+      "order": 4,
+      "title": "Set Your Location",
+      "description": "Find associations and circles near you. Your city helps us recommend local communities.",
+      "field": "location",
+      "trustScoreBonus": 10,
+      "required": false,
+      "icon": "map-pin"
+    },
+    {
+      "id": "step-language",
+      "order": 5,
+      "title": "Choose Your Language",
+      "description": "Select your preferred language for the CircleUp interface and notifications.",
+      "field": "language",
+      "trustScoreBonus": 5,
+      "required": false,
+      "icon": "globe"
+    }
+  ],
+  "languages": [
+    { "code": "en", "label": "English", "flag": "🇬🇧" },
+    { "code": "fr", "label": "Français", "flag": "🇫🇷" },
+    { "code": "de", "label": "Deutsch", "flag": "🇩🇪" },
+    { "code": "it", "label": "Italiano", "flag": "🇮🇹" },
+    { "code": "pt", "label": "Português", "flag": "🇵🇹" }
+  ],
+  "heroContent": {
+    "tagline": "Community savings, modernized.",
+    "headline": "Join thousands building prosperity together",
+    "description": "CircleUp empowers diaspora associations and savings communities with AI-powered tools for ROSCA circles, collective governance, and financial inclusion.",
+    "stats": [
+      { "value": "1B+", "label": "Global ROSCA participants" },
+      { "value": "CHF 2.4M", "label": "Saved through CircleUp" },
+      { "value": "98.7%", "label": "On-time contribution rate" }
+    ],
+    "valueProps": [
+      {
+        "title": "AI Trust Scores",
+        "description": "Every member gets a transparent reliability rating (0-1000) based on payment history and engagement."
+      },
+      {
+        "title": "Emergency Fund Protection",
+        "description": "1% of contributions automatically pooled to cover defaults — your savings are protected."
+      },
+      {
+        "title": "Your Culture, Your Way",
+        "description": "Susu, tontine, paluwagan, tanda — CircleUp speaks your language and respects your traditions."
+      }
+    ],
+    "testimonial": {
+      "quote": "CircleUp transformed how our association manages our tontine. Transparent, fair, and everyone trusts the system now.",
+      "author": "Marie Nguesso",
+      "role": "President, Solidarité Camerounaise Genève",
+      "avatar": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100"
+    }
+  },
+  "passwordRequirements": [
+    { "id": "length", "label": "At least 8 characters", "regex": ".{8,}" },
+    { "id": "uppercase", "label": "One uppercase letter", "regex": "[A-Z]" },
+    { "id": "number", "label": "One number", "regex": "[0-9]" }
+  ],
+  "activeSessions": [
+    {
+      "id": "sess-001",
+      "deviceType": "desktop",
+      "browser": "Chrome 124",
+      "os": "macOS 14.4",
+      "ipAddress": "195.176.xxx.xxx",
+      "location": "Zürich, Switzerland",
+      "lastActive": "2025-05-02T08:15:00Z",
+      "isCurrent": true
+    },
+    {
+      "id": "sess-002",
+      "deviceType": "mobile",
+      "browser": "Safari 17",
+      "os": "iOS 17.4",
+      "ipAddress": "31.10.xxx.xxx",
+      "location": "Zürich, Switzerland",
+      "lastActive": "2025-05-01T22:30:00Z",
+      "isCurrent": false
+    },
+    {
+      "id": "sess-003",
+      "deviceType": "tablet",
+      "browser": "Firefox 125",
+      "os": "iPadOS 17.4",
+      "ipAddress": "178.197.xxx.xxx",
+      "location": "Bern, Switzerland",
+      "lastActive": "2025-04-28T14:00:00Z",
+      "isCurrent": false
+    }
+  ],
+  "referralCodes": [
+    {
+      "code": "AMINA-2024",
+      "referrerId": "usr-001",
+      "referrerName": "Amina Diallo",
+      "trustScoreBonus": 25,
+      "used": false
+    },
+    {
+      "code": "FATOU-SAVE",
+      "referrerId": "usr-003",
+      "referrerName": "Fatou Barry",
+      "trustScoreBonus": 25,
+      "used": true,
+      "usedBy": "usr-005",
+      "usedAt": "2025-01-20T16:30:00Z"
+    }
+  ]
+}

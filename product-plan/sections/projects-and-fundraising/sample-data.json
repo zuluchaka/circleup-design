@@ -1,0 +1,351 @@
+{
+  "_meta": {
+    "models": {
+      "campaigns": "Fundraising campaigns created by associations to raise money for specific projects or initiatives.",
+      "donations": "Individual contributions made to campaigns, including one-time and recurring donations.",
+      "campaignUpdates": "Progress updates posted by campaign organizers to keep donors informed.",
+      "matchingConfigs": "Configuration for matching campaigns where donations are multiplied by sponsors.",
+      "donors": "People who have contributed to campaigns, with their giving history and tier status."
+    },
+    "relationships": [
+      "Each Campaign belongs to one Association",
+      "Donations are linked to Campaigns and optionally to registered Users",
+      "CampaignUpdates are posted to Campaigns by admin users",
+      "MatchingConfig is optional and linked 1:1 with a Campaign",
+      "Donors may have multiple Donations across multiple Campaigns"
+    ]
+  },
+
+  "campaigns": [
+    {
+      "id": "campaign-001",
+      "associationId": "assoc-001",
+      "associationName": "Swiss Tech Professionals",
+      "title": "Emergency Support Fund for Laid-off Members",
+      "description": "The tech industry has seen significant layoffs in 2025-2026. This emergency fund provides immediate financial support to association members who have lost their jobs, helping them cover essential expenses while they search for new employment.\n\nFunds will be distributed based on need, with priority given to members with families and those who have been active contributors to the association.",
+      "coverImage": "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=1200",
+      "mediaGallery": [
+        {
+          "id": "media-001",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800",
+          "caption": "Supporting our community through difficult times"
+        }
+      ],
+      "category": "emergency",
+      "goalAmount": 50000,
+      "raisedAmount": 38750,
+      "currency": "CHF",
+      "startDate": "2026-01-01T00:00:00Z",
+      "endDate": "2026-03-31T23:59:59Z",
+      "status": "active",
+      "visibility": "members",
+      "allowAnonymous": true,
+      "minDonation": 10,
+      "suggestedAmounts": [25, 50, 100, 250, 500],
+      "donorCount": 127,
+      "matchingConfig": {
+        "id": "match-001",
+        "campaignId": "campaign-001",
+        "sponsorName": "TechCorp Foundation",
+        "sponsorLogo": "https://example.com/techcorp-logo.png",
+        "matchRatio": 1.0,
+        "matchCap": 25000,
+        "matchedSoFar": 18750,
+        "startDate": "2026-01-01T00:00:00Z",
+        "endDate": "2026-02-28T23:59:59Z",
+        "isActive": true
+      },
+      "createdAt": "2025-12-15T10:00:00Z",
+      "createdBy": "user-admin-001"
+    },
+    {
+      "id": "campaign-002",
+      "associationId": "assoc-002",
+      "associationName": "West African Diaspora Geneva",
+      "title": "Community Center Renovation Project",
+      "description": "Our community center has served the West African diaspora in Geneva for over 15 years. It's time for a major renovation to improve accessibility, upgrade facilities, and create more space for cultural events and youth programs.\n\nThe renovation will include:\n- New accessible entrance and elevator\n- Upgraded kitchen facilities\n- Modern audio/visual equipment\n- Expanded children's play area\n- Solar panels for energy efficiency",
+      "coverImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200",
+      "mediaGallery": [
+        {
+          "id": "media-002",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800",
+          "caption": "Current community center"
+        },
+        {
+          "id": "media-003",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+          "caption": "Planned renovation design"
+        }
+      ],
+      "category": "infrastructure",
+      "goalAmount": 120000,
+      "raisedAmount": 67500,
+      "currency": "CHF",
+      "startDate": "2025-11-01T00:00:00Z",
+      "endDate": "2026-06-30T23:59:59Z",
+      "status": "active",
+      "visibility": "public",
+      "allowAnonymous": true,
+      "minDonation": 20,
+      "suggestedAmounts": [50, 100, 250, 500, 1000],
+      "donorCount": 234,
+      "matchingConfig": null,
+      "createdAt": "2025-10-20T14:30:00Z",
+      "createdBy": "user-admin-002"
+    },
+    {
+      "id": "campaign-003",
+      "associationId": "assoc-003",
+      "associationName": "Zurich Young Professionals",
+      "title": "Scholarship Fund for Career Development",
+      "description": "Education is the key to professional growth. This scholarship fund supports association members pursuing certifications, courses, and advanced degrees that will enhance their careers.\n\nScholarships cover:\n- Professional certifications (AWS, Google, etc.)\n- Language courses\n- MBA and executive education programs\n- Conference attendance and workshops",
+      "coverImage": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200",
+      "mediaGallery": [],
+      "category": "education",
+      "goalAmount": 30000,
+      "raisedAmount": 30000,
+      "currency": "CHF",
+      "startDate": "2025-09-01T00:00:00Z",
+      "endDate": "2025-12-31T23:59:59Z",
+      "status": "completed",
+      "visibility": "members",
+      "allowAnonymous": false,
+      "minDonation": 25,
+      "suggestedAmounts": [50, 100, 200, 500],
+      "donorCount": 89,
+      "matchingConfig": null,
+      "createdAt": "2025-08-15T09:00:00Z",
+      "createdBy": "user-admin-003"
+    }
+  ],
+
+  "donations": [
+    {
+      "id": "donation-001",
+      "campaignId": "campaign-001",
+      "donorId": "user-001",
+      "donorName": "Marco Bernasconi",
+      "donorEmail": "marco@example.com",
+      "donorAvatar": "https://i.pravatar.cc/150?u=marco",
+      "amount": 500,
+      "currency": "CHF",
+      "isAnonymous": false,
+      "isRecurring": false,
+      "message": "Glad to support our colleagues during tough times. Stay strong!",
+      "status": "completed",
+      "paymentMethod": "card",
+      "transactionId": "txn_abc123",
+      "matchedAmount": 500,
+      "createdAt": "2026-01-10T14:30:00Z"
+    },
+    {
+      "id": "donation-002",
+      "campaignId": "campaign-001",
+      "donorId": null,
+      "donorName": "Anonymous",
+      "donorEmail": "anonymous@example.com",
+      "amount": 1000,
+      "currency": "CHF",
+      "isAnonymous": true,
+      "isRecurring": false,
+      "status": "completed",
+      "paymentMethod": "bank_transfer",
+      "transactionId": "txn_def456",
+      "matchedAmount": 1000,
+      "createdAt": "2026-01-09T11:00:00Z"
+    },
+    {
+      "id": "donation-003",
+      "campaignId": "campaign-001",
+      "donorId": "user-002",
+      "donorName": "Sophie Müller",
+      "donorEmail": "sophie@example.com",
+      "donorAvatar": "https://i.pravatar.cc/150?u=sophie",
+      "amount": 100,
+      "currency": "CHF",
+      "isAnonymous": false,
+      "isRecurring": true,
+      "recurringFrequency": "monthly",
+      "message": "Happy to contribute monthly until the goal is reached.",
+      "status": "completed",
+      "paymentMethod": "card",
+      "transactionId": "txn_ghi789",
+      "matchedAmount": 100,
+      "createdAt": "2026-01-08T09:15:00Z"
+    },
+    {
+      "id": "donation-004",
+      "campaignId": "campaign-002",
+      "donorId": "user-003",
+      "donorName": "Amadou Diallo",
+      "donorEmail": "amadou@example.com",
+      "donorAvatar": "https://i.pravatar.cc/150?u=amadou",
+      "amount": 250,
+      "currency": "CHF",
+      "isAnonymous": false,
+      "isRecurring": false,
+      "message": "For the children's play area - let's give them a great space!",
+      "status": "completed",
+      "paymentMethod": "card",
+      "transactionId": "txn_jkl012",
+      "matchedAmount": 0,
+      "createdAt": "2026-01-07T16:45:00Z"
+    },
+    {
+      "id": "donation-005",
+      "campaignId": "campaign-002",
+      "donorId": "user-004",
+      "donorName": "Fatou Sow",
+      "donorEmail": "fatou@example.com",
+      "donorAvatar": "https://i.pravatar.cc/150?u=fatou",
+      "amount": 1000,
+      "currency": "CHF",
+      "isAnonymous": false,
+      "isRecurring": false,
+      "message": "This center has been my second home. Proud to contribute!",
+      "status": "completed",
+      "paymentMethod": "bank_transfer",
+      "transactionId": "txn_mno345",
+      "matchedAmount": 0,
+      "createdAt": "2026-01-05T10:30:00Z"
+    }
+  ],
+
+  "campaignUpdates": [
+    {
+      "id": "update-001",
+      "campaignId": "campaign-001",
+      "title": "We've reached 75% of our goal!",
+      "content": "Thanks to your incredible generosity, we've now raised CHF 37,500 - 75% of our CHF 50,000 goal!\n\nSo far, we've been able to provide emergency grants to 8 members who lost their jobs in the recent tech layoffs. Each grant of CHF 3,000-5,000 has helped cover rent, insurance, and essential living expenses while they search for new positions.\n\nThe matching from TechCorp Foundation has been instrumental - every franc you donate is doubled!\n\nLet's push to reach our goal before the March deadline.",
+      "media": [
+        {
+          "id": "update-media-001",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800",
+          "caption": "Thank you to all our donors!"
+        }
+      ],
+      "isPinned": true,
+      "publishedAt": "2026-01-10T12:00:00Z",
+      "authorId": "user-admin-001",
+      "authorName": "Elena Rossi",
+      "authorAvatar": "https://i.pravatar.cc/150?u=elena"
+    },
+    {
+      "id": "update-002",
+      "campaignId": "campaign-002",
+      "title": "Architectural plans approved!",
+      "content": "Great news! The city of Geneva has approved our renovation plans. Construction will begin in March 2026.\n\nWe're now 56% of the way to our goal. The accessibility improvements alone will cost CHF 45,000, so every contribution matters.\n\nCome visit the center this weekend to see the current space and the planned improvements. We'll have the architect's renderings on display.",
+      "media": [
+        {
+          "id": "update-media-002",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800",
+          "caption": "Approved architectural plans"
+        }
+      ],
+      "isPinned": false,
+      "publishedAt": "2026-01-08T15:30:00Z",
+      "authorId": "user-admin-002",
+      "authorName": "Mamadou Keita",
+      "authorAvatar": "https://i.pravatar.cc/150?u=mamadou"
+    },
+    {
+      "id": "update-003",
+      "campaignId": "campaign-003",
+      "title": "Goal reached! Thank you!",
+      "content": "We did it! Thanks to 89 generous donors, we've reached our CHF 30,000 goal for the 2025-2026 scholarship fund.\n\nApplications are now open for:\n- 10 professional certification scholarships (up to CHF 1,500 each)\n- 5 language course scholarships (up to CHF 2,000 each)\n- 2 executive education scholarships (up to CHF 5,000 each)\n\nApply through your member portal by January 31st.",
+      "media": [],
+      "isPinned": true,
+      "publishedAt": "2025-12-31T18:00:00Z",
+      "authorId": "user-admin-003",
+      "authorName": "Thomas Weber",
+      "authorAvatar": "https://i.pravatar.cc/150?u=thomas"
+    }
+  ],
+
+  "donors": [
+    {
+      "id": "donor-001",
+      "userId": "user-001",
+      "name": "Marco Bernasconi",
+      "email": "marco@example.com",
+      "avatar": "https://i.pravatar.cc/150?u=marco",
+      "tier": "gold",
+      "totalDonated": 2500,
+      "donationCount": 5,
+      "firstDonation": "2025-03-15T00:00:00Z",
+      "lastDonation": "2026-01-10T14:30:00Z",
+      "isRecurringDonor": false,
+      "campaigns": ["campaign-001", "campaign-003"],
+      "showOnWall": true
+    },
+    {
+      "id": "donor-002",
+      "userId": "user-002",
+      "name": "Sophie Müller",
+      "email": "sophie@example.com",
+      "avatar": "https://i.pravatar.cc/150?u=sophie",
+      "tier": "silver",
+      "totalDonated": 600,
+      "donationCount": 6,
+      "firstDonation": "2025-08-01T00:00:00Z",
+      "lastDonation": "2026-01-08T09:15:00Z",
+      "isRecurringDonor": true,
+      "campaigns": ["campaign-001"],
+      "showOnWall": true
+    },
+    {
+      "id": "donor-003",
+      "userId": "user-004",
+      "name": "Fatou Sow",
+      "email": "fatou@example.com",
+      "avatar": "https://i.pravatar.cc/150?u=fatou",
+      "tier": "platinum",
+      "totalDonated": 5000,
+      "donationCount": 3,
+      "firstDonation": "2025-06-01T00:00:00Z",
+      "lastDonation": "2026-01-05T10:30:00Z",
+      "isRecurringDonor": false,
+      "campaigns": ["campaign-002", "campaign-003"],
+      "showOnWall": true
+    }
+  ],
+
+  "donorStats": {
+    "totalDonors": 312,
+    "recurringDonors": 45,
+    "averageDonation": 175,
+    "retentionRate": 0.68,
+    "tierBreakdown": {
+      "bronze": 198,
+      "silver": 78,
+      "gold": 28,
+      "platinum": 8
+    }
+  },
+
+  "campaignStats": {
+    "campaign-001": {
+      "totalRaised": 38750,
+      "goalProgress": 0.775,
+      "donorCount": 127,
+      "averageDonation": 305,
+      "recurringRevenue": 2400,
+      "matchedTotal": 18750,
+      "daysRemaining": 79,
+      "donationTrend": [
+        { "date": "2026-01-04", "amount": 4500, "count": 12 },
+        { "date": "2026-01-05", "amount": 3200, "count": 15 },
+        { "date": "2026-01-06", "amount": 2800, "count": 11 },
+        { "date": "2026-01-07", "amount": 5100, "count": 18 },
+        { "date": "2026-01-08", "amount": 4200, "count": 14 },
+        { "date": "2026-01-09", "amount": 3800, "count": 13 },
+        { "date": "2026-01-10", "amount": 2900, "count": 10 }
+      ]
+    }
+  }
+}
