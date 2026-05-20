@@ -11,7 +11,10 @@ This section is the canonical home for the **Associations stacked-card layout pa
 ### Membership lifecycle
 - **My Associations Dashboard** — All associations the user belongs to with role badges (President, Treasurer, Secretary, Organizer, Member), member count, unread activity, quick actions; "Discover" and "Create" entry points. Surfaces two inline lifecycle sections at the top:
   - **Pending invitations** — invitations received from other associations, with inline Accept / Decline.
-  - **Pending requests** — join requests the user has submitted that are still awaiting approval, with status, expiry, and a Cancel request action. Cancelling removes the request from the association's review queue.
+  - **Join requests** — every join request the user has submitted, surfaced as a tri-state card so the applicant sees the decision the moment it lands:
+    - `pending` — amber accent, "REQUEST SENT", awaiting-approval line with expiry countdown, applicant-message quote, and a Cancel request action (confirm-in-place). Cancelling removes the request from the association's review queue.
+    - `approved` — emerald accent, "REQUEST APPROVED", decision date + decider name, "You're now a member", primary `Open association` CTA, Dismiss to clear the card.
+    - `rejected` — red accent, "REQUEST DECLINED", decision date + decider name, the president's `rejectionReason` rendered as a quoted reason block, Dismiss action. The reason is the same string the president typed in the Join Request Review modal.
   - **Empty state** — first-time users with no associations, no invitations and no pending requests see a single empty-state card with "Browse Associations" and (when a payment card is on file) "Create Your Own"; otherwise a contextual nudge to add a card before creating.
 - **Multi-Association Dashboard** — For users in many associations, a higher-density cross-association overview with switcher and consolidated counts.
 - **My Associations List** — A denser, single-column alternative to the Dashboard for power-users. Same data, no inline lifecycle sections, sorted list of belongings; used inside compact shell layouts and as a fallback when the dashboard cards would scroll excessively.

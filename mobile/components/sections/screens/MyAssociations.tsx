@@ -125,13 +125,18 @@ const PENDING_INVITATIONS: Invitation[] = [
   },
 ];
 
+type RequestStatus = "pending" | "approved" | "rejected";
+
 type SentRequest = {
   id: string;
   associationName: string;
   logo: string;
   sentLabel: string;
   message: string;
+  status: RequestStatus;
   expiresIn?: string;
+  decisionLabel?: string;
+  rejectionReason?: string;
 };
 
 const PENDING_REQUESTS: SentRequest[] = [
@@ -142,6 +147,7 @@ const PENDING_REQUESTS: SentRequest[] = [
     sentLabel: "Sent May 2",
     message:
       "Bonjour, je viens de m'installer à Lausanne et j'aimerais rejoindre la communauté.",
+    status: "pending",
     expiresIn: "Expires in 14 days",
   },
   {
@@ -151,7 +157,28 @@ const PENDING_REQUESTS: SentRequest[] = [
     sentLabel: "Sent May 11",
     message:
       "I run a logistics startup in Geneva and would like to connect with other founders.",
+    status: "pending",
     expiresIn: "Expires in 23 days",
+  },
+  {
+    id: "sreq3",
+    associationName: "Cape Verdean Mutual Aid",
+    logo: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=200&h=200&fit=crop",
+    sentLabel: "Sent May 15",
+    message: "I lived in Praia for 5 years and would love to stay connected with the community here.",
+    status: "approved",
+    decisionLabel: "Approved May 19 by Jorge Brito",
+  },
+  {
+    id: "sreq4",
+    associationName: "Eritrean Welfare Geneva",
+    logo: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=200&h=200&fit=crop",
+    sentLabel: "Sent May 9",
+    message: "Hi, I would like to join your circle.",
+    status: "rejected",
+    decisionLabel: "Declined May 18 by Saba Tesfay",
+    rejectionReason:
+      "Membership currently limited to families with ties to the Asmara region — we'd welcome a referral from an existing member.",
   },
 ];
 
@@ -363,6 +390,95 @@ function InvitationCard({ inv, t }: { inv: Invitation; t: AppTheme }) {
 }
 
 function RequestCard({ req, t }: { req: SentRequest; t: AppTheme }) {
+  if (req.status === "approved") {
+    return (
+      <View style={[styles.invCard, { backgroundColor: t.successSoft, borderColor: t.success }]}>
+        <View style={{ flexDirection: "row", gap: space.md, alignItems: "center" }}>
+          <Image source={{ uri: req.logo }} style={styles.invLogo} />
+          <View style={{ flex: 1, gap: 2 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+              <Check size={11} color={t.success} />
+              <Text variant="micro" weight="bold" style={{ color: t.success, letterSpacing: 1 }}>
+                REQUEST APPROVED
+              </Text>
+            </View>
+            <Text variant="bodySmall" weight="semibold">
+              {req.associationName}
+            </Text>
+            <Text variant="caption" tone="secondary">
+              {req.decisionLabel ?? "Approved"} · You're now a member
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: "row", gap: space.sm, marginTop: space.md }}>
+          <Pressable style={[styles.btnGhost, { backgroundColor: t.bgElevated, borderColor: t.border }]}>
+            <Text variant="caption" weight="semibold" tone="secondary">
+              Dismiss
+            </Text>
+          </Pressable>
+          <Pressable style={[styles.btnPrimary, { backgroundColor: t.success }]}>
+            <Text variant="caption" weight="bold" style={{ color: "#fff" }}>
+              Open association
+            </Text>
+            <ChevronRight size={13} color="#fff" />
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
+
+  if (req.status === "rejected") {
+    return (
+      <View style={[styles.invCard, { backgroundColor: t.dangerSoft, borderColor: t.danger }]}>
+        <View style={{ flexDirection: "row", gap: space.md, alignItems: "flex-start" }}>
+          <Image source={{ uri: req.logo }} style={styles.invLogo} />
+          <View style={{ flex: 1, gap: 2 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+              <X size={11} color={t.danger} />
+              <Text variant="micro" weight="bold" style={{ color: t.danger, letterSpacing: 1 }}>
+                REQUEST DECLINED
+              </Text>
+            </View>
+            <Text variant="bodySmall" weight="semibold">
+              {req.associationName}
+            </Text>
+            <Text variant="caption" tone="secondary">
+              {req.decisionLabel ?? "Declined"}
+            </Text>
+          </View>
+        </View>
+        {req.rejectionReason ? (
+          <View
+            style={{
+              marginTop: space.sm,
+              backgroundColor: t.bgElevated,
+              borderLeftWidth: 2,
+              borderLeftColor: t.danger,
+              paddingHorizontal: space.sm,
+              paddingVertical: space.xs,
+              borderRadius: radius.sm,
+            }}
+          >
+            <Text variant="micro" weight="bold" style={{ color: t.danger, marginBottom: 2 }}>
+              REASON
+            </Text>
+            <Text variant="caption" tone="secondary">
+              {req.rejectionReason}
+            </Text>
+          </View>
+        ) : null}
+        <View style={{ flexDirection: "row", gap: space.sm, marginTop: space.md }}>
+          <Pressable style={[styles.btnGhost, { backgroundColor: t.bgElevated, borderColor: t.border }]}>
+            <Text variant="caption" weight="semibold" tone="secondary">
+              Dismiss
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
+
+  // Pending
   return (
     <View style={[styles.invCard, { backgroundColor: t.warningSoft, borderColor: t.warning }]}>
       <View style={{ flexDirection: "row", gap: space.md, alignItems: "center" }}>
@@ -507,13 +623,13 @@ export function MyAssociations() {
           </View>
         ) : null}
 
-        {/* Pending requests (outbound) */}
+        {/* Join requests (outbound, all states) */}
         {PENDING_REQUESTS.length > 0 ? (
           <View style={{ paddingHorizontal: space.lg, marginTop: space.xl, gap: space.md }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
               <Clock size={16} color={t.warning} />
               <Text variant="h3" weight="bold">
-                Pending requests
+                Join requests
               </Text>
               <View style={[styles.countDot, { backgroundColor: t.warning }]}>
                 <Text variant="micro" weight="bold" style={{ color: "#fff" }}>

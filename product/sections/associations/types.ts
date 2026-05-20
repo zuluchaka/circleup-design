@@ -214,6 +214,12 @@ export interface SentJoinRequest {
   requestedAt: string
   status: JoinRequestStatus
   expiresAt?: string | null
+  /** When the president made a decision (approved/rejected). */
+  decidedAt?: string | null
+  /** Display name of the decision maker. */
+  decidedByName?: string | null
+  /** Free-text reason supplied by the president on rejection. Surfaced back to the applicant. */
+  rejectionReason?: string | null
 }
 
 export interface DiscoverableAssociation {

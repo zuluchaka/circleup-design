@@ -22,6 +22,7 @@ export default function MyAssociationsDashboardPreview() {
         onAcceptInvitation={(id) => console.log('Accept invitation:', id)}
         onDeclineInvitation={(id) => console.log('Decline invitation:', id)}
         onCancelJoinRequest={(id) => console.log('Cancel join request:', id)}
+        onDismissJoinRequest={(id) => console.log('Dismiss join request:', id)}
       />
     </div>
   )

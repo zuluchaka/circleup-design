@@ -511,6 +511,37 @@
       "requestedAt": "2026-05-11T09:05:00Z",
       "status": "pending",
       "expiresAt": "2026-06-11T09:05:00Z"
+    },
+    {
+      "id": "sreq-003",
+      "associationId": "assoc-013",
+      "associationName": "Cape Verdean Mutual Aid",
+      "associationLogo": "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=200&h=200&fit=crop",
+      "associationType": "social",
+      "associationMemberCount": 78,
+      "associationCountry": "Switzerland",
+      "associationLanguage": "pt",
+      "message": "I lived in Praia for 5 years and would love to stay connected with the community here.",
+      "requestedAt": "2026-05-15T08:00:00Z",
+      "status": "approved",
+      "decidedAt": "2026-05-19T16:42:00Z",
+      "decidedByName": "Jorge Brito"
+    },
+    {
+      "id": "sreq-004",
+      "associationId": "assoc-014",
+      "associationName": "Eritrean Welfare Geneva",
+      "associationLogo": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=200&h=200&fit=crop",
+      "associationType": "social",
+      "associationMemberCount": 56,
+      "associationCountry": "Switzerland",
+      "associationLanguage": "en",
+      "message": "Hi, I would like to join your circle.",
+      "requestedAt": "2026-05-09T11:30:00Z",
+      "status": "rejected",
+      "decidedAt": "2026-05-18T09:15:00Z",
+      "decidedByName": "Saba Tesfay",
+      "rejectionReason": "Membership currently limited to families with ties to the Asmara region — we'd welcome a referral from an existing member."
     }
   ],
   "discoverableAssociations": [
