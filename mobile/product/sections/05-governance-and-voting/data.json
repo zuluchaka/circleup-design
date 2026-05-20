@@ -1,0 +1,53 @@
+{
+  "proposals": [
+    {
+      "id": "prop_2026_budget",
+      "title": "2026 Operating Budget",
+      "body": "Approve a CHF 48,000 budget allocated across Welfare (CHF 18k), Events (CHF 12k), Admin (CHF 8k), Tooling (CHF 6k), and Contingency (CHF 4k).",
+      "status": "Voting",
+      "endsAt": "2026-05-25",
+      "quorum": { "current": 124, "required": 138 },
+      "votes": { "yes": 87, "no": 14, "abstain": 23 },
+      "yourVote": null
+    },
+    {
+      "id": "prop_chair_extension",
+      "title": "Extend Chair Term to 2 years",
+      "body": "Move from 1-year to 2-year chair terms to improve continuity. Existing terms grandfathered.",
+      "status": "Discussion",
+      "endsAt": "2026-06-12",
+      "quorum": { "current": 0, "required": 138 },
+      "votes": { "yes": 0, "no": 0, "abstain": 0 },
+      "yourVote": null
+    },
+    {
+      "id": "prop_archive_youth",
+      "title": "Archive Youth Starter Circle",
+      "body": "Low participation. Proposal to archive after the current cycle completes; current members will be invited to Welfare Booster.",
+      "status": "Closed",
+      "endsAt": "2026-04-30",
+      "quorum": { "current": 142, "required": 138 },
+      "votes": { "yes": 91, "no": 28, "abstain": 23 },
+      "yourVote": "yes",
+      "outcome": "Passed"
+    }
+  ],
+  "elections": [
+    {
+      "id": "elec_treasurer_2026",
+      "seat": "Treasurer · 2026/27",
+      "endsAt": "2026-05-21",
+      "candidates": [
+        { "id": "c_amara",  "name": "Amara Ofori",    "trust": 824, "pitch": "Three years as Treasurer. Clean audits. Plans to onboard predictive analytics from Section 8 to anticipate cash needs.", "endorsements": 18 },
+        { "id": "c_mariam", "name": "Mariam Rahimi",  "trust": 802, "pitch": "Auditor for two years. Will modernise the welfare approval workflow and tighten reconciliation.", "endorsements": 11 },
+        { "id": "c_ngozi",  "name": "Ngozi Okafor",   "trust": 731, "pitch": "Organiser background. Will push for English/French parity on all communications.", "endorsements": 6 }
+      ]
+    }
+  ],
+  "committees": [
+    { "id": "com_finance",   "name": "Finance",   "chair": "Amara Ofori",   "members": ["Mariam Rahimi", "Zara Bekele", "Kofi Mensah"], "termEnd": "2026-12-31" },
+    { "id": "com_membership","name": "Membership","chair": "Ngozi Okafor", "members": ["Selam Haile", "Linh Pham"],                    "termEnd": "2026-12-31" },
+    { "id": "com_events",    "name": "Events",    "chair": "Zara Bekele",  "members": ["Aïssatou Dembélé", "Selam Haile"],            "termEnd": "2026-12-31" },
+    { "id": "com_audit",     "name": "Audit",     "chair": "Mariam Rahimi","members": ["Kofi Mensah"],                                 "termEnd": "2026-12-31" }
+  ]
+}

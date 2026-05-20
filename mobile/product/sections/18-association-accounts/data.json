@@ -1,0 +1,42 @@
+{
+  "accounts": [
+    {
+      "id": "aa-sus-001",
+      "accountNumber": "ASS-7K2N-PRI",
+      "associationId": "as-7k2n",
+      "associationName": "Senegalese Union of Switzerland",
+      "accountType": "primary",
+      "currency": "CHF",
+      "balance": 12640.55,
+      "status": "active",
+      "approvalThreshold": 5000,
+      "pendingApprovals": 1,
+      "isRestricted": false,
+      "fundCategories": [
+        { "slug": "general", "name": "General Fund", "balance": 7200,    "targetAmount": 10000, "currency": "CHF" },
+        { "slug": "welfare", "name": "Welfare Fund", "balance": 3140.55, "targetAmount": 4000,  "currency": "CHF" },
+        { "slug": "reserve", "name": "Reserve Fund", "balance": 2300,    "targetAmount": 8000,  "currency": "CHF" }
+      ]
+    },
+    {
+      "id": "aa-fcb-001",
+      "accountNumber": "ASS-4F12-PRI",
+      "associationId": "as-4f12",
+      "associationName": "Filipino Community Basel",
+      "accountType": "primary",
+      "currency": "CHF",
+      "balance": 1240.55,
+      "status": "active",
+      "approvalThreshold": 2500,
+      "pendingApprovals": 0,
+      "isRestricted": true,
+      "restrictionReason": "BR-ZX09RKLM suspended · 12d grace remaining",
+      "fundCategories": [
+        { "slug": "general", "name": "General Fund", "balance": 640.55, "targetAmount": 2500, "currency": "CHF" },
+        { "slug": "welfare", "name": "Welfare Fund", "balance": 600,    "targetAmount": 1500, "currency": "CHF" },
+        { "slug": "reserve", "name": "Reserve Fund", "balance": 0,      "targetAmount": 3000, "currency": "CHF" }
+      ]
+    }
+  ],
+  "entryTypeRestrictedAllowed": ["dues_collected", "fee_payment"]
+}

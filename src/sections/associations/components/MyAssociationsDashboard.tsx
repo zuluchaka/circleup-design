@@ -1,32 +1,37 @@
 import { useState } from 'react'
-import type { Association, ReceivedInvitation } from '@/../product/sections/associations/types'
+import type { Association, ReceivedInvitation, SentJoinRequest } from '@/../product/sections/associations/types'
 import { AssociationCard } from './AssociationCard'
 
 export interface MyAssociationsDashboardProps {
   associations: Association[]
   receivedInvitations?: ReceivedInvitation[]
+  sentJoinRequests?: SentJoinRequest[]
   onViewAssociation?: (id: string) => void
   onEditAssociation?: (id: string) => void
   onCreateAssociation?: () => void
   onDiscoverAssociations?: () => void
   onAcceptInvitation?: (id: string) => Promise<void> | void
   onDeclineInvitation?: (id: string) => Promise<void> | void
+  onCancelJoinRequest?: (id: string) => Promise<void> | void
   canCreate?: boolean
 }
 
 export function MyAssociationsDashboard({
   associations,
   receivedInvitations = [],
+  sentJoinRequests = [],
   onViewAssociation,
   onEditAssociation,
   onCreateAssociation,
   onDiscoverAssociations,
   onAcceptInvitation,
   onDeclineInvitation,
+  onCancelJoinRequest,
   canCreate = false,
 }: MyAssociationsDashboardProps) {
   const [processingId, setProcessingId] = useState<string | null>(null)
   const [confirmDeclineId, setConfirmDeclineId] = useState<string | null>(null)
+  const [confirmCancelId, setConfirmCancelId] = useState<string | null>(null)
   // Compute summary stats
   const activeAssociations = associations.filter(a => a.status === 'active' || !a.status)
   const settingUpAssociations = associations.filter(a => a.status === 'draft')
@@ -91,7 +96,7 @@ export function MyAssociationsDashboard({
 
       {/* Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {associations.length === 0 && receivedInvitations.length === 0 ? (
+        {associations.length === 0 && receivedInvitations.length === 0 && sentJoinRequests.length === 0 ? (
           <div className="text-center py-16">
             <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
               <svg className="w-10 h-10 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -268,6 +273,109 @@ export function MyAssociationsDashboard({
                       </div>
                     </div>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {/* Pending Join Requests (outbound) */}
+            {sentJoinRequests.length > 0 && (
+              <section className="mb-8">
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Pending requests
+                  <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full">
+                    {sentJoinRequests.length}
+                  </span>
+                </h2>
+                <div className="space-y-3">
+                  {sentJoinRequests.map((req) => {
+                    const requestedAt = new Date(req.requestedAt)
+                    const expiresAt = req.expiresAt ? new Date(req.expiresAt) : null
+                    const daysUntilExpiry = expiresAt
+                      ? Math.max(0, Math.ceil((expiresAt.getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
+                      : null
+                    return (
+                      <div
+                        key={req.id}
+                        className="bg-white dark:bg-slate-900 rounded-xl border border-amber-200 dark:border-amber-800/50 p-4 flex flex-col sm:flex-row sm:items-center gap-4"
+                      >
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          {req.associationLogo ? (
+                            <img src={req.associationLogo} alt="" className="w-12 h-12 rounded-xl object-cover flex-shrink-0" />
+                          ) : (
+                            <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center flex-shrink-0">
+                              <span className="text-lg font-bold text-amber-600 dark:text-amber-400">
+                                {req.associationName.charAt(0)}
+                              </span>
+                            </div>
+                          )}
+                          <div className="min-w-0">
+                            <p className="text-[10px] font-bold text-amber-700 dark:text-amber-400 tracking-wider mb-0.5">
+                              REQUEST SENT
+                            </p>
+                            <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                              {req.associationName}
+                            </p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                              Sent {requestedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                              {' '}&middot; Awaiting approval
+                              {daysUntilExpiry !== null && (
+                                <> &middot; Expires in {daysUntilExpiry} {daysUntilExpiry === 1 ? 'day' : 'days'}</>
+                              )}
+                            </p>
+                            <p className="text-xs text-slate-600 dark:text-slate-300 mt-1.5 italic bg-slate-50 dark:bg-slate-800/50 rounded-lg px-3 py-2 border-l-2 border-amber-300 dark:border-amber-600">
+                              "{req.message}"
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          {confirmCancelId === req.id ? (
+                            <>
+                              <span className="text-xs text-slate-500 dark:text-slate-400 mr-1">Cancel request?</span>
+                              <button
+                                onClick={() => setConfirmCancelId(null)}
+                                className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                              >
+                                Keep
+                              </button>
+                              <button
+                                onClick={async () => {
+                                  setProcessingId(req.id)
+                                  setConfirmCancelId(null)
+                                  await onCancelJoinRequest?.(req.id)
+                                  setProcessingId(null)
+                                }}
+                                disabled={processingId === req.id}
+                                className="px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors disabled:opacity-50"
+                              >
+                                Yes, cancel
+                              </button>
+                            </>
+                          ) : (
+                            <button
+                              onClick={() => setConfirmCancelId(req.id)}
+                              disabled={processingId === req.id}
+                              className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1.5"
+                            >
+                              {processingId === req.id ? (
+                                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                </svg>
+                              ) : (
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                              )}
+                              Cancel request
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </section>
             )}

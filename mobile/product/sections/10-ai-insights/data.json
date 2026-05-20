@@ -1,0 +1,47 @@
+{
+  "feed": [
+    {
+      "id": "ins_doubleshare",
+      "kind": "Recommendation",
+      "title": "Consider doubling your share next cycle",
+      "body": "14 months of on-time payments and a Trust Score above 800. Projected default risk if you double: 1.7%. A 2-share allocation would unlock a CHF 4,800 payout in August.",
+      "action": { "label": "Request 2nd share", "target": "/sections/multi-share/request" },
+      "dataInputs": ["Trust score", "Payment history", "Circle capacity"]
+    },
+    {
+      "id": "ins_risk_linh",
+      "kind": "Risk",
+      "title": "Linh P. likely to miss June contribution",
+      "body": "Payment latency rising over the last 3 cycles. Predicted June miss probability: 64%. Recommended action: friendly outreach in the next 5 days.",
+      "action": { "label": "Open thread", "target": "/sections/communication-and-events/thread" },
+      "dataInputs": ["Cycle history", "Engagement signals"]
+    },
+    {
+      "id": "ins_fraud_kofi",
+      "kind": "Fraud",
+      "title": "Unusual login from a new device · Kofi Mensah",
+      "body": "Login from Lagos, Nigeria. Device not recognised. Session has been revoked. Recommend Kofi confirm via the verification link sent.",
+      "action": { "label": "Review session", "target": "/sections/platform-administration/console" },
+      "dataInputs": ["IP geolocation", "Device fingerprint", "Behavior baseline"]
+    }
+  ],
+  "assistant": {
+    "suggested": [
+      "How am I doing this cycle?",
+      "When is my next payout?",
+      "Why did my Trust change?",
+      "Am I eligible for a payout advance?"
+    ],
+    "exampleConversation": [
+      { "role": "user",      "content": "When is my next payout?" },
+      { "role": "assistant", "content": "August 25, CHF 2,400 — cycle 11 of Main CHF Circle. Tap the link to view your full payout schedule.", "citations": [{ "label": "Payout schedule", "target": "/sections/rosca-circles/payouts" }] }
+    ]
+  },
+  "risk": {
+    "tiles": [
+      { "id": "default", "label": "Members at default risk", "value": "2",   "tone": "warning" },
+      { "id": "anomaly", "label": "Anomalous contributions", "value": "1",   "tone": "warning" },
+      { "id": "fraud",   "label": "Suspicious logins",       "value": "1",   "tone": "danger"  }
+    ]
+  }
+}

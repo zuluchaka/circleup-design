@@ -1,0 +1,99 @@
+{
+  "circles": [
+    {
+      "id": "circle_main_chf",
+      "name": "Main CHF Circle",
+      "contribution": 200,
+      "currency": "CHF",
+      "cadence": "Monthly",
+      "members": 12,
+      "cycle": 8,
+      "cycleLength": 12,
+      "yourStatus": "Due",
+      "yourDueAmount": 202,
+      "nextDue": "2026-05-20",
+      "nextPayoutTo": "Kofi Mensah",
+      "nextPayoutAmount": 2400,
+      "nextPayoutDate": "2026-05-25",
+      "collectionRate": 0.94,
+      "emergencyFund": 4320,
+      "accent": "#4f46e5"
+    },
+    {
+      "id": "circle_welfare",
+      "name": "Welfare Booster",
+      "contribution": 50,
+      "currency": "CHF",
+      "cadence": "Monthly",
+      "members": 24,
+      "cycle": 4,
+      "cycleLength": 24,
+      "yourStatus": "Paid",
+      "yourDueAmount": 0,
+      "nextDue": "2026-06-15",
+      "nextPayoutTo": "Zara Bekele",
+      "nextPayoutAmount": 1200,
+      "nextPayoutDate": "2026-05-28",
+      "collectionRate": 0.88,
+      "emergencyFund": 2410,
+      "accent": "#10b981"
+    },
+    {
+      "id": "circle_youth",
+      "name": "Youth Starter",
+      "contribution": 25,
+      "currency": "CHF",
+      "cadence": "Bi-weekly",
+      "members": 8,
+      "cycle": 2,
+      "cycleLength": 8,
+      "yourStatus": "Overdue",
+      "yourDueAmount": 25,
+      "nextDue": "2026-05-13",
+      "nextPayoutTo": "Linh Pham",
+      "nextPayoutAmount": 200,
+      "nextPayoutDate": "2026-05-19",
+      "collectionRate": 0.71,
+      "emergencyFund": 220,
+      "accent": "#f59e0b"
+    }
+  ],
+  "circleRoster": [
+    { "id": "mem_amara",   "name": "Amara Ofori",      "trust": 824, "status": "Paid",    "slot": 1, "paidAt": "2026-04-19" },
+    { "id": "mem_kofi",    "name": "Kofi Mensah",      "trust": 891, "status": "Paid",    "slot": 2, "paidAt": "2026-04-18" },
+    { "id": "mem_zara",    "name": "Zara Bekele",      "trust": 776, "status": "Paid",    "slot": 3, "paidAt": "2026-04-19" },
+    { "id": "mem_dembele", "name": "Aïssatou Dembélé", "trust": 689, "status": "Paid",    "slot": 4, "paidAt": "2026-04-20" },
+    { "id": "mem_pham",    "name": "Linh Pham",        "trust": 615, "status": "EF",      "slot": 5, "paidAt": null },
+    { "id": "mem_okoye",   "name": "Chinedu Okoye",    "trust": 558, "status": "Due",     "slot": 6, "paidAt": null },
+    { "id": "mem_rahimi",  "name": "Mariam Rahimi",    "trust": 802, "status": "Paid",    "slot": 7, "paidAt": "2026-04-19" },
+    { "id": "mem_haile",   "name": "Selam Haile",      "trust": 644, "status": "Paid",    "slot": 8, "paidAt": "2026-04-20" }
+  ],
+  "paymentMethods": [
+    { "id": "pf",      "label": "PostFinance · *4892", "kind": "bank",   "default": true  },
+    { "id": "visa",    "label": "Visa · *2104",         "kind": "card",   "default": false },
+    { "id": "twint",   "label": "TWINT",                "kind": "wallet", "default": false }
+  ],
+  "payoutSchedule": [
+    { "cycle": 1,  "to": "Mariam Rahimi",  "amount": 2400, "date": "2025-10-25", "status": "Paid" },
+    { "cycle": 2,  "to": "Zara Bekele",    "amount": 2400, "date": "2025-11-25", "status": "Paid" },
+    { "cycle": 3,  "to": "Ngozi Okafor",   "amount": 2400, "date": "2025-12-25", "status": "Paid" },
+    { "cycle": 4,  "to": "Aïssatou D.",    "amount": 2400, "date": "2026-01-25", "status": "Paid" },
+    { "cycle": 5,  "to": "Chinedu Okoye",  "amount": 2400, "date": "2026-02-25", "status": "Paid" },
+    { "cycle": 6,  "to": "Selam Haile",    "amount": 2400, "date": "2026-03-25", "status": "Paid" },
+    { "cycle": 7,  "to": "Linh Pham",      "amount": 2400, "date": "2026-04-25", "status": "Paid" },
+    { "cycle": 8,  "to": "Kofi Mensah",    "amount": 2400, "date": "2026-05-25", "status": "Upcoming" },
+    { "cycle": 9,  "to": "Amara Ofori",    "amount": 2400, "date": "2026-06-25", "status": "Projected" },
+    { "cycle": 10, "to": "João da Silva",  "amount": 2400, "date": "2026-07-25", "status": "Projected" },
+    { "cycle": 11, "to": "You · Amara",    "amount": 2400, "date": "2026-08-25", "status": "Projected" },
+    { "cycle": 12, "to": "Olusegun A.",    "amount": 2400, "date": "2026-09-25", "status": "Projected" }
+  ],
+  "treasurer": {
+    "collected": 0.94,
+    "atRisk": 2,
+    "emergencyFund": 4320,
+    "exceptions": [
+      { "id": "exc_linh",    "memberId": "mem_pham",  "name": "Linh Pham",     "issue": "3 days overdue", "trust": 615 },
+      { "id": "exc_chinedu", "memberId": "mem_okoye", "name": "Chinedu Okoye", "issue": "Late payment risk · likely", "trust": 558 }
+    ]
+  }
+}

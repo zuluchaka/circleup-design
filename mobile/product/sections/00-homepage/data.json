@@ -1,0 +1,145 @@
+{
+  "hero": {
+    "eyebrow": "Community finance, modernized",
+    "title": "Save together. Govern together. Grow together.",
+    "subtitle": "CircleUp is the trusted home for ROSCAs, susus, tandas, paluwagans, and welfare funds — built with diaspora communities, for diaspora communities.",
+    "stats": [
+      { "value": "1B+", "label": "Global ROSCA members" },
+      { "value": "184", "label": "Associations onboarded" },
+      { "value": "CHF 2.1M", "label": "Circulated through CircleUp" }
+    ]
+  },
+  "discover": [
+    {
+      "id": "what",
+      "title": "What is a ROSCA?",
+      "body": "A Rotating Savings and Credit Association is a group of trusted members who pool fixed contributions and take turns receiving the full pot. No interest, no banks, just discipline and trust."
+    },
+    {
+      "id": "variants",
+      "title": "Susu, tanda, paluwagan, tontine",
+      "body": "Same idea, different names. CircleUp speaks your community's language and follows your governance traditions — not the other way around."
+    },
+    {
+      "id": "trust",
+      "title": "Trust Score makes risk visible",
+      "body": "Every member earns a 0–1000 Trust Score based on payment history, identity verification, and engagement. You see exactly how it's calculated."
+    },
+    {
+      "id": "emergency",
+      "title": "Emergency Fund covers defaults",
+      "body": "1% of every contribution feeds an Emergency Fund. If a member can't pay, the fund covers the cycle. No drama, no broken trust."
+    }
+  ],
+  "quiz": {
+    "questions": [
+      {
+        "id": "q1_savings_goal",
+        "prompt": "What's your top reason for joining a savings circle?",
+        "options": [
+          { "value": "discipline", "label": "I want a forcing function to save consistently" },
+          { "value": "payout", "label": "I want a lump sum I can plan around" },
+          { "value": "community", "label": "I want to support my community" },
+          { "value": "credit", "label": "I want to build credit history" }
+        ]
+      },
+      {
+        "id": "q2_role",
+        "prompt": "Are you joining a circle or starting one?",
+        "options": [
+          { "value": "joining", "label": "Joining a circle a friend told me about" },
+          { "value": "starting", "label": "Starting one with my community" },
+          { "value": "exploring", "label": "Just exploring, not sure yet" }
+        ]
+      },
+      {
+        "id": "q3_payment_history",
+        "prompt": "How would you rate your past payment discipline?",
+        "options": [
+          { "value": "excellent", "label": "Excellent — I never miss" },
+          { "value": "ok", "label": "Mostly good, occasional slip" },
+          { "value": "building", "label": "Working on it" }
+        ]
+      },
+      {
+        "id": "q4_amount",
+        "prompt": "What monthly contribution feels comfortable?",
+        "options": [
+          { "value": "lt_50", "label": "Less than CHF 50" },
+          { "value": "50_200", "label": "CHF 50 – 200" },
+          { "value": "gt_200", "label": "More than CHF 200" }
+        ]
+      }
+    ],
+    "outcomes": [
+      {
+        "id": "ready_to_join",
+        "title": "You're ready to join",
+        "body": "Your goals and discipline are a great fit. Get started and we'll match you with a circle.",
+        "cta": "Get started"
+      },
+      {
+        "id": "ready_to_organize",
+        "title": "You're a great fit to organize",
+        "body": "You have the discipline and the community instinct. Start a circle — we'll guide you step by step.",
+        "cta": "Start a circle"
+      },
+      {
+        "id": "build_trust",
+        "title": "Build Trust first",
+        "body": "Start with a low-stakes starter circle. As you make payments on time, your Trust Score grows.",
+        "cta": "Find a starter circle"
+      }
+    ]
+  },
+  "pricing": [
+    {
+      "id": "free",
+      "name": "Free",
+      "tagline": "For very small circles getting started",
+      "price": "CHF 0",
+      "cadence": "always",
+      "features": [
+        "Up to 12 members",
+        "Single ROSCA circle",
+        "In-app messaging",
+        "Trust Score (basic factors)",
+        "Email support"
+      ],
+      "highlighted": false
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "tagline": "For active associations",
+      "price": "CHF 49",
+      "cadence": "per month",
+      "features": [
+        "Unlimited members & circles",
+        "Trust Score (all factors + endorsements)",
+        "Emergency Fund (auto)",
+        "Governance & voting",
+        "Multi-channel notifications (push + email + SMS)",
+        "Priority support"
+      ],
+      "highlighted": true
+    },
+    {
+      "id": "federation",
+      "name": "Federation",
+      "tagline": "For multi-association networks",
+      "price": "Custom",
+      "cadence": "per month",
+      "features": [
+        "Everything in Pro",
+        "Multi-association governance",
+        "Consolidated finance & dues",
+        "Federation reporting",
+        "FINMA / FADP / GDPR compliance pack",
+        "Dedicated success manager"
+      ],
+      "highlighted": false
+    }
+  ],
+  "feeDisclosure": "1% of each ROSCA contribution funds the Emergency Fund, which automatically covers defaults. No hidden card fees; bank transfers are free."
+}

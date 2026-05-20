@@ -1,0 +1,61 @@
+{
+  "funds": [
+    {
+      "id": "fund_operating",
+      "name": "Operating Fund",
+      "kind": "operating",
+      "balance": 4_280,
+      "currency": "CHF",
+      "trend": [3800, 4100, 4250, 4180, 4280],
+      "maxDisbursement": 1000,
+      "signersRequired": 2
+    },
+    {
+      "id": "fund_welfare",
+      "name": "Welfare Fund",
+      "kind": "welfare",
+      "balance": 5_810,
+      "currency": "CHF",
+      "trend": [4900, 5050, 5200, 5500, 5810],
+      "maxDisbursement": 2000,
+      "signersRequired": 3
+    },
+    {
+      "id": "fund_emergency",
+      "name": "Emergency Fund",
+      "kind": "emergency",
+      "balance": 6_960,
+      "currency": "CHF",
+      "trend": [6450, 6580, 6720, 6840, 6960],
+      "maxDisbursement": 5000,
+      "signersRequired": 2,
+      "autoCover": true
+    },
+    {
+      "id": "fund_school_bus",
+      "name": "School Bus Project",
+      "kind": "project",
+      "balance": 12_400,
+      "currency": "CHF",
+      "trend": [4800, 7100, 9000, 10800, 12400],
+      "maxDisbursement": 25000,
+      "signersRequired": 4
+    }
+  ],
+  "ledger": [
+    { "id": "le_1", "at": "2026-05-17T06:42", "kind": "credit", "amount": 200, "label": "Contribution · Aïssatou D. · Main CHF" },
+    { "id": "le_2", "at": "2026-05-17T06:42", "kind": "credit", "amount": 2,   "label": "EF carve-out · Aïssatou D." },
+    { "id": "le_3", "at": "2026-05-16T09:00", "kind": "debit",  "amount": 2400, "label": "Payout · Kofi Mensah · Main CHF" },
+    { "id": "le_4", "at": "2026-05-15T18:00", "kind": "credit", "amount": 800,  "label": "Welfare contribution · Mariam R." },
+    { "id": "le_5", "at": "2026-05-14T11:20", "kind": "debit",  "amount": 600,  "label": "Welfare disbursement · medical aid · approved 3/3" }
+  ],
+  "welfareRequest": {
+    "reasons": ["Medical", "Funeral", "Education", "Emergency", "Other"],
+    "stepLabels": ["Reason", "Amount", "Documents"]
+  },
+  "approvals": [
+    { "id": "wr_medical", "member": "Aïssatou Dembélé", "amount": 800, "reason": "Medical emergency", "quorum": "1/3", "submitted": "2026-05-16T18:11", "status": "Submitted" },
+    { "id": "wr_funeral", "member": "Chinedu Okoye",    "amount": 1500,"reason": "Funeral support",    "quorum": "2/3", "submitted": "2026-05-15T22:04", "status": "In review" },
+    { "id": "wr_school",  "member": "Selam Haile",      "amount": 600, "reason": "School fees",        "quorum": "3/3", "submitted": "2026-05-13T09:18", "status": "Approved" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "personal": {
+    "savedYtd": 2400,
+    "currency": "CHF",
+    "monthlySeries": [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200],
+    "streakMonths": 12,
+    "trust": { "current": 824, "delta90d": 18 },
+    "nextPayout": { "date": "2026-08-25", "amount": 2400 }
+  },
+  "circleHealth": {
+    "circleId": "circle_main_chf",
+    "tiles": [
+      { "id": "collected",  "label": "Collection rate",   "value": "94%", "trend": "up" },
+      { "id": "risk",       "label": "Default risk",      "value": "2",   "trend": "down", "tone": "warning" },
+      { "id": "attendance", "label": "Event attendance",  "value": "91%", "trend": "flat" },
+      { "id": "welfare",    "label": "Welfare uptake",    "value": "14%", "trend": "up" }
+    ],
+    "drilldownAtRisk": [
+      { "name": "Linh Pham",     "reason": "3 days late · prior 2 missed", "trust": 615 },
+      { "name": "Chinedu Okoye", "reason": "Predicted late · 78%",          "trust": 558 }
+    ]
+  },
+  "statements": [
+    { "id": "st_personal_2026", "scope": "Personal", "period": "Jan – May 2026", "generated": "2026-05-17", "format": "PDF", "size": "208 KB" },
+    { "id": "st_circle_q1",     "scope": "Circle · Main CHF", "period": "Q1 2026",        "generated": "2026-04-05", "format": "PDF", "size": "316 KB" },
+    { "id": "st_assoc_2025",    "scope": "Association",       "period": "2025 annual",    "generated": "2026-02-12", "format": "PDF", "size": "1.2 MB" }
+  ]
+}

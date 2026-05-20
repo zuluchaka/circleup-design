@@ -1,0 +1,42 @@
+{
+  "campaigns": [
+    {
+      "id": "fund_school_bus",
+      "title": "School Bus for Tamale Children",
+      "raised": 12_400,
+      "goal": 25_000,
+      "currency": "CHF",
+      "donors": 84,
+      "daysLeft": 22,
+      "accent": "#10b981",
+      "matching": { "partner": "Geneva Diaspora Foundation", "multiplier": 1, "cap": 5000, "matched": 3200 },
+      "impact": "Daily transport for 38 children across the 2026/27 school year.",
+      "story": "Our partner school in Tamale is one bus short. With CHF 25,000 we can lease a bus for the school year and cover fuel and maintenance."
+    },
+    {
+      "id": "fund_emergency_quake",
+      "title": "Emergency Aid · Marrakech Quake",
+      "raised": 5_900,
+      "goal": 10_000,
+      "currency": "CHF",
+      "donors": 142,
+      "daysLeft": 4,
+      "accent": "#f43f5e",
+      "matching": null,
+      "impact": "Direct shelter and food relief to 80 affected families.",
+      "story": "Working with a local NGO to distribute emergency aid to families displaced by the September quake."
+    }
+  ],
+  "donateQuickAmounts": [25, 50, 100, 200],
+  "donorWall": [
+    { "name": "Mariam R.",   "amount": 200, "at": "Today" },
+    { "name": "Kofi M.",     "amount": 300, "at": "Today" },
+    { "name": "Anonymous",   "amount": 150, "at": "Yesterday" },
+    { "name": "Zara B.",     "amount": 100, "at": "Yesterday" },
+    { "name": "Ngozi O.",    "amount": 50,  "at": "May 14" }
+  ],
+  "impactStories": [
+    { "id": "imp_1", "title": "38 children riding daily",       "body": "First month with the new bus completed. 38 students riding daily; on-time arrivals improved from 64% to 96%.", "photoHue": "#10b981" },
+    { "id": "imp_2", "title": "Fuel and maintenance under budget", "body": "Operating costs running 12% under projection. Surplus reserved for tire replacement.",                              "photoHue": "#0ea5e9" }
+  ]
+}

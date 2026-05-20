@@ -1,0 +1,29 @@
+{
+  "federation": {
+    "id": "fed_swiss_west",
+    "name": "Swiss West Diaspora Federation",
+    "crestHue": "#312e81",
+    "status": "Active",
+    "founded": "2023-06-12",
+    "associations": 4,
+    "totalMembers": 942,
+    "totalCirculating": 218_400,
+    "currency": "CHF"
+  },
+  "federatedAssociations": [
+    { "id": "assoc_diaspora_geneva", "name": "Diaspora Circle Geneva",   "members": 184, "duesStatus": "Current", "circles": 3 },
+    { "id": "assoc_lausanne",        "name": "Lausanne Cultural Circle", "members": 224, "duesStatus": "Late · 2 months", "circles": 4 },
+    { "id": "assoc_vevey",           "name": "Vevey Susu Network",       "members": 142, "duesStatus": "Current", "circles": 2 },
+    { "id": "assoc_fribourg",        "name": "Fribourg Welfare Ring",    "members": 392, "duesStatus": "Current", "circles": 5 }
+  ],
+  "consolidatedFinance": {
+    "tabs": ["Dues", "Transfers", "Federation Fund"],
+    "dues": [
+      { "associationId": "assoc_diaspora_geneva", "association": "Diaspora Circle Geneva",   "monthly": 200, "outstanding": 0,    "status": "OK"   },
+      { "associationId": "assoc_lausanne",        "association": "Lausanne Cultural Circle", "monthly": 200, "outstanding": 400,  "status": "Late" },
+      { "associationId": "assoc_vevey",           "association": "Vevey Susu Network",       "monthly": 150, "outstanding": 0,    "status": "OK"   },
+      { "associationId": "assoc_fribourg",        "association": "Fribourg Welfare Ring",    "monthly": 200, "outstanding": 0,    "status": "OK"   }
+    ],
+    "federationFundBalance": 8_420
+  }
+}

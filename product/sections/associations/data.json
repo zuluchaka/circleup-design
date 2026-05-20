@@ -409,7 +409,18 @@
       "userAvatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
       "message": "I recently moved to Geneva and would love to connect with the Ethiopian Orthodox community here. I've been a member of our church in Addis for 15 years.",
       "requestedAt": "2025-12-29T11:00:00Z",
-      "status": "pending"
+      "status": "pending",
+      "trustScore": 712,
+      "location": "Geneva, Switzerland",
+      "mutualMembersCount": 4,
+      "eligibilityChecks": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "passed", "detail": "PostFinance ID match" },
+        { "id": "language", "label": "Speaks Amharic or English", "status": "passed", "detail": "Profile language: Amharic, English" },
+        { "id": "trust", "label": "Trust Score ≥ 600", "status": "passed", "detail": "Trust Score 712" },
+        { "id": "duplicate", "label": "Not already a member", "status": "passed" },
+        { "id": "geo", "label": "Resides in chapter region", "status": "warning", "detail": "Self-declared Geneva — not yet confirmed by document" },
+        { "id": "referral", "label": "Referred by active member", "status": "manual", "detail": "Mentions Tesfaye Bekele — manual confirmation needed" }
+      ]
     },
     {
       "id": "req-002",
@@ -420,7 +431,86 @@
       "userAvatarUrl": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
       "message": "Looking to join the community. Referred by Tesfaye Bekele.",
       "requestedAt": "2026-01-02T15:30:00Z",
-      "status": "pending"
+      "status": "pending",
+      "trustScore": 645,
+      "location": "Lausanne, Switzerland",
+      "mutualMembersCount": 2,
+      "eligibilityChecks": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "passed" },
+        { "id": "language", "label": "Speaks Amharic or English", "status": "passed", "detail": "Profile language: English" },
+        { "id": "trust", "label": "Trust Score ≥ 600", "status": "passed", "detail": "Trust Score 645" },
+        { "id": "duplicate", "label": "Not already a member", "status": "passed" },
+        { "id": "geo", "label": "Resides in chapter region", "status": "passed", "detail": "Lausanne address confirmed" },
+        { "id": "referral", "label": "Referred by active member", "status": "passed", "detail": "Tesfaye Bekele (member since 2019)" }
+      ]
+    },
+    {
+      "id": "req-003",
+      "associationId": "assoc-003",
+      "userId": "user-022",
+      "userName": "Daniel Girma",
+      "userEmail": "dgirma@email.com",
+      "userAvatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+      "message": "Hello — I would like to apply to join the parish.",
+      "requestedAt": "2026-01-04T08:12:00Z",
+      "status": "pending",
+      "trustScore": 410,
+      "location": "Zürich, Switzerland",
+      "mutualMembersCount": 0,
+      "eligibilityChecks": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "warning", "detail": "KYC pending — ID upload required" },
+        { "id": "language", "label": "Speaks Amharic or English", "status": "passed" },
+        { "id": "trust", "label": "Trust Score ≥ 600", "status": "failed", "detail": "Trust Score 410 — below threshold" },
+        { "id": "duplicate", "label": "Not already a member", "status": "passed" },
+        { "id": "geo", "label": "Resides in chapter region", "status": "warning", "detail": "Zürich is outside Geneva chapter — federation referral possible" },
+        { "id": "referral", "label": "Referred by active member", "status": "failed", "detail": "No referral on file" }
+      ]
+    }
+  ],
+  "receivedInvitations": [
+    {
+      "id": "inv-received-001",
+      "associationId": "assoc-014",
+      "associationName": "Caribbean Welfare Society",
+      "associationLogo": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=200&h=200&fit=crop",
+      "associationType": "cultural",
+      "associationMemberCount": 178,
+      "role": "member",
+      "membershipType": "regular",
+      "invitedBy": "Marie-Claire Dupont",
+      "invitedAt": "2026-05-16T10:00:00Z",
+      "status": "pending",
+      "message": "We'd love to have you join our welfare circle — your background in community organizing is exactly what we need."
+    }
+  ],
+  "sentJoinRequests": [
+    {
+      "id": "sreq-001",
+      "associationId": "assoc-011",
+      "associationName": "Congolese Community Lausanne",
+      "associationLogo": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=200&h=200&fit=crop",
+      "associationType": "cultural",
+      "associationMemberCount": 145,
+      "associationCountry": "Switzerland",
+      "associationLanguage": "fr",
+      "message": "Bonjour, je viens de m'installer à Lausanne et j'aimerais rejoindre la communauté.",
+      "requestedAt": "2026-05-02T14:20:00Z",
+      "status": "pending",
+      "expiresAt": "2026-06-02T14:20:00Z"
+    },
+    {
+      "id": "sreq-002",
+      "associationId": "assoc-012",
+      "associationName": "East African Entrepreneurs Hub",
+      "associationLogo": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&h=200&fit=crop",
+      "associationType": "professional",
+      "associationMemberCount": 312,
+      "associationCountry": "Switzerland",
+      "associationLanguage": "en",
+      "message": "I run a logistics startup in Geneva and would like to connect with other founders.",
+      "requestedAt": "2026-05-11T09:05:00Z",
+      "status": "pending",
+      "expiresAt": "2026-06-11T09:05:00Z"
     }
   ],
   "discoverableAssociations": [

@@ -1,0 +1,23 @@
+{
+  "myShares": [
+    { "circleId": "circle_main_chf", "circleName": "Main CHF Circle",   "shares": 1, "maxEligible": 3, "circleCap": 0.30, "concentration": 0.083 },
+    { "circleId": "circle_welfare",  "circleName": "Welfare Booster",   "shares": 1, "maxEligible": 1, "circleCap": 0.30, "concentration": 0.042 },
+    { "circleId": "circle_youth",    "circleName": "Youth Starter",     "shares": 0, "maxEligible": 0, "circleCap": 0.30, "concentration": 0.000 }
+  ],
+  "eligibilityChecks": [
+    { "id": "trust",    "label": "Trust Score ≥ 700",          "ok": true,  "value": "824" },
+    { "id": "tenure",   "label": "Tenure ≥ 12 months",          "ok": true,  "value": "68 months" },
+    { "id": "missed",   "label": "0 missed payments in last 6", "ok": true,  "value": "0" },
+    { "id": "concent",  "label": "Stays under 30% circle cap",  "ok": true,  "value": "16.7% projected" }
+  ],
+  "currentRequest": null,
+  "monitor": {
+    "circleId": "circle_main_chf",
+    "rows": [
+      { "name": "Mariam Rahimi",    "shares": 3, "share": 0.250, "cap": 0.30, "status": "Near cap" },
+      { "name": "Kofi Mensah",      "shares": 2, "share": 0.167, "cap": 0.30, "status": "OK" },
+      { "name": "Amara Ofori",      "shares": 2, "share": 0.167, "cap": 0.30, "status": "OK" },
+      { "name": "Other members",    "shares": 5, "share": 0.416, "cap": 0.30, "status": "OK" }
+    ]
+  }
+}

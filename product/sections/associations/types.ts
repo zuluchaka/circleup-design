@@ -161,6 +161,15 @@ export interface PendingInvitation {
   lastResentAt?: string | null
 }
 
+export type EligibilityCheckStatus = 'passed' | 'warning' | 'failed' | 'manual'
+
+export interface EligibilityCheck {
+  id: string
+  label: string
+  status: EligibilityCheckStatus
+  detail?: string
+}
+
 export interface JoinRequest {
   id: string
   associationId: string
@@ -171,6 +180,10 @@ export interface JoinRequest {
   message: string
   requestedAt: string
   status: JoinRequestStatus
+  trustScore?: number
+  location?: string
+  mutualMembersCount?: number
+  eligibilityChecks?: EligibilityCheck[]
 }
 
 export interface ReceivedInvitation {
@@ -186,6 +199,21 @@ export interface ReceivedInvitation {
   invitedAt: string
   status: InvitationStatus
   message?: string | null
+}
+
+export interface SentJoinRequest {
+  id: string
+  associationId: string
+  associationName: string
+  associationLogo: string | null
+  associationType: AssociationType
+  associationMemberCount: number
+  associationCountry?: string
+  associationLanguage?: string
+  message: string
+  requestedAt: string
+  status: JoinRequestStatus
+  expiresAt?: string | null
 }
 
 export interface DiscoverableAssociation {

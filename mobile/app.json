@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "CircleUp Designs",
+    "slug": "circleup-mobile-designs",
+    "scheme": "circleup",
+    "version": "0.2.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#1f2937"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "ch.circleup.designs"
+    },
+    "android": {
+      "package": "ch.circleup.designs",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "credit": {
+    "score": 706,
+    "band": "Strong",
+    "range": { "min": 300, "max": 850 },
+    "factors": [
+      { "id": "history",     "label": "On-time contributions", "weight": 35, "score": 33, "status": "Excellent" },
+      { "id": "tenure",      "label": "Tenure & engagement",   "weight": 20, "score": 16, "status": "Strong" },
+      { "id": "identity",    "label": "Verified identity",     "weight": 15, "score": 15, "status": "Verified" },
+      { "id": "welfare",     "label": "Welfare repayment",     "weight": 15, "score":  0, "status": "No history" },
+      { "id": "endorsements","label": "Peer endorsements",     "weight": 15, "score":  9, "status": "Building" }
+    ]
+  },
+  "advance": {
+    "max": 1200,
+    "feePct": 0.012,
+    "repayDate": "2026-08-25",
+    "repaySource": "Cycle 11 payout",
+    "currency": "CHF",
+    "currentAdvance": null
+  },
+  "loan": {
+    "preApprovedAmount": 6000,
+    "rateApr": 0.089,
+    "termsMonths": [6, 12, 18, 24],
+    "schedulePreview": [
+      { "month": 1, "principal": 320, "interest": 30 },
+      { "month": 2, "principal": 322, "interest": 28 },
+      { "month": 3, "principal": 325, "interest": 25 }
+    ]
+  },
+  "bureau": {
+    "partner": "TransUnion CH",
+    "status": "Eligible",
+    "lastReport": null,
+    "benefits": [
+      "On-time contributions build your formal credit history.",
+      "Welfare repayments count positively.",
+      "Defaults are also reported — make sure you can sustain payments."
+    ]
+  }
+}

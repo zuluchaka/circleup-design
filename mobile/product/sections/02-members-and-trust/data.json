@@ -1,0 +1,31 @@
+{
+  "filters": ["All", "Active", "Pending", "Treasurers", "Trust ≥ 700", "Joined 2026"],
+  "members": [
+    { "id": "mem_amara",   "name": "Amara Ofori",      "role": "Treasurer", "trust": 824, "status": "Active",  "joined": "2020-09-12", "city": "Geneva",   "missed": 0, "contributions": 56 },
+    { "id": "mem_kofi",    "name": "Kofi Mensah",      "role": "President", "trust": 891, "status": "Active",  "joined": "2019-04-02", "city": "Geneva",   "missed": 0, "contributions": 84 },
+    { "id": "mem_zara",    "name": "Zara Bekele",      "role": "Secretary", "trust": 776, "status": "Active",  "joined": "2021-01-22", "city": "Lausanne", "missed": 1, "contributions": 62 },
+    { "id": "mem_dembele", "name": "Aïssatou Dembélé", "role": "Member",    "trust": 689, "status": "Active",  "joined": "2022-02-18", "city": "Geneva",   "missed": 1, "contributions": 38 },
+    { "id": "mem_pham",    "name": "Linh Pham",        "role": "Member",    "trust": 615, "status": "Active",  "joined": "2022-06-04", "city": "Vevey",    "missed": 2, "contributions": 32 },
+    { "id": "mem_okoye",   "name": "Chinedu Okoye",    "role": "Member",    "trust": 558, "status": "Active",  "joined": "2023-01-09", "city": "Geneva",   "missed": 3, "contributions": 28 },
+    { "id": "mem_rahimi",  "name": "Mariam Rahimi",    "role": "Auditor",   "trust": 802, "status": "Active",  "joined": "2020-11-30", "city": "Geneva",   "missed": 0, "contributions": 58 },
+    { "id": "mem_dasilva", "name": "João da Silva",    "role": "Member",    "trust": 482, "status": "Pending", "joined": "2026-04-14", "city": "Geneva",   "missed": 0, "contributions": 0 },
+    { "id": "mem_okafor",  "name": "Ngozi Okafor",     "role": "Organizer", "trust": 731, "status": "Active",  "joined": "2021-07-19", "city": "Lausanne", "missed": 1, "contributions": 48 },
+    { "id": "mem_haile",   "name": "Selam Haile",      "role": "Member",    "trust": 644, "status": "Active",  "joined": "2022-10-03", "city": "Fribourg", "missed": 2, "contributions": 34 }
+  ],
+  "trustFactors": [
+    { "id": "ontime",      "label": "On-time contributions", "weight": 35, "score": 32, "status": "Excellent",      "tip": "Stay current with this cycle to maintain Excellent." },
+    { "id": "tenure",      "label": "Tenure & engagement",   "weight": 20, "score": 17, "status": "Strong",         "tip": "Joining circles and voting in elections compounds tenure value." },
+    { "id": "identity",    "label": "Verified identity",     "weight": 15, "score": 15, "status": "Verified",       "tip": "Identity verified · no action needed." },
+    { "id": "welfare",     "label": "Welfare repayment",     "weight": 15, "score":  0, "status": "No history",     "tip": "You haven't drawn welfare aid yet — neutral impact." },
+    { "id": "endorsements","label": "Peer endorsements",     "weight": 15, "score":  8, "status": "Building",       "tip": "Ask 2 long-tenured members to endorse you to unlock the full 15 points." }
+  ],
+  "endorsementCount": 4,
+  "invite": {
+    "channels": [
+      { "id": "link",  "label": "Shareable link", "icon": "link" },
+      { "id": "email", "label": "Email",          "icon": "mail" },
+      { "id": "sms",   "label": "SMS",            "icon": "message-circle" }
+    ],
+    "messagePreview": "Salut! Je t'invite à rejoindre Diaspora Circle Geneva sur CircleUp. C'est notre nouvelle plateforme pour gérer la tontine. Inscris-toi ici: {{link}}"
+  }
+}

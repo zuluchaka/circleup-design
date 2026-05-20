@@ -1,0 +1,45 @@
+{
+  "checklists": [
+    {
+      "id": "ob-br3",
+      "brId": "br3",
+      "prospectName": "Indian Professionals Zurich",
+      "contractReference": "CT-G4VLPQ22",
+      "status": "in_progress",
+      "escalationLevel": "amber",
+      "completionPercentage": 60,
+      "steps": {
+        "association_profile": { "status": "completed", "completedAt": "2026-05-15T10:00:00Z", "completedByName": "Aminata Diallo" },
+        "account_activation":  { "status": "completed", "completedAt": "2026-05-15T10:30:00Z", "completedByName": "System" },
+        "dues_config":         { "status": "completed", "completedAt": "2026-05-17T14:22:00Z", "completedByName": "Aminata Diallo" },
+        "member_invitations":  { "status": "in_progress" },
+        "first_circle":        { "status": "pending" }
+      },
+      "completedOnBehalf": [
+        {
+          "step": "dues_config",
+          "completedBy": "Aminata Diallo",
+          "consentNote": "Dues confirmed by Arun on call 2026-05-17. CHF 250/mo, monthly cycle.",
+          "completedAt": "2026-05-17T14:22:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ob-br1",
+      "brId": "br1",
+      "prospectName": "Senegalese Union of Switzerland",
+      "contractReference": "CT-7K2NQ4XF",
+      "status": "completed",
+      "escalationLevel": null,
+      "completionPercentage": 100,
+      "steps": {
+        "association_profile": { "status": "completed", "completedAt": "2025-02-11T09:00:00Z", "completedByName": "Aminata Diallo" },
+        "account_activation":  { "status": "completed", "completedAt": "2025-02-11T09:30:00Z", "completedByName": "System" },
+        "dues_config":         { "status": "completed", "completedAt": "2025-02-12T11:14:00Z", "completedByName": "Cheikh Diop" },
+        "member_invitations":  { "status": "completed", "completedAt": "2025-02-13T15:20:00Z", "completedByName": "Cheikh Diop" },
+        "first_circle":        { "status": "completed", "completedAt": "2025-02-15T08:00:00Z", "completedByName": "Cheikh Diop" }
+      },
+      "completedOnBehalf": []
+    }
+  ]
+}

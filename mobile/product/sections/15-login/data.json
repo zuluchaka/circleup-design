@@ -1,0 +1,30 @@
+{
+  "signin": {
+    "providers": ["email", "google", "apple"],
+    "passwordResetSupport": true
+  },
+  "signup": {
+    "intents": ["member", "organizer", "starter"],
+    "passwordPolicy": {
+      "minLength": 10,
+      "requiresMixedCase": true,
+      "requiresNumberOrSymbol": true
+    }
+  },
+  "verify": {
+    "resendSeconds": 30,
+    "exampleEmail": "amara@example.org"
+  },
+  "onboarding": {
+    "steps": [
+      { "id": "profile",   "label": "Profile",   "fields": ["firstName", "lastName", "language"] },
+      { "id": "identity",  "label": "Identity",  "fields": ["idScan", "selfie"] },
+      { "id": "prefs",     "label": "Preferences","fields": ["pushPermission", "emailDigest", "paymentMethod"] },
+      { "id": "firstcircle","label": "First circle", "fields": ["circleId"] }
+    ],
+    "recommendedCircles": [
+      { "id": "circle_welfare", "name": "Welfare Booster", "contribution": 50, "cadence": "Monthly", "reason": "Low-stakes start with 24 active members." },
+      { "id": "circle_youth",   "name": "Youth Starter",   "contribution": 25, "cadence": "Bi-weekly","reason": "Build a streak quickly with smaller contributions." }
+    ]
+  }
+}

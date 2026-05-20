@@ -1,0 +1,54 @@
+{
+  "inbox": [
+    { "id": "th_amara",  "kind": "thread",       "title": "Amara Ofori",           "preview": "Can you take a look at the May reconciliation before…", "at": "09:42", "unread": true,  "channel": "In-app" },
+    { "id": "ann_agm",   "kind": "announcement", "title": "AGM 2026 — Save the date","preview": "Save the date for the AGM on June 8, 18:00…",          "at": "Yesterday", "unread": true,  "channel": "Push + Email" },
+    { "id": "sys_payout","kind": "system",       "title": "Payout received",        "preview": "Kofi Mensah received CHF 2,400 for cycle 8.",            "at": "May 16", "unread": false, "channel": "System" },
+    { "id": "th_finance","kind": "thread",       "title": "Finance committee",      "preview": "Mariam: budget draft v3 attached.",                       "at": "May 14", "unread": false, "channel": "In-app" },
+    { "id": "ann_remind","kind": "announcement", "title": "Contribution due May 20","preview": "Members of Main CHF Circle, the May contribution…",       "at": "May 15", "unread": false, "channel": "Push" }
+  ],
+  "thread": {
+    "id": "th_amara",
+    "title": "Amara Ofori",
+    "messages": [
+      { "id": "m1", "from": "Amara Ofori",  "body": "Hi! Can you take a look at the May reconciliation before the committee meeting tomorrow?", "at": "09:38", "mine": false },
+      { "id": "m2", "from": "You",          "body": "Yes — looking now. The CHF 600 disbursement reconciles cleanly.",                            "at": "09:39", "mine": true  },
+      { "id": "m3", "from": "Amara Ofori",  "body": "Perfect. Could you also confirm the EF balance carries over correctly?",                     "at": "09:40", "mine": false },
+      { "id": "m4", "from": "You",          "body": "Confirmed — CHF 6,960. I'll attach a screenshot before the meeting.",                        "at": "09:42", "mine": true  }
+    ]
+  },
+  "events": [
+    {
+      "id": "evt_workshop",     "title": "Financial Literacy Workshop", "date": "2026-05-24T10:00", "location": "Online · Zoom",       "accent": "#10b981", "price": 0,  "rsvp": { "yes": 38, "maybe": 9, "no": 2 }, "yourRsvp": null, "bucket": "This week",
+      "description": "Diaspora finance and credit-building best practices, led by Nadia A. Recording available afterwards."
+    },
+    {
+      "id": "evt_agm_2026",     "title": "Annual General Meeting 2026", "date": "2026-06-08T18:00", "location": "Maison des Associations, Geneva", "accent": "#4f46e5", "price": 0,  "rsvp": { "yes": 92, "maybe": 11, "no": 14 }, "yourRsvp": "yes",  "bucket": "Later",
+      "description": "Yearly meeting to review the 2025 reports, vote on the 2026 budget, and elect committee seats."
+    },
+    {
+      "id": "evt_summerfest",   "title": "Summer Cultural Festival",    "date": "2026-07-12T12:00", "location": "Parc des Bastions",   "accent": "#f59e0b", "price": 15, "rsvp": { "yes": 64, "maybe": 22, "no": 6 }, "yourRsvp": null, "bucket": "Later",
+      "description": "Family day with music, food, and a circle members reunion. Includes lunch."
+    }
+  ],
+  "announcement": {
+    "id": "ann_agm",
+    "title": "AGM 2026 — Save the date",
+    "body": "Save the date for the AGM on June 8, 18:00. RSVP opens this Friday. Snacks and child-care will be provided.",
+    "sentAt": "2026-05-12T17:00",
+    "sender": "Kofi Mensah · President",
+    "audience": "All members · 184",
+    "deliveryStats": { "push": { "sent": 184, "opened": 142 }, "email": { "sent": 184, "opened": 121 } }
+  },
+  "qr": {
+    "eventId": "evt_summerfest",
+    "expected": 64,
+    "checkedIn": 41,
+    "lastFive": [
+      { "name": "Linh Pham",       "at": "11:48" },
+      { "name": "Selam Haile",     "at": "11:47" },
+      { "name": "Ngozi Okafor",    "at": "11:45" },
+      { "name": "Chinedu Okoye",   "at": "11:42" },
+      { "name": "Aïssatou D.",     "at": "11:40" }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "association": {
+    "id": "assoc_diaspora_geneva",
+    "name": "Diaspora Circle Geneva",
+    "tagline": "Saving together since 2019",
+    "country": "Switzerland",
+    "city": "Geneva",
+    "language": "FR",
+    "currency": "CHF",
+    "brandHue": "#4f46e5",
+    "founded": "2019-03-15",
+    "status": "active",
+    "members": 184,
+    "activeMembers": 162,
+    "circles": 3,
+    "fundsBalance": 12420,
+    "trustAverage": 712,
+    "emergencyFundRate": 0.01,
+    "terminology": "tontine",
+    "governance": "committee"
+  },
+  "quickActions": [
+    { "id": "add_member", "label": "Add member", "icon": "user-plus" },
+    { "id": "start_circle", "label": "Start circle", "icon": "circle-plus" },
+    { "id": "new_announcement", "label": "Announcement", "icon": "megaphone" },
+    { "id": "open_treasury", "label": "Treasury", "icon": "wallet" }
+  ],
+  "recentActivity": [
+    { "id": "act_1", "kind": "contribution", "actor": "Aïssatou Dembélé", "message": "contributed CHF 200 to Main CHF Circle", "at": "2026-05-17T06:42" },
+    { "id": "act_2", "kind": "join_request", "actor": "Olusegun Adebayo", "message": "requested to join · review needed", "at": "2026-05-16T22:11" },
+    { "id": "act_3", "kind": "payout", "actor": "Kofi Mensah", "message": "received payout CHF 2,400", "at": "2026-05-16T09:00" },
+    { "id": "act_4", "kind": "vote", "actor": "Mariam Rahimi", "message": "voted on 2026 Operating Budget", "at": "2026-05-15T19:33" },
+    { "id": "act_5", "kind": "document", "actor": "Zara Bekele", "message": "uploaded April board minutes", "at": "2026-05-14T15:02" }
+  ],
+  "creationWizard": {
+    "steps": [
+      { "id": "details", "label": "Details" },
+      { "id": "governance", "label": "Governance" },
+      { "id": "terminology", "label": "Terminology" }
+    ],
+    "governanceModels": [
+      { "id": "committee", "label": "Committee-led", "blurb": "Elected committee makes day-to-day decisions; AGM for major changes." },
+      { "id": "consensus", "label": "Consensus", "blurb": "Decisions require broad agreement; well-suited to small, tight groups." },
+      { "id": "founder", "label": "Founder-led", "blurb": "A single organiser leads; members vote on major changes only." }
+    ],
+    "terminologyPresets": [
+      { "id": "rosca", "label": "ROSCA", "tone": "Generic" },
+      { "id": "susu", "label": "Susu", "tone": "West African" },
+      { "id": "tanda", "label": "Tanda", "tone": "Latin American" },
+      { "id": "paluwagan", "label": "Paluwagan", "tone": "Filipino" },
+      { "id": "tontine", "label": "Tontine", "tone": "Francophone" }
+    ]
+  },
+  "migrationWizard": {
+    "steps": [
+      { "id": "upload", "label": "Upload" },
+      { "id": "parse", "label": "Parse" },
+      { "id": "validate", "label": "Validate" },
+      { "id": "review", "label": "Review" },
+      { "id": "golive", "label": "Go-live" }
+    ],
+    "sampleValidation": {
+      "valid": 138,
+      "warnings": 3,
+      "errors": 1,
+      "warningSamples": [
+        "Row 47: duplicate email kofi@example.org — merging with existing member",
+        "Row 92: phone +41 76 555 invalid — keeping but flagged",
+        "Row 113: birth date out of range — clamping to plausible value"
+      ],
+      "errorSamples": [
+        "Row 56: missing required field 'phone' — resolve before continuing"
+      ]
+    }
+  },
+  "settingsGroups": [
+    {
+      "id": "profile",
+      "label": "Profile",
+      "rows": [
+        { "label": "Name", "value": "Diaspora Circle Geneva" },
+        { "label": "Tagline", "value": "Saving together since 2019" },
+        { "label": "Country / City", "value": "Switzerland · Geneva" }
+      ]
+    },
+    {
+      "id": "locale",
+      "label": "Locale & currency",
+      "rows": [
+        { "label": "Primary language", "value": "Français" },
+        { "label": "Currency", "value": "CHF" },
+        { "label": "Time zone", "value": "Europe/Zurich" }
+      ]
+    },
+    {
+      "id": "branding",
+      "label": "Branding",
+      "rows": [
+        { "label": "Brand hue", "value": "#4f46e5" },
+        { "label": "Logo", "value": "Default initials" }
+      ]
+    },
+    {
+      "id": "fees",
+      "label": "Fees & Emergency Fund",
+      "rows": [
+        { "label": "Emergency Fund rate", "value": "1.0%" },
+        { "label": "Card fees passed to members", "value": "No" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "categories": ["All", "Governance", "Finance", "Minutes", "Forms", "Other"],
+  "documents": [
+    { "id": "doc_bylaws",     "title": "Bylaws · v3.2",            "category": "Governance", "version": "3.2", "updated": "2026-02-14", "size": "412 KB",  "visibility": "All members", "owners": ["Kofi Mensah"] },
+    { "id": "doc_minutes_apr","title": "Board minutes · April 2026","category": "Minutes",    "version": "1.0", "updated": "2026-04-30", "size": "184 KB",  "visibility": "All members", "owners": ["Zara Bekele"] },
+    { "id": "doc_audit_2025", "title": "Annual audit · 2025",      "category": "Finance",    "version": "2.0", "updated": "2026-03-02", "size": "1.2 MB",  "visibility": "Committee",   "owners": ["Mariam Rahimi"] },
+    { "id": "doc_membership", "title": "Membership form",          "category": "Forms",      "version": "1.4", "updated": "2025-09-01", "size": "92 KB",   "visibility": "Public link", "owners": ["Ngozi Okafor"] },
+    { "id": "doc_code",       "title": "Code of conduct",          "category": "Governance", "version": "1.0", "updated": "2024-11-12", "size": "76 KB",   "visibility": "All members", "owners": ["Kofi Mensah"] }
+  ],
+  "versionTimeline": [
+    { "version": "3.2", "at": "2026-02-14", "by": "Kofi Mensah",  "change": "Clarified quorum rules for special elections." },
+    { "version": "3.1", "at": "2025-09-05", "by": "Kofi Mensah",  "change": "Added Welfare Fund eligibility section." },
+    { "version": "3.0", "at": "2025-01-10", "by": "Kofi Mensah",  "change": "Major rewrite for Swiss compliance." },
+    { "version": "2.4", "at": "2023-06-22", "by": "Ngozi Okafor", "change": "Updated address." }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "kpis": [
+    { "id": "users",   "label": "Active users",      "value": "12,418",  "trend": "up" },
+    { "id": "arr",     "label": "ARR",                "value": "CHF 184k","trend": "up" },
+    { "id": "kyc",     "label": "KYC backlog",        "value": "38",      "trend": "down" },
+    { "id": "disputes","label": "Open disputes",      "value": "4",       "trend": "flat" },
+    { "id": "uptime",  "label": "Uptime (30d)",       "value": "99.97%",  "trend": "flat" }
+  ],
+  "kycQueue": [
+    { "id": "kyc_18",  "name": "Olusegun Adebayo", "country": "CH", "risk": 18,  "submitted": "2026-05-16", "docs": ["Passport", "Selfie", "Address"] },
+    { "id": "kyc_22",  "name": "Mei Tanaka",       "country": "CH", "risk": 22,  "submitted": "2026-05-15", "docs": ["ID card", "Selfie"] },
+    { "id": "kyc_57",  "name": "Joseph Banda",     "country": "ZM", "risk": 57,  "submitted": "2026-05-15", "docs": ["Passport"] },
+    { "id": "kyc_71",  "name": "Carmen Reyes",     "country": "MX", "risk": 71,  "submitted": "2026-05-14", "docs": ["Passport", "Address"] }
+  ],
+  "tickets": [
+    { "id": "tic_1", "subject": "Payout mismatch · circle_main_chf", "priority": "High",   "sla": "4h left",  "owner": "Operations", "status": "Open" },
+    { "id": "tic_2", "subject": "Bank link error · 12 members",      "priority": "Medium", "sla": "11h left", "owner": "Support",    "status": "In progress" },
+    { "id": "tic_3", "subject": "Dispute · welfare disbursement",    "priority": "High",   "sla": "Overdue",  "owner": "Compliance", "status": "Open" },
+    { "id": "tic_4", "subject": "Account suspension appeal",          "priority": "Low",    "sla": "2d left",  "owner": "Support",    "status": "Awaiting member" }
+  ],
+  "flags": [
+    { "id": "f_multi_share_v2",  "name": "Multi-Share v2",         "state": "on",  "cohort": "Pro · 25%", "owner": "growth" },
+    { "id": "f_ai_assistant",    "name": "AI Assistant (Section 10)","state": "on",  "cohort": "All",      "owner": "ai" },
+    { "id": "f_federation_lite", "name": "Federation Lite",         "state": "off", "cohort": "Internal",  "owner": "federations" }
+  ]
+}

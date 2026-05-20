@@ -1,0 +1,43 @@
+{
+  "feed": [
+    { "id": "fd_1", "actor": "Mariam Rahimi",   "verb": "earned",     "object": "5-Year tenure badge",            "at": "2026-05-16" },
+    { "id": "fd_2", "actor": "Zara Bekele",     "verb": "completed",  "object": "12-Month streak",                "at": "2026-05-15" },
+    { "id": "fd_3", "actor": "Olusegun Adebayo","verb": "joined",     "object": "Diaspora Circle Geneva",         "at": "2026-05-14" },
+    { "id": "fd_4", "actor": "Aïssatou D.",     "verb": "endorsed",   "object": "Linh Pham",                      "at": "2026-05-12" }
+  ],
+  "badges": [
+    { "id": "b_streak_12",   "title": "12-Month Streak",    "earned": true,  "criterion": "12 on-time months in a row" },
+    { "id": "b_first_payout","title": "First payout",       "earned": true,  "criterion": "Receive your first ROSCA payout" },
+    { "id": "b_endorser",    "title": "Endorser",           "earned": true,  "criterion": "Endorse 3 members" },
+    { "id": "b_circle_lead", "title": "Circle Leader",      "earned": false, "criterion": "Run a circle for 12 months without defaults" },
+    { "id": "b_recruiter",   "title": "Recruiter · 5",      "earned": false, "criterion": "Bring 5 members" },
+    { "id": "b_welfare_help","title": "Welfare champion",   "earned": false, "criterion": "Sign off 10 welfare approvals" }
+  ],
+  "leaderboard": {
+    "metric": "On-time months",
+    "entries": [
+      { "rank": 1, "name": "Mariam Rahimi",  "value": 58 },
+      { "rank": 2, "name": "Kofi Mensah",    "value": 54 },
+      { "rank": 3, "name": "Amara Ofori",    "value": 53 },
+      { "rank": 4, "name": "Zara Bekele",    "value": 48 },
+      { "rank": 5, "name": "Ngozi Okafor",   "value": 42 },
+      { "rank": 6, "name": "Selam Haile",    "value": 31 },
+      { "rank": 7, "name": "Aïssatou D.",    "value": 28 },
+      { "rank": 8, "name": "Linh Pham",      "value": 22 },
+      { "rank": 9, "name": "Chinedu Okoye",  "value": 17 },
+      { "rank": 10,"name": "João da Silva",  "value": 0  }
+    ]
+  },
+  "referrals": {
+    "code": "AMARA-CIRCLE",
+    "rewardLadder": [
+      { "invites": 1, "reward": "CHF 5 credit" },
+      { "invites": 3, "reward": "CHF 20 credit" },
+      { "invites": 5, "reward": "Recruiter badge" }
+    ],
+    "history": [
+      { "id": "ref_1", "to": "Olusegun Adebayo", "status": "Joined",  "at": "2026-05-14" },
+      { "id": "ref_2", "to": "+41 79 555 0182",  "status": "Sent",    "at": "2026-05-10" }
+    ]
+  }
+}
