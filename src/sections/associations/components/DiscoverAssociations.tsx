@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import type { DiscoverableAssociation, AssociationType } from '@/../product/sections/associations/types'
+import type { DiscoverableAssociation, AssociationType, EligibilityCheck } from '@/../product/sections/associations/types'
 import { AssociationTypeBadge } from './AssociationTypeBadge'
 
 export interface DiscoverAssociationsProps {
   associations: DiscoverableAssociation[]
   loading?: boolean
   error?: string | null
-  onRequestToJoin?: (id: string) => Promise<void> | void
+  onRequestToJoin?: (id: string, message: string) => Promise<void> | void
   onSearch?: (query: string) => void
   onBack?: () => void
 }
@@ -35,6 +35,8 @@ export function DiscoverAssociations({
   const [joinSuccess, setJoinSuccess] = useState<string | null>(null)
   const [joinError, setJoinError] = useState<string | null>(null)
   const [verifiedOnly, setVerifiedOnly] = useState(false)
+  const [preCheckAssociation, setPreCheckAssociation] = useState<DiscoverableAssociation | null>(null)
+  const [preCheckMessage, setPreCheckMessage] = useState('')
 
   const filteredAssociations = associations.filter((assoc) => {
     const matchesSearch =
@@ -310,17 +312,10 @@ export function DiscoverAssociations({
                     ) : (
                       <>
                         <button
-                          onClick={async () => {
-                            setJoiningId(association.id)
+                          onClick={() => {
                             setJoinError(null)
-                            try {
-                              await onRequestToJoin?.(association.id)
-                              setJoinSuccess(association.id)
-                            } catch (e) {
-                              setJoinError(e instanceof Error ? e.message : 'Failed to join')
-                            } finally {
-                              setJoiningId(null)
-                            }
+                            setPreCheckMessage('')
+                            setPreCheckAssociation(association)
                           }}
                           disabled={joiningId === association.id}
                           className="w-full px-4 py-2.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl transition-colors shadow-sm hover:shadow-md disabled:opacity-50 flex items-center justify-center gap-1.5"
@@ -350,6 +345,263 @@ export function DiscoverAssociations({
           </>
         )}
       </main>
+
+      {preCheckAssociation && (
+        <PreCheckModal
+          association={preCheckAssociation}
+          message={preCheckMessage}
+          onChangeMessage={setPreCheckMessage}
+          processing={joiningId === preCheckAssociation.id}
+          onClose={() => setPreCheckAssociation(null)}
+          onSubmit={async () => {
+            if (!preCheckAssociation) return
+            setJoiningId(preCheckAssociation.id)
+            setJoinError(null)
+            try {
+              await onRequestToJoin?.(preCheckAssociation.id, preCheckMessage.trim())
+              setJoinSuccess(preCheckAssociation.id)
+              setPreCheckAssociation(null)
+              setPreCheckMessage('')
+            } catch (e) {
+              setJoinError(e instanceof Error ? e.message : 'Failed to join')
+            } finally {
+              setJoiningId(null)
+            }
+          }}
+        />
+      )}
     </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Pre-Check Modal — member-side eligibility view before submitting a request
+// ---------------------------------------------------------------------------
+
+interface PreCheckModalProps {
+  association: DiscoverableAssociation
+  message: string
+  processing: boolean
+  onChangeMessage: (value: string) => void
+  onClose: () => void
+  onSubmit: () => void
+}
+
+function PreCheckModal({
+  association,
+  message,
+  processing,
+  onChangeMessage,
+  onClose,
+  onSubmit,
+}: PreCheckModalProps) {
+  const checks = association.eligibilityPreview ?? []
+  const passed = checks.filter((c) => c.status === 'passed').length
+  const warnings = checks.filter((c) => c.status === 'warning' || c.status === 'manual').length
+  const failed = checks.filter((c) => c.status === 'failed').length
+  const verdict: 'auto-approve' | 'review' | 'block' =
+    failed > 0 ? 'block' : warnings > 0 ? 'review' : 'auto-approve'
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-xl max-h-[90vh] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            {association.logo ? (
+              <img src={association.logo} alt="" className="w-12 h-12 rounded-xl object-cover" />
+            ) : (
+              <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+                <span className="text-lg font-bold text-indigo-700 dark:text-indigo-300">{association.name.charAt(0)}</span>
+              </div>
+            )}
+            <div className="min-w-0">
+              <p className="text-[10px] font-bold tracking-wider text-slate-500 dark:text-slate-400">REQUEST TO JOIN</p>
+              <h2 className="text-base font-semibold text-slate-900 dark:text-white truncate">{association.name}</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                {association.country} · {association.memberCount.toLocaleString()} members · {association.activeCircles} circles
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-slate-500 flex-shrink-0"
+            aria-label="Close"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="overflow-y-auto p-6 space-y-5">
+          {/* Verdict */}
+          <PreCheckVerdict verdict={verdict} />
+
+          {/* Eligibility checks */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Your eligibility</h4>
+              {checks.length > 0 && (
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  {passed} clear · {warnings} need attention · {failed} blocking
+                </p>
+              )}
+            </div>
+            {checks.length === 0 ? (
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                This association has no automated eligibility rules. Submit a request and the president will review it manually.
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {checks.map((c) => (
+                  <PreCheckRow key={c.id} check={c} />
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Message */}
+          <div>
+            <label htmlFor="prejoin-message" className="block text-sm font-semibold text-slate-900 dark:text-white mb-2">
+              Why do you want to join?
+            </label>
+            <textarea
+              id="prejoin-message"
+              value={message}
+              onChange={(e) => onChangeMessage(e.target.value)}
+              placeholder="Introduce yourself to the president. Mention any ties to the community, referrals, or what you hope to contribute."
+              rows={4}
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 resize-y"
+            />
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">Visible to the association president when they review your request.</p>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-slate-200 dark:border-slate-800 px-6 py-4 bg-slate-50 dark:bg-slate-900/60 flex flex-col sm:flex-row gap-3 justify-end">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onSubmit}
+            disabled={processing || verdict === 'block'}
+            className="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            {processing ? (
+              <>
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Sending...
+              </>
+            ) : verdict === 'block' ? (
+              'Resolve blocking checks first'
+            ) : (
+              'Submit request'
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PreCheckVerdict({ verdict }: { verdict: 'auto-approve' | 'review' | 'block' }) {
+  if (verdict === 'auto-approve') {
+    return (
+      <div className="rounded-xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-900/20 px-4 py-3 flex items-start gap-3">
+        <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+        </svg>
+        <div>
+          <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">You meet every eligibility rule</p>
+          <p className="text-xs text-emerald-700/80 dark:text-emerald-300/80">The president will still see your request — most clear-eligibility applicants are approved within a day or two.</p>
+        </div>
+      </div>
+    )
+  }
+  if (verdict === 'review') {
+    return (
+      <div className="rounded-xl border border-amber-200 dark:border-amber-800/50 bg-amber-50 dark:bg-amber-900/20 px-4 py-3 flex items-start gap-3">
+        <svg className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.74-2.99l-7.07-12.25a2 2 0 00-3.48 0L3.19 16.01A2 2 0 004.93 19z" />
+        </svg>
+        <div>
+          <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">Some checks need human review</p>
+          <p className="text-xs text-amber-700/80 dark:text-amber-300/80">You can still submit — the president will weigh the flagged items below alongside your message.</p>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className="rounded-xl border border-red-200 dark:border-red-800/50 bg-red-50 dark:bg-red-900/20 px-4 py-3 flex items-start gap-3">
+      <svg className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      <div>
+        <p className="text-sm font-semibold text-red-700 dark:text-red-300">Blocking eligibility issues</p>
+        <p className="text-xs text-red-700/80 dark:text-red-300/80">Resolve the failed checks below before submitting. The Submit button will unlock once they're cleared.</p>
+      </div>
+    </div>
+  )
+}
+
+function PreCheckRow({ check }: { check: EligibilityCheck }) {
+  const tone = {
+    passed: {
+      bg: 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/50',
+      icon: 'text-emerald-600 dark:text-emerald-400',
+      label: 'text-emerald-700 dark:text-emerald-300',
+      path: 'M5 13l4 4L19 7',
+    },
+    warning: {
+      bg: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/50',
+      icon: 'text-amber-600 dark:text-amber-400',
+      label: 'text-amber-700 dark:text-amber-300',
+      path: 'M12 9v2m0 4h.01M4.93 19h14.14a2 2 0 001.74-2.99l-7.07-12.25a2 2 0 00-3.48 0L3.19 16.01A2 2 0 004.93 19z',
+    },
+    failed: {
+      bg: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800/50',
+      icon: 'text-red-600 dark:text-red-400',
+      label: 'text-red-700 dark:text-red-300',
+      path: 'M6 18L18 6M6 6l12 12',
+    },
+    manual: {
+      bg: 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700',
+      icon: 'text-slate-500 dark:text-slate-400',
+      label: 'text-slate-700 dark:text-slate-200',
+      path: 'M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093M12 17h.01',
+    },
+  }[check.status]
+
+  return (
+    <li className={`flex items-start gap-3 rounded-lg border p-3 ${tone.bg}`}>
+      <div className={`w-6 h-6 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center flex-shrink-0 ${tone.icon}`}>
+        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={tone.path} />
+        </svg>
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className={`text-sm font-medium ${tone.label}`}>{check.label}</p>
+        {check.detail && (
+          <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{check.detail}</p>
+        )}
+      </div>
+      <span className={`text-[10px] font-bold uppercase tracking-wider ${tone.label}`}>
+        {check.status === 'manual' ? 'Action needed' : check.status}
+      </span>
+    </li>
   )
 }

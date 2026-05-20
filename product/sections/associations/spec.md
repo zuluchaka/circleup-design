@@ -15,7 +15,12 @@ This section is the canonical home for the **Associations stacked-card layout pa
   - **Empty state** — first-time users with no associations, no invitations and no pending requests see a single empty-state card with "Browse Associations" and (when a payment card is on file) "Create Your Own"; otherwise a contextual nudge to add a card before creating.
 - **Multi-Association Dashboard** — For users in many associations, a higher-density cross-association overview with switcher and consolidated counts.
 - **My Associations List** — A denser, single-column alternative to the Dashboard for power-users. Same data, no inline lifecycle sections, sorted list of belongings; used inside compact shell layouts and as a fallback when the dashboard cards would scroll excessively.
-- **Discover Associations** — Search/filter by type, language, location, association type (cultural, savings, professional, federation); request to join with eligibility pre-check.
+- **Discover Associations** — Search/filter by type, language, location, association type (cultural, savings, professional, federation); each card's **Request to join** opens a **Pre-Check modal** (web) / **Pre-Join BottomSheet** (mobile) before the request is submitted:
+  - Header summarises the target association (logo, name, country, member/circle counts).
+  - **Verdict banner** — auto-approve (all rules clear), needs review (warnings/manual items), or blocking (failed rules).
+  - **Eligibility pre-checks** — evaluation of the current user's profile against each of the association's rules (KYC, Trust Score threshold, language, geo/residence, referral, duplicate-membership), with passed / warning / failed / manual states and per-rule detail.
+  - **Applicant message** — required textarea where the user introduces themselves; the message is the same field surfaced to the president inside the Join Request Review modal.
+  - **Submit / Cancel** — Submit is disabled while any check is `failed`, with a "Resolve issues to send" affordance. Once submitted the request appears in the member's **Pending requests** section on My Associations Dashboard and in the president's **Pending approvals** queue.
 - **View Association Dashboard** — Branding hero, stats strip (members, circles, total funds, EF balance), announcements, activity feed, role-appropriate quick actions; pinned restyle-pattern header.
 - **Invite / Apply / Join** — Generate invite links, send SMS/email/WhatsApp, manage pending invitations (admin side), track join requests (admin side). The member-facing counterparts live in **My Associations Dashboard** (Pending invitations + Pending requests sections above).
 
@@ -91,7 +96,7 @@ This is the **reference layout** the rest of the V1.9 product restyles to:
 ### Screens
 - **My Associations Dashboard / Multi-Association Dashboard / My Associations List** — Stacked association cards (Dashboard) or dense rows (List), role badges, member count, fund summary, "Open" CTA. Dashboard variant includes top sections for **Pending invitations** (with Accept / Decline) and **Pending requests** (with Cancel).
 - **President Pending-Approvals Banner + Join Request Review Modal** — Banner card on President Dashboard with per-queue counts; Request-to-join modal lists requests in a sidebar and shows eligibility pre-checks, applicant context, and Approve / Reject (with reason) actions per request.
-- **Discover Associations** — Filter chips, association cards with type badge, language, member count, "Request to Join".
+- **Discover Associations** — Filter chips, association cards with type badge, language, member count, "Request to Join" → opens **Pre-Check modal / sheet** with verdict banner, eligibility pre-check list, applicant-message field, Submit/Cancel.
 - **Create Association** — Two-card method picker (From Scratch / Import) → respective wizard.
 - **Association Dashboard** — Branding hero, stats strip, announcements + activity, role-conditional CTAs.
 - **President Dashboard Widgets** — Multi-card widget board.

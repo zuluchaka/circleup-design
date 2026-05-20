@@ -235,6 +235,8 @@ export interface DiscoverableAssociation {
   verifiedSince?: string | null
   subscriptionTier?: string
   circleManagerName?: string | null
+  /** Current user's eligibility against this association's rules — evaluated server-side at discovery time. */
+  eligibilityPreview?: EligibilityCheck[]
 }
 
 // =============================================================================

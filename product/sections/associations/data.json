@@ -524,7 +524,13 @@
       "country": "Switzerland",
       "language": "en",
       "memberCount": 892,
-      "activeCircles": 12
+      "activeCircles": 12,
+      "eligibilityPreview": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "passed", "detail": "Your PostFinance ID is verified" },
+        { "id": "trust", "label": "Trust Score ≥ 500", "status": "passed", "detail": "Your Trust Score is 712" },
+        { "id": "geo", "label": "Resides in Switzerland", "status": "passed", "detail": "Geneva address on file" },
+        { "id": "duplicate", "label": "Not already a member", "status": "passed" }
+      ]
     },
     {
       "id": "assoc-011",
@@ -536,7 +542,14 @@
       "country": "Switzerland",
       "language": "fr",
       "memberCount": 145,
-      "activeCircles": 3
+      "activeCircles": 3,
+      "isPending": true,
+      "eligibilityPreview": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "passed" },
+        { "id": "language", "label": "Speaks French", "status": "passed", "detail": "Profile language: French, English" },
+        { "id": "geo", "label": "Resides in Vaud canton", "status": "warning", "detail": "Your address is in Geneva — chapter accepts cross-canton on a case basis" },
+        { "id": "duplicate", "label": "Not already a member", "status": "passed" }
+      ]
     },
     {
       "id": "assoc-012",
@@ -548,7 +561,13 @@
       "country": "Switzerland",
       "language": "en",
       "memberCount": 67,
-      "activeCircles": 2
+      "activeCircles": 2,
+      "eligibilityPreview": [
+        { "id": "kyc", "label": "Identity verified (KYC)", "status": "passed" },
+        { "id": "trust", "label": "Trust Score ≥ 700", "status": "passed", "detail": "Your Trust Score is 712" },
+        { "id": "business", "label": "Owns or runs a business", "status": "manual", "detail": "Update your profile to declare your business — required before approval" },
+        { "id": "referral", "label": "Referred by an active member", "status": "failed", "detail": "No referral on file. Ask an existing member to refer you." }
+      ]
     }
   ],
   "federations": [

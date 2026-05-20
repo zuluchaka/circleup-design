@@ -22,7 +22,12 @@ import {
   Heart,
   CircleDot,
   Building2,
+  Check,
+  X,
+  AlertTriangle,
+  HelpCircle,
 } from "lucide-react-native";
+import { BottomSheet } from "@/components/shared/BottomSheet";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text } from "@/components/shared/Text";
 import { useTheme, space, radius, palette, type AppTheme } from "@/theme";
@@ -46,6 +51,15 @@ import { RelationshipCard } from "@/components/shared/RelationshipCard";
 
 type AssocType = "cultural" | "religious" | "professional" | "savings" | "social" | "family";
 
+type EligibilityCheckStatus = "passed" | "warning" | "failed" | "manual";
+
+type EligibilityCheck = {
+  id: string;
+  label: string;
+  status: EligibilityCheckStatus;
+  detail?: string;
+};
+
 type DiscoverableAssociation = {
   id: string;
   name: string;
@@ -59,6 +73,8 @@ type DiscoverableAssociation = {
   isVerified: boolean;
   matchScore?: number;
   matchReasons?: string[];
+  /** Current user's eligibility against this association's rules. */
+  eligibilityPreview?: EligibilityCheck[];
 };
 
 const ASSOC_TYPE_LABEL: Record<AssocType, string> = {
@@ -95,6 +111,12 @@ const ASSOCIATIONS: DiscoverableAssociation[] = [
     isVerified: true,
     matchScore: 96,
     matchReasons: ["Your community", "Trusted organizer"],
+    eligibilityPreview: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "passed", detail: "Your PostFinance ID is verified" },
+      { id: "language", label: "Speaks French or Wolof", status: "passed", detail: "Profile language: French, English" },
+      { id: "geo", label: "Resides in Switzerland", status: "passed", detail: "Geneva address on file" },
+      { id: "duplicate", label: "Not already a member", status: "passed" },
+    ],
   },
   {
     id: "a2",
@@ -123,6 +145,12 @@ const ASSOCIATIONS: DiscoverableAssociation[] = [
     memberCount: 620,
     activeCircles: 9,
     isVerified: true,
+    eligibilityPreview: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "passed" },
+      { id: "trust", label: "Trust Score ≥ 700", status: "passed", detail: "Your Trust Score is 712" },
+      { id: "geo", label: "Resides in Zürich canton", status: "warning", detail: "Your address is in Geneva — chapter reviews cross-canton on a case basis" },
+      { id: "referral", label: "Referred by active member", status: "manual", detail: "Mention a referrer in your message if you have one" },
+    ],
   },
   {
     id: "a4",
@@ -136,6 +164,12 @@ const ASSOCIATIONS: DiscoverableAssociation[] = [
     memberCount: 290,
     activeCircles: 5,
     isVerified: false,
+    eligibilityPreview: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "passed" },
+      { id: "language", label: "Speaks Tagalog", status: "failed", detail: "Tagalog not declared on your profile — required for membership" },
+      { id: "geo", label: "Resides in Basel region", status: "warning", detail: "Geneva address — federation referral possible" },
+      { id: "referral", label: "Sponsored by a current member", status: "failed", detail: "No sponsor on file" },
+    ],
   },
   {
     id: "a5",
@@ -428,7 +462,15 @@ function FilterChips<T extends string>({
 
 // ----- Association card -----
 
-function AssociationCard({ assoc, t }: { assoc: DiscoverableAssociation; t: AppTheme }) {
+function AssociationCard({
+  assoc,
+  t,
+  onRequestToJoin,
+}: {
+  assoc: DiscoverableAssociation;
+  t: AppTheme;
+  onRequestToJoin: (assoc: DiscoverableAssociation) => void;
+}) {
   return (
     <Pressable style={[styles.assocCard, { backgroundColor: t.surface, borderColor: t.border }]}>
       <View style={{ flexDirection: "row", gap: space.md }}>
@@ -497,7 +539,10 @@ function AssociationCard({ assoc, t }: { assoc: DiscoverableAssociation; t: AppT
           <Text variant="caption" tone="secondary">circles</Text>
         </View>
         <View style={{ flex: 1 }} />
-        <Pressable style={[styles.btnPrimaryCompact, { backgroundColor: t.primary }]}>
+        <Pressable
+          onPress={() => onRequestToJoin(assoc)}
+          style={[styles.btnPrimaryCompact, { backgroundColor: t.primary }]}
+        >
           <Text variant="caption" weight="bold" style={{ color: "#fff" }}>
             Request to join
           </Text>
@@ -672,6 +717,9 @@ export function DiscoverHub() {
   const [brStatus, setBrStatus] = useState<BrStatus | "all">("all");
   const [brTier, setBrTier] = useState<BrTier | "all">("all");
   const [brRisk, setBrRisk] = useState<"all" | "expiring" | "churn" | "overdue">("all");
+
+  const [preCheckAssoc, setPreCheckAssoc] = useState<DiscoverableAssociation | null>(null);
+  const [preCheckMessage, setPreCheckMessage] = useState("");
 
   const filteredAssocs = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -958,7 +1006,15 @@ export function DiscoverHub() {
             ) : (
               <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
                 {filteredAssocs.map((a) => (
-                  <AssociationCard key={a.id} assoc={a} t={t} />
+                  <AssociationCard
+                    key={a.id}
+                    assoc={a}
+                    t={t}
+                    onRequestToJoin={(assoc) => {
+                      setPreCheckMessage("");
+                      setPreCheckAssoc(assoc);
+                    }}
+                  />
                 ))}
               </View>
             )}
@@ -998,6 +1054,235 @@ export function DiscoverHub() {
           </View>
         )}
       </ScrollView>
+
+      <PreJoinSheet
+        open={preCheckAssoc !== null}
+        assoc={preCheckAssoc}
+        message={preCheckMessage}
+        onChangeMessage={setPreCheckMessage}
+        onClose={() => setPreCheckAssoc(null)}
+        onSubmit={() => {
+          if (!preCheckAssoc) return;
+          console.log(
+            "Submit join request:",
+            preCheckAssoc.id,
+            "message:",
+            preCheckMessage.trim(),
+          );
+          setPreCheckAssoc(null);
+          setPreCheckMessage("");
+        }}
+        t={t}
+      />
+    </View>
+  );
+}
+
+// ============================================================================
+// Pre-Join Sheet (member-side eligibility pre-check)
+// ============================================================================
+
+function PreJoinSheet({
+  open,
+  assoc,
+  message,
+  onChangeMessage,
+  onClose,
+  onSubmit,
+  t,
+}: {
+  open: boolean;
+  assoc: DiscoverableAssociation | null;
+  message: string;
+  onChangeMessage: (v: string) => void;
+  onClose: () => void;
+  onSubmit: () => void;
+  t: AppTheme;
+}) {
+  if (!assoc) {
+    return <BottomSheet open={open} onClose={onClose} title="Request to join">{null}</BottomSheet>;
+  }
+  const checks = assoc.eligibilityPreview ?? [];
+  const passed = checks.filter((c) => c.status === "passed").length;
+  const warnings = checks.filter((c) => c.status === "warning" || c.status === "manual").length;
+  const failed = checks.filter((c) => c.status === "failed").length;
+  const verdict: "auto-approve" | "review" | "block" =
+    failed > 0 ? "block" : warnings > 0 ? "review" : "auto-approve";
+  const verdictTone =
+    verdict === "auto-approve"
+      ? { bg: t.successSoft, fg: t.success, label: "You meet every rule" }
+      : verdict === "review"
+        ? { bg: t.warningSoft, fg: t.warning, label: "Needs human review" }
+        : { bg: t.dangerSoft, fg: t.danger, label: "Blocking issues" };
+
+  return (
+    <BottomSheet
+      open={open}
+      onClose={onClose}
+      title="Request to join"
+      subtitle={`${assoc.country} · ${assoc.memberCount.toLocaleString()} members · ${assoc.activeCircles} circles`}
+      footer={
+        <View style={{ flexDirection: "row", gap: space.sm }}>
+          <Pressable
+            onPress={onClose}
+            style={[styles.btnGhostSheet, { backgroundColor: t.bgElevated, borderColor: t.border }]}
+          >
+            <Text variant="caption" weight="semibold" tone="secondary">
+              Cancel
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={onSubmit}
+            disabled={verdict === "block"}
+            style={[
+              styles.btnPrimarySheet,
+              { backgroundColor: verdict === "block" ? t.bgMuted : t.primary },
+            ]}
+          >
+            <Text
+              variant="caption"
+              weight="bold"
+              style={{ color: verdict === "block" ? t.textMuted : "#fff" }}
+            >
+              {verdict === "block" ? "Resolve issues to send" : "Submit request"}
+            </Text>
+          </Pressable>
+        </View>
+      }
+    >
+      <View style={{ gap: space.md, paddingTop: space.md }}>
+        {/* Association header */}
+        <View style={{ flexDirection: "row", gap: space.md, alignItems: "center" }}>
+          <Image source={{ uri: assoc.logo }} style={styles.preJoinLogo} />
+          <View style={{ flex: 1 }}>
+            <Text variant="micro" weight="bold" tone="muted" style={{ letterSpacing: 0.8 }}>
+              REQUEST TO JOIN
+            </Text>
+            <Text variant="bodySmall" weight="bold">
+              {assoc.name}
+            </Text>
+          </View>
+        </View>
+
+        {/* Verdict pill */}
+        <View
+          style={{
+            backgroundColor: verdictTone.bg,
+            paddingHorizontal: space.md,
+            paddingVertical: space.sm,
+            borderRadius: radius.md,
+            flexDirection: "row",
+            alignItems: "center",
+            gap: space.sm,
+          }}
+        >
+          {verdict === "auto-approve" ? (
+            <Check size={16} color={verdictTone.fg} />
+          ) : verdict === "review" ? (
+            <AlertTriangle size={16} color={verdictTone.fg} />
+          ) : (
+            <X size={16} color={verdictTone.fg} />
+          )}
+          <Text variant="caption" weight="bold" style={{ color: verdictTone.fg, flex: 1 }}>
+            {verdictTone.label}
+          </Text>
+        </View>
+
+        {/* Eligibility rows */}
+        {checks.length > 0 ? (
+          <View>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.sm }}>
+              <Text variant="caption" weight="bold">
+                Your eligibility
+              </Text>
+              <Text variant="micro" tone="secondary">
+                {passed} clear · {warnings} review · {failed} block
+              </Text>
+            </View>
+            <View style={{ gap: 6 }}>
+              {checks.map((c) => (
+                <PreJoinRow key={c.id} check={c} t={t} />
+              ))}
+            </View>
+          </View>
+        ) : (
+          <Text variant="caption" tone="secondary">
+            This association has no automated eligibility rules. The president will review your request manually.
+          </Text>
+        )}
+
+        {/* Message */}
+        <View>
+          <Text variant="caption" weight="bold" style={{ marginBottom: 6 }}>
+            Why do you want to join?
+          </Text>
+          <TextInput
+            value={message}
+            onChangeText={onChangeMessage}
+            placeholder="Introduce yourself, mention any referrals or ties to the community."
+            placeholderTextColor={t.textMuted}
+            multiline
+            numberOfLines={4}
+            style={{
+              backgroundColor: t.bgElevated,
+              borderColor: t.border,
+              borderWidth: 1,
+              borderRadius: radius.md,
+              padding: space.sm,
+              minHeight: 80,
+              textAlignVertical: "top",
+              color: t.textPrimary,
+            }}
+          />
+          <Text variant="micro" tone="secondary" style={{ marginTop: 4 }}>
+            Visible to the president when reviewing your request.
+          </Text>
+        </View>
+      </View>
+    </BottomSheet>
+  );
+}
+
+function PreJoinRow({ check, t }: { check: EligibilityCheck; t: AppTheme }) {
+  const tone = (() => {
+    switch (check.status) {
+      case "passed":
+        return { bg: t.successSoft, fg: t.success, Icon: Check, label: "PASS" };
+      case "warning":
+        return { bg: t.warningSoft, fg: t.warning, Icon: AlertTriangle, label: "WARN" };
+      case "failed":
+        return { bg: t.dangerSoft, fg: t.danger, Icon: X, label: "FAIL" };
+      case "manual":
+        return { bg: t.bgMuted, fg: t.textSecondary, Icon: HelpCircle, label: "ACTION" };
+    }
+  })();
+  const Icon = tone.Icon;
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        gap: space.sm,
+        paddingHorizontal: space.sm,
+        paddingVertical: 8,
+        borderRadius: radius.sm,
+        backgroundColor: tone.bg,
+      }}
+    >
+      <Icon size={13} color={tone.fg} />
+      <View style={{ flex: 1 }}>
+        <Text variant="caption" weight="semibold" style={{ color: tone.fg }}>
+          {check.label}
+        </Text>
+        {check.detail ? (
+          <Text variant="micro" tone="secondary" style={{ marginTop: 1 }}>
+            {check.detail}
+          </Text>
+        ) : null}
+      </View>
+      <Text variant="micro" weight="bold" style={{ color: tone.fg, letterSpacing: 0.6 }}>
+        {tone.label}
+      </Text>
     </View>
   );
 }
@@ -1311,6 +1596,31 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: space.sm,
     paddingVertical: space.md,
+    borderRadius: radius.md,
+  },
+
+  // Pre-join sheet
+  preJoinLogo: {
+    width: 48,
+    height: 48,
+    borderRadius: radius.md,
+    backgroundColor: palette.slate[200],
+  },
+  btnGhostSheet: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    borderRadius: radius.md,
+    borderWidth: 1,
+  },
+  btnPrimarySheet: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
     borderRadius: radius.md,
   },
 });
