@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, ScrollView, StyleSheet, Pressable, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -22,8 +23,13 @@ import {
   ChevronRight,
   Sparkles,
   Pin,
+  Check,
+  X,
+  MapPin,
+  HelpCircle,
 } from "lucide-react-native";
 import { Text } from "@/components/shared/Text";
+import { BottomSheet } from "@/components/shared/BottomSheet";
 import { useTheme, space, radius, palette, type AppTheme } from "@/theme";
 
 // ============================================================================
@@ -256,12 +262,91 @@ function isLeader(role: AssocRole) {
   return role === "President" || role === "Treasurer" || role === "Secretary" || role === "Organizer";
 }
 
+type EligibilityCheckStatus = "passed" | "warning" | "failed" | "manual";
+
+type EligibilityCheck = {
+  id: string;
+  label: string;
+  status: EligibilityCheckStatus;
+  detail?: string;
+};
+
+type JoinRequest = {
+  id: string;
+  userName: string;
+  userAvatarUrl: string;
+  location: string;
+  trustScore: number;
+  mutualMembersCount: number;
+  requestedAt: string;
+  message: string;
+  eligibilityChecks: EligibilityCheck[];
+};
+
+const JOIN_REQUESTS: JoinRequest[] = [
+  {
+    id: "req-001",
+    userName: "Yohannes Tadesse",
+    userAvatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
+    location: "Geneva, Switzerland",
+    trustScore: 712,
+    mutualMembersCount: 4,
+    requestedAt: "Dec 29",
+    message:
+      "I recently moved to Geneva and would love to connect with the Ethiopian Orthodox community here. I've been a member of our church in Addis for 15 years.",
+    eligibilityChecks: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "passed", detail: "PostFinance ID match" },
+      { id: "language", label: "Speaks Amharic or English", status: "passed", detail: "Profile language: Amharic, English" },
+      { id: "trust", label: "Trust Score ≥ 600", status: "passed", detail: "Trust Score 712" },
+      { id: "duplicate", label: "Not already a member", status: "passed" },
+      { id: "geo", label: "Resides in chapter region", status: "warning", detail: "Self-declared Geneva — not yet confirmed by document" },
+      { id: "referral", label: "Referred by active member", status: "manual", detail: "Mentions Tesfaye Bekele — manual confirmation needed" },
+    ],
+  },
+  {
+    id: "req-002",
+    userName: "Meron Haile",
+    userAvatarUrl: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
+    location: "Lausanne, Switzerland",
+    trustScore: 645,
+    mutualMembersCount: 2,
+    requestedAt: "Jan 2",
+    message: "Looking to join the community. Referred by Tesfaye Bekele.",
+    eligibilityChecks: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "passed" },
+      { id: "language", label: "Speaks Amharic or English", status: "passed", detail: "Profile language: English" },
+      { id: "trust", label: "Trust Score ≥ 600", status: "passed", detail: "Trust Score 645" },
+      { id: "duplicate", label: "Not already a member", status: "passed" },
+      { id: "geo", label: "Resides in chapter region", status: "passed", detail: "Lausanne address confirmed" },
+      { id: "referral", label: "Referred by active member", status: "passed", detail: "Tesfaye Bekele (member since 2019)" },
+    ],
+  },
+  {
+    id: "req-003",
+    userName: "Daniel Girma",
+    userAvatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+    location: "Zürich, Switzerland",
+    trustScore: 410,
+    mutualMembersCount: 0,
+    requestedAt: "Jan 4",
+    message: "Hello — I would like to apply to join the parish.",
+    eligibilityChecks: [
+      { id: "kyc", label: "Identity verified (KYC)", status: "warning", detail: "KYC pending — ID upload required" },
+      { id: "language", label: "Speaks Amharic or English", status: "passed" },
+      { id: "trust", label: "Trust Score ≥ 600", status: "failed", detail: "Trust Score 410 — below threshold" },
+      { id: "duplicate", label: "Not already a member", status: "passed" },
+      { id: "geo", label: "Resides in chapter region", status: "warning", detail: "Zürich is outside Geneva chapter — federation referral possible" },
+      { id: "referral", label: "Referred by active member", status: "failed", detail: "No referral on file" },
+    ],
+  },
+];
+
 const PRESIDENT_WIDGETS = [
   {
     id: "approvals",
     label: "Pending approvals",
     value: "6",
-    sub: "3 above threshold",
+    sub: "3 join · 2 tx · 1 dispute",
     tone: "warning" as const,
     Icon: CheckCircle2,
   },
@@ -412,6 +497,9 @@ export function AssociationDetail({ id }: { id: string }) {
   const a = ASSOCIATIONS[id] ?? ASSOCIATIONS.ma1;
   const leader = isLeader(a.role);
   const president = a.role === "President";
+
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [pendingRequests, setPendingRequests] = useState<JoinRequest[]>(JOIN_REQUESTS);
 
   const widgetTone = (tone: "warning" | "danger" | "info" | "primary") => {
     switch (tone) {
@@ -569,9 +657,13 @@ export function AssociationDetail({ id }: { id: string }) {
               {PRESIDENT_WIDGETS.map((w) => {
                 const tone = widgetTone(w.tone);
                 const Icon = w.Icon;
+                const onPress = w.id === "approvals" ? () => setReviewOpen(true) : undefined;
+                const displayValue =
+                  w.id === "approvals" ? String(pendingRequests.length + 3) : w.value;
                 return (
                   <Pressable
                     key={w.id}
+                    onPress={onPress}
                     style={[styles.widget, { backgroundColor: t.surface, borderColor: t.border }]}
                   >
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
@@ -581,13 +673,15 @@ export function AssociationDetail({ id }: { id: string }) {
                       <ChevronRight size={14} color={t.textMuted} />
                     </View>
                     <Text variant="h2" weight="bold" style={{ color: tone.fg, marginTop: space.sm }}>
-                      {w.value}
+                      {displayValue}
                     </Text>
                     <Text variant="caption" weight="semibold">
                       {w.label}
                     </Text>
                     <Text variant="micro" tone="secondary">
-                      {w.sub}
+                      {w.id === "approvals"
+                        ? `${pendingRequests.length} join · 2 tx · 1 dispute`
+                        : w.sub}
                     </Text>
                   </Pressable>
                 );
@@ -782,6 +876,242 @@ export function AssociationDetail({ id }: { id: string }) {
           </View>
         </View>
       </ScrollView>
+
+      {president ? (
+        <JoinRequestReviewSheet
+          open={reviewOpen}
+          requests={pendingRequests}
+          onClose={() => setReviewOpen(false)}
+          onApprove={(reqId) => {
+            console.log("Approve join request:", reqId);
+            setPendingRequests((prev) => prev.filter((r) => r.id !== reqId));
+          }}
+          onReject={(reqId, reason) => {
+            console.log("Reject join request:", reqId, "reason:", reason);
+            setPendingRequests((prev) => prev.filter((r) => r.id !== reqId));
+          }}
+          t={t}
+        />
+      ) : null}
+    </View>
+  );
+}
+
+// ============================================================================
+// Join Request Review Sheet
+// ============================================================================
+
+function JoinRequestReviewSheet({
+  open,
+  requests,
+  onClose,
+  onApprove,
+  onReject,
+  t,
+}: {
+  open: boolean;
+  requests: JoinRequest[];
+  onClose: () => void;
+  onApprove: (id: string) => void;
+  onReject: (id: string, reason?: string) => void;
+  t: AppTheme;
+}) {
+  return (
+    <BottomSheet
+      open={open}
+      onClose={onClose}
+      title="Review join requests"
+      subtitle={`${requests.length} pending · approve or reject with eligibility context`}
+    >
+      {requests.length === 0 ? (
+        <View style={{ paddingVertical: space.xl, alignItems: "center", gap: space.sm }}>
+          <CheckCircle2 size={32} color={t.success} />
+          <Text variant="bodySmall" weight="semibold">
+            All caught up
+          </Text>
+          <Text variant="caption" tone="secondary">
+            No join requests waiting on your decision.
+          </Text>
+        </View>
+      ) : (
+        <View style={{ gap: space.lg, paddingTop: space.md }}>
+          {requests.map((req) => (
+            <JoinRequestReviewCard
+              key={req.id}
+              req={req}
+              t={t}
+              onApprove={() => onApprove(req.id)}
+              onReject={() => onReject(req.id)}
+            />
+          ))}
+        </View>
+      )}
+    </BottomSheet>
+  );
+}
+
+function JoinRequestReviewCard({
+  req,
+  t,
+  onApprove,
+  onReject,
+}: {
+  req: JoinRequest;
+  t: AppTheme;
+  onApprove: () => void;
+  onReject: () => void;
+}) {
+  const passed = req.eligibilityChecks.filter((c) => c.status === "passed").length;
+  const warnings = req.eligibilityChecks.filter((c) => c.status === "warning" || c.status === "manual").length;
+  const failed = req.eligibilityChecks.filter((c) => c.status === "failed").length;
+  const verdict: "auto-approve" | "review" | "block" =
+    failed > 0 ? "block" : warnings > 0 ? "review" : "auto-approve";
+  const verdictTone =
+    verdict === "auto-approve"
+      ? { bg: t.successSoft, fg: t.success, label: "All checks passed" }
+      : verdict === "review"
+        ? { bg: t.warningSoft, fg: t.warning, label: "Needs review" }
+        : { bg: t.dangerSoft, fg: t.danger, label: "Blocking issues" };
+
+  return (
+    <View style={[styles.reviewCard, { backgroundColor: t.surface, borderColor: t.border }]}>
+      {/* Applicant header */}
+      <View style={{ flexDirection: "row", gap: space.md, alignItems: "flex-start" }}>
+        <Image source={{ uri: req.userAvatarUrl }} style={styles.reviewAvatar} />
+        <View style={{ flex: 1 }}>
+          <Text variant="bodySmall" weight="bold" numberOfLines={1}>
+            {req.userName}
+          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4, marginTop: 2 }}>
+            <MapPin size={11} color={t.textMuted} />
+            <Text variant="micro" tone="secondary">
+              {req.location}
+            </Text>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginTop: 6, flexWrap: "wrap" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 3 }}>
+              <ShieldCheck size={11} color={t.success} />
+              <Text variant="micro" weight="semibold">
+                Trust {req.trustScore}
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 3 }}>
+              <Users size={11} color={t.textMuted} />
+              <Text variant="micro" tone="secondary">
+                {req.mutualMembersCount} mutual
+              </Text>
+            </View>
+            <Text variant="micro" tone="secondary">
+              · {req.requestedAt}
+            </Text>
+          </View>
+        </View>
+        <View style={[styles.verdictPill, { backgroundColor: verdictTone.bg }]}>
+          <Text variant="micro" weight="bold" style={{ color: verdictTone.fg }}>
+            {verdictTone.label}
+          </Text>
+        </View>
+      </View>
+
+      {/* Message */}
+      <View
+        style={{
+          marginTop: space.md,
+          paddingHorizontal: space.md,
+          paddingVertical: space.sm,
+          backgroundColor: t.bgMuted,
+          borderLeftWidth: 2,
+          borderLeftColor: t.border,
+          borderRadius: radius.sm,
+        }}
+      >
+        <Text variant="micro" weight="bold" tone="muted" style={{ letterSpacing: 0.8, marginBottom: 4 }}>
+          APPLICANT MESSAGE
+        </Text>
+        <Text variant="caption" tone="secondary" style={{ fontStyle: "italic" }}>
+          "{req.message}"
+        </Text>
+      </View>
+
+      {/* Eligibility pre-checks */}
+      <View style={{ marginTop: space.md }}>
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: space.sm }}>
+          <Text variant="caption" weight="bold">
+            Eligibility pre-checks
+          </Text>
+          <Text variant="micro" tone="secondary">
+            {passed} passed · {warnings} review · {failed} block
+          </Text>
+        </View>
+        <View style={{ gap: 6 }}>
+          {req.eligibilityChecks.map((c) => (
+            <EligibilityRow key={c.id} check={c} t={t} />
+          ))}
+        </View>
+      </View>
+
+      {/* Actions */}
+      <View style={{ flexDirection: "row", gap: space.sm, marginTop: space.md }}>
+        <Pressable
+          onPress={onReject}
+          style={[styles.btnGhost, { backgroundColor: t.bgElevated, borderColor: t.border }]}
+        >
+          <X size={13} color={t.textSecondary} />
+          <Text variant="caption" weight="semibold" tone="secondary">
+            Reject
+          </Text>
+        </Pressable>
+        <Pressable onPress={onApprove} style={[styles.btnApprove, { backgroundColor: t.success }]}>
+          <Check size={14} color="#fff" />
+          <Text variant="caption" weight="bold" style={{ color: "#fff" }}>
+            Approve
+          </Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
+function EligibilityRow({ check, t }: { check: EligibilityCheck; t: AppTheme }) {
+  const tone = (() => {
+    switch (check.status) {
+      case "passed":
+        return { bg: t.successSoft, fg: t.success, Icon: Check, label: "PASS" };
+      case "warning":
+        return { bg: t.warningSoft, fg: t.warning, Icon: AlertTriangle, label: "WARN" };
+      case "failed":
+        return { bg: t.dangerSoft, fg: t.danger, Icon: X, label: "FAIL" };
+      case "manual":
+        return { bg: t.bgMuted, fg: t.textSecondary, Icon: HelpCircle, label: "MANUAL" };
+    }
+  })();
+  const Icon = tone.Icon;
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        gap: space.sm,
+        paddingHorizontal: space.sm,
+        paddingVertical: 8,
+        borderRadius: radius.sm,
+        backgroundColor: tone.bg,
+      }}
+    >
+      <Icon size={13} color={tone.fg} />
+      <View style={{ flex: 1 }}>
+        <Text variant="caption" weight="semibold" style={{ color: tone.fg }}>
+          {check.label}
+        </Text>
+        {check.detail ? (
+          <Text variant="micro" tone="secondary" style={{ marginTop: 1 }}>
+            {check.detail}
+          </Text>
+        ) : null}
+      </View>
+      <Text variant="micro" weight="bold" style={{ color: tone.fg, letterSpacing: 0.6 }}>
+        {tone.label}
+      </Text>
     </View>
   );
 }
@@ -987,5 +1317,41 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderRadius: radius.pill,
     marginLeft: "auto",
+  },
+
+  reviewCard: {
+    padding: space.md,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+  },
+  reviewAvatar: {
+    width: 44,
+    height: 44,
+    borderRadius: radius.md,
+    backgroundColor: palette.slate[200],
+  },
+  verdictPill: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: radius.pill,
+  },
+  btnGhost: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 4,
+    paddingVertical: 10,
+    borderRadius: radius.md,
+    borderWidth: 1,
+  },
+  btnApprove: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 4,
+    paddingVertical: 10,
+    borderRadius: radius.md,
   },
 });
