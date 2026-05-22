@@ -1,61 +1,205 @@
 {
-  "funds": [
-    {
-      "id": "fund_operating",
-      "name": "Operating Fund",
-      "kind": "operating",
-      "balance": 4_280,
-      "currency": "CHF",
-      "trend": [3800, 4100, 4250, 4180, 4280],
-      "maxDisbursement": 1000,
-      "signersRequired": 2
-    },
-    {
-      "id": "fund_welfare",
-      "name": "Welfare Fund",
-      "kind": "welfare",
-      "balance": 5_810,
-      "currency": "CHF",
-      "trend": [4900, 5050, 5200, 5500, 5810],
-      "maxDisbursement": 2000,
-      "signersRequired": 3
-    },
-    {
-      "id": "fund_emergency",
-      "name": "Emergency Fund",
-      "kind": "emergency",
-      "balance": 6_960,
-      "currency": "CHF",
-      "trend": [6450, 6580, 6720, 6840, 6960],
-      "maxDisbursement": 5000,
-      "signersRequired": 2,
-      "autoCover": true
-    },
-    {
-      "id": "fund_school_bus",
-      "name": "School Bus Project",
-      "kind": "project",
-      "balance": 12_400,
-      "currency": "CHF",
-      "trend": [4800, 7100, 9000, 10800, 12400],
-      "maxDisbursement": 25000,
-      "signersRequired": 4
-    }
-  ],
-  "ledger": [
-    { "id": "le_1", "at": "2026-05-17T06:42", "kind": "credit", "amount": 200, "label": "Contribution · Aïssatou D. · Main CHF" },
-    { "id": "le_2", "at": "2026-05-17T06:42", "kind": "credit", "amount": 2,   "label": "EF carve-out · Aïssatou D." },
-    { "id": "le_3", "at": "2026-05-16T09:00", "kind": "debit",  "amount": 2400, "label": "Payout · Kofi Mensah · Main CHF" },
-    { "id": "le_4", "at": "2026-05-15T18:00", "kind": "credit", "amount": 800,  "label": "Welfare contribution · Mariam R." },
-    { "id": "le_5", "at": "2026-05-14T11:20", "kind": "debit",  "amount": 600,  "label": "Welfare disbursement · medical aid · approved 3/3" }
-  ],
-  "welfareRequest": {
-    "reasons": ["Medical", "Funeral", "Education", "Emergency", "Other"],
-    "stepLabels": ["Reason", "Amount", "Documents"]
+  "overview": {
+    "totalBalance": 29450,
+    "available": 24340,
+    "pending": 5110,
+    "efBalance": 6960,
+    "currency": "CHF",
+    "weeklyDelta": 480,
+    "actionQueue": [
+      { "id": "aq1", "kind": "unconfirmed",         "label": "3 unconfirmed transfers",            "detail": "PostFinance · CHF 802 unmatched · awaiting reconciliation", "fundId": "fund_operating", "at": "2026-05-21T08:00:00Z", "severity": "warning" },
+      { "id": "aq2", "kind": "reconciliation",      "label": "April reconciliation due",            "detail": "Bank statement uploaded · 6 lines to match",                "fundId": null,             "at": "2026-05-20T18:00:00Z", "severity": "info" },
+      { "id": "aq3", "kind": "expiring_approval",   "label": "Funeral aid quorum expires in 2d",    "detail": "Chinedu Okoye · CHF 1'500 · 2/3 signers",                   "fundId": "fund_welfare",   "at": "2026-05-19T22:04:00Z", "severity": "danger" },
+      { "id": "aq4", "kind": "expiring_statement",  "label": "Q1 audit statement expiring",          "detail": "Generated 14 Apr · download before 30 May",                "fundId": null,             "at": "2026-04-14T12:00:00Z", "severity": "info" }
+    ],
+    "funds": [
+      {
+        "id": "fund_operating",
+        "name": "Operating Fund",
+        "kind": "operating",
+        "balance": 4280,
+        "currency": "CHF",
+        "available": 3478,
+        "pending": 802,
+        "trend": [3800, 4100, 4250, 4180, 4280, 4220, 4280],
+        "maxDisbursement": 1000,
+        "signersRequired": 2,
+        "rules": {
+          "allowedSources": ["Association dues", "Subscription fees", "Bank transfers"],
+          "allowedUses": ["Operating expenses", "Platform fees", "Treasurer reimbursements"],
+          "maxSingleDisbursement": 1000,
+          "signersRequired": 2
+        }
+      },
+      {
+        "id": "fund_welfare",
+        "name": "Welfare Fund",
+        "kind": "welfare",
+        "balance": 5810,
+        "currency": "CHF",
+        "available": 4710,
+        "pending": 1100,
+        "trend": [4900, 5050, 5200, 5500, 5810, 5740, 5810],
+        "maxDisbursement": 2000,
+        "signersRequired": 3,
+        "rules": {
+          "allowedSources": ["Voluntary contributions", "Fundraising events", "Donations"],
+          "allowedUses": ["Medical", "Funeral", "Education", "Emergency aid"],
+          "maxSingleDisbursement": 2000,
+          "signersRequired": 3
+        }
+      },
+      {
+        "id": "fund_emergency",
+        "name": "Emergency Fund",
+        "kind": "emergency",
+        "balance": 6960,
+        "currency": "CHF",
+        "available": 6960,
+        "pending": 0,
+        "trend": [6450, 6580, 6720, 6840, 6960, 6960, 6960],
+        "maxDisbursement": 5000,
+        "signersRequired": 2,
+        "autoCover": true,
+        "rules": {
+          "allowedSources": ["EF carve-out (1% per contribution)", "Voluntary top-ups"],
+          "allowedUses": ["Auto-cover missed contributions", "Cycle continuity"],
+          "maxSingleDisbursement": 5000,
+          "signersRequired": 2,
+          "autoCover": true
+        }
+      },
+      {
+        "id": "fund_school_bus",
+        "name": "School Bus Project",
+        "kind": "project",
+        "balance": 12400,
+        "currency": "CHF",
+        "available": 9192,
+        "pending": 3208,
+        "trend": [4800, 7100, 9000, 10800, 12400, 12200, 12400],
+        "maxDisbursement": 25000,
+        "signersRequired": 4,
+        "rules": {
+          "allowedSources": ["Project pledges", "Fundraising campaigns", "Grants"],
+          "allowedUses": ["Vehicle purchase", "Insurance", "Maintenance"],
+          "maxSingleDisbursement": 25000,
+          "signersRequired": 4
+        }
+      }
+    ],
+    "recentLedger": [
+      { "id": "le_1", "at": "2026-05-19T06:42:00Z", "fundId": "fund_operating", "kind": "credit", "amount": 200,  "currency": "CHF", "category": "contribution",          "label": "Contribution · Aïssatou D. · Main CHF",    "counterparty": "mem_dembele", "balanceAfter": 4280, "reference": "MAIN-C8-19-014" },
+      { "id": "le_2", "at": "2026-05-19T06:42:00Z", "fundId": "fund_emergency", "kind": "credit", "amount": 2,    "currency": "CHF", "category": "ef_intervention",       "label": "EF carve-out · Aïssatou D.",               "counterparty": "mem_dembele", "balanceAfter": 6960, "reference": "EF-C8-AD" },
+      { "id": "le_3", "at": "2026-05-18T09:00:00Z", "fundId": "fund_operating", "kind": "debit",  "amount": 2400, "currency": "CHF", "category": "payout",                "label": "Payout · Kofi Mensah · Main CHF",          "counterparty": "mem_kofi",    "balanceAfter": 4080, "reference": "MAIN-C8-PAYOUT" },
+      { "id": "le_4", "at": "2026-05-17T18:00:00Z", "fundId": "fund_welfare",   "kind": "credit", "amount": 800,  "currency": "CHF", "category": "contribution",          "label": "Welfare contribution · Mariam R.",         "counterparty": "mem_rahimi",  "balanceAfter": 5810, "reference": "WLF-2026-05-22" },
+      { "id": "le_5", "at": "2026-05-15T11:20:00Z", "fundId": "fund_welfare",   "kind": "debit",  "amount": 600,  "currency": "CHF", "category": "welfare_disbursement",  "label": "Welfare disbursement · medical aid",       "counterparty": "mem_haile",   "balanceAfter": 5010, "reference": "WLF-DISB-018" }
+    ]
   },
-  "approvals": [
-    { "id": "wr_medical", "member": "Aïssatou Dembélé", "amount": 800, "reason": "Medical emergency", "quorum": "1/3", "submitted": "2026-05-16T18:11", "status": "Submitted" },
-    { "id": "wr_funeral", "member": "Chinedu Okoye",    "amount": 1500,"reason": "Funeral support",    "quorum": "2/3", "submitted": "2026-05-15T22:04", "status": "In review" },
-    { "id": "wr_school",  "member": "Selam Haile",      "amount": 600, "reason": "School fees",        "quorum": "3/3", "submitted": "2026-05-13T09:18", "status": "Approved" }
+  "welfareRequestDraft": {
+    "fundId": "fund_welfare",
+    "reasons": [
+      { "id": "medical",   "label": "Medical",        "icon": "stethoscope" },
+      { "id": "funeral",   "label": "Funeral",        "icon": "flower" },
+      { "id": "education", "label": "Education",      "icon": "book" },
+      { "id": "emergency", "label": "Emergency",      "icon": "siren" },
+      { "id": "other",     "label": "Other",          "icon": "more" }
+    ],
+    "eligibility": {
+      "maxAdvance": 2000,
+      "trustScore": 768,
+      "tenureMonths": 18,
+      "detail": "Up to CHF 2'000 based on Trust Score 768 and 18-month tenure. Repayment optional."
+    }
+  },
+  "welfareRequests": [
+    {
+      "id": "wr_medical",
+      "fundId": "fund_welfare",
+      "member": "Aïssatou Dembélé",
+      "memberId": "mem_dembele",
+      "memberTrust": 689,
+      "amount": 800,
+      "currency": "CHF",
+      "reason": "Medical emergency · cardiology consult",
+      "reasonKind": "medical",
+      "note": "Cardiology appointment needed before end of month. Will provide receipts after the visit.",
+      "submitted": "2026-05-16T18:11:00Z",
+      "deadline": "2026-05-23T18:11:00Z",
+      "status": "Submitted",
+      "signersRequired": 3,
+      "evidence": 1,
+      "signers": [
+        { "signerId": "mem_amara",  "signerName": "Amara Ofori",  "signerTrust": 824, "decision": "approved", "decidedAt": "2026-05-17T09:14:00Z", "note": "Confirmed by phone." },
+        { "signerId": "mem_kofi",   "signerName": "Kofi Mensah",  "signerTrust": 891, "decision": "pending",  "decidedAt": null,                    "note": null },
+        { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi","signerTrust": 802, "decision": "pending",  "decidedAt": null,                    "note": null }
+      ]
+    },
+    {
+      "id": "wr_funeral",
+      "fundId": "fund_welfare",
+      "member": "Chinedu Okoye",
+      "memberId": "mem_okoye",
+      "memberTrust": 558,
+      "amount": 1500,
+      "currency": "CHF",
+      "reason": "Funeral support · uncle",
+      "reasonKind": "funeral",
+      "note": "Family funeral in Abuja. Receipts to follow next week.",
+      "submitted": "2026-05-15T22:04:00Z",
+      "deadline": "2026-05-24T22:04:00Z",
+      "status": "In review",
+      "signersRequired": 3,
+      "evidence": 2,
+      "signers": [
+        { "signerId": "mem_amara",  "signerName": "Amara Ofori",   "signerTrust": 824, "decision": "approved", "decidedAt": "2026-05-16T08:00:00Z", "note": null },
+        { "signerId": "mem_kofi",   "signerName": "Kofi Mensah",   "signerTrust": 891, "decision": "approved", "decidedAt": "2026-05-16T19:33:00Z", "note": "Have spoken with Chinedu." },
+        { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi", "signerTrust": 802, "decision": "pending",  "decidedAt": null,                    "note": null }
+      ]
+    },
+    {
+      "id": "wr_school",
+      "fundId": "fund_welfare",
+      "member": "Selam Haile",
+      "memberId": "mem_haile",
+      "memberTrust": 644,
+      "amount": 600,
+      "currency": "CHF",
+      "reason": "School fees · daughter (Year 9)",
+      "reasonKind": "education",
+      "note": "Receipt from the school attached.",
+      "submitted": "2026-05-13T09:18:00Z",
+      "deadline": "2026-05-20T09:18:00Z",
+      "status": "Approved",
+      "signersRequired": 3,
+      "evidence": 1,
+      "signers": [
+        { "signerId": "mem_amara",  "signerName": "Amara Ofori",   "signerTrust": 824, "decision": "approved", "decidedAt": "2026-05-14T07:14:00Z", "note": null },
+        { "signerId": "mem_kofi",   "signerName": "Kofi Mensah",   "signerTrust": 891, "decision": "approved", "decidedAt": "2026-05-14T18:11:00Z", "note": null },
+        { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi", "signerTrust": 802, "decision": "approved", "decidedAt": "2026-05-15T08:33:00Z", "note": "All three of us reviewed the receipt." }
+      ]
+    },
+    {
+      "id": "wr_emergency",
+      "fundId": "fund_welfare",
+      "member": "Linh Pham",
+      "memberId": "mem_pham",
+      "memberTrust": 615,
+      "amount": 400,
+      "currency": "CHF",
+      "reason": "Emergency · car repair to keep job",
+      "reasonKind": "emergency",
+      "note": "Battery and alternator. Garage quote attached.",
+      "submitted": "2026-05-12T14:00:00Z",
+      "deadline": "2026-05-19T14:00:00Z",
+      "status": "Declined",
+      "signersRequired": 3,
+      "evidence": 1,
+      "signers": [
+        { "signerId": "mem_amara",  "signerName": "Amara Ofori",   "signerTrust": 824, "decision": "approved", "decidedAt": "2026-05-13T09:00:00Z", "note": null },
+        { "signerId": "mem_kofi",   "signerName": "Kofi Mensah",   "signerTrust": 891, "decision": "rejected", "decidedAt": "2026-05-13T16:00:00Z", "note": "Suggested a personal loan instead." },
+        { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi", "signerTrust": 802, "decision": "rejected", "decidedAt": "2026-05-14T11:00:00Z", "note": "Welfare scope doesn't cover vehicle repairs." }
+      ]
+    }
   ]
 }

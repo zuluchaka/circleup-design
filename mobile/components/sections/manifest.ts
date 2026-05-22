@@ -41,6 +41,9 @@ import { RoscaCircleAccount } from "./screens/RoscaCircleAccount";
 import { RoscaAdminMonitoring } from "./screens/RoscaAdminMonitoring";
 import { DiscoverHub } from "./screens/DiscoverHub";
 import { TreasuryOverview } from "./screens/TreasuryOverview";
+import { TreasuryFundDetail } from "./screens/TreasuryFundDetail";
+import { TreasuryRequest } from "./screens/TreasuryRequest";
+import { TreasuryApprovals } from "./screens/TreasuryApprovals";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
 import { CommsInbox } from "./screens/CommsInbox";
 import { AnalyticsPersonal } from "./screens/AnalyticsPersonal";
@@ -89,6 +92,9 @@ export const screenManifest: Record<string, ComponentType> = {
   "rosca-circles/admin-monitoring": RoscaAdminMonitoring,
   "rosca-circles/discover": DiscoverHub,
   "treasury-and-funds/overview": TreasuryOverview,
+  "treasury-and-funds/fund-detail": TreasuryFundDetail,
+  "treasury-and-funds/request": TreasuryRequest,
+  "treasury-and-funds/approvals": TreasuryApprovals,
   "governance-and-voting/proposals": GovernanceProposals,
   "communication-and-events/inbox": CommsInbox,
   "documents/library": DocumentsLibrary,
