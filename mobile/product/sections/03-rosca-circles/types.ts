@@ -155,6 +155,71 @@ export type RenewalProposal = {
   voters: RenewalVoter[];
 };
 
+// ---------------------------------------------------------------------------
+// Phase 4 — live cycle ops
+// ---------------------------------------------------------------------------
+
+export type CycleMemberStatus = "Paid" | "Pending" | "Failed" | "Late" | "EF";
+
+export type CycleMember = {
+  memberId: string;
+  name: string;
+  slot: number;
+  trust: number;
+  status: CycleMemberStatus;
+  amount: number;
+  method: string | null;
+  paidAt: string | null;
+  failureReason: string | null;
+  retryCount: number;
+};
+
+export type CycleProgress = {
+  circleId: string;
+  cycle: number;
+  cycleLength: number;
+  dueDate: string;
+  perMember: number;
+  currency: string;
+  expectedTotal: number;
+  collectedTotal: number;
+  confirmed: number;
+  pending: number;
+  failed: number;
+  payoutRecipient: string;
+  payoutAmount: number;
+  payoutTriggerable: boolean;
+  members: CycleMember[];
+};
+
+export type CollectionLocation = {
+  id: string;
+  label: string;
+  hint: string;
+};
+
+export type ExceptionContext = {
+  exceptionId: string;
+  memberId: string;
+  name: string;
+  trust: number;
+  issue: string;
+  daysOverdue: number;
+  amountDue: number;
+  currency: string;
+  phone: string;
+  whatsapp: string;
+  email: string;
+  cycle: number;
+  efBalance: number;
+  efRemainingAfter: number;
+  history: {
+    paidLastCycle: boolean;
+    missedCyclesYear: number;
+    onTimeRate: number;
+  };
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;

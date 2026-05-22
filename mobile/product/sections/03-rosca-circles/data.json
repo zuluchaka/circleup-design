@@ -324,6 +324,63 @@
       { "memberId": "mem_ngozi",   "name": "Ngozi Okafor",     "trust": 685, "vote": "pending", "votedAt": null }
     ]
   },
+  "cycleProgress": {
+    "circleId": "circle_main_chf",
+    "cycle": 8,
+    "cycleLength": 12,
+    "dueDate": "2026-05-20",
+    "perMember": 202,
+    "currency": "CHF",
+    "expectedTotal": 2424,
+    "collectedTotal": 2222,
+    "confirmed": 8,
+    "pending": 2,
+    "failed": 1,
+    "payoutRecipient": "Kofi Mensah",
+    "payoutAmount": 2400,
+    "payoutTriggerable": false,
+    "members": [
+      { "memberId": "mem_amara",    "name": "Amara Ofori",      "slot": 1,  "trust": 824, "status": "Paid",    "amount": 202, "method": "PostFinance",      "paidAt": "2026-05-15T07:14:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_kofi",     "name": "Kofi Mensah",      "slot": 2,  "trust": 891, "status": "Paid",    "amount": 202, "method": "TWINT",            "paidAt": "2026-05-15T19:02:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_zara",     "name": "Zara Bekele",      "slot": 3,  "trust": 776, "status": "Paid",    "amount": 202, "method": "Visa · *2104",      "paidAt": "2026-05-16T11:48:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_dembele",  "name": "Aïssatou Dembélé", "slot": 4,  "trust": 689, "status": "Paid",    "amount": 202, "method": "PostFinance",      "paidAt": "2026-05-16T20:33:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_pham",     "name": "Linh Pham",        "slot": 5,  "trust": 615, "status": "Failed",  "amount": 202, "method": "Visa · *4421",      "paidAt": null,                    "failureReason": "Insufficient funds", "retryCount": 2 },
+      { "memberId": "mem_okoye",    "name": "Chinedu Okoye",    "slot": 6,  "trust": 558, "status": "Pending", "amount": 202, "method": null,               "paidAt": null,                    "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_rahimi",   "name": "Mariam Rahimi",    "slot": 7,  "trust": 802, "status": "Paid",    "amount": 202, "method": "PostFinance",      "paidAt": "2026-05-17T13:25:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_haile",    "name": "Selam Haile",      "slot": 8,  "trust": 644, "status": "Paid",    "amount": 202, "method": "PostFinance",      "paidAt": "2026-05-18T07:33:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_joao",     "name": "João da Silva",    "slot": 9,  "trust": 701, "status": "Paid",    "amount": 202, "method": "TWINT",            "paidAt": "2026-05-18T14:50:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_olusegun", "name": "Olusegun A.",      "slot": 10, "trust": 712, "status": "Pending", "amount": 202, "method": null,               "paidAt": null,                    "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_aminata",  "name": "Aminata Diallo",   "slot": 11, "trust": 768, "status": "Paid",    "amount": 202, "method": "Visa · *2104",      "paidAt": "2026-05-19T08:00:00Z", "failureReason": null, "retryCount": 0 },
+      { "memberId": "mem_ngozi",    "name": "Ngozi Okafor",     "slot": 12, "trust": 685, "status": "Paid",    "amount": 202, "method": "PostFinance",      "paidAt": "2026-05-19T16:22:00Z", "failureReason": null, "retryCount": 0 }
+    ]
+  },
+  "collectionLocations": [
+    { "id": "loc_meeting",    "label": "Monthly meeting",     "hint": "Geneva Community Hall · 1st Saturday" },
+    { "id": "loc_office",     "label": "Treasurer's office",  "hint": "By appointment" },
+    { "id": "loc_event",      "label": "Community event",     "hint": "Cultural gatherings, fairs" },
+    { "id": "loc_other",      "label": "Other location",      "hint": "Add a custom note" }
+  ],
+  "exceptionContext": {
+    "exceptionId": "exc_linh",
+    "memberId": "mem_pham",
+    "name": "Linh Pham",
+    "trust": 615,
+    "issue": "3 days overdue",
+    "daysOverdue": 3,
+    "amountDue": 202,
+    "currency": "CHF",
+    "phone": "+41 78 555 4421",
+    "whatsapp": "+41 78 555 4421",
+    "email": "linh.pham@example.ch",
+    "cycle": 8,
+    "efBalance": 4320,
+    "efRemainingAfter": 4118,
+    "history": {
+      "paidLastCycle": false,
+      "missedCyclesYear": 1,
+      "onTimeRate": 0.83
+    }
+  },
   "invitations": [
     {
       "id": "inv_artisan",
