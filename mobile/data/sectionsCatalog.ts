@@ -53,12 +53,47 @@ export const sectionsCatalog: SectionMeta[] = [
     title: "ROSCA Circles",
     blurb: "My circles, contribute, payouts, emergency fund.",
     screens: [
+      // Phase 1 — Core member loop (built)
       { slug: "discover", label: "Discover Circles" },
       { slug: "my-circles", label: "My Circles" },
       { slug: "circle-detail", label: "Circle Detail" },
       { slug: "contribute", label: "Make Contribution" },
       { slug: "payouts", label: "Payout Schedule" },
       { slug: "treasurer", label: "Treasurer Dashboard" },
+      // Phase 2 — Discovery & joining
+      { slug: "circle-public", label: "Public Circle Preview" },
+      { slug: "join-request", label: "Join Request" },
+      { slug: "waitlist", label: "Waitlist Position" },
+      { slug: "invitations", label: "Circle Invitations" },
+      // Phase 3 — Creating & renewing
+      { slug: "create", label: "Create Circle Wizard" },
+      { slug: "renewal", label: "Renewal & Voting" },
+      // Phase 4 — Live cycle ops (organizer / treasurer)
+      { slug: "cycle-progress", label: "Cycle Progress Grid" },
+      { slug: "cash-collection", label: "Cash Collection" },
+      { slug: "exception-action", label: "Exception Action" },
+      // Phase 5 — Member-action sheets
+      { slug: "pay-for-member", label: "Pay for Member" },
+      { slug: "position-swap", label: "Position Swap" },
+      { slug: "bidding", label: "Bidding Interface" },
+      { slug: "payout-advance", label: "Payout Advance" },
+      { slug: "auto-pay", label: "Auto-Pay" },
+      // Phase 6 — Health, risk & moderation
+      { slug: "analytics", label: "Circle Analytics" },
+      { slug: "risk-scores", label: "Member Risk Scores" },
+      { slug: "disputes", label: "Disputes List" },
+      { slug: "dispute-detail", label: "Dispute Detail" },
+      { slug: "emergency-fund", label: "Emergency Fund Panel" },
+      // Phase 7 — Settings & governance
+      { slug: "settings", label: "Circle Settings" },
+      { slug: "management", label: "Circle Management" },
+      { slug: "invite", label: "Invite Members" },
+      { slug: "participants", label: "Circle Participants" },
+      { slug: "multi-share", label: "Multi-Share" },
+      { slug: "documents", label: "Circle Documents" },
+      // Phase 8 — Account & admin
+      { slug: "circle-account", label: "Circle Account" },
+      { slug: "admin-monitoring", label: "Admin Monitoring" },
     ],
   },
   {

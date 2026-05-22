@@ -32,7 +32,30 @@ const sectionsCatalog = [
     screens: ["list", "dashboard", "settings"],
   },
   { index: 2,  slug: "members-and-trust",        screens: ["directory", "profile", "trust", "invite"] },
-  { index: 3,  slug: "rosca-circles",            screens: ["my-circles", "circle-detail", "contribute", "payouts", "treasurer"] },
+  {
+    index: 3,
+    slug: "rosca-circles",
+    // Spec lives at mobile/product/sections/03-rosca-circles/spec.md.
+    // Phases 2–8 are stub-rendered until the matching component lands.
+    screens: [
+      // Phase 1 — built
+      "my-circles", "circle-detail", "contribute", "payouts", "treasurer",
+      // Phase 2 — discovery & joining
+      "circle-public", "join-request", "waitlist", "invitations",
+      // Phase 3 — creating & renewing
+      "create", "renewal",
+      // Phase 4 — live cycle ops
+      "cycle-progress", "cash-collection", "exception-action",
+      // Phase 5 — member-action sheets
+      "pay-for-member", "position-swap", "bidding", "payout-advance", "auto-pay",
+      // Phase 6 — health, risk & moderation
+      "analytics", "risk-scores", "disputes", "dispute-detail", "emergency-fund",
+      // Phase 7 — settings & governance
+      "settings", "management", "invite", "participants", "multi-share", "documents",
+      // Phase 8 — account & admin
+      "circle-account", "admin-monitoring",
+    ],
+  },
   { index: 4,  slug: "treasury-and-funds",       screens: ["overview", "fund-detail", "request", "approvals"] },
   { index: 5,  slug: "governance-and-voting",    screens: ["proposals", "ballot", "elections", "committees"] },
   { index: 6,  slug: "communication-and-events", screens: ["inbox", "thread", "events", "event-detail", "qr"] },
