@@ -220,6 +220,60 @@ export type ExceptionContext = {
   };
 };
 
+// ---------------------------------------------------------------------------
+// Phase 5 — member-action sheets
+// ---------------------------------------------------------------------------
+
+export type PositionSwapCandidate = {
+  memberId: string;
+  name: string;
+  trust: number;
+  currentSlot: number;
+  cyclesAway: number;
+  willingnessHint: string;
+};
+
+export type BidEntry = {
+  bidderId: string;
+  bidderInitial: string;
+  amount: number;
+  isYou: boolean;
+};
+
+export type BiddingState = {
+  circleId: string;
+  cycle: number;
+  payoutAmount: number;
+  currency: string;
+  deadline: string;
+  minimumBid: number;
+  yourCurrentBid: number | null;
+  yourMaxBid: number;
+  transparencyMode: "open" | "blind";
+  bids: BidEntry[];
+};
+
+export type PayoutAdvanceEligibility = {
+  yourPosition: number;
+  cyclesToPayout: number;
+  estimatedPayoutAmount: number;
+  currency: string;
+  maxAdvance: number;
+  cooldownDays: number;
+  checks: EligibilityCheck[];
+  reviewerTrustThreshold: number;
+};
+
+export type AutoPaySetup = {
+  enabled: boolean;
+  primaryMethodId: string;
+  backupMethodId: string | null;
+  nextChargeDate: string;
+  nextChargeAmount: number;
+  currency: string;
+  scheduleNote: string;
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;

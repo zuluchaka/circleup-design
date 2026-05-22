@@ -21,6 +21,11 @@ import { RoscaRenewal } from "./screens/RoscaRenewal";
 import { RoscaCycleProgress } from "./screens/RoscaCycleProgress";
 import { RoscaCashCollection } from "./screens/RoscaCashCollection";
 import { RoscaExceptionAction } from "./screens/RoscaExceptionAction";
+import { RoscaPayForMember } from "./screens/RoscaPayForMember";
+import { RoscaPositionSwap } from "./screens/RoscaPositionSwap";
+import { RoscaBidding } from "./screens/RoscaBidding";
+import { RoscaPayoutAdvance } from "./screens/RoscaPayoutAdvance";
+import { RoscaAutoPay } from "./screens/RoscaAutoPay";
 import { DiscoverHub } from "./screens/DiscoverHub";
 import { TreasuryOverview } from "./screens/TreasuryOverview";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
@@ -51,6 +56,11 @@ export const screenManifest: Record<string, ComponentType> = {
   "rosca-circles/cycle-progress": RoscaCycleProgress,
   "rosca-circles/cash-collection": RoscaCashCollection,
   "rosca-circles/exception-action": RoscaExceptionAction,
+  "rosca-circles/pay-for-member": RoscaPayForMember,
+  "rosca-circles/position-swap": RoscaPositionSwap,
+  "rosca-circles/bidding": RoscaBidding,
+  "rosca-circles/payout-advance": RoscaPayoutAdvance,
+  "rosca-circles/auto-pay": RoscaAutoPay,
   "rosca-circles/discover": DiscoverHub,
   "treasury-and-funds/overview": TreasuryOverview,
   "governance-and-voting/proposals": GovernanceProposals,

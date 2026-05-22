@@ -381,6 +381,54 @@
       "onTimeRate": 0.83
     }
   },
+  "positionSwapCandidates": [
+    { "memberId": "mem_kofi",     "name": "Kofi Mensah",      "trust": 891, "currentSlot": 2,  "cyclesAway": -6, "willingnessHint": "Has accepted swaps before" },
+    { "memberId": "mem_okoye",    "name": "Chinedu Okoye",    "trust": 558, "currentSlot": 6,  "cyclesAway": -2, "willingnessHint": "Likely needs cash this month" },
+    { "memberId": "mem_olusegun", "name": "Olusegun A.",      "trust": 712, "currentSlot": 10, "cyclesAway": 2,  "willingnessHint": "Has flagged 'flexible'" },
+    { "memberId": "mem_ngozi",    "name": "Ngozi Okafor",     "trust": 685, "currentSlot": 12, "cyclesAway": 4,  "willingnessHint": "Hasn't responded to past swaps" }
+  ],
+  "bidding": {
+    "circleId": "circle_main_chf",
+    "cycle": 8,
+    "payoutAmount": 2400,
+    "currency": "CHF",
+    "deadline": "2026-05-23T18:00:00Z",
+    "minimumBid": 25,
+    "yourCurrentBid": 80,
+    "yourMaxBid": 200,
+    "transparencyMode": "open",
+    "bids": [
+      { "bidderId": "mem_pham",    "bidderInitial": "L",  "amount": 120, "isYou": false },
+      { "bidderId": "mem_aminata", "bidderInitial": "A",  "amount": 80,  "isYou": true  },
+      { "bidderId": "mem_okoye",   "bidderInitial": "C",  "amount": 60,  "isYou": false },
+      { "bidderId": "mem_olusegun","bidderInitial": "O",  "amount": 40,  "isYou": false },
+      { "bidderId": "mem_joao",    "bidderInitial": "J",  "amount": 25,  "isYou": false }
+    ]
+  },
+  "payoutAdvanceEligibility": {
+    "yourPosition": 11,
+    "cyclesToPayout": 3,
+    "estimatedPayoutAmount": 2400,
+    "currency": "CHF",
+    "maxAdvance": 1800,
+    "cooldownDays": 14,
+    "checks": [
+      { "id": "trust",      "label": "Trust score above 700",            "detail": "Yours: 768",                                "status": "ok" },
+      { "id": "history",    "label": "No missed payments in 6 cycles",   "detail": "Clean since cycle 2",                       "status": "ok" },
+      { "id": "ef",         "label": "Sufficient Emergency Fund cover",  "detail": "EF balance covers 21 months at current rate", "status": "ok" },
+      { "id": "first",      "label": "First advance this circle",        "detail": "Advances are limited to one per circle",    "status": "warning" }
+    ],
+    "reviewerTrustThreshold": 700
+  },
+  "autoPay": {
+    "enabled": true,
+    "primaryMethodId": "pf",
+    "backupMethodId": "twint",
+    "nextChargeDate": "2026-06-20",
+    "nextChargeAmount": 202,
+    "currency": "CHF",
+    "scheduleNote": "Charges 2 days before the contribution due date so bank transfers settle on time."
+  },
   "invitations": [
     {
       "id": "inv_artisan",
