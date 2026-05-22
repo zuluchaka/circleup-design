@@ -258,6 +258,72 @@
     "expectedPromotion": "2026-07-15",
     "notifyOnPromotion": true
   },
+  "draftCircle": {
+    "name": "Builders Circle Geneva",
+    "description": "Monthly CHF 300 circle for early-career members in the Geneva diaspora. Twelve cycles, fixed-order payouts.",
+    "contribution": 300,
+    "currency": "CHF",
+    "cadence": "Monthly",
+    "cycleLength": 12,
+    "maxMembers": 12,
+    "payoutMethod": "fixed",
+    "paymentMode": "stripe_only",
+    "emergencyFundRate": 0.01,
+    "gracePeriodDays": 5,
+    "latePenalty": 0.03,
+    "language": "EN",
+    "visibility": "association_only"
+  },
+  "createAiSuggestion": {
+    "reason": "Based on 8 similar successful CHF-monthly circles in Geneva over the last 18 months.",
+    "successProbability": 0.91,
+    "maxMembers": 12,
+    "payoutMethod": "fixed",
+    "emergencyFundRate": 0.01,
+    "gracePeriodDays": 5,
+    "latePenalty": 0.03
+  },
+  "createTierLimit": {
+    "tier": "Basic",
+    "memberLimit": 30,
+    "current": 18
+  },
+  "renewalProposal": {
+    "id": "renew_main_chf_v2",
+    "parentCircleId": "circle_main_chf",
+    "parentCircleName": "Main CHF Circle",
+    "status": "voting",
+    "proposedStart": "2026-10-01",
+    "proposedContribution": 250,
+    "proposedCurrency": "CHF",
+    "proposedDuration": 12,
+    "proposedCadence": "Monthly",
+    "changesFromParent": [
+      "Contribution: CHF 200 → CHF 250 (+25%)",
+      "Cycle length unchanged · 12 months",
+      "Same fixed-order payouts and 1% EF rate"
+    ],
+    "notes": "Bumping the contribution to keep up with rent in Geneva. Same rotation, same EF. Vote by 28 May to lock in the next round.",
+    "votingDeadline": "2026-05-28T23:59:00Z",
+    "optInCount": 7,
+    "optOutCount": 1,
+    "pendingCount": 4,
+    "requiredOptIns": 10,
+    "voters": [
+      { "memberId": "mem_amara",   "name": "Amara Ofori",      "trust": 824, "vote": "opt_in",  "votedAt": "2026-05-18T08:14:00Z" },
+      { "memberId": "mem_kofi",    "name": "Kofi Mensah",      "trust": 891, "vote": "opt_in",  "votedAt": "2026-05-18T19:02:00Z" },
+      { "memberId": "mem_zara",    "name": "Zara Bekele",      "trust": 776, "vote": "opt_in",  "votedAt": "2026-05-19T11:48:00Z" },
+      { "memberId": "mem_dembele", "name": "Aïssatou Dembélé", "trust": 689, "vote": "opt_in",  "votedAt": "2026-05-19T20:33:00Z" },
+      { "memberId": "mem_pham",    "name": "Linh Pham",        "trust": 615, "vote": "opt_out", "votedAt": "2026-05-20T09:00:00Z" },
+      { "memberId": "mem_okoye",   "name": "Chinedu Okoye",    "trust": 558, "vote": "pending", "votedAt": null },
+      { "memberId": "mem_rahimi",  "name": "Mariam Rahimi",    "trust": 802, "vote": "opt_in",  "votedAt": "2026-05-20T13:25:00Z" },
+      { "memberId": "mem_haile",   "name": "Selam Haile",      "trust": 644, "vote": "opt_in",  "votedAt": "2026-05-21T07:33:00Z" },
+      { "memberId": "mem_joao",    "name": "João da Silva",    "trust": 701, "vote": "pending", "votedAt": null },
+      { "memberId": "mem_olusegun","name": "Olusegun A.",      "trust": 712, "vote": "pending", "votedAt": null },
+      { "memberId": "mem_aminata", "name": "Aminata Diallo",   "trust": 768, "vote": "opt_in",  "votedAt": "2026-05-21T14:02:00Z" },
+      { "memberId": "mem_ngozi",   "name": "Ngozi Okafor",     "trust": 685, "vote": "pending", "votedAt": null }
+    ]
+  },
   "invitations": [
     {
       "id": "inv_artisan",

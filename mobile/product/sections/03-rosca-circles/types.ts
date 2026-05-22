@@ -83,6 +83,78 @@ export type WaitlistEntry = {
   notifyOnPromotion: boolean;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 3 — creating & renewing
+// ---------------------------------------------------------------------------
+
+export type PayoutMethod = "fixed" | "bidding" | "random";
+export type PaymentMode = "stripe_only" | "hybrid" | "manual_only";
+export type Visibility = "public" | "association_only" | "private";
+
+export type DraftCircle = {
+  name: string;
+  description: string;
+  contribution: number;
+  currency: string;
+  cadence: Cadence;
+  cycleLength: number;
+  maxMembers: number;
+  payoutMethod: PayoutMethod;
+  paymentMode: PaymentMode;
+  emergencyFundRate: number;
+  gracePeriodDays: number;
+  latePenalty: number;
+  language: string;
+  visibility: Visibility;
+};
+
+export type CreateAiSuggestion = {
+  reason: string;
+  successProbability: number;
+  maxMembers: number;
+  payoutMethod: PayoutMethod;
+  emergencyFundRate: number;
+  gracePeriodDays: number;
+  latePenalty: number;
+};
+
+export type CreateTierLimit = {
+  tier: "Free" | "Basic" | "Pro";
+  memberLimit: number;
+  current: number;
+};
+
+export type RenewalStatus = "proposed" | "voting" | "approved" | "rejected" | "cancelled" | "created";
+export type MemberVote = "opt_in" | "opt_out" | "pending";
+
+export type RenewalVoter = {
+  memberId: string;
+  name: string;
+  trust: number;
+  vote: MemberVote;
+  votedAt: string | null;
+};
+
+export type RenewalProposal = {
+  id: string;
+  parentCircleId: string;
+  parentCircleName: string;
+  status: RenewalStatus;
+  proposedStart: string;
+  proposedContribution: number;
+  proposedCurrency: string;
+  proposedDuration: number;
+  proposedCadence: Cadence;
+  changesFromParent: string[];
+  notes: string;
+  votingDeadline: string;
+  optInCount: number;
+  optOutCount: number;
+  pendingCount: number;
+  requiredOptIns: number;
+  voters: RenewalVoter[];
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;
