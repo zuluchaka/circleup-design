@@ -96,6 +96,86 @@
       { "id": "le_5", "at": "2026-05-15T11:20:00Z", "fundId": "fund_welfare",   "kind": "debit",  "amount": 600,  "currency": "CHF", "category": "welfare_disbursement",  "label": "Welfare disbursement · medical aid",       "counterparty": "mem_haile",   "balanceAfter": 5010, "reference": "WLF-DISB-018" }
     ]
   },
+  "ledger": [
+    { "id": "lg1",  "at": "2026-05-21T09:00:00Z", "fundId": "fund_emergency", "kind": "debit",  "amount": 202,  "currency": "CHF", "category": "ef_intervention",      "label": "EF cover · Linh Pham · cycle 8",            "counterparty": "Linh Pham",       "balanceAfter": 6758, "reference": "EF-INT-LP-C8" },
+    { "id": "lg2",  "at": "2026-05-20T07:14:00Z", "fundId": "fund_operating", "kind": "credit", "amount": 200,  "currency": "CHF", "category": "contribution",         "label": "Contribution · Aminata Diallo",            "counterparty": "Aminata Diallo",  "balanceAfter": 4280, "reference": "MAIN-C8-19-014" },
+    { "id": "lg3",  "at": "2026-05-20T07:14:00Z", "fundId": "fund_emergency", "kind": "credit", "amount": 2,    "currency": "CHF", "category": "ef_intervention",      "label": "EF carve-out · Aminata Diallo",            "counterparty": "Aminata Diallo",  "balanceAfter": 6960, "reference": "EF-C8-AD" },
+    { "id": "lg4",  "at": "2026-05-19T13:25:00Z", "fundId": "fund_operating", "kind": "credit", "amount": 200,  "currency": "CHF", "category": "contribution",         "label": "Contribution · Mariam Rahimi",             "counterparty": "Mariam Rahimi",   "balanceAfter": 4080, "reference": "MAIN-C8-19-015" },
+    { "id": "lg5",  "at": "2026-05-19T00:00:00Z", "fundId": "fund_operating", "kind": "debit",  "amount": 24,   "currency": "CHF", "category": "platform_fee",         "label": "Platform fee · cycle 8 (12%)",             "counterparty": "Platform",        "balanceAfter": 3880, "reference": "PLAT-FEE-C8" },
+    { "id": "lg6",  "at": "2026-05-18T09:00:00Z", "fundId": "fund_operating", "kind": "debit",  "amount": 2400, "currency": "CHF", "category": "payout",               "label": "Payout · Kofi Mensah · Main CHF",          "counterparty": "Kofi Mensah",     "balanceAfter": 3904, "reference": "MAIN-C8-PAYOUT" },
+    { "id": "lg7",  "at": "2026-05-17T18:00:00Z", "fundId": "fund_welfare",   "kind": "credit", "amount": 800,  "currency": "CHF", "category": "contribution",         "label": "Welfare contribution · Mariam R.",         "counterparty": "Mariam Rahimi",   "balanceAfter": 5810, "reference": "WLF-2026-05-22" },
+    { "id": "lg8",  "at": "2026-05-15T11:20:00Z", "fundId": "fund_welfare",   "kind": "debit",  "amount": 600,  "currency": "CHF", "category": "welfare_disbursement", "label": "Welfare disbursement · medical aid",       "counterparty": "Selam Haile",     "balanceAfter": 5010, "reference": "WLF-DISB-018" },
+    { "id": "lg9",  "at": "2026-05-15T08:00:00Z", "fundId": "fund_emergency", "kind": "credit", "amount": 50,   "currency": "CHF", "category": "ef_repayment",         "label": "EF repayment · Chinedu Okoye · inst 4/5",  "counterparty": "Chinedu Okoye",   "balanceAfter": 6304, "reference": "EF-RP-CO-04" },
+    { "id": "lg10", "at": "2026-05-12T10:30:00Z", "fundId": "fund_school_bus","kind": "credit", "amount": 1600, "currency": "CHF", "category": "transfer_in",          "label": "Project pledge · May 2026",                "counterparty": "Diaspora Geneva", "balanceAfter": 12400,"reference": "SB-PLEDGE-MAY" },
+    { "id": "lg11", "at": "2026-05-10T14:00:00Z", "fundId": "fund_operating", "kind": "credit", "amount": 200,  "currency": "CHF", "category": "contribution",         "label": "Contribution · Zara Bekele",               "counterparty": "Zara Bekele",     "balanceAfter": 6304, "reference": "MAIN-C8-10-006" },
+    { "id": "lg12", "at": "2026-04-25T10:00:00Z", "fundId": "fund_operating", "kind": "debit",  "amount": 2400, "currency": "CHF", "category": "payout",               "label": "Payout · Linh Pham · cycle 7",             "counterparty": "Linh Pham",       "balanceAfter": 6104, "reference": "MAIN-C7-PAYOUT" },
+    { "id": "lg13", "at": "2026-04-21T09:00:00Z", "fundId": "fund_emergency", "kind": "debit",  "amount": 202,  "currency": "CHF", "category": "ef_intervention",      "label": "EF cover · Linh Pham · cycle 7",            "counterparty": "Linh Pham",       "balanceAfter": 6254, "reference": "EF-INT-LP-C7" }
+  ],
+  "entryDetail": {
+    "id": "lg1",
+    "reference": "EF-INT-LP-C8",
+    "fundId": "fund_emergency",
+    "fundName": "Emergency Fund",
+    "kind": "debit",
+    "amount": 202,
+    "currency": "CHF",
+    "category": "ef_intervention",
+    "label": "EF cover · Linh Pham · cycle 8",
+    "counterparty": "Linh Pham",
+    "counterpartyId": "mem_pham",
+    "counterpartyKind": "member",
+    "at": "2026-05-21T09:00:00Z",
+    "balanceBefore": 6960,
+    "balanceAfter": 6758,
+    "sourceDocument": {
+      "id": "doc_efint_lp_c8",
+      "label": "EF intervention receipt · Linh Pham.pdf",
+      "kind": "pdf",
+      "size": "112 KB"
+    },
+    "related": [
+      { "id": "lg13",        "label": "Previous EF cover · cycle 7",          "amount": 202, "at": "2026-04-21T09:00:00Z", "link": "predecessor" },
+      { "id": "rp_lp_c8_01", "label": "Repayment · installment 1 of 5",      "amount": 40,  "at": "2026-06-20T08:00:00Z", "link": "successor" },
+      { "id": "rp_lp_c8_02", "label": "Repayment · installment 2 of 5",      "amount": 40,  "at": "2026-07-20T08:00:00Z", "link": "successor" },
+      { "id": "rp_lp_c8_03", "label": "Repayment · installment 3 of 5",      "amount": 40,  "at": "2026-08-20T08:00:00Z", "link": "successor" },
+      { "id": "rp_lp_c8_04", "label": "Repayment · installment 4 of 5",      "amount": 40,  "at": "2026-09-20T08:00:00Z", "link": "successor" },
+      { "id": "rp_lp_c8_05", "label": "Repayment · installment 5 of 5",      "amount": 42,  "at": "2026-10-20T08:00:00Z", "link": "successor" }
+    ],
+    "audit": [
+      { "id": "ae1", "kind": "posted",    "actor": "System",         "actorRole": "Platform",   "at": "2026-05-21T09:00:00Z", "body": "Posted to ledger automatically when cycle 8 closed with Linh's contribution outstanding." },
+      { "id": "ae2", "kind": "viewed",    "actor": "Amara Ofori",    "actorRole": "Organiser",  "at": "2026-05-21T11:14:00Z", "body": "Reviewed and confirmed the auto-cover decision." },
+      { "id": "ae3", "kind": "viewed",    "actor": "Kofi Mensah",    "actorRole": "Treasurer",  "at": "2026-05-21T18:02:00Z", "body": "Cross-checked against the repayment schedule." }
+    ]
+  },
+  "reconciliationSession": {
+    "id": "recon_2026_05",
+    "period": "May 2026",
+    "fundId": "fund_operating",
+    "bankName": "PostFinance · *4892",
+    "importedAt": "2026-05-21T08:00:00Z",
+    "totals": {
+      "platform": 8,
+      "bank": 8,
+      "matched": 5,
+      "discrepancy": 1,
+      "orphan": 2
+    },
+    "rows": [
+      { "id": "rec_p1", "side": "platform", "date": "2026-05-19T06:42:00Z", "label": "Contribution · Aminata Diallo",        "amount": 200,  "currency": "CHF", "match": "matched",     "matchedWith": "rec_b1", "variance": null },
+      { "id": "rec_b1", "side": "bank",     "date": "2026-05-19T08:14:00Z", "label": "POSTFIN · AMINATA D · MAIN",          "amount": 200,  "currency": "CHF", "match": "matched",     "matchedWith": "rec_p1", "variance": null },
+      { "id": "rec_p2", "side": "platform", "date": "2026-05-19T13:25:00Z", "label": "Contribution · Mariam Rahimi",          "amount": 200,  "currency": "CHF", "match": "matched",     "matchedWith": "rec_b2", "variance": null },
+      { "id": "rec_b2", "side": "bank",     "date": "2026-05-19T14:08:00Z", "label": "POSTFIN · M.RAHIMI · MAIN-CIRCLE",     "amount": 200,  "currency": "CHF", "match": "matched",     "matchedWith": "rec_p2", "variance": null },
+      { "id": "rec_p3", "side": "platform", "date": "2026-05-18T09:00:00Z", "label": "Payout · Kofi Mensah · Main CHF",      "amount": -2400,"currency": "CHF", "match": "matched",     "matchedWith": "rec_b3", "variance": null },
+      { "id": "rec_b3", "side": "bank",     "date": "2026-05-18T10:14:00Z", "label": "SEPA OUT · KOFI MENSAH",                "amount": -2400,"currency": "CHF", "match": "matched",     "matchedWith": "rec_p3", "variance": null },
+      { "id": "rec_p4", "side": "platform", "date": "2026-05-17T18:00:00Z", "label": "Welfare contribution · Mariam R.",       "amount": 800,  "currency": "CHF", "match": "discrepancy", "matchedWith": "rec_b4", "variance": 5 },
+      { "id": "rec_b4", "side": "bank",     "date": "2026-05-17T19:11:00Z", "label": "POSTFIN · M.RAHIMI · WELFARE",          "amount": 805,  "currency": "CHF", "match": "discrepancy", "matchedWith": "rec_p4", "variance": 5 },
+      { "id": "rec_p5", "side": "platform", "date": "2026-05-15T11:20:00Z", "label": "Welfare disbursement · medical aid",    "amount": -600, "currency": "CHF", "match": "matched",     "matchedWith": "rec_b5", "variance": null },
+      { "id": "rec_b5", "side": "bank",     "date": "2026-05-15T12:08:00Z", "label": "SEPA OUT · SELAM HAILE · MEDICAL",      "amount": -600, "currency": "CHF", "match": "matched",     "matchedWith": "rec_p5", "variance": null },
+      { "id": "rec_b6", "side": "bank",     "date": "2026-05-14T16:42:00Z", "label": "POSTFIN · UNKNOWN · CHF 350",            "amount": 350,  "currency": "CHF", "match": "orphan",      "matchedWith": null,    "variance": null },
+      { "id": "rec_b7", "side": "bank",     "date": "2026-05-12T08:00:00Z", "label": "POSTFIN · DEPOSIT REVERSAL",             "amount": -45,  "currency": "CHF", "match": "orphan",      "matchedWith": null,    "variance": null },
+      { "id": "rec_p6", "side": "platform", "date": "2026-05-12T10:30:00Z", "label": "Project pledge · May 2026",              "amount": 1600, "currency": "CHF", "match": "orphan",      "matchedWith": null,    "variance": null }
+    ]
+  },
   "welfareRequestDraft": {
     "fundId": "fund_welfare",
     "reasons": [

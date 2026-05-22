@@ -105,6 +105,84 @@ export type SignerDecision = {
   note: string | null;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 2 — ledger & reconciliation
+// ---------------------------------------------------------------------------
+
+export type AuditEvent = {
+  id: string;
+  kind: "posted" | "adjusted" | "matched" | "reconciled" | "viewed";
+  actor: string;
+  actorRole: string;
+  at: string;
+  body: string;
+};
+
+export type RelatedEntry = {
+  id: string;
+  label: string;
+  amount: number;
+  at: string;
+  link: "predecessor" | "successor";
+};
+
+export type EntryDetail = {
+  id: string;
+  reference: string;
+  fundId: string;
+  fundName: string;
+  kind: "credit" | "debit";
+  amount: number;
+  currency: string;
+  category: LedgerCategory;
+  label: string;
+  counterparty: string;
+  counterpartyId: string;
+  counterpartyKind: "member" | "external" | "platform" | "circle";
+  at: string;
+  balanceBefore: number;
+  balanceAfter: number;
+  sourceDocument: {
+    id: string;
+    label: string;
+    kind: "pdf" | "csv" | "receipt";
+    size: string;
+  } | null;
+  related: RelatedEntry[];
+  audit: AuditEvent[];
+};
+
+export type ReconciliationMatch = "matched" | "discrepancy" | "orphan";
+export type ReconciliationSide = "platform" | "bank";
+
+export type ReconciliationRow = {
+  id: string;
+  side: ReconciliationSide;
+  date: string;
+  label: string;
+  amount: number;
+  currency: string;
+  match: ReconciliationMatch;
+  matchedWith: string | null;
+  variance: number | null;
+};
+
+export type ReconciliationSession = {
+  id: string;
+  period: string;
+  fundId: string;
+  bankName: string;
+  importedAt: string;
+  totals: {
+    platform: number;
+    bank: number;
+    matched: number;
+    discrepancy: number;
+    orphan: number;
+  };
+  rows: ReconciliationRow[];
+};
+
 export type WelfareRequest = {
   id: string;
   fundId: string;
