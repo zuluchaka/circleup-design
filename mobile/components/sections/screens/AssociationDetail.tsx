@@ -31,6 +31,7 @@ import {
 import { Text } from "@/components/shared/Text";
 import { BottomSheet } from "@/components/shared/BottomSheet";
 import { useTheme, space, radius, palette, type AppTheme } from "@/theme";
+import comms from "@/product/sections/06-communication-and-events/data.json";
 
 // ============================================================================
 // Inline catalog of associations (keyed by id)
@@ -443,6 +444,60 @@ function QuickAction({
   );
 }
 
+function UpcomingEventTile({ evt, t }: { evt: any; t: AppTheme }) {
+  const isSoldOut = evt.status === "sold_out" || evt.rsvp.yes >= evt.capacity;
+  const dateLabel = new Date(evt.date).toLocaleDateString("en-CH", { day: "numeric", month: "short" });
+  const timeLabel = new Date(evt.date).toLocaleTimeString("en-CH", { hour: "2-digit", minute: "2-digit" });
+  const capacityPct = Math.min(1, evt.rsvp.yes / evt.capacity);
+
+  return (
+    <Pressable
+      onPress={() => router.push("/sections/communication-and-events/event-detail" as never)}
+      style={[styles.upcomingTile, { backgroundColor: t.surface, borderColor: t.border }]}
+    >
+      <View style={[styles.upcomingDate, { backgroundColor: `${evt.accent}22` }]}>
+        <Text variant="micro" weight="bold" style={{ color: evt.accent, letterSpacing: 0.6 }}>
+          {new Date(evt.date).toLocaleDateString("en-CH", { month: "short" }).toUpperCase()}
+        </Text>
+        <Text variant="h2" weight="bold" style={{ color: evt.accent, marginTop: -2 }}>
+          {new Date(evt.date).getDate()}
+        </Text>
+        <Text variant="micro" weight="semibold" style={{ color: evt.accent }}>
+          {timeLabel}
+        </Text>
+      </View>
+      <View style={{ flex: 1, padding: space.md, gap: 4 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
+          {evt.yourRsvp === "yes" ? (
+            <View style={[styles.upcomingPill, { backgroundColor: t.successSoft }]}>
+              <Check size={9} color={t.success} strokeWidth={3} />
+              <Text variant="micro" weight="bold" style={{ color: t.success, letterSpacing: 0.5 }}>GOING</Text>
+            </View>
+          ) : isSoldOut ? (
+            <View style={[styles.upcomingPill, { backgroundColor: t.dangerSoft }]}>
+              <Text variant="micro" weight="bold" style={{ color: t.danger, letterSpacing: 0.5 }}>SOLD OUT</Text>
+            </View>
+          ) : (
+            <View style={[styles.upcomingPill, { backgroundColor: `${evt.accent}22` }]}>
+              <Text variant="micro" weight="bold" style={{ color: evt.accent, letterSpacing: 0.5 }}>
+                {evt.bucket.toUpperCase()}
+              </Text>
+            </View>
+          )}
+        </View>
+        <Text variant="caption" weight="bold" numberOfLines={2} style={{ lineHeight: 15 }}>{evt.title}</Text>
+        <Text variant="micro" tone="secondary" numberOfLines={1}>{evt.location.venue}</Text>
+        <View style={[styles.upcomingBar, { backgroundColor: t.bgMuted }]}>
+          <View style={[styles.upcomingFill, { width: `${capacityPct * 100}%`, backgroundColor: evt.accent }]} />
+        </View>
+        <Text variant="micro" tone="muted" weight="semibold">
+          {evt.rsvp.yes} of {evt.capacity} · {evt.price === 0 ? "Free" : `${evt.currency} ${evt.price}`}
+        </Text>
+      </View>
+    </Pressable>
+  );
+}
+
 function SectionLink({
   Icon,
   label,
@@ -497,6 +552,13 @@ export function AssociationDetail({ id }: { id: string }) {
   const a = ASSOCIATIONS[id] ?? ASSOCIATIONS.ma1;
   const leader = isLeader(a.role);
   const president = a.role === "President";
+  const secretary = a.role === "Secretary";
+
+  // Events for this association (excluding past)
+  const upcomingAssocEvents = (comms.events as any[])
+    .filter((e) => e.associationId === a.id && e.status !== "past")
+    .sort((evA, evB) => new Date(evA.date).getTime() - new Date(evB.date).getTime());
+  const nextEvent = upcomingAssocEvents[0];
 
   const [reviewOpen, setReviewOpen] = useState(false);
   const [pendingRequests, setPendingRequests] = useState<JoinRequest[]>(JOIN_REQUESTS);
@@ -769,6 +831,52 @@ export function AssociationDetail({ id }: { id: string }) {
           </View>
         </View>
 
+        {/* Upcoming events strip */}
+        {upcomingAssocEvents.length > 0 ? (
+          <View style={{ marginTop: space.xl }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: space.sm, paddingHorizontal: space.lg }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+                <Calendar size={16} color={t.primary} />
+                <Text variant="h3" weight="bold">Upcoming events</Text>
+                {secretary ? (
+                  <View style={[styles.secretaryPill, { backgroundColor: t.warningSoft }]}>
+                    <Crown size={9} color={t.warning} />
+                    <Text variant="micro" weight="bold" style={{ color: t.warning, letterSpacing: 0.5 }}>
+                      YOU HOST
+                    </Text>
+                  </View>
+                ) : null}
+              </View>
+              <Pressable onPress={() => router.push(`/associations/${a.id}/events` as never)}>
+                <Text variant="caption" tone="accent" weight="semibold">See all</Text>
+              </Pressable>
+            </View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg }}
+            >
+              {upcomingAssocEvents.slice(0, 4).map((evt) => (
+                <UpcomingEventTile key={evt.id} evt={evt} t={t} />
+              ))}
+              {secretary ? (
+                <Pressable
+                  onPress={() => router.push(`/associations/${a.id}/events` as never)}
+                  style={[styles.upcomingCta, { borderColor: t.primary, backgroundColor: t.primarySoft }]}
+                >
+                  <Megaphone size={16} color={t.primary} />
+                  <Text variant="caption" weight="bold" style={{ color: t.primary, marginTop: 6, textAlign: "center" }}>
+                    Create event
+                  </Text>
+                  <Text variant="micro" tone="secondary" align="center" style={{ marginTop: 2 }}>
+                    or send invites
+                  </Text>
+                </Pressable>
+              ) : null}
+            </ScrollView>
+          </View>
+        ) : null}
+
         {/* Section deep-links */}
         <View style={{ paddingHorizontal: space.lg, marginTop: space.xl }}>
           <Text variant="caption" weight="semibold" tone="muted" style={{ letterSpacing: 1, marginBottom: space.sm }}>
@@ -777,6 +885,14 @@ export function AssociationDetail({ id }: { id: string }) {
           <View style={{ gap: space.sm }}>
             <SectionLink Icon={CircleDot} label="Circles" hint="ROSCA circles in this association" count={a.activeCircles} t={t} onPress={() => router.push("/circles" as never)} />
             <SectionLink Icon={Users} label="Members" hint="Directory, roles, Trust Scores" count={a.members} t={t} />
+            <SectionLink
+              Icon={Calendar}
+              label="Events"
+              hint="Upcoming meetups, AGMs, workshops · RSVP and invites"
+              count={upcomingAssocEvents.length}
+              t={t}
+              onPress={() => router.push(`/associations/${a.id}/events` as never)}
+            />
             {leader ? (
               <>
                 <SectionLink Icon={Wallet} label="Finance & ledger" hint="Treasurer view · dues, payouts, transactions" t={t} onPress={() => router.push(`/associations/${a.id}/finance` as never)} />
@@ -1121,6 +1237,54 @@ function EligibilityRow({ check, t }: { check: EligibilityCheck; t: AppTheme }) 
 // ============================================================================
 
 const styles = StyleSheet.create({
+  secretaryPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radius.pill,
+  },
+  upcomingTile: {
+    width: 260,
+    flexDirection: "row",
+    borderRadius: radius.md,
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  upcomingDate: {
+    width: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: space.sm,
+  },
+  upcomingPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radius.pill,
+  },
+  upcomingBar: {
+    height: 4,
+    borderRadius: 2,
+    overflow: "hidden",
+    marginTop: 4,
+  },
+  upcomingFill: {
+    height: "100%",
+    borderRadius: 2,
+  },
+  upcomingCta: {
+    width: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: space.md,
+    borderRadius: radius.md,
+    borderWidth: 1.5,
+    borderStyle: "dashed",
+  },
   hero: {
     paddingTop: 56,
     paddingBottom: space.xl,

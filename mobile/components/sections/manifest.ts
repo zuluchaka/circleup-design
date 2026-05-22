@@ -56,6 +56,10 @@ import { TreasuryPostfinanceImport } from "./screens/TreasuryPostfinanceImport";
 import { TreasuryExternalAccounts } from "./screens/TreasuryExternalAccounts";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
 import { CommsInbox } from "./screens/CommsInbox";
+import { EventDetail } from "./screens/EventDetail";
+import { AssociationEvents } from "./screens/AssociationEvents";
+import { CreateEvent } from "./screens/CreateEvent";
+import { InviteAttendees } from "./screens/InviteAttendees";
 import { AnalyticsPersonal } from "./screens/AnalyticsPersonal";
 import { CreditScore } from "./screens/CreditScore";
 import { InsightsFeed } from "./screens/InsightsFeed";
@@ -117,6 +121,10 @@ export const screenManifest: Record<string, ComponentType> = {
   "treasury-and-funds/external-accounts": TreasuryExternalAccounts,
   "governance-and-voting/proposals": GovernanceProposals,
   "communication-and-events/inbox": CommsInbox,
+  "communication-and-events/event-detail": EventDetail,
+  "communication-and-events/association-events": AssociationEvents,
+  "communication-and-events/create-event": CreateEvent,
+  "communication-and-events/invite-attendees": InviteAttendees,
   "documents/library": DocumentsLibrary,
   "analytics-and-reporting/personal": AnalyticsPersonal,
   "credit-and-lending/score": CreditScore,

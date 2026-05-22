@@ -26,18 +26,135 @@ export type Thread = {
   messages: Message[];
 };
 
+// ---------------------------------------------------------------------------
+// Events
+// ---------------------------------------------------------------------------
+
+export type EventCategory =
+  | "cultural"
+  | "agm"
+  | "workshop"
+  | "fundraiser"
+  | "meetup"
+  | "info_session"
+  | "religious"
+  | "sport"
+  | "social";
+
+export type EventStatus = "draft" | "open" | "sold_out" | "past" | "cancelled";
+
+export type EventLocation =
+  | { kind: "in_person"; venue: string; address: string; onlineUrl: null }
+  | { kind: "online"; venue: string; address: string; onlineUrl: string };
+
+export type EventBucket = "Today" | "This week" | "Later" | "Past";
+
 export type EventItem = {
   id: string;
   title: string;
+  description: string;
+  associationId: string;
+  associationName: string;
+  associationInitials: string;
+  associationCity: string;
+  secretaryId: string;
+  secretaryName: string;
+  secretaryTrust: number;
+  secretaryHue: string;
+  isPublic: boolean;
+  category: EventCategory;
+  tags: string[];
   date: string;
-  location: string;
+  endsAt: string;
+  location: EventLocation;
   accent: string;
   price: number;
+  currency: string;
+  capacity: number;
   rsvp: { yes: number; maybe: number; no: number };
+  checkInOpen: boolean;
   yourRsvp: RsvpStatus | null;
-  bucket: "Today" | "This week" | "Later" | "Past";
-  description: string;
+  status: EventStatus;
+  bucket: EventBucket;
 };
+
+export type EventAttendee = {
+  memberId: string;
+  name: string;
+  trust: number;
+  hue: string | null;
+  rsvp: RsvpStatus;
+  rsvpAt: string;
+  paid: boolean;
+  checkedIn: boolean;
+  isMember: boolean;
+};
+
+export type EventDetail = EventItem & {
+  agenda: { id: string; time: string; label: string }[];
+  attendees: EventAttendee[];
+  invitationsSent: number;
+  invitationsAccepted: number;
+};
+
+export type EventInvitation = {
+  id: string;
+  eventId: string;
+  eventTitle: string;
+  eventDate: string;
+  eventAccent: string;
+  associationName: string;
+  inviterId: string;
+  inviterName: string;
+  inviterRole: "Secretary" | "President" | "Member";
+  inviterTrust: number;
+  channel: "WhatsApp" | "SMS" | "Email" | "Push" | "In-app";
+  message: string | null;
+  sentAt: string;
+  expiresAt: string;
+  status: "pending" | "accepted" | "declined" | "expired";
+};
+
+export type CreateEventDraft = {
+  title: string;
+  description: string;
+  associationId: string;
+  category: EventCategory;
+  date: string;
+  startTime: string;
+  endTime: string;
+  locationKind: "in_person" | "online";
+  venue: string;
+  address: string;
+  onlineUrl: string;
+  capacity: number;
+  price: number;
+  currency: string;
+  isPublic: boolean;
+  audience: "public" | "all_members" | "circle" | "committee" | "custom";
+  tags: string[];
+  accent: string;
+};
+
+export type InviteAttendeesPanel = {
+  eventId: string;
+  audiences: {
+    id: string;
+    label: string;
+    hint: string;
+    estimatedReach: number;
+  }[];
+  channels: {
+    id: "whatsapp" | "sms" | "email" | "push" | "in_app";
+    label: string;
+    hint: string;
+  }[];
+  defaultMessage: string;
+};
+
+// ---------------------------------------------------------------------------
+// Announcements + QR (existing)
+// ---------------------------------------------------------------------------
 
 export type Announcement = {
   id: string;

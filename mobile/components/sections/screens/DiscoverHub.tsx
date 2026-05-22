@@ -26,6 +26,10 @@ import {
   X,
   AlertTriangle,
   HelpCircle,
+  Calendar,
+  Ticket,
+  Clock,
+  ExternalLink,
 } from "lucide-react-native";
 import { BottomSheet } from "@/components/shared/BottomSheet";
 import { LinearGradient } from "expo-linear-gradient";
@@ -41,6 +45,9 @@ import {
   type BrTier,
 } from "@/data/businessRelationships";
 import { RelationshipCard } from "@/components/shared/RelationshipCard";
+import { Avatar } from "@/components/shared/Avatar";
+import { router } from "expo-router";
+import comms from "@/product/sections/06-communication-and-events/data.json";
 
 // CURRENT_USER + BR data are imported from `data/` so they can be reused by
 // the bottom-nav BR tab without duplicate state.
@@ -697,10 +704,192 @@ function CircleCard({ circle, t }: { circle: DiscoverableCircle; t: AppTheme }) 
 }
 
 // ============================================================================
+// Event card (for Discover Events tab)
+// ============================================================================
+
+type DiscoverableEvent = {
+  id: string;
+  title: string;
+  description: string;
+  associationId: string;
+  associationName: string;
+  associationInitials: string;
+  associationCity: string;
+  secretaryName: string;
+  secretaryTrust: number;
+  secretaryHue: string;
+  category: string;
+  tags: string[];
+  date: string;
+  endsAt: string;
+  location: { kind: "in_person" | "online"; venue: string; address: string };
+  accent: string;
+  price: number;
+  currency: string;
+  capacity: number;
+  rsvp: { yes: number; maybe: number; no: number };
+  yourRsvp: "yes" | "maybe" | "no" | null;
+  status: "draft" | "open" | "sold_out" | "past" | "cancelled";
+  bucket: "Today" | "This week" | "Later" | "Past";
+};
+
+function eventCategoryLabel(c: string) {
+  if (c === "agm") return "AGM";
+  if (c === "info_session") return "Info session";
+  return c.charAt(0).toUpperCase() + c.slice(1);
+}
+
+function formatEventDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-CH", { weekday: "short", day: "numeric", month: "short" });
+}
+
+function formatEventTime(iso: string) {
+  return new Date(iso).toLocaleTimeString("en-CH", { hour: "2-digit", minute: "2-digit" });
+}
+
+function EventCard({ event, t }: { event: DiscoverableEvent; t: AppTheme }) {
+  const isSoldOut = event.status === "sold_out" || event.rsvp.yes >= event.capacity;
+  const capacityPct = Math.min(1, event.rsvp.yes / event.capacity);
+
+  return (
+    <Pressable
+      onPress={() => router.push("/sections/communication-and-events/event-detail" as never)}
+      style={[styles.eventCard, { backgroundColor: t.surface, borderColor: t.border }]}
+    >
+      {/* Accent band */}
+      <View style={[styles.eventAccent, { backgroundColor: event.accent }]} />
+
+      <View style={{ flex: 1, padding: space.md, gap: space.sm }}>
+        {/* Top row: pills */}
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+          <View style={[styles.eventCatPill, { backgroundColor: `${event.accent}22` }]}>
+            <Text variant="micro" weight="bold" style={{ color: event.accent, letterSpacing: 0.5 }}>
+              {eventCategoryLabel(event.category).toUpperCase()}
+            </Text>
+          </View>
+          <View style={[styles.eventBucketPill, { backgroundColor: t.bgMuted }]}>
+            <Clock size={9} color={t.textSecondary} />
+            <Text variant="micro" weight="bold" tone="secondary" style={{ letterSpacing: 0.5 }}>
+              {event.bucket.toUpperCase()}
+            </Text>
+          </View>
+          {isSoldOut ? (
+            <View style={[styles.eventBucketPill, { backgroundColor: t.dangerSoft }]}>
+              <Text variant="micro" weight="bold" style={{ color: t.danger, letterSpacing: 0.5 }}>SOLD OUT</Text>
+            </View>
+          ) : null}
+          {event.yourRsvp === "yes" ? (
+            <View style={[styles.eventBucketPill, { backgroundColor: t.successSoft }]}>
+              <Check size={9} color={t.success} strokeWidth={3} />
+              <Text variant="micro" weight="bold" style={{ color: t.success, letterSpacing: 0.5 }}>GOING</Text>
+            </View>
+          ) : null}
+        </View>
+
+        {/* Title + date strip */}
+        <View>
+          <Text variant="bodySmall" weight="bold" numberOfLines={2}>{event.title}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 4, flexWrap: "wrap" }}>
+            <Calendar size={11} color={t.textMuted} />
+            <Text variant="micro" tone="secondary">
+              {formatEventDate(event.date)} · {formatEventTime(event.date)}
+            </Text>
+            <View style={[styles.dotSep, { backgroundColor: t.textMuted, opacity: 0.5 }]} />
+            {event.location.kind === "online" ? (
+              <>
+                <ExternalLink size={11} color={t.textMuted} />
+                <Text variant="micro" tone="secondary" numberOfLines={1}>Online</Text>
+              </>
+            ) : (
+              <>
+                <MapPin size={11} color={t.textMuted} />
+                <Text variant="micro" tone="secondary" numberOfLines={1} style={{ flex: 1 }}>
+                  {event.location.venue}
+                </Text>
+              </>
+            )}
+          </View>
+        </View>
+
+        {/* Host strip */}
+        <View style={[styles.eventHost, { backgroundColor: t.bgMuted }]}>
+          <Avatar name={event.secretaryName} size="xs" hue={event.secretaryHue} />
+          <View style={{ flex: 1 }}>
+            <Text variant="micro" weight="bold" numberOfLines={1}>{event.secretaryName} · Secretary</Text>
+            <Text variant="micro" tone="secondary" numberOfLines={1}>{event.associationName}</Text>
+          </View>
+          <View style={[styles.eventTrust, { backgroundColor: t.successSoft }]}>
+            <Text variant="micro" weight="bold" style={{ color: t.success, letterSpacing: 0.5 }}>
+              T·{event.secretaryTrust}
+            </Text>
+          </View>
+        </View>
+
+        {/* Footer: capacity + price */}
+        <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 4 }}>
+              <Text variant="micro" tone="muted" weight="semibold">
+                <Users size={9} color={t.textMuted} /> {event.rsvp.yes} of {event.capacity}
+              </Text>
+              <Text variant="micro" weight="bold" style={{ color: event.price === 0 ? t.success : t.warning }}>
+                {event.price === 0 ? "Free" : `${event.currency} ${event.price}`}
+              </Text>
+            </View>
+            <View style={[styles.eventBar, { backgroundColor: t.bgMuted }]}>
+              <View style={[styles.eventBarFill, { width: `${capacityPct * 100}%`, backgroundColor: event.accent }]} />
+            </View>
+          </View>
+          <Pressable
+            style={[styles.eventCta, { backgroundColor: isSoldOut ? t.warning : event.accent }]}
+            onPress={() => router.push("/sections/communication-and-events/event-detail" as never)}
+          >
+            {isSoldOut ? (
+              <Text variant="caption" weight="bold" style={{ color: "#fff" }}>Waitlist</Text>
+            ) : event.yourRsvp === "yes" ? (
+              <>
+                <Ticket size={12} color="#fff" />
+                <Text variant="caption" weight="bold" style={{ color: "#fff" }}>Open</Text>
+              </>
+            ) : (
+              <>
+                <Text variant="caption" weight="bold" style={{ color: "#fff" }}>RSVP</Text>
+                <ChevronRight size={12} color="#fff" />
+              </>
+            )}
+          </Pressable>
+        </View>
+      </View>
+    </Pressable>
+  );
+}
+
+// ============================================================================
 // Main screen
 // ============================================================================
 
-type TabKey = "associations" | "circles" | "relationships";
+type TabKey = "associations" | "circles" | "relationships" | "events";
+
+type EventCategoryFilter = "all" | "cultural" | "agm" | "workshop" | "fundraiser" | "meetup" | "info_session" | "social";
+type EventWhenFilter = "all" | "today" | "this_week" | "later";
+
+const EVENT_CATEGORY_FILTERS: { value: EventCategoryFilter; label: string }[] = [
+  { value: "all",          label: "All" },
+  { value: "cultural",     label: "Cultural" },
+  { value: "agm",          label: "AGM" },
+  { value: "workshop",     label: "Workshops" },
+  { value: "fundraiser",   label: "Fundraisers" },
+  { value: "meetup",       label: "Meetups" },
+  { value: "info_session", label: "Info" },
+  { value: "social",       label: "Social" },
+];
+
+const EVENT_WHEN_FILTERS: { value: EventWhenFilter; label: string }[] = [
+  { value: "all",       label: "Any time" },
+  { value: "today",     label: "Today" },
+  { value: "this_week", label: "This week" },
+  { value: "later",     label: "Later" },
+];
 
 export function DiscoverHub() {
   const t = useTheme();
@@ -717,6 +906,9 @@ export function DiscoverHub() {
   const [brStatus, setBrStatus] = useState<BrStatus | "all">("all");
   const [brTier, setBrTier] = useState<BrTier | "all">("all");
   const [brRisk, setBrRisk] = useState<"all" | "expiring" | "churn" | "overdue">("all");
+
+  const [eventCategory, setEventCategory] = useState<EventCategoryFilter>("all");
+  const [eventWhen, setEventWhen] = useState<EventWhenFilter>("all");
 
   const [preCheckAssoc, setPreCheckAssoc] = useState<DiscoverableAssociation | null>(null);
   const [preCheckMessage, setPreCheckMessage] = useState("");
@@ -768,6 +960,26 @@ export function DiscoverHub() {
       return matchesQ && matchesStatus && matchesTier && matchesRisk;
     });
   }, [query, brStatus, brTier, brRisk]);
+
+  const filteredEvents = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const events = (comms.events as any[]).filter((e) => e.isPublic && e.status !== "past");
+    return events.filter((e) => {
+      const matchesQ =
+        !q ||
+        e.title.toLowerCase().includes(q) ||
+        e.associationName.toLowerCase().includes(q) ||
+        e.description.toLowerCase().includes(q) ||
+        (e.location?.venue ?? "").toLowerCase().includes(q);
+      const matchesCat = eventCategory === "all" || e.category === eventCategory;
+      const matchesWhen =
+        eventWhen === "all" ||
+        (eventWhen === "today" && e.bucket === "Today") ||
+        (eventWhen === "this_week" && e.bucket === "This week") ||
+        (eventWhen === "later" && e.bucket === "Later");
+      return matchesQ && matchesCat && matchesWhen;
+    });
+  }, [query, eventCategory, eventWhen]);
 
   const brMrr = useMemo(
     () =>
@@ -832,6 +1044,8 @@ export function DiscoverHub() {
                   ? "Search associations, languages, locations..."
                   : tab === "circles"
                   ? "Search circles, organizers, communities..."
+                  : tab === "events"
+                  ? "Search events, hosts, venues..."
                   : "Search relationships, BR-ref, association..."
               }
               placeholderTextColor="rgba(255,255,255,0.6)"
@@ -855,6 +1069,7 @@ export function DiscoverHub() {
                     },
                   ]
                 : []),
+              { value: "events" as TabKey, label: "Events", count: filteredEvents.length },
             ]}
             value={tab}
             onChange={setTab}
@@ -1015,6 +1230,39 @@ export function DiscoverHub() {
                       setPreCheckAssoc(assoc);
                     }}
                   />
+                ))}
+              </View>
+            )}
+          </View>
+        ) : tab === "events" ? (
+          <View style={{ marginTop: space.lg, gap: space.md }}>
+            <FilterChips options={EVENT_CATEGORY_FILTERS} value={eventCategory} onChange={setEventCategory} />
+            <FilterChips options={EVENT_WHEN_FILTERS} value={eventWhen} onChange={setEventWhen} variant="secondary" />
+
+            <View style={{ paddingHorizontal: space.lg, flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: space.sm }}>
+              <Text variant="h3" weight="bold">
+                {filteredEvents.length} {filteredEvents.length === 1 ? "event" : "events"}
+              </Text>
+              <Text variant="caption" tone="accent" weight="semibold">
+                Sort: Soonest
+              </Text>
+            </View>
+
+            {filteredEvents.length === 0 ? (
+              <EmptyState
+                t={t}
+                title="No events match your filters"
+                hint="Try clearing the search or category/when filters."
+                onClear={() => {
+                  setQuery("");
+                  setEventCategory("all");
+                  setEventWhen("all");
+                }}
+              />
+            ) : (
+              <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
+                {filteredEvents.map((e) => (
+                  <EventCard key={e.id} event={e} t={t} />
                 ))}
               </View>
             )}
@@ -1360,6 +1608,63 @@ const styles = StyleSheet.create({
     paddingTop: 64,
     paddingBottom: space.xl,
     paddingHorizontal: space.lg,
+  },
+  eventCard: {
+    flexDirection: "row",
+    borderRadius: radius.md,
+    borderWidth: 1,
+    overflow: "hidden",
+  },
+  eventAccent: {
+    width: 4,
+  },
+  eventCatPill: {
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radius.pill,
+  },
+  eventBucketPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radius.pill,
+  },
+  dotSep: {
+    width: 3,
+    height: 3,
+    borderRadius: 1.5,
+  },
+  eventHost: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: radius.sm,
+  },
+  eventTrust: {
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radius.pill,
+  },
+  eventBar: {
+    height: 4,
+    borderRadius: 2,
+    overflow: "hidden",
+  },
+  eventBarFill: {
+    height: "100%",
+    borderRadius: 2,
+  },
+  eventCta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: radius.pill,
   },
   userAvatar: {
     width: 48,
