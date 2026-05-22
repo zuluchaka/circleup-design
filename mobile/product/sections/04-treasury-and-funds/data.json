@@ -336,6 +336,92 @@
     "estimatedPages": 42,
     "estimatedSize": "1.6 MB"
   },
+  "multiCurrencySettings": {
+    "defaultCurrency": "CHF",
+    "supported": [
+      { "code": "CHF", "name": "Swiss franc",   "flag": "🇨🇭", "rate": 1.0000, "symbol": "CHF" },
+      { "code": "EUR", "name": "Euro",          "flag": "🇪🇺", "rate": 0.9620, "symbol": "€" },
+      { "code": "USD", "name": "US dollar",     "flag": "🇺🇸", "rate": 1.1180, "symbol": "$" },
+      { "code": "GBP", "name": "Pound sterling","flag": "🇬🇧", "rate": 0.8830, "symbol": "£" }
+    ],
+    "providers": [
+      { "id": "postfinance", "label": "PostFinance daily rates", "rateBasis": "Mid-market · daily 09:00 CET", "freshness": "Refreshed 2h ago" },
+      { "id": "ecb",         "label": "ECB reference rates",     "rateBasis": "ECB daily reference",          "freshness": "Refreshed 1d ago" },
+      { "id": "manual",      "label": "Manual override",         "rateBasis": "Treasurer-set rates",          "freshness": "Set 14d ago" }
+    ],
+    "selectedProviderId": "postfinance",
+    "locales": [
+      { "id": "de-CH", "label": "Swiss German (de-CH)", "thousandsSeparator": "'", "decimalSeparator": ".", "example": "CHF 12'345.50" },
+      { "id": "fr-CH", "label": "Swiss French (fr-CH)", "thousandsSeparator": " ", "decimalSeparator": ",", "example": "CHF 12 345,50" },
+      { "id": "en-CH", "label": "English (CH) (en-CH)", "thousandsSeparator": ",", "decimalSeparator": ".", "example": "CHF 12,345.50" }
+    ],
+    "selectedLocaleId": "de-CH",
+    "preview": {
+      "amount": 12345.5,
+      "in": "CHF"
+    }
+  },
+  "investmentPortfolio": {
+    "idleBalance": 6960,
+    "currency": "CHF",
+    "earningPotential": 187,
+    "advisorName": "Mariam Rahimi",
+    "advisorTrust": 802,
+    "lastReviewed": "2026-05-12T10:00:00Z",
+    "opportunities": [
+      {
+        "id": "inv_mm",
+        "name": "PostFinance Money Market",
+        "category": "money_market",
+        "provider": "PostFinance",
+        "risk": "low",
+        "annualReturn": 0.013,
+        "lockupMonths": 0,
+        "minimumAmount": 500,
+        "currency": "CHF",
+        "description": "Daily liquid placement of idle EF balances. Withdraw any time. FINMA-supervised.",
+        "highlights": [
+          "Daily liquidity — withdraw without penalty",
+          "FDIC-style deposit protection up to CHF 100'000",
+          "Auto-sweep can be enabled once approved"
+        ]
+      },
+      {
+        "id": "inv_bond",
+        "name": "Confederation Bond Ladder",
+        "category": "bond_ladder",
+        "provider": "Swiss Treasury",
+        "risk": "low",
+        "annualReturn": 0.022,
+        "lockupMonths": 6,
+        "minimumAmount": 2000,
+        "currency": "CHF",
+        "description": "Diversified 3-12 month Swiss confederation bonds. Ladders ensure regular maturity for cycle payouts.",
+        "highlights": [
+          "Backed by the Swiss confederation",
+          "Maturity steps align with quarterly cycle closes",
+          "Higher yield than money market with modest lockup"
+        ]
+      },
+      {
+        "id": "inv_fd",
+        "name": "Term Deposit · 12 months",
+        "category": "fixed_deposit",
+        "provider": "Raiffeisen",
+        "risk": "medium",
+        "annualReturn": 0.031,
+        "lockupMonths": 12,
+        "minimumAmount": 5000,
+        "currency": "CHF",
+        "description": "Locked deposit with a fixed rate. Best for the long-tail surplus that won't be needed before the renewal cycle.",
+        "highlights": [
+          "Highest stable yield among preview options",
+          "Early withdrawal incurs a 0.5% penalty",
+          "Renewable at maturity"
+        ]
+      }
+    ]
+  },
   "statementsPanel": {
     "storageUsed": 28,
     "storageLimit": 200,

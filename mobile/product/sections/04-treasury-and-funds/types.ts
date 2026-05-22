@@ -274,6 +274,72 @@ export type StatementsPanel = {
   items: StatementItem[];
 };
 
+// ---------------------------------------------------------------------------
+// Phase 4 — currency & investments
+// ---------------------------------------------------------------------------
+
+export type SupportedCurrency = {
+  code: string;
+  name: string;
+  flag: string;
+  rate: number;
+  symbol: string;
+};
+
+export type FxProvider = {
+  id: string;
+  label: string;
+  rateBasis: string;
+  freshness: string;
+};
+
+export type LocaleOption = {
+  id: string;
+  label: string;
+  thousandsSeparator: string;
+  decimalSeparator: string;
+  example: string;
+};
+
+export type MultiCurrencySettings = {
+  defaultCurrency: string;
+  supported: SupportedCurrency[];
+  providers: FxProvider[];
+  selectedProviderId: string;
+  locales: LocaleOption[];
+  selectedLocaleId: string;
+  preview: {
+    amount: number;
+    in: string;
+  };
+};
+
+export type InvestmentRisk = "low" | "medium" | "high";
+
+export type InvestmentOpportunity = {
+  id: string;
+  name: string;
+  category: "money_market" | "bond_ladder" | "fixed_deposit" | "structured";
+  provider: string;
+  risk: InvestmentRisk;
+  annualReturn: number;
+  lockupMonths: number;
+  minimumAmount: number;
+  currency: string;
+  description: string;
+  highlights: string[];
+};
+
+export type InvestmentPortfolio = {
+  idleBalance: number;
+  currency: string;
+  earningPotential: number;
+  opportunities: InvestmentOpportunity[];
+  advisorName: string;
+  advisorTrust: number;
+  lastReviewed: string;
+};
+
 export type WelfareRequest = {
   id: string;
   fundId: string;
