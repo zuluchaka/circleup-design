@@ -53,3 +53,52 @@ export type TreasurerException = {
   issue: string;
   trust: number;
 };
+
+// ---------------------------------------------------------------------------
+// Phase 2 — discovery & joining
+// ---------------------------------------------------------------------------
+
+export type EligibilityStatus = "ok" | "blocker" | "warning";
+
+export type EligibilityCheck = {
+  id: string;
+  label: string;
+  detail: string;
+  status: EligibilityStatus;
+};
+
+export type JoinEligibility = {
+  circleId: string;
+  canJoin: boolean;
+  isFull: boolean;
+  checks: EligibilityCheck[];
+};
+
+export type WaitlistEntry = {
+  circleId: string;
+  position: number;
+  totalAhead: number;
+  joinedAt: string;
+  expectedPromotion: string;
+  notifyOnPromotion: boolean;
+};
+
+export type CircleInvitation = {
+  id: string;
+  circleId: string;
+  circleName: string;
+  circleAccent: string;
+  contribution: number;
+  currency: string;
+  cadence: Cadence;
+  inviterId: string;
+  inviterName: string;
+  inviterTrust: number;
+  inviterRole: "Organizer" | "Treasurer" | "Member";
+  associationName: string;
+  channel: "WhatsApp" | "SMS" | "Email" | "Direct";
+  message: string | null;
+  sentAt: string;
+  expiresAt: string;
+  status: "pending" | "accepted" | "declined" | "expired";
+};
