@@ -681,6 +681,50 @@
     "storageUsed": 18,
     "storageLimit": 100
   },
+  "circleAccount": {
+    "accountNumber": "CH71 3001 9890 1234 5678 9",
+    "status": "active",
+    "openedAt": "2025-09-25T08:00:00Z",
+    "totalBalance": 4318,
+    "contributionsThisCycle": 2222,
+    "efBalance": 4320,
+    "platformFeesTotal": 192,
+    "currency": "CHF",
+    "nextPayout": {
+      "recipient": "Kofi Mensah",
+      "amount": 2400,
+      "date": "2026-05-25"
+    },
+    "ledger": [
+      { "id": "le1",  "kind": "credit", "category": "contribution",   "label": "Contribution · cycle 8 · Aminata Diallo",   "amount": 202,  "currency": "CHF", "at": "2026-05-19T08:00:00Z", "counterparty": "mem_aminata",  "balanceAfter": 4318 },
+      { "id": "le2",  "kind": "credit", "category": "contribution",   "label": "Contribution · cycle 8 · Mariam Rahimi",    "amount": 202,  "currency": "CHF", "at": "2026-05-17T13:25:00Z", "counterparty": "mem_rahimi",   "balanceAfter": 4116 },
+      { "id": "le3",  "kind": "debit",  "category": "ef_intervention","label": "EF cover · cycle 8 · Linh Pham",            "amount": 202,  "currency": "CHF", "at": "2026-05-21T09:00:00Z", "counterparty": "mem_pham",     "balanceAfter": 3914 },
+      { "id": "le4",  "kind": "debit",  "category": "platform_fee",   "label": "Platform fee · cycle 8 (8%)",               "amount": 24,   "currency": "CHF", "at": "2026-05-20T00:00:00Z", "counterparty": "Platform",     "balanceAfter": 4116 },
+      { "id": "le5",  "kind": "credit", "category": "ef_repayment",   "label": "EF repayment · Chinedu Okoye · install 4/5","amount": 50,   "currency": "CHF", "at": "2026-05-15T11:00:00Z", "counterparty": "mem_okoye",    "balanceAfter": 4140 },
+      { "id": "le6",  "kind": "credit", "category": "contribution",   "label": "Contribution · cycle 8 · Kofi Mensah",      "amount": 202,  "currency": "CHF", "at": "2026-05-15T19:02:00Z", "counterparty": "mem_kofi",     "balanceAfter": 4090 },
+      { "id": "le7",  "kind": "debit",  "category": "payout",         "label": "Payout · cycle 7 · Linh Pham",              "amount": 2400, "currency": "CHF", "at": "2026-04-25T10:00:00Z", "counterparty": "mem_pham",     "balanceAfter": 3888 }
+    ]
+  },
+  "adminMonitoring": {
+    "totals": {
+      "circles": 142,
+      "openDisputes": 7,
+      "flaggedOffPlatform": 4,
+      "frozen": 1
+    },
+    "alerts": [
+      { "id": "al1", "kind": "off_platform", "circleId": "circle_main_chf", "circleName": "Main CHF Circle",       "body": "4 evidence files attached to escalated dispute · cycle 8",                 "at": "2026-05-21T09:18:00Z" },
+      { "id": "al2", "kind": "risk",          "circleId": "circle_youth",    "circleName": "Youth Starter",         "body": "Collection rate dropped 22 points over last 2 cycles (71% → 49%)",         "at": "2026-05-20T14:00:00Z" },
+      { "id": "al3", "kind": "freeze",        "circleId": "circle_2024fr",   "circleName": "2024 EUR Fund · Lyon",   "body": "Frozen by support after KYC mismatch on 3 confirmed members",            "at": "2026-05-19T16:40:00Z" }
+    ],
+    "circles": [
+      { "circleId": "circle_main_chf", "name": "Main CHF Circle",     "associationName": "Diaspora Circle Geneva", "status": "active",  "health": "watch", "cycle": 8,  "cycleLength": 12, "collectionRate": 0.94, "openDisputes": 2, "offPlatformActivity": 1, "balance": 4318, "currency": "CHF", "accent": "#4f46e5" },
+      { "circleId": "circle_welfare",  "name": "Welfare Booster",     "associationName": "Diaspora Circle Geneva", "status": "active",  "health": "ok",    "cycle": 4,  "cycleLength": 24, "collectionRate": 0.88, "openDisputes": 0, "offPlatformActivity": 0, "balance": 2410, "currency": "CHF", "accent": "#10b981" },
+      { "circleId": "circle_youth",    "name": "Youth Starter",       "associationName": "Diaspora Circle Geneva", "status": "active",  "health": "risk",  "cycle": 2,  "cycleLength": 8,  "collectionRate": 0.49, "openDisputes": 1, "offPlatformActivity": 2, "balance": 220,  "currency": "CHF", "accent": "#f59e0b" },
+      { "circleId": "circle_lugano",   "name": "Lugano Welfare Pool", "associationName": "Lago Welfare Society",   "status": "pending", "health": "ok",    "cycle": 0,  "cycleLength": 12, "collectionRate": 0,    "openDisputes": 0, "offPlatformActivity": 0, "balance": 0,    "currency": "EUR", "accent": "#10b981" },
+      { "circleId": "circle_2024fr",   "name": "2024 EUR Fund · Lyon","associationName": "Lyon Diaspora Circle",   "status": "frozen",  "health": "risk",  "cycle": 6,  "cycleLength": 12, "collectionRate": 0.62, "openDisputes": 3, "offPlatformActivity": 4, "balance": 1840, "currency": "EUR", "accent": "#f43f5e" }
+    ]
+  },
   "invitations": [
     {
       "id": "inv_artisan",

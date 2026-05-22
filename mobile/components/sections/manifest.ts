@@ -37,6 +37,8 @@ import { RoscaInvite } from "./screens/RoscaInvite";
 import { RoscaParticipants } from "./screens/RoscaParticipants";
 import { RoscaMultiShare } from "./screens/RoscaMultiShare";
 import { RoscaDocuments } from "./screens/RoscaDocuments";
+import { RoscaCircleAccount } from "./screens/RoscaCircleAccount";
+import { RoscaAdminMonitoring } from "./screens/RoscaAdminMonitoring";
 import { DiscoverHub } from "./screens/DiscoverHub";
 import { TreasuryOverview } from "./screens/TreasuryOverview";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
@@ -83,6 +85,8 @@ export const screenManifest: Record<string, ComponentType> = {
   "rosca-circles/participants": RoscaParticipants,
   "rosca-circles/multi-share": RoscaMultiShare,
   "rosca-circles/documents": RoscaDocuments,
+  "rosca-circles/circle-account": RoscaCircleAccount,
+  "rosca-circles/admin-monitoring": RoscaAdminMonitoring,
   "rosca-circles/discover": DiscoverHub,
   "treasury-and-funds/overview": TreasuryOverview,
   "governance-and-voting/proposals": GovernanceProposals,

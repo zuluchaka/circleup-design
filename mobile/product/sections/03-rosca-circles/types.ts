@@ -555,6 +555,77 @@ export type DocumentsPanel = {
   storageLimit: number;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 8 — account & admin
+// ---------------------------------------------------------------------------
+
+export type AccountStatus = "active" | "frozen" | "closed" | "pending";
+
+export type LedgerEntry = {
+  id: string;
+  kind: "credit" | "debit";
+  category: "contribution" | "payout" | "ef_intervention" | "ef_repayment" | "platform_fee" | "cash" | "refund";
+  label: string;
+  amount: number;
+  currency: string;
+  at: string;
+  counterparty: string;
+  balanceAfter: number;
+};
+
+export type CircleAccount = {
+  accountNumber: string;
+  status: AccountStatus;
+  openedAt: string;
+  totalBalance: number;
+  contributionsThisCycle: number;
+  efBalance: number;
+  platformFeesTotal: number;
+  currency: string;
+  nextPayout: {
+    recipient: string;
+    amount: number;
+    date: string;
+  };
+  ledger: LedgerEntry[];
+};
+
+export type HealthFlag = "ok" | "watch" | "risk";
+
+export type MonitoredCircle = {
+  circleId: string;
+  name: string;
+  associationName: string;
+  status: AccountStatus;
+  health: HealthFlag;
+  cycle: number;
+  cycleLength: number;
+  collectionRate: number;
+  openDisputes: number;
+  offPlatformActivity: number;
+  balance: number;
+  currency: string;
+  accent: string;
+};
+
+export type AdminMonitoring = {
+  totals: {
+    circles: number;
+    openDisputes: number;
+    flaggedOffPlatform: number;
+    frozen: number;
+  };
+  alerts: {
+    id: string;
+    kind: "off_platform" | "risk" | "freeze" | "kyc";
+    circleId: string;
+    circleName: string;
+    body: string;
+    at: string;
+  }[];
+  circles: MonitoredCircle[];
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;
