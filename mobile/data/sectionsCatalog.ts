@@ -100,12 +100,27 @@ export const sectionsCatalog: SectionMeta[] = [
     slug: "treasury-and-funds",
     index: 4,
     title: "Treasury & Funds",
-    blurb: "Multi-fund ledger, welfare requests, application workflows.",
+    blurb: "Multi-fund ledger, welfare requests, reconciliation, Swiss-specific imports.",
     screens: [
+      // Phase 1 — Core treasurer loop
       { slug: "overview", label: "Treasury Overview" },
       { slug: "fund-detail", label: "Fund Detail" },
       { slug: "request", label: "Request Welfare Aid" },
       { slug: "approvals", label: "Approvals Queue" },
+      // Phase 2 — Ledger & reconciliation
+      { slug: "ledger", label: "Transaction Ledger" },
+      { slug: "entry-detail", label: "Ledger Entry Detail" },
+      { slug: "reconciliation", label: "Reconciliation Console" },
+      // Phase 3 — Reporting & compliance
+      { slug: "reports", label: "Financial Reports" },
+      { slug: "audit-report", label: "Audit Report Generator" },
+      { slug: "statements", label: "Statements" },
+      // Phase 4 — Currency & investments
+      { slug: "multi-currency", label: "Multi-Currency Settings" },
+      { slug: "investments", label: "Investment Manager" },
+      // Phase 5 — Swiss-specific integrations
+      { slug: "postfinance-import", label: "PostFinance Import" },
+      { slug: "external-accounts", label: "External Accounts" },
     ],
   },
   {

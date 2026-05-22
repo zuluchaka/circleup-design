@@ -56,7 +56,24 @@ const sectionsCatalog = [
       "circle-account", "admin-monitoring",
     ],
   },
-  { index: 4,  slug: "treasury-and-funds",       screens: ["overview", "fund-detail", "request", "approvals"] },
+  {
+    index: 4,
+    slug: "treasury-and-funds",
+    // Spec lives at mobile/product/sections/04-treasury-and-funds/spec.md.
+    // Phases 2–5 are stub-rendered until the matching component lands.
+    screens: [
+      // Phase 1 — core treasurer loop
+      "overview", "fund-detail", "request", "approvals",
+      // Phase 2 — ledger & reconciliation
+      "ledger", "entry-detail", "reconciliation",
+      // Phase 3 — reporting & compliance
+      "reports", "audit-report", "statements",
+      // Phase 4 — currency & investments
+      "multi-currency", "investments",
+      // Phase 5 — Swiss-specific integrations
+      "postfinance-import", "external-accounts",
+    ],
+  },
   { index: 5,  slug: "governance-and-voting",    screens: ["proposals", "ballot", "elections", "committees"] },
   { index: 6,  slug: "communication-and-events", screens: ["inbox", "thread", "events", "event-detail", "qr"] },
   { index: 7,  slug: "documents",                screens: ["library", "viewer", "share"] },
