@@ -340,6 +340,84 @@ export type InvestmentPortfolio = {
   lastReviewed: string;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 5 — Swiss-specific integrations
+// ---------------------------------------------------------------------------
+
+export type CsvMappingField =
+  | "date"
+  | "amount"
+  | "description"
+  | "counterparty"
+  | "reference"
+  | "currency"
+  | "skip";
+
+export type CsvColumn = {
+  id: string;
+  label: string;
+  sample: string;
+  mappedTo: CsvMappingField;
+  confidence: "high" | "medium" | "low";
+};
+
+export type ImportEntry = {
+  id: string;
+  date: string;
+  amount: number;
+  currency: string;
+  description: string;
+  counterparty: string;
+  reference: string;
+  match: "ready" | "needs_attention";
+  matchReason: string | null;
+};
+
+export type PostfinanceImport = {
+  step: 1 | 2 | 3 | 4;
+  fileName: string;
+  fileSize: string;
+  bank: string;
+  detection: {
+    separator: string;
+    decimal: string;
+    dateFormat: string;
+    encoding: string;
+    rowCount: number;
+    autoDetected: boolean;
+  };
+  columns: CsvColumn[];
+  entries: ImportEntry[];
+  summary: {
+    ready: number;
+    needsAttention: number;
+    duplicates: number;
+  };
+};
+
+export type AccountStatus = "linked" | "reauth_needed" | "expired" | "pending";
+
+export type ExternalAccount = {
+  id: string;
+  bank: string;
+  accountMask: string;
+  kind: "bank" | "card_processor" | "wallet";
+  status: AccountStatus;
+  defaultCurrency: string;
+  lastSync: string;
+  syncFrequency: string;
+  notes: string | null;
+  rolesAllowed: string[];
+};
+
+export type ExternalAccountsPanel = {
+  accounts: ExternalAccount[];
+  totals: {
+    linked: number;
+    needsAttention: number;
+  };
+};
+
 export type WelfareRequest = {
   id: string;
   fundId: string;

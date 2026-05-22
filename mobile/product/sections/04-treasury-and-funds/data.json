@@ -422,6 +422,97 @@
       }
     ]
   },
+  "postfinanceImport": {
+    "step": 3,
+    "fileName": "postfinance_may_2026.csv",
+    "fileSize": "84 KB",
+    "bank": "PostFinance · *4892",
+    "detection": {
+      "separator": ";",
+      "decimal": ".",
+      "dateFormat": "YYYY-MM-DD",
+      "encoding": "UTF-8",
+      "rowCount": 32,
+      "autoDetected": true
+    },
+    "columns": [
+      { "id": "c1", "label": "Buchungsdatum",    "sample": "2026-05-19", "mappedTo": "date",         "confidence": "high"   },
+      { "id": "c2", "label": "Avisierungstext",  "sample": "POSTFIN · AMINATA D · MAIN", "mappedTo": "description",  "confidence": "high"   },
+      { "id": "c3", "label": "Gutschrift",       "sample": "200.00",     "mappedTo": "amount",       "confidence": "high"   },
+      { "id": "c4", "label": "Belastung",        "sample": "",           "mappedTo": "amount",       "confidence": "medium" },
+      { "id": "c5", "label": "Saldo",            "sample": "4'280.00",   "mappedTo": "skip",         "confidence": "low"    },
+      { "id": "c6", "label": "Referenznummer",   "sample": "QR-2026-05-19-014", "mappedTo": "reference", "confidence": "medium" }
+    ],
+    "entries": [
+      { "id": "imp1",  "date": "2026-05-19", "amount":  200,  "currency": "CHF", "description": "POSTFIN · AMINATA D · MAIN",       "counterparty": "Aminata Diallo",   "reference": "QR-2026-05-19-014", "match": "ready",            "matchReason": null },
+      { "id": "imp2",  "date": "2026-05-19", "amount":  200,  "currency": "CHF", "description": "POSTFIN · M.RAHIMI · MAIN-CIRCLE",  "counterparty": "Mariam Rahimi",    "reference": "QR-2026-05-19-015", "match": "ready",            "matchReason": null },
+      { "id": "imp3",  "date": "2026-05-18", "amount": -2400, "currency": "CHF", "description": "SEPA OUT · KOFI MENSAH",            "counterparty": "Kofi Mensah",      "reference": "PAYOUT-C8-KM",      "match": "ready",            "matchReason": null },
+      { "id": "imp4",  "date": "2026-05-17", "amount":  805,  "currency": "CHF", "description": "POSTFIN · M.RAHIMI · WELFARE",      "counterparty": "Mariam Rahimi",    "reference": "WLF-2026-05-22",    "match": "needs_attention",  "matchReason": "Amount differs from platform record by CHF 5 — likely fee" },
+      { "id": "imp5",  "date": "2026-05-15", "amount": -600,  "currency": "CHF", "description": "SEPA OUT · SELAM HAILE · MEDICAL",  "counterparty": "Selam Haile",      "reference": "WLF-DISB-018",      "match": "ready",            "matchReason": null },
+      { "id": "imp6",  "date": "2026-05-14", "amount":  350,  "currency": "CHF", "description": "POSTFIN · UNKNOWN · CHF 350",       "counterparty": "—",                 "reference": "—",                  "match": "needs_attention",  "matchReason": "No platform entry within ±5 days" }
+    ],
+    "summary": {
+      "ready": 4,
+      "needsAttention": 2,
+      "duplicates": 0
+    }
+  },
+  "externalAccountsPanel": {
+    "totals": {
+      "linked": 3,
+      "needsAttention": 1
+    },
+    "accounts": [
+      {
+        "id": "acc_pf",
+        "bank": "PostFinance",
+        "accountMask": "•••• 4892",
+        "kind": "bank",
+        "status": "linked",
+        "defaultCurrency": "CHF",
+        "lastSync": "2026-05-22T08:00:00Z",
+        "syncFrequency": "Every 4 hours",
+        "notes": "Default operating account · auto-imports CSV statements monthly",
+        "rolesAllowed": ["operating", "welfare"]
+      },
+      {
+        "id": "acc_stripe",
+        "bank": "Stripe",
+        "accountMask": "acct_••• 4F8",
+        "kind": "card_processor",
+        "status": "linked",
+        "defaultCurrency": "CHF",
+        "lastSync": "2026-05-22T09:14:00Z",
+        "syncFrequency": "Real-time webhooks",
+        "notes": "Card + Twint + SEPA Direct Debit",
+        "rolesAllowed": ["operating", "welfare", "emergency"]
+      },
+      {
+        "id": "acc_raif",
+        "bank": "Raiffeisen",
+        "accountMask": "•••• 1184",
+        "kind": "bank",
+        "status": "reauth_needed",
+        "defaultCurrency": "CHF",
+        "lastSync": "2026-05-15T07:00:00Z",
+        "syncFrequency": "Every 12 hours",
+        "notes": "Project fund deposits · re-authenticate within 7 days",
+        "rolesAllowed": ["project"]
+      },
+      {
+        "id": "acc_twint",
+        "bank": "TWINT",
+        "accountMask": "+41 78 ••• 4892",
+        "kind": "wallet",
+        "status": "expired",
+        "defaultCurrency": "CHF",
+        "lastSync": "2026-04-12T15:33:00Z",
+        "syncFrequency": "On payment",
+        "notes": "Token expired after policy change — relink to keep TWINT live",
+        "rolesAllowed": ["operating"]
+      }
+    ]
+  },
   "statementsPanel": {
     "storageUsed": 28,
     "storageLimit": 200,
