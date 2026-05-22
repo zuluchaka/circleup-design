@@ -429,6 +429,160 @@
     "currency": "CHF",
     "scheduleNote": "Charges 2 days before the contribution due date so bank transfers settle on time."
   },
+  "analytics": {
+    "cycle": 8,
+    "projectedCompletion": "2026-09-25",
+    "metrics": [
+      { "id": "coll",    "label": "Collection rate", "value": "94%", "benchmark": "Top quartile (91%)",  "trend": "up",   "delta": "+3% vs last 3 cycles", "toneHint": "good" },
+      { "id": "ontime",  "label": "On-time rate",    "value": "91%", "benchmark": "Top quartile (88%)",  "trend": "up",   "delta": "+2% vs last 3 cycles", "toneHint": "good" },
+      { "id": "default", "label": "Defaults",        "value": "1",   "benchmark": "Median (2)",          "trend": "down", "delta": "−1 vs cycle 7",        "toneHint": "good" },
+      { "id": "engage",  "label": "Engagement",      "value": "78%", "benchmark": "Median (74%)",        "trend": "flat", "delta": "Stable",               "toneHint": "neutral" }
+    ],
+    "monthlyTrend": [
+      { "month": "Nov", "collectionRate": 0.88, "onTimeRate": 0.84 },
+      { "month": "Dec", "collectionRate": 0.90, "onTimeRate": 0.85 },
+      { "month": "Jan", "collectionRate": 0.86, "onTimeRate": 0.83 },
+      { "month": "Feb", "collectionRate": 0.92, "onTimeRate": 0.88 },
+      { "month": "Mar", "collectionRate": 0.91, "onTimeRate": 0.87 },
+      { "month": "Apr", "collectionRate": 0.93, "onTimeRate": 0.89 },
+      { "month": "May", "collectionRate": 0.94, "onTimeRate": 0.91 }
+    ],
+    "topReliable": [
+      { "memberId": "mem_kofi",   "name": "Kofi Mensah",     "trust": 891, "onTimeRate": 1.00, "missedCycles": 0, "direction": "up" },
+      { "memberId": "mem_amara",  "name": "Amara Ofori",     "trust": 824, "onTimeRate": 1.00, "missedCycles": 0, "direction": "flat" },
+      { "memberId": "mem_rahimi", "name": "Mariam Rahimi",   "trust": 802, "onTimeRate": 0.98, "missedCycles": 0, "direction": "flat" }
+    ],
+    "watchList": [
+      { "memberId": "mem_pham",   "name": "Linh Pham",       "trust": 615, "onTimeRate": 0.83, "missedCycles": 1, "direction": "down" },
+      { "memberId": "mem_okoye",  "name": "Chinedu Okoye",   "trust": 558, "onTimeRate": 0.75, "missedCycles": 2, "direction": "down" }
+    ]
+  },
+  "riskSummary": {
+    "totalAssessed": 12,
+    "averageRisk": 28,
+    "high": 1,
+    "medium": 2,
+    "low": 9,
+    "scores": [
+      {
+        "memberId": "mem_pham", "name": "Linh Pham", "trust": 615, "score": 68, "band": "high",
+        "recommendation": "Pair with EF cover and watch closely for the next 2 cycles.",
+        "factors": [
+          { "id": "history",      "label": "Payment history",     "weight": 0.35, "contribution": 24, "signal": "negative" },
+          { "id": "verification", "label": "ID verification",     "weight": 0.10, "contribution": 0,  "signal": "neutral"  },
+          { "id": "tenure",       "label": "Tenure",              "weight": 0.15, "contribution": 6,  "signal": "negative" },
+          { "id": "engagement",   "label": "Engagement",          "weight": 0.15, "contribution": 12, "signal": "negative" },
+          { "id": "network",      "label": "Network trust",       "weight": 0.15, "contribution": 18, "signal": "negative" },
+          { "id": "external",     "label": "External signals",    "weight": 0.10, "contribution": 8,  "signal": "negative" }
+        ]
+      },
+      {
+        "memberId": "mem_okoye", "name": "Chinedu Okoye", "trust": 558, "score": 54, "band": "medium",
+        "recommendation": "Send proactive reminders 4 days before each contribution.",
+        "factors": [
+          { "id": "history",      "label": "Payment history",     "weight": 0.35, "contribution": 20, "signal": "negative" },
+          { "id": "verification", "label": "ID verification",     "weight": 0.10, "contribution": 0,  "signal": "neutral"  },
+          { "id": "tenure",       "label": "Tenure",              "weight": 0.15, "contribution": 4,  "signal": "neutral"  },
+          { "id": "engagement",   "label": "Engagement",          "weight": 0.15, "contribution": 10, "signal": "negative" },
+          { "id": "network",      "label": "Network trust",       "weight": 0.15, "contribution": 14, "signal": "negative" },
+          { "id": "external",     "label": "External signals",    "weight": 0.10, "contribution": 6,  "signal": "negative" }
+        ]
+      },
+      {
+        "memberId": "mem_haile", "name": "Selam Haile", "trust": 644, "score": 38, "band": "medium",
+        "recommendation": "On track. Keep her in the rotation as planned.",
+        "factors": [
+          { "id": "history",      "label": "Payment history",     "weight": 0.35, "contribution": 8,  "signal": "neutral"  },
+          { "id": "verification", "label": "ID verification",     "weight": 0.10, "contribution": 0,  "signal": "positive" },
+          { "id": "tenure",       "label": "Tenure",              "weight": 0.15, "contribution": 6,  "signal": "neutral"  },
+          { "id": "engagement",   "label": "Engagement",          "weight": 0.15, "contribution": 10, "signal": "negative" },
+          { "id": "network",      "label": "Network trust",       "weight": 0.15, "contribution": 8,  "signal": "neutral"  },
+          { "id": "external",     "label": "External signals",    "weight": 0.10, "contribution": 6,  "signal": "neutral"  }
+        ]
+      },
+      {
+        "memberId": "mem_dembele", "name": "Aïssatou Dembélé", "trust": 689, "score": 22, "band": "low",
+        "recommendation": "Reliable contributor — no action needed.",
+        "factors": [
+          { "id": "history",      "label": "Payment history",     "weight": 0.35, "contribution": 4, "signal": "positive" },
+          { "id": "verification", "label": "ID verification",     "weight": 0.10, "contribution": 0, "signal": "positive" },
+          { "id": "tenure",       "label": "Tenure",              "weight": 0.15, "contribution": 4, "signal": "positive" },
+          { "id": "engagement",   "label": "Engagement",          "weight": 0.15, "contribution": 6, "signal": "positive" },
+          { "id": "network",      "label": "Network trust",       "weight": 0.15, "contribution": 4, "signal": "positive" },
+          { "id": "external",     "label": "External signals",    "weight": 0.10, "contribution": 4, "signal": "neutral"  }
+        ]
+      }
+    ]
+  },
+  "disputes": [
+    {
+      "id": "disp_okoye_late",
+      "title": "Late payment dispute — cycle 7",
+      "filedBy": "Chinedu Okoye", "filedById": "mem_okoye",
+      "against": "Treasurer (Amara Ofori)", "againstId": "mem_amara",
+      "type": "missed_payment", "priority": "medium", "status": "acknowledged",
+      "filedAt": "2026-05-12T08:30:00Z", "lastUpdate": "2026-05-20T14:11:00Z",
+      "evidenceCount": 2
+    },
+    {
+      "id": "disp_pham_off",
+      "title": "Off-platform payment claim",
+      "filedBy": "Linh Pham", "filedById": "mem_pham",
+      "against": "Treasurer (Amara Ofori)", "againstId": "mem_amara",
+      "type": "off_platform", "priority": "high", "status": "escalated",
+      "filedAt": "2026-05-15T16:22:00Z", "lastUpdate": "2026-05-21T09:18:00Z",
+      "evidenceCount": 4
+    },
+    {
+      "id": "disp_conflict",
+      "title": "Conflict during monthly meeting",
+      "filedBy": "Selam Haile", "filedById": "mem_haile",
+      "against": "Olusegun A.", "againstId": "mem_olusegun",
+      "type": "conflict", "priority": "low", "status": "resolved",
+      "filedAt": "2026-04-29T19:00:00Z", "lastUpdate": "2026-05-08T12:00:00Z",
+      "evidenceCount": 1
+    }
+  ],
+  "disputeDetail": {
+    "id": "disp_pham_off",
+    "title": "Off-platform payment claim",
+    "description": "Linh says she handed CHF 202 in cash to the treasurer at the May community meeting. The contribution still shows as Failed in the app. Asking that her on-time record be corrected and the cycle 8 retry be cancelled.",
+    "filedBy": "Linh Pham", "filedById": "mem_pham",
+    "against": "Treasurer (Amara Ofori)", "againstId": "mem_amara",
+    "type": "off_platform", "priority": "high", "status": "escalated",
+    "filedAt": "2026-05-15T16:22:00Z",
+    "cycle": 8, "amountInvolved": 202, "currency": "CHF",
+    "evidence": [
+      { "id": "ev1", "kind": "image",    "label": "Cash handover · meeting photo",    "size": "1.4 MB", "uploadedAt": "2026-05-15T16:25:00Z" },
+      { "id": "ev2", "kind": "document", "label": "Witness statement · Mariam R.",    "size": "184 KB", "uploadedAt": "2026-05-16T09:02:00Z" },
+      { "id": "ev3", "kind": "image",    "label": "Receipt stub · meeting log",        "size": "812 KB", "uploadedAt": "2026-05-16T10:18:00Z" },
+      { "id": "ev4", "kind": "audio",    "label": "Voice note · context recording",    "size": "2.1 MB", "uploadedAt": "2026-05-18T20:33:00Z" }
+    ],
+    "timeline": [
+      { "id": "tl1", "kind": "filed",        "actor": "Linh Pham",        "actorRole": "Filer",      "at": "2026-05-15T16:22:00Z", "body": "Filed an off-platform payment dispute. Claims CHF 202 paid in cash on 14 May." },
+      { "id": "tl2", "kind": "evidence",     "actor": "Linh Pham",        "actorRole": "Filer",      "at": "2026-05-15T16:25:00Z", "body": "Uploaded 1 image: Cash handover · meeting photo." },
+      { "id": "tl3", "kind": "acknowledged", "actor": "Amara Ofori",      "actorRole": "Organiser",  "at": "2026-05-16T08:14:00Z", "body": "Acknowledged. Asked Mariam to provide a witness statement." },
+      { "id": "tl4", "kind": "evidence",     "actor": "Mariam Rahimi",    "actorRole": "Witness",    "at": "2026-05-16T09:02:00Z", "body": "Uploaded witness statement supporting the cash handover." },
+      { "id": "tl5", "kind": "comment",      "actor": "Amara Ofori",      "actorRole": "Organiser",  "at": "2026-05-18T11:00:00Z", "body": "Could not locate the entry in my ledger. Escalating to platform support for resolution." },
+      { "id": "tl6", "kind": "escalated",    "actor": "CircleUp Support", "actorRole": "Platform",   "at": "2026-05-21T09:18:00Z", "body": "Picked up by support. Investigation underway — expect a decision in 48 hours." }
+    ],
+    "yourRole": "organizer"
+  },
+  "emergencyFundPanel": {
+    "balance": 4320,
+    "currency": "CHF",
+    "rate": 0.01,
+    "perCycle": 24,
+    "totalCovered": 808,
+    "totalRecovered": 432,
+    "activeInterventions": 2,
+    "interventions": [
+      { "id": "efi1", "memberId": "mem_pham",   "memberName": "Linh Pham",     "cycle": 8, "amount": 202, "paid": 0,   "installments": 5, "installmentsPaid": 0, "at": "2026-05-21T09:00:00Z" },
+      { "id": "efi2", "memberId": "mem_okoye",  "memberName": "Chinedu Okoye", "cycle": 7, "amount": 202, "paid": 162, "installments": 5, "installmentsPaid": 4, "at": "2026-04-21T09:00:00Z" },
+      { "id": "efi3", "memberId": "mem_olusegun","memberName": "Olusegun A.",   "cycle": 5, "amount": 202, "paid": 202, "installments": 4, "installmentsPaid": 4, "at": "2026-02-21T09:00:00Z" },
+      { "id": "efi4", "memberId": "mem_pham",   "memberName": "Linh Pham",     "cycle": 4, "amount": 202, "paid": 202, "installments": 5, "installmentsPaid": 5, "at": "2026-01-23T09:00:00Z" }
+    ]
+  },
   "invitations": [
     {
       "id": "inv_artisan",

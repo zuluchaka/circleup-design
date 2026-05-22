@@ -274,6 +274,152 @@ export type AutoPaySetup = {
   scheduleNote: string;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 6 — health, risk & moderation
+// ---------------------------------------------------------------------------
+
+export type Trend = "up" | "down" | "flat";
+
+export type AnalyticsMetric = {
+  id: string;
+  label: string;
+  value: string;
+  benchmark: string;
+  trend: Trend;
+  delta: string;
+  toneHint: "good" | "bad" | "neutral";
+};
+
+export type MonthlyPoint = {
+  month: string;
+  collectionRate: number;
+  onTimeRate: number;
+};
+
+export type ReliabilityEntry = {
+  memberId: string;
+  name: string;
+  trust: number;
+  onTimeRate: number;
+  missedCycles: number;
+  direction: Trend;
+};
+
+export type CircleAnalytics = {
+  cycle: number;
+  projectedCompletion: string;
+  metrics: AnalyticsMetric[];
+  monthlyTrend: MonthlyPoint[];
+  topReliable: ReliabilityEntry[];
+  watchList: ReliabilityEntry[];
+};
+
+export type RiskFactor = {
+  id: string;
+  label: string;
+  weight: number;
+  contribution: number;
+  signal: "positive" | "negative" | "neutral";
+};
+
+export type RiskScore = {
+  memberId: string;
+  name: string;
+  trust: number;
+  score: number;
+  band: "low" | "medium" | "high";
+  recommendation: string;
+  factors: RiskFactor[];
+};
+
+export type RiskSummary = {
+  totalAssessed: number;
+  averageRisk: number;
+  high: number;
+  medium: number;
+  low: number;
+  scores: RiskScore[];
+};
+
+export type DisputeStatus = "open" | "acknowledged" | "escalated" | "resolved";
+export type DisputeType = "missed_payment" | "off_platform" | "conflict" | "fraud" | "other";
+export type DisputePriority = "low" | "medium" | "high";
+
+export type DisputeSummary = {
+  id: string;
+  title: string;
+  filedBy: string;
+  filedById: string;
+  against: string;
+  againstId: string;
+  type: DisputeType;
+  priority: DisputePriority;
+  status: DisputeStatus;
+  filedAt: string;
+  lastUpdate: string;
+  evidenceCount: number;
+};
+
+export type DisputeEvidence = {
+  id: string;
+  kind: "image" | "document" | "video" | "audio";
+  label: string;
+  size: string;
+  uploadedAt: string;
+};
+
+export type DisputeTimelineEvent = {
+  id: string;
+  kind: "filed" | "acknowledged" | "evidence" | "escalated" | "comment" | "resolved";
+  actor: string;
+  actorRole: string;
+  at: string;
+  body: string;
+};
+
+export type DisputeDetail = {
+  id: string;
+  title: string;
+  description: string;
+  filedBy: string;
+  filedById: string;
+  against: string;
+  againstId: string;
+  type: DisputeType;
+  priority: DisputePriority;
+  status: DisputeStatus;
+  filedAt: string;
+  cycle: number;
+  amountInvolved: number;
+  currency: string;
+  evidence: DisputeEvidence[];
+  timeline: DisputeTimelineEvent[];
+  yourRole: "filer" | "respondent" | "organizer" | "observer";
+};
+
+export type EfIntervention = {
+  id: string;
+  memberId: string;
+  memberName: string;
+  cycle: number;
+  amount: number;
+  paid: number;
+  installments: number;
+  installmentsPaid: number;
+  at: string;
+};
+
+export type EmergencyFundPanel = {
+  balance: number;
+  currency: string;
+  rate: number;
+  perCycle: number;
+  totalCovered: number;
+  totalRecovered: number;
+  activeInterventions: number;
+  interventions: EfIntervention[];
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;

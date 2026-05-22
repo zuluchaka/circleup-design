@@ -26,6 +26,11 @@ import { RoscaPositionSwap } from "./screens/RoscaPositionSwap";
 import { RoscaBidding } from "./screens/RoscaBidding";
 import { RoscaPayoutAdvance } from "./screens/RoscaPayoutAdvance";
 import { RoscaAutoPay } from "./screens/RoscaAutoPay";
+import { RoscaAnalytics } from "./screens/RoscaAnalytics";
+import { RoscaRiskScores } from "./screens/RoscaRiskScores";
+import { RoscaDisputes } from "./screens/RoscaDisputes";
+import { RoscaDisputeDetail } from "./screens/RoscaDisputeDetail";
+import { RoscaEmergencyFund } from "./screens/RoscaEmergencyFund";
 import { DiscoverHub } from "./screens/DiscoverHub";
 import { TreasuryOverview } from "./screens/TreasuryOverview";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
@@ -61,6 +66,11 @@ export const screenManifest: Record<string, ComponentType> = {
   "rosca-circles/bidding": RoscaBidding,
   "rosca-circles/payout-advance": RoscaPayoutAdvance,
   "rosca-circles/auto-pay": RoscaAutoPay,
+  "rosca-circles/analytics": RoscaAnalytics,
+  "rosca-circles/risk-scores": RoscaRiskScores,
+  "rosca-circles/disputes": RoscaDisputes,
+  "rosca-circles/dispute-detail": RoscaDisputeDetail,
+  "rosca-circles/emergency-fund": RoscaEmergencyFund,
   "rosca-circles/discover": DiscoverHub,
   "treasury-and-funds/overview": TreasuryOverview,
   "governance-and-voting/proposals": GovernanceProposals,
