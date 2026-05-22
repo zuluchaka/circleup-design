@@ -420,6 +420,141 @@ export type EmergencyFundPanel = {
   interventions: EfIntervention[];
 };
 
+// ---------------------------------------------------------------------------
+// Phase 7 — settings & governance
+// ---------------------------------------------------------------------------
+
+export type CircleSettings = {
+  status: "active" | "paused" | "completed";
+  pausedSince: string | null;
+  pauseReason: string | null;
+  cyclesRemaining: number;
+  maxExtendCycles: number;
+  configuration: {
+    cadence: Cadence;
+    contribution: number;
+    currency: string;
+    payoutMethod: PayoutMethod;
+    paymentMode: PaymentMode;
+    visibility: Visibility;
+    emergencyFundRate: number;
+    gracePeriodDays: number;
+    latePenalty: number;
+    language: string;
+  };
+};
+
+export type ManagementMember = {
+  memberId: string;
+  name: string;
+  trust: number;
+  role: "Member" | "Treasurer" | "Organizer";
+  status: "active" | "suspended" | "in_arrears";
+  slot: number;
+  onTimeRate: number;
+  joinedAt: string;
+};
+
+export type ManagementWaitlistEntry = {
+  position: number;
+  name: string;
+  trust: number;
+  joinedAt: string;
+  channel: "Invite" | "Discover";
+};
+
+export type ManagementSummary = {
+  members: ManagementMember[];
+  waitlist: ManagementWaitlistEntry[];
+  pendingInvitations: number;
+  openDisputes: number;
+};
+
+export type InviteChannel = {
+  id: "email" | "sms" | "whatsapp" | "qr" | "link";
+  label: string;
+  hint: string;
+  active: boolean;
+};
+
+export type SentInvitation = {
+  id: string;
+  recipient: string;
+  channel: "Email" | "SMS" | "WhatsApp" | "QR" | "Link";
+  status: "pending" | "delivered" | "opened" | "accepted" | "declined" | "expired";
+  sentAt: string;
+};
+
+export type InvitePanel = {
+  channels: InviteChannel[];
+  recentSent: SentInvitation[];
+  qrCode: string;
+  inviteLink: string;
+};
+
+export type Participant = {
+  memberId: string;
+  name: string;
+  trust: number;
+  role: "Member" | "Treasurer" | "Organizer";
+  slot: number;
+  status: "active" | "suspended" | "in_arrears";
+  onTimeRate: number;
+  cyclesPaid: number;
+  missedCycles: number;
+  joinedAt: string;
+};
+
+export type ShareHistoryEntry = {
+  id: string;
+  kind: "increase" | "decrease" | "request" | "approved" | "denied";
+  cycle: number;
+  newShareCount: number;
+  at: string;
+  note: string;
+};
+
+export type MultiSharePanel = {
+  currentShares: number;
+  maxShares: number;
+  multiplier: number;
+  baseContribution: number;
+  currency: string;
+  baseEfRate: number;
+  pendingRequest: {
+    requested: number;
+    submittedAt: string;
+    status: "pending" | "approved" | "denied";
+  } | null;
+  history: ShareHistoryEntry[];
+};
+
+export type DocumentFolder = {
+  id: string;
+  label: string;
+  kind: "charter" | "receipts" | "statements" | "agreements" | "minutes";
+  itemCount: number;
+  lastUpdated: string;
+};
+
+export type CircleDocument = {
+  id: string;
+  folderId: string;
+  label: string;
+  kind: "pdf" | "image" | "spreadsheet" | "document";
+  size: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  pinned: boolean;
+};
+
+export type DocumentsPanel = {
+  folders: DocumentFolder[];
+  recent: CircleDocument[];
+  storageUsed: number;
+  storageLimit: number;
+};
+
 export type CircleInvitation = {
   id: string;
   circleId: string;

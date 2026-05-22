@@ -583,6 +583,104 @@
       { "id": "efi4", "memberId": "mem_pham",   "memberName": "Linh Pham",     "cycle": 4, "amount": 202, "paid": 202, "installments": 5, "installmentsPaid": 5, "at": "2026-01-23T09:00:00Z" }
     ]
   },
+  "circleSettings": {
+    "status": "active",
+    "pausedSince": null,
+    "pauseReason": null,
+    "cyclesRemaining": 4,
+    "maxExtendCycles": 6,
+    "configuration": {
+      "cadence": "Monthly",
+      "contribution": 200,
+      "currency": "CHF",
+      "payoutMethod": "fixed",
+      "paymentMode": "stripe_only",
+      "visibility": "association_only",
+      "emergencyFundRate": 0.01,
+      "gracePeriodDays": 5,
+      "latePenalty": 0.03,
+      "language": "EN"
+    }
+  },
+  "managementSummary": {
+    "members": [
+      { "memberId": "mem_amara",   "name": "Amara Ofori",       "trust": 824, "role": "Organizer",  "status": "active",     "slot": 1,  "onTimeRate": 1.00, "joinedAt": "2025-09-15" },
+      { "memberId": "mem_kofi",    "name": "Kofi Mensah",       "trust": 891, "role": "Treasurer",  "status": "active",     "slot": 2,  "onTimeRate": 1.00, "joinedAt": "2025-09-18" },
+      { "memberId": "mem_zara",    "name": "Zara Bekele",       "trust": 776, "role": "Member",     "status": "active",     "slot": 3,  "onTimeRate": 0.96, "joinedAt": "2025-09-20" },
+      { "memberId": "mem_dembele", "name": "Aïssatou Dembélé",  "trust": 689, "role": "Member",     "status": "active",     "slot": 4,  "onTimeRate": 0.94, "joinedAt": "2025-09-22" },
+      { "memberId": "mem_pham",    "name": "Linh Pham",         "trust": 615, "role": "Member",     "status": "in_arrears", "slot": 5,  "onTimeRate": 0.83, "joinedAt": "2025-09-25" },
+      { "memberId": "mem_okoye",   "name": "Chinedu Okoye",     "trust": 558, "role": "Member",     "status": "active",     "slot": 6,  "onTimeRate": 0.75, "joinedAt": "2025-09-28" },
+      { "memberId": "mem_rahimi",  "name": "Mariam Rahimi",     "trust": 802, "role": "Member",     "status": "active",     "slot": 7,  "onTimeRate": 0.98, "joinedAt": "2025-10-01" }
+    ],
+    "waitlist": [
+      { "position": 1, "name": "Beatrice Mokonzi", "trust": 712, "joinedAt": "2026-05-08", "channel": "Discover" },
+      { "position": 2, "name": "Yasmine Krieger",  "trust": 654, "joinedAt": "2026-05-12", "channel": "Invite" }
+    ],
+    "pendingInvitations": 3,
+    "openDisputes": 2
+  },
+  "invitePanel": {
+    "channels": [
+      { "id": "email",    "label": "Email",    "hint": "Bulk send to a list",        "active": true  },
+      { "id": "sms",      "label": "SMS",      "hint": "Direct to a phone number",   "active": false },
+      { "id": "whatsapp", "label": "WhatsApp", "hint": "Pre-filled message + link",  "active": false },
+      { "id": "qr",       "label": "QR code",  "hint": "Scan in person",             "active": false },
+      { "id": "link",     "label": "Link",     "hint": "Copy and share anywhere",    "active": false }
+    ],
+    "recentSent": [
+      { "id": "si1", "recipient": "leyla.tahar@example.ch",  "channel": "Email",    "status": "opened",    "sentAt": "2026-05-21T09:12:00Z" },
+      { "id": "si2", "recipient": "+41 78 555 1187",         "channel": "WhatsApp", "status": "accepted",  "sentAt": "2026-05-20T18:33:00Z" },
+      { "id": "si3", "recipient": "haru.tanaka@example.ch",  "channel": "Email",    "status": "delivered", "sentAt": "2026-05-19T11:42:00Z" },
+      { "id": "si4", "recipient": "+41 76 555 4202",         "channel": "SMS",      "status": "expired",   "sentAt": "2026-05-12T08:00:00Z" }
+    ],
+    "qrCode": "circleup://join/main-chf-circle?token=qr_4f8a",
+    "inviteLink": "https://circleup.ch/c/main-chf-circle"
+  },
+  "participants": [
+    { "memberId": "mem_amara",   "name": "Amara Ofori",       "trust": 824, "role": "Organizer", "slot": 1,  "status": "active",     "onTimeRate": 1.00, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-09-15" },
+    { "memberId": "mem_kofi",    "name": "Kofi Mensah",       "trust": 891, "role": "Treasurer", "slot": 2,  "status": "active",     "onTimeRate": 1.00, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-09-18" },
+    { "memberId": "mem_zara",    "name": "Zara Bekele",       "trust": 776, "role": "Member",    "slot": 3,  "status": "active",     "onTimeRate": 0.96, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-09-20" },
+    { "memberId": "mem_dembele", "name": "Aïssatou Dembélé",  "trust": 689, "role": "Member",    "slot": 4,  "status": "active",     "onTimeRate": 0.94, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-09-22" },
+    { "memberId": "mem_pham",    "name": "Linh Pham",         "trust": 615, "role": "Member",    "slot": 5,  "status": "in_arrears", "onTimeRate": 0.83, "cyclesPaid": 6, "missedCycles": 1, "joinedAt": "2025-09-25" },
+    { "memberId": "mem_okoye",   "name": "Chinedu Okoye",     "trust": 558, "role": "Member",    "slot": 6,  "status": "active",     "onTimeRate": 0.75, "cyclesPaid": 7, "missedCycles": 2, "joinedAt": "2025-09-28" },
+    { "memberId": "mem_rahimi",  "name": "Mariam Rahimi",     "trust": 802, "role": "Member",    "slot": 7,  "status": "active",     "onTimeRate": 0.98, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-10-01" },
+    { "memberId": "mem_haile",   "name": "Selam Haile",       "trust": 644, "role": "Member",    "slot": 8,  "status": "active",     "onTimeRate": 0.91, "cyclesPaid": 8, "missedCycles": 0, "joinedAt": "2025-10-03" }
+  ],
+  "multiShare": {
+    "currentShares": 1,
+    "maxShares": 3,
+    "multiplier": 1,
+    "baseContribution": 200,
+    "currency": "CHF",
+    "baseEfRate": 0.01,
+    "pendingRequest": {
+      "requested": 2,
+      "submittedAt": "2026-05-18T10:00:00Z",
+      "status": "pending"
+    },
+    "history": [
+      { "id": "sh1", "kind": "request",  "cycle": 8, "newShareCount": 2, "at": "2026-05-18T10:00:00Z", "note": "Requested 1 additional share — organiser review pending" },
+      { "id": "sh2", "kind": "approved", "cycle": 6, "newShareCount": 1, "at": "2026-04-02T14:30:00Z", "note": "Stepped down from 2 shares to 1 (financial change)" },
+      { "id": "sh3", "kind": "approved", "cycle": 3, "newShareCount": 2, "at": "2026-01-25T08:00:00Z", "note": "Granted second share at cycle 3 start" }
+    ]
+  },
+  "documentsPanel": {
+    "folders": [
+      { "id": "fld_charter",    "label": "Charter & rules",       "kind": "charter",     "itemCount": 3,  "lastUpdated": "2026-04-12T08:00:00Z" },
+      { "id": "fld_receipts",   "label": "Contribution receipts", "kind": "receipts",    "itemCount": 86, "lastUpdated": "2026-05-21T19:14:00Z" },
+      { "id": "fld_statements", "label": "Cycle statements",      "kind": "statements",  "itemCount": 8,  "lastUpdated": "2026-05-20T12:00:00Z" },
+      { "id": "fld_agreements", "label": "Signed agreements",     "kind": "agreements",  "itemCount": 12, "lastUpdated": "2026-03-15T16:00:00Z" },
+      { "id": "fld_minutes",    "label": "Meeting minutes",       "kind": "minutes",     "itemCount": 8,  "lastUpdated": "2026-05-04T20:00:00Z" }
+    ],
+    "recent": [
+      { "id": "doc_st8",     "folderId": "fld_statements", "label": "Cycle 8 statement.pdf",        "kind": "pdf",         "size": "428 KB", "uploadedBy": "Amara Ofori",   "uploadedAt": "2026-05-20T12:00:00Z", "pinned": true  },
+      { "id": "doc_rcpt194", "folderId": "fld_receipts",   "label": "Receipt #194 — Linh Pham EF.pdf", "kind": "pdf",      "size": "112 KB", "uploadedBy": "System",         "uploadedAt": "2026-05-21T19:14:00Z", "pinned": false },
+      { "id": "doc_charter", "folderId": "fld_charter",    "label": "Circle charter v2.pdf",         "kind": "pdf",         "size": "1.1 MB", "uploadedBy": "Amara Ofori",    "uploadedAt": "2026-04-12T08:00:00Z", "pinned": true  },
+      { "id": "doc_min_may", "folderId": "fld_minutes",    "label": "May meeting minutes.pdf",        "kind": "pdf",         "size": "284 KB", "uploadedBy": "Mariam Rahimi",  "uploadedAt": "2026-05-04T20:00:00Z", "pinned": false }
+    ],
+    "storageUsed": 18,
+    "storageLimit": 100
+  },
   "invitations": [
     {
       "id": "inv_artisan",
