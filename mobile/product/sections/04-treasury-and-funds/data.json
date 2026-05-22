@@ -281,5 +281,70 @@
         { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi", "signerTrust": 802, "decision": "rejected", "decidedAt": "2026-05-14T11:00:00Z", "note": "Welfare scope doesn't cover vehicle repairs." }
       ]
     }
-  ]
+  ],
+  "reportPreview": {
+    "period": "month",
+    "scope": "all",
+    "scopeLabel": "All funds",
+    "rangeStart": "2026-05-01",
+    "rangeEnd": "2026-05-31",
+    "currency": "CHF",
+    "kpis": [
+      { "id": "in",   "label": "Inflows",  "value": 3052, "trend": "up",   "delta": "+12% vs Apr",  "toneHint": "good"    },
+      { "id": "out",  "label": "Outflows", "value": 5828, "trend": "up",   "delta": "+18% vs Apr",  "toneHint": "bad"     },
+      { "id": "net",  "label": "Net",      "value": -2776,"trend": "down", "delta": "−CHF 470 MoM", "toneHint": "neutral" },
+      { "id": "ef",   "label": "EF used",  "value": 202,  "trend": "down", "delta": "−1 intervention","toneHint": "good"  }
+    ],
+    "balanceSheet": [
+      { "id": "bs_op",     "label": "Operating Fund",        "value": 4280,  "group": "assets" },
+      { "id": "bs_wlf",    "label": "Welfare Fund",          "value": 5810,  "group": "assets" },
+      { "id": "bs_ef",     "label": "Emergency Fund",        "value": 6960,  "group": "assets" },
+      { "id": "bs_proj",   "label": "Project Fund",          "value": 12400, "group": "assets" },
+      { "id": "bs_pend",   "label": "Pending payouts",       "value": 2400,  "group": "liabilities" },
+      { "id": "bs_efoust", "label": "Outstanding EF debt",   "value": 376,   "group": "liabilities" },
+      { "id": "bs_eq",     "label": "Members' equity",       "value": 26674, "group": "equity" }
+    ],
+    "cashFlow": [
+      { "id": "cf_contrib",  "label": "Contributions received",     "value":  2222, "group": "operating" },
+      { "id": "cf_payout",   "label": "Payouts disbursed",          "value": -2400, "group": "operating" },
+      { "id": "cf_welfare",  "label": "Welfare disbursements",      "value":  -600, "group": "operating" },
+      { "id": "cf_efcarve",  "label": "EF carve-out collected",     "value":    24, "group": "operating" },
+      { "id": "cf_efint",    "label": "EF interventions out",       "value":  -202, "group": "operating" },
+      { "id": "cf_efrepay",  "label": "EF repayments in",           "value":    50, "group": "operating" },
+      { "id": "cf_proj_in",  "label": "Project pledges in",         "value":  1600, "group": "financing" },
+      { "id": "cf_fees",     "label": "Platform fees",              "value":   -24, "group": "operating" }
+    ]
+  },
+  "auditReportSetup": {
+    "rangeStart": "2026-01-01",
+    "rangeEnd": "2026-03-31",
+    "scopeLabel": "Q1 2026 · all funds",
+    "format": "pdf",
+    "sections": [
+      { "id": "tx",      "label": "Full transaction history",       "description": "Every credit and debit across all funds with reference codes.",       "included": true,  "required": true  },
+      { "id": "ef",      "label": "Emergency Fund interventions",    "description": "EF cover events, repayments, and outstanding balances.",              "included": true,  "required": true  },
+      { "id": "recon",   "label": "Reconciliation records",          "description": "Platform vs bank matches with variance notes and adjustments.",       "included": true,  "required": true  },
+      { "id": "approv",  "label": "Welfare approvals",               "description": "Per-request signer decisions, notes, and disbursement evidence.",     "included": true,  "required": false },
+      { "id": "policy",  "label": "Policy & rules snapshot",          "description": "Fund-by-fund rules as configured for the period.",                    "included": true,  "required": false },
+      { "id": "members", "label": "Member ledger by participant",     "description": "Each member's contributions, payouts, EF use, and arrears.",         "included": false, "required": false }
+    ],
+    "attestations": [
+      { "signerId": "mem_amara",  "signerName": "Amara Ofori",   "signerRole": "President / Organiser", "signerTrust": 824, "state": "attested", "attestedAt": "2026-04-08T09:14:00Z", "lastReminded": null                 },
+      { "signerId": "mem_kofi",   "signerName": "Kofi Mensah",   "signerRole": "Treasurer",              "signerTrust": 891, "state": "attested", "attestedAt": "2026-04-08T19:02:00Z", "lastReminded": null                 },
+      { "signerId": "mem_rahimi", "signerName": "Mariam Rahimi", "signerRole": "Co-signer",              "signerTrust": 802, "state": "pending",  "attestedAt": null,                    "lastReminded": "2026-05-15T08:00:00Z" }
+    ],
+    "estimatedPages": 42,
+    "estimatedSize": "1.6 MB"
+  },
+  "statementsPanel": {
+    "storageUsed": 28,
+    "storageLimit": 200,
+    "items": [
+      { "id": "st_2026_04", "period": "Apr 2026",     "rangeStart": "2026-04-01", "rangeEnd": "2026-04-30", "scope": "All funds",     "generatedBy": "Amara Ofori",  "generatedAt": "2026-05-02T08:14:00Z", "size": "412 KB", "pages": 8,  "status": "ready",        "pinned": true  },
+      { "id": "st_2026_03", "period": "Mar 2026",     "rangeStart": "2026-03-01", "rangeEnd": "2026-03-31", "scope": "All funds",     "generatedBy": "Kofi Mensah",  "generatedAt": "2026-04-02T19:00:00Z", "size": "398 KB", "pages": 8,  "status": "ready",        "pinned": false },
+      { "id": "st_q1",      "period": "Q1 2026",      "rangeStart": "2026-01-01", "rangeEnd": "2026-03-31", "scope": "All funds",     "generatedBy": "Amara Ofori",  "generatedAt": "2026-04-08T09:14:00Z", "size": "1.4 MB", "pages": 36, "status": "ready",        "pinned": false },
+      { "id": "st_2026_05_wlf", "period": "May 2026 · Welfare", "rangeStart": "2026-05-01", "rangeEnd": "2026-05-31", "scope": "Welfare Fund", "generatedBy": "Mariam Rahimi", "generatedAt": "2026-05-22T07:00:00Z", "size": "—",      "pages": 0,  "status": "regenerating", "pinned": false },
+      { "id": "st_2026_02", "period": "Feb 2026",     "rangeStart": "2026-02-01", "rangeEnd": "2026-02-28", "scope": "All funds",     "generatedBy": "Kofi Mensah",  "generatedAt": "2026-03-03T18:00:00Z", "size": "382 KB", "pages": 7,  "status": "expired",      "pinned": false }
+    ]
+  }
 }

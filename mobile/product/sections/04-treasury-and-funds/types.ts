@@ -183,6 +183,97 @@ export type ReconciliationSession = {
   rows: ReconciliationRow[];
 };
 
+// ---------------------------------------------------------------------------
+// Phase 3 — reporting & compliance
+// ---------------------------------------------------------------------------
+
+export type ReportPeriod = "month" | "quarter" | "year";
+export type ReportScope = "all" | "single" | "custom";
+
+export type ReportKpi = {
+  id: string;
+  label: string;
+  value: number;
+  trend: "up" | "down" | "flat";
+  delta: string;
+  toneHint: "good" | "bad" | "neutral";
+};
+
+export type BalanceSheetRow = {
+  id: string;
+  label: string;
+  value: number;
+  group: "assets" | "liabilities" | "equity";
+};
+
+export type CashFlowRow = {
+  id: string;
+  label: string;
+  value: number;
+  group: "operating" | "investing" | "financing";
+};
+
+export type ReportPreview = {
+  period: ReportPeriod;
+  scope: ReportScope;
+  scopeLabel: string;
+  rangeStart: string;
+  rangeEnd: string;
+  currency: string;
+  kpis: ReportKpi[];
+  balanceSheet: BalanceSheetRow[];
+  cashFlow: CashFlowRow[];
+};
+
+export type AuditSection = {
+  id: string;
+  label: string;
+  description: string;
+  included: boolean;
+  required: boolean;
+};
+
+export type SignerAttestation = {
+  signerId: string;
+  signerName: string;
+  signerRole: string;
+  signerTrust: number;
+  state: "attested" | "pending" | "expired";
+  attestedAt: string | null;
+  lastReminded: string | null;
+};
+
+export type AuditReportSetup = {
+  rangeStart: string;
+  rangeEnd: string;
+  scopeLabel: string;
+  format: "pdf" | "csv" | "xbrl";
+  sections: AuditSection[];
+  attestations: SignerAttestation[];
+  estimatedPages: number;
+  estimatedSize: string;
+};
+
+export type StatementItem = {
+  id: string;
+  period: string;
+  rangeStart: string;
+  rangeEnd: string;
+  scope: string;
+  generatedBy: string;
+  generatedAt: string;
+  size: string;
+  pages: number;
+  status: "ready" | "regenerating" | "expired";
+  pinned: boolean;
+};
+
+export type StatementsPanel = {
+  storageUsed: number;
+  storageLimit: number;
+  items: StatementItem[];
+};
+
 export type WelfareRequest = {
   id: string;
   fundId: string;

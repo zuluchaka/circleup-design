@@ -47,6 +47,9 @@ import { TreasuryApprovals } from "./screens/TreasuryApprovals";
 import { TreasuryLedger } from "./screens/TreasuryLedger";
 import { TreasuryEntryDetail } from "./screens/TreasuryEntryDetail";
 import { TreasuryReconciliation } from "./screens/TreasuryReconciliation";
+import { TreasuryReports } from "./screens/TreasuryReports";
+import { TreasuryAuditReport } from "./screens/TreasuryAuditReport";
+import { TreasuryStatements } from "./screens/TreasuryStatements";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
 import { CommsInbox } from "./screens/CommsInbox";
 import { AnalyticsPersonal } from "./screens/AnalyticsPersonal";
@@ -101,6 +104,9 @@ export const screenManifest: Record<string, ComponentType> = {
   "treasury-and-funds/ledger": TreasuryLedger,
   "treasury-and-funds/entry-detail": TreasuryEntryDetail,
   "treasury-and-funds/reconciliation": TreasuryReconciliation,
+  "treasury-and-funds/reports": TreasuryReports,
+  "treasury-and-funds/audit-report": TreasuryAuditReport,
+  "treasury-and-funds/statements": TreasuryStatements,
   "governance-and-voting/proposals": GovernanceProposals,
   "communication-and-events/inbox": CommsInbox,
   "documents/library": DocumentsLibrary,
