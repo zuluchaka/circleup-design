@@ -22,6 +22,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const DEEP_LINK_HOST = process.env.CIRCLEUP_DEEP_LINK_HOST ?? "192.168.1.115:8081";
 const SETTLE_MS = Number(process.env.CIRCLEUP_SETTLE_MS ?? 6000);
+const MAX_DIM = Number(process.env.CIRCLEUP_MAX_DIM ?? 1500);
 
 function adb(args) {
   return execFileSync("adb", args, { stdio: ["ignore", "pipe", "pipe"] });
@@ -29,6 +30,18 @@ function adb(args) {
 
 function adbPipe(args) {
   return execFileSync("adb", args, { stdio: ["ignore", "pipe", "inherit"] });
+}
+
+// Downscale to MAX_DIM on the longest side. The Pixel 7 emulator captures at
+// 1080x2400, which exceeds Claude's image-read max dimension (~2000px) — so
+// any future inspection of these PNGs would fail. Keep the longest side at
+// 1500px to stay safely under that cap while preserving detail.
+function downscale(file) {
+  try {
+    execFileSync("sips", ["-Z", String(MAX_DIM), file], { stdio: "ignore" });
+  } catch {
+    // sips is macOS-only; on other platforms leave the PNG at native size.
+  }
 }
 
 // Catalog: mirror data/sectionsCatalog.ts.
@@ -193,6 +206,7 @@ async function main() {
         await wait(SETTLE_MS);
         adb(["shell", "screencap", "-p", "/sdcard/_capture.png"]);
         adbPipe(["pull", "/sdcard/_capture.png", outFile]);
+        downscale(outFile);
         console.log(`  ✔ ${section.slug}/${screen}`);
         ok++;
       } catch (err) {
