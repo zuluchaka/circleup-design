@@ -1,20 +1,35 @@
-// Drives a headless Chromium against the Expo web build and saves an
-// Android-framed PNG for every screen in the catalog.
+// Drives the running Android emulator via adb deep-links and saves a PNG
+// for every screen in the catalog.
+//
+// The Chromium/web pipeline was retired because Expo Router web does not
+// honour direct navigation to dynamic catch-all routes
+// (`/sections/[section]/[screen]`) in dev — all such URLs render the index
+// route instead, yielding identical screenshots for every screen.
 //
 // Usage:
-//   1. In one terminal:   npm run web            (leave running until ready)
-//   2. In another:        npm run screenshots
+//   1. Start the emulator (any AVD): `emulator -avd Pixel_7`
+//   2. Start Metro for Android:      `npm run android` (leave running)
+//   3. Capture all screens:          `npm run screenshots`
+//   4. Capture one section:          `node scripts/capture-android.mjs --section=communication-and-events`
 
 import { mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
+import { setTimeout as wait } from "node:timers/promises";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
-const BASE = process.env.CIRCLEUP_WEB_URL ?? "http://localhost:8081";
-const VIEWPORT = { width: 412, height: 915 };
-const DEVICE_SCALE_FACTOR = 2;
+const DEEP_LINK_HOST = process.env.CIRCLEUP_DEEP_LINK_HOST ?? "192.168.1.115:8081";
+const SETTLE_MS = Number(process.env.CIRCLEUP_SETTLE_MS ?? 6000);
+
+function adb(args) {
+  return execFileSync("adb", args, { stdio: ["ignore", "pipe", "pipe"] });
+}
+
+function adbPipe(args) {
+  return execFileSync("adb", args, { stdio: ["ignore", "pipe", "inherit"] });
+}
 
 // Catalog: mirror data/sectionsCatalog.ts.
 const sectionsCatalog = [
@@ -75,7 +90,21 @@ const sectionsCatalog = [
     ],
   },
   { index: 5,  slug: "governance-and-voting",    screens: ["proposals", "ballot", "elections", "committees"] },
-  { index: 6,  slug: "communication-and-events", screens: ["inbox", "thread", "events", "event-detail", "qr"] },
+  {
+    index: 6,
+    slug: "communication-and-events",
+    screens: [
+      "inbox",
+      "thread",
+      "events",
+      "event-detail",
+      "association-events",
+      "create-event",
+      "invite-attendees",
+      "announcement-composer",
+      "qr",
+    ],
+  },
   { index: 7,  slug: "documents",                screens: ["library", "viewer", "share"] },
   { index: 8,  slug: "analytics-and-reporting",  screens: ["personal", "circle-health", "statements"] },
   { index: 9,  slug: "credit-and-lending",       screens: ["score", "advance", "loan", "bureau"] },
@@ -120,25 +149,37 @@ const sectionsCatalog = [
 ];
 
 async function main() {
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: VIEWPORT,
-    deviceScaleFactor: DEVICE_SCALE_FACTOR,
-    hasTouch: true,
-    isMobile: true,
-    userAgent:
-      "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36",
-  });
-  const page = await context.newPage();
+  const sectionFilter = process.argv
+    .find((a) => a.startsWith("--section="))
+    ?.slice("--section=".length);
+  const sections = sectionFilter
+    ? sectionsCatalog.filter((s) => s.slug === sectionFilter)
+    : sectionsCatalog;
+  if (sectionFilter && sections.length === 0) {
+    console.error(`No section matches "${sectionFilter}".`);
+    process.exit(1);
+  }
+
+  // Sanity-check the emulator is up.
+  try {
+    const devices = adb(["devices"]).toString();
+    if (!/\b(device|emulator)\b/.test(devices.split("\n").slice(1).join("\n"))) {
+      console.error("No Android emulator attached. Start one with `emulator -avd <name>`.");
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error("`adb` is not on PATH or returned an error:", err.message);
+    process.exit(1);
+  }
 
   let ok = 0;
   let failed = 0;
 
-  for (const section of sectionsCatalog) {
+  for (const section of sections) {
     for (let i = 0; i < section.screens.length; i++) {
       const screen = section.screens[i];
       const routePath = section.routes?.[screen] ?? `/sections/${section.slug}/${screen}`;
-      const url = `${BASE}${routePath}`;
+      const deepLink = `exp://${DEEP_LINK_HOST}/--${routePath}`;
       const outDir = resolve(
         ROOT,
         "product/sections",
@@ -148,9 +189,10 @@ async function main() {
       await mkdir(outDir, { recursive: true });
       const outFile = resolve(outDir, `${String(i + 1).padStart(2, "0")}-${screen}.png`);
       try {
-        await page.goto(url, { waitUntil: "networkidle", timeout: 30_000 });
-        await page.waitForTimeout(450);
-        await page.screenshot({ path: outFile, fullPage: false });
+        adb(["shell", "am", "start", "-a", "android.intent.action.VIEW", "-d", deepLink]);
+        await wait(SETTLE_MS);
+        adb(["shell", "screencap", "-p", "/sdcard/_capture.png"]);
+        adbPipe(["pull", "/sdcard/_capture.png", outFile]);
         console.log(`  ✔ ${section.slug}/${screen}`);
         ok++;
       } catch (err) {
@@ -160,7 +202,6 @@ async function main() {
     }
   }
 
-  await browser.close();
   console.log(`\nDone. ${ok} captured, ${failed} failed.`);
 }
 
