@@ -32,7 +32,6 @@ const ROUTES = {
   events: "/sections/communication-and-events/events",
   qr: "/sections/communication-and-events/qr",
   composer: "/sections/communication-and-events/announcement-composer",
-  inboxBackup: "/sections/communication-and-events/inbox",
 } as const;
 
 type Filter = "All" | "Chats" | "Groups" | "Announcements" | "Notifications";
@@ -98,7 +97,7 @@ export function MessagesHub() {
   const openInboxItem = (item: InboxItem) => {
     if (item.kind === "thread") router.push(ROUTES.thread);
     else if (item.kind === "announcement") router.push(ROUTES.composer);
-    else router.push(ROUTES.inboxBackup);
+    // System rows have no detail view — tapping is a no-op for now.
   };
 
   const inbox = comms.inbox as InboxItem[];
