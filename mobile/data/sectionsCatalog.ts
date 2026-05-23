@@ -148,6 +148,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "association-events", label: "Association Events" },
       { slug: "create-event", label: "Create Event" },
       { slug: "invite-attendees", label: "Invite Attendees" },
+      { slug: "announcement-composer", label: "Announcement Composer" },
       { slug: "qr", label: "QR Check-in" },
     ],
   },

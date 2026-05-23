@@ -5,6 +5,7 @@ import {
   CircleDot,
   User as UserIcon,
   Briefcase,
+  MessageCircle,
 } from "lucide-react-native";
 import { BottomTabBar } from "./BottomTabBar";
 import { CURRENT_USER } from "@/data/currentUser";
@@ -24,22 +25,26 @@ const BASE_TABS = {
     route: "/associations",
   },
   circles: { key: "circles", label: "Circles", icon: CircleDot, route: "/circles" },
+  messages: { key: "messages", label: "Messages", icon: MessageCircle, route: "/messages" },
   profile: { key: "profile", label: "Profile", icon: UserIcon, route: "/profile" },
 } as const;
 
-// CMs see Relationships before Associations. Members see the standard 4 tabs.
+// CMs see Relationships before Associations. Members see the standard tabs.
+// Messages sits just before Profile in both layouts.
 const TABS = CURRENT_USER.isCircleManager
   ? ([
       BASE_TABS.discover,
       BASE_TABS.relationships,
       BASE_TABS.associations,
       BASE_TABS.circles,
+      BASE_TABS.messages,
       BASE_TABS.profile,
     ] as const)
   : ([
       BASE_TABS.discover,
       BASE_TABS.associations,
       BASE_TABS.circles,
+      BASE_TABS.messages,
       BASE_TABS.profile,
     ] as const);
 
@@ -49,6 +54,7 @@ function activeFromPath(pathname: string): TabKey {
   if (pathname.startsWith("/business-relationships")) return "relationships" as TabKey;
   if (pathname.startsWith("/associations")) return "associations" as TabKey;
   if (pathname.startsWith("/circles")) return "circles" as TabKey;
+  if (pathname.startsWith("/messages")) return "messages" as TabKey;
   if (pathname.startsWith("/profile")) return "profile" as TabKey;
   return "discover" as TabKey;
 }

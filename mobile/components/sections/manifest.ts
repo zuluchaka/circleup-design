@@ -56,6 +56,10 @@ import { TreasuryPostfinanceImport } from "./screens/TreasuryPostfinanceImport";
 import { TreasuryExternalAccounts } from "./screens/TreasuryExternalAccounts";
 import { GovernanceProposals } from "./screens/GovernanceProposals";
 import { CommsInbox } from "./screens/CommsInbox";
+import { CommsThread } from "./screens/CommsThread";
+import { CommsEvents } from "./screens/CommsEvents";
+import { CommsQrCheckIn } from "./screens/CommsQrCheckIn";
+import { AnnouncementComposer } from "./screens/AnnouncementComposer";
 import { EventDetail } from "./screens/EventDetail";
 import { AssociationEvents } from "./screens/AssociationEvents";
 import { CreateEvent } from "./screens/CreateEvent";
@@ -121,6 +125,10 @@ export const screenManifest: Record<string, ComponentType> = {
   "treasury-and-funds/external-accounts": TreasuryExternalAccounts,
   "governance-and-voting/proposals": GovernanceProposals,
   "communication-and-events/inbox": CommsInbox,
+  "communication-and-events/thread": CommsThread,
+  "communication-and-events/events": CommsEvents,
+  "communication-and-events/qr": CommsQrCheckIn,
+  "communication-and-events/announcement-composer": AnnouncementComposer,
   "communication-and-events/event-detail": EventDetail,
   "communication-and-events/association-events": AssociationEvents,
   "communication-and-events/create-event": CreateEvent,
