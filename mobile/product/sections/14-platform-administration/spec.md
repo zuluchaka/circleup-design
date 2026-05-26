@@ -1,5 +1,7 @@
 # Section 14 — Platform Administration
 
+> **Implementation status: design pending.** Spec, `types.ts`, and `data.json` exist; no React components have been built. The `console`, `kyc`, `support`, and `flags` routes currently render the generic `ScreenStub` placeholder. Captured screenshots under `screenshots/android/` are stub renders, not real designs. **Agent-OS should not implement this section directly** — primary screens need to be designed first (spec → component → sample-data wiring → screenshots). Because this section is operator-only behind the `staff` role gate and touches every other section's data read-only, designing it well requires a dense desktop-style layout that the rest of the app's components don't yet provide. The data shape and integration contracts in this file are authoritative and safe to rely on.
+
 ## Overview
 
 Operator-only console for the company running the CircleUp platform. Manages user accounts across all associations, AML/KYC review queues, regulatory reporting (FINMA / FADP / GDPR), support tickets, dispute resolution, system health, and feature flags. Lives behind the `staff` role gate and is not visible to regular members.

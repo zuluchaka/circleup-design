@@ -1,5 +1,7 @@
 # Section 11 — Community & Social
 
+> **Implementation status: design pending.** Spec, `types.ts`, and `data.json` exist; no React components have been built. The `feed`, `badges`, `leaderboard`, and `referrals` routes currently render the generic `ScreenStub` placeholder. Captured screenshots under `screenshots/android/` are stub renders, not real designs. **Agent-OS should not implement this section directly** — primary screens need to be designed first (spec → component → sample-data wiring → screenshots). The data shape and integration contracts in this file are authoritative and safe to rely on.
+
 ## Overview
 
 The "stickiness" layer: referral rewards, achievement badges, leaderboards, savings challenges, and milestone celebrations. Designed to reinforce on-time contributions and long-tenure participation without making the experience feel gamified-in-a-cheap-way. The aesthetic stays adult: muted celebration, real numbers, no confetti by default.

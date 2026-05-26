@@ -2,11 +2,27 @@
 // If a key is missing, the dynamic route renders `_stub.tsx` instead, which
 // links to the section's planning docs.
 
-import type { ComponentType } from "react";
+import { type ComponentType } from "react";
 
 import { HomepageWelcome } from "./screens/HomepageWelcome";
+import { HomepageDiscover } from "./screens/HomepageDiscover";
+import { HomepageQuiz, HomepageQuizMidway, HomepageQuizOutcome } from "./screens/HomepageQuiz";
+import { HomepagePricing } from "./screens/HomepagePricing";
+import { LoginSignup } from "./screens/LoginSignup";
+import { LoginVerify } from "./screens/LoginVerify";
+import {
+  LoginOnboarding,
+  LoginOnboardingIdentity,
+  LoginOnboardingPrefs,
+  LoginOnboardingFirstCircle,
+} from "./screens/LoginOnboarding";
+import { FederationsAssociations } from "./screens/FederationsAssociations";
+import { FederationsConsolidated } from "./screens/FederationsConsolidated";
 import { AssociationsDashboard } from "./screens/AssociationsDashboard";
-import { MembersDirectory } from "./screens/MembersDirectory";
+import { MembersDirectory, MembersDirectoryEmpty } from "./screens/MembersDirectory";
+import { MembersProfile } from "./screens/MembersProfile";
+import { MembersTrust } from "./screens/MembersTrust";
+import { MembersInvite } from "./screens/MembersInvite";
 import { RoscaMyCircles } from "./screens/RoscaMyCircles";
 import { RoscaCircleDetail } from "./screens/RoscaCircleDetail";
 import { RoscaContribute } from "./screens/RoscaContribute";
@@ -54,7 +70,10 @@ import { TreasuryMultiCurrency } from "./screens/TreasuryMultiCurrency";
 import { TreasuryInvestments } from "./screens/TreasuryInvestments";
 import { TreasuryPostfinanceImport } from "./screens/TreasuryPostfinanceImport";
 import { TreasuryExternalAccounts } from "./screens/TreasuryExternalAccounts";
-import { GovernanceProposals } from "./screens/GovernanceProposals";
+import { GovernanceProposals, GovernanceProposalsEmpty } from "./screens/GovernanceProposals";
+import { GovernanceBallot } from "./screens/GovernanceBallot";
+import { GovernanceElections } from "./screens/GovernanceElections";
+import { GovernanceCommittees } from "./screens/GovernanceCommittees";
 import { MessagesHub } from "./screens/MessagesHub";
 import { CommsThread } from "./screens/CommsThread";
 import { CommsEvents } from "./screens/CommsEvents";
@@ -64,18 +83,49 @@ import { EventDetail } from "./screens/EventDetail";
 import { AssociationEvents } from "./screens/AssociationEvents";
 import { CreateEvent } from "./screens/CreateEvent";
 import { InviteAttendees } from "./screens/InviteAttendees";
-import { AnalyticsPersonal } from "./screens/AnalyticsPersonal";
-import { CreditScore } from "./screens/CreditScore";
-import { InsightsFeed } from "./screens/InsightsFeed";
-import { CampaignsList } from "./screens/CampaignsList";
+import { AnalyticsPersonal, AnalyticsPersonalEmpty } from "./screens/AnalyticsPersonal";
+import { AnalyticsCircleHealth } from "./screens/AnalyticsCircleHealth";
+import { AnalyticsStatements } from "./screens/AnalyticsStatements";
+import { CreditScore, CreditScoreLow } from "./screens/CreditScore";
+import { CreditAdvance } from "./screens/CreditAdvance";
+import { CreditLoan } from "./screens/CreditLoan";
+import { CreditBureau } from "./screens/CreditBureau";
+import { InsightsFeed, InsightsFeedEmpty } from "./screens/InsightsFeed";
+import { AiAssistant } from "./screens/AiAssistant";
+import { AiRisk } from "./screens/AiRisk";
+import { CommunityFeed } from "./screens/CommunityFeed";
+import { CommunityBadges } from "./screens/CommunityBadges";
+import { CommunityLeaderboard } from "./screens/CommunityLeaderboard";
+import { CommunityReferrals } from "./screens/CommunityReferrals";
+import { MultiShareMyShares } from "./screens/MultiShareMyShares";
+import { MultiShareRequest } from "./screens/MultiShareRequest";
+import { MultiShareMonitor } from "./screens/MultiShareMonitor";
+import { PlatformConsole } from "./screens/PlatformConsole";
+import { PlatformKyc } from "./screens/PlatformKyc";
+import { PlatformSupport } from "./screens/PlatformSupport";
+import { PlatformFlags } from "./screens/PlatformFlags";
+import {
+  CampaignsList,
+  CampaignsListEmptyOrganiser,
+  CampaignsListEmptyMember,
+} from "./screens/CampaignsList";
+import { ProjectsCampaignDetail } from "./screens/ProjectsCampaignDetail";
+import { ProjectsDonate } from "./screens/ProjectsDonate";
+import { ProjectsImpact } from "./screens/ProjectsImpact";
 import { LoginSignIn } from "./screens/LoginSignIn";
-import { DocumentsLibrary } from "./screens/DocumentsLibrary";
+import { DocumentsLibrary, DocumentsLibraryEmpty } from "./screens/DocumentsLibrary";
+import { DocumentsViewer } from "./screens/DocumentsViewer";
+import { DocumentsShare } from "./screens/DocumentsShare";
 import { FederationsOverview } from "./screens/FederationsOverview";
 
 export const screenManifest: Record<string, ComponentType> = {
   "homepage/welcome": HomepageWelcome,
   "associations/dashboard": AssociationsDashboard,
   "members-and-trust/directory": MembersDirectory,
+  "members-and-trust/directory-empty": MembersDirectoryEmpty,
+  "members-and-trust/profile": MembersProfile,
+  "members-and-trust/trust": MembersTrust,
+  "members-and-trust/invite": MembersInvite,
   "rosca-circles/my-circles": RoscaMyCircles,
   "rosca-circles/circle-detail": RoscaCircleDetail,
   "rosca-circles/contribute": RoscaContribute,
@@ -124,6 +174,10 @@ export const screenManifest: Record<string, ComponentType> = {
   "treasury-and-funds/postfinance-import": TreasuryPostfinanceImport,
   "treasury-and-funds/external-accounts": TreasuryExternalAccounts,
   "governance-and-voting/proposals": GovernanceProposals,
+  "governance-and-voting/proposals-empty": GovernanceProposalsEmpty,
+  "governance-and-voting/ballot": GovernanceBallot,
+  "governance-and-voting/elections": GovernanceElections,
+  "governance-and-voting/committees": GovernanceCommittees,
   "communication-and-events/inbox": MessagesHub,
   "communication-and-events/thread": CommsThread,
   "communication-and-events/events": CommsEvents,
@@ -134,10 +188,52 @@ export const screenManifest: Record<string, ComponentType> = {
   "communication-and-events/create-event": CreateEvent,
   "communication-and-events/invite-attendees": InviteAttendees,
   "documents/library": DocumentsLibrary,
+  "documents/library-empty": DocumentsLibraryEmpty,
+  "documents/viewer": DocumentsViewer,
+  "documents/share": DocumentsShare,
   "analytics-and-reporting/personal": AnalyticsPersonal,
+  "analytics-and-reporting/personal-empty": AnalyticsPersonalEmpty,
+  "analytics-and-reporting/circle-health": AnalyticsCircleHealth,
+  "analytics-and-reporting/statements": AnalyticsStatements,
   "credit-and-lending/score": CreditScore,
+  "credit-and-lending/score-low": CreditScoreLow,
+  "credit-and-lending/advance": CreditAdvance,
+  "credit-and-lending/loan": CreditLoan,
+  "credit-and-lending/bureau": CreditBureau,
   "ai-insights/feed": InsightsFeed,
+  "ai-insights/feed-empty": InsightsFeedEmpty,
+  "ai-insights/assistant": AiAssistant,
+  "ai-insights/risk": AiRisk,
+  "community-and-social/feed": CommunityFeed,
+  "community-and-social/badges": CommunityBadges,
+  "community-and-social/leaderboard": CommunityLeaderboard,
+  "community-and-social/referrals": CommunityReferrals,
+  "multi-share/my-shares": MultiShareMyShares,
+  "multi-share/request": MultiShareRequest,
+  "multi-share/monitor": MultiShareMonitor,
+  "platform-administration/console": PlatformConsole,
+  "platform-administration/kyc": PlatformKyc,
+  "platform-administration/support": PlatformSupport,
+  "platform-administration/flags": PlatformFlags,
   "projects-and-fundraising/campaigns": CampaignsList,
+  "projects-and-fundraising/campaigns-empty": CampaignsListEmptyOrganiser,
+  "projects-and-fundraising/campaigns-empty-member": CampaignsListEmptyMember,
+  "projects-and-fundraising/campaign-detail": ProjectsCampaignDetail,
+  "projects-and-fundraising/donate": ProjectsDonate,
+  "projects-and-fundraising/impact": ProjectsImpact,
   "login/signin": LoginSignIn,
+  "login/signup": LoginSignup,
+  "login/verify": LoginVerify,
+  "login/onboarding": LoginOnboarding,
+  "login/onboarding-identity": LoginOnboardingIdentity,
+  "login/onboarding-prefs": LoginOnboardingPrefs,
+  "login/onboarding-first-circle": LoginOnboardingFirstCircle,
+  "homepage/discover": HomepageDiscover,
+  "homepage/quiz": HomepageQuiz,
+  "homepage/quiz-midway": HomepageQuizMidway,
+  "homepage/quiz-outcome": HomepageQuizOutcome,
+  "homepage/pricing": HomepagePricing,
   "federations/overview": FederationsOverview,
+  "federations/associations": FederationsAssociations,
+  "federations/consolidated": FederationsConsolidated,
 };

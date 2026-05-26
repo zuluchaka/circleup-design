@@ -1,23 +1,32 @@
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useColorScheme, View } from "react-native";
-import { ThemeContext, resolveTheme } from "@/theme";
+import { View } from "react-native";
+import { useTheme } from "@/theme";
+import { ThemeModeProvider } from "@/theme/ThemeModeProvider";
+import { SnackbarProvider } from "@/components/shared/Snackbar";
 
 export default function RootLayout() {
-  const scheme = useColorScheme();
-  const theme = resolveTheme(scheme);
   return (
     <SafeAreaProvider>
-      <ThemeContext.Provider value={theme}>
-        <View style={{ flex: 1, backgroundColor: theme.bg }}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: theme.bg },
-            }}
-          />
-        </View>
-      </ThemeContext.Provider>
+      <ThemeModeProvider>
+        <SnackbarProvider>
+          <RootStack />
+        </SnackbarProvider>
+      </ThemeModeProvider>
     </SafeAreaProvider>
+  );
+}
+
+function RootStack() {
+  const theme = useTheme();
+  return (
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: theme.bg },
+        }}
+      />
+    </View>
   );
 }

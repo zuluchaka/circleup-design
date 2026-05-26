@@ -1,5 +1,7 @@
 # Section 12 — Multi-Share
 
+> **Implementation status: design pending.** Spec, `types.ts`, and `data.json` exist; no React components have been built for this section. The `my-shares`, `request`, and `monitor` routes currently render the generic `ScreenStub` placeholder. (Note: `RoscaMultiShare` exists in the codebase but belongs to Section 3 ROSCA Circles — it's not the screen meant for this section.) Captured screenshots under `screenshots/android/` are stub renders, not real designs. **Agent-OS should not implement this section directly** — primary screens need to be designed first (spec → component → sample-data wiring → screenshots). The data shape and eligibility rules in this file are authoritative and safe to rely on.
+
 ## Overview
 
 Allows trusted members to hold **multiple shares (1–10)** of a circle's base contribution. Holding N shares means contributing N× the base and receiving N× the payout. Eligibility is gated by Trust Score, tenure, and platform-wide concentration limits (no member can hold more than 30% of a circle's total).

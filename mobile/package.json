@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "screenshots": "node scripts/capture-android.mjs"
+    "screenshots": "node scripts/capture-android.mjs",
+    "screenshots:ios": "node scripts/capture-ios.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

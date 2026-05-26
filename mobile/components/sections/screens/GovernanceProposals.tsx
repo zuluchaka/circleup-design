@@ -1,20 +1,51 @@
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Clock, Vote, CheckCircle2 } from "lucide-react-native";
+import { Clock, Vote, CheckCircle2, FilePlus } from "lucide-react-native";
 import { Text } from "@/components/shared/Text";
 import { Card } from "@/components/shared/Card";
 import { StatChip } from "@/components/shared/StatChip";
 import { ProgressBar } from "@/components/shared/ProgressBar";
 import { AppHeader } from "@/components/shared/AppHeader";
+import { Button } from "@/components/shared/Button";
 import { useTheme, space, radius } from "@/theme";
 import governance from "@/product/sections/05-governance-and-voting/data.json";
 
-export function GovernanceProposals() {
+type GovernanceData = typeof governance;
+
+export function GovernanceProposalsEmpty() {
+  return <GovernanceProposals data={{ ...governance, proposals: [] }} />;
+}
+
+export function GovernanceProposals({
+  data = governance,
+}: { data?: GovernanceData } = {}) {
   const t = useTheme();
+  const isEmpty = data.proposals.length === 0;
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <AppHeader title="Proposals" subtitle="Governance & Voting" />
+      <AppHeader
+        title="Proposals"
+        subtitle={isEmpty ? "Nothing to vote on" : "Governance & Voting"}
+      />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: space.xxxl, gap: space.lg }}>
-        {governance.proposals.map((p) => {
+        {isEmpty ? (
+          <Card padded bordered>
+            <View style={{ alignItems: "center", paddingVertical: space.xl }}>
+              <View style={[styles.emptyIcon, { backgroundColor: t.primarySoft }]}>
+                <Vote size={28} color={t.primary} />
+              </View>
+              <Text variant="h2" weight="bold" align="center" style={{ marginTop: space.md }}>
+                No active proposals
+              </Text>
+              <Text variant="bodySmall" tone="secondary" align="center" style={{ marginTop: space.sm, lineHeight: 18, paddingHorizontal: space.md }}>
+                Treasurers and organisers can put rule changes, fee adjustments, or elections to a vote. Members get notified the moment a proposal opens.
+              </Text>
+              <View style={{ marginTop: space.lg, width: "100%" }}>
+                <Button label="Draft a proposal" leadingIcon={<FilePlus size={16} color="#fff" />} fullWidth />
+              </View>
+            </View>
+          </Card>
+        ) : null}
+        {data.proposals.map((p) => {
           const totalVotes = p.votes.yes + p.votes.no + p.votes.abstain;
           const quorumPct = (p.quorum.current / p.quorum.required) * 100;
           const tone = p.status === "Voting" ? "primary" : p.status === "Discussion" ? "info" : "neutral";
@@ -88,5 +119,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  emptyIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

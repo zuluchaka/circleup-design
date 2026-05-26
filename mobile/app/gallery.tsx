@@ -16,7 +16,7 @@ export default function GalleryIndex() {
         <Text variant="caption" tone="accent" weight="bold">CIRCLEUP MOBILE</Text>
         <Text variant="display" weight="bold">Section Gallery</Text>
         <Text variant="bodySmall" tone="secondary">
-          17 sections · Android-first · used for design review and screenshot capture.
+          {sectionsCatalog.length} sections · Android-first · used for design review and screenshot capture.
         </Text>
       </View>
 
@@ -38,7 +38,7 @@ export default function GalleryIndex() {
               {section.screens.map((screen) => (
                 <Link
                   key={screen.slug}
-                  href={`/sections/${section.slug}/${screen.slug}` as never}
+                  href={(section.routes?.[screen.slug] ?? `/sections/${section.slug}/${screen.slug}`) as never}
                   asChild
                 >
                   <Pressable style={[styles.row, { borderTopColor: t.border }]}>

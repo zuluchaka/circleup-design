@@ -161,6 +161,36 @@ const CHECKLISTS: OnboardingChecklist[] = [
     createdAt: "2025-02-10T12:00:00Z",
     updatedAt: "2025-02-15T08:00:00Z",
   },
+  // Variant fixture: 8+ days stalled at step 3 — red escalation.
+  {
+    id: "ob-br-red",
+    brId: "br-red",
+    prospectName: "Vietnamese Cultural Society · Bern",
+    contractReference: "CT-V9PRX17A",
+    status: "escalated",
+    escalationLevel: "red",
+    steps: {
+      association_profile: step(
+        "association_profile",
+        "completed",
+        "2026-05-09T09:30:00Z",
+        "Aminata Diallo",
+      ),
+      account_activation: step(
+        "account_activation",
+        "completed",
+        "2026-05-09T10:05:00Z",
+        "System",
+      ),
+      dues_config: step("dues_config", "in_progress"),
+      member_invitations: step("member_invitations", "pending"),
+      first_circle: step("first_circle", "pending"),
+    },
+    completedOnBehalf: [],
+    completionPercentage: 40,
+    createdAt: "2026-05-08T09:00:00Z",
+    updatedAt: "2026-05-10T11:00:00Z",
+  },
 ];
 
 export function findOnboardingChecklistByBrId(brId: string): OnboardingChecklist | undefined {

@@ -664,6 +664,66 @@ export function MyAssociations() {
 }
 
 // ============================================================================
+// Empty variant — brand-new user with no memberships and no invitations
+// ============================================================================
+
+export function MyAssociationsEmpty() {
+  const t = useTheme();
+  return (
+    <View style={{ flex: 1, backgroundColor: t.bg }}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 96 }}>
+        <LinearGradient
+          colors={[palette.indigo[700], palette.indigo[900]]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.header}
+        >
+          <Text variant="micro" weight="bold" style={{ color: palette.amber[200], letterSpacing: 1.2 }}>
+            MEMBER OF · 0 ASSOCIATIONS
+          </Text>
+          <Text variant="display" weight="bold" style={{ color: "#fff", marginTop: space.xs }}>
+            My Associations
+          </Text>
+          <Text variant="body" style={{ color: "rgba(255,255,255,0.85)", marginTop: 2 }}>
+            Find a community to belong to — or start your own.
+          </Text>
+        </LinearGradient>
+
+        <View style={{ paddingHorizontal: space.lg, marginTop: space.xl, gap: space.lg }}>
+          <View style={[styles.emptyCard, { backgroundColor: t.surface, borderColor: t.border }]}>
+            <View style={[styles.emptyIcon, { backgroundColor: t.primarySoft }]}>
+              <Users size={28} color={t.primary} />
+            </View>
+            <Text variant="h2" weight="bold" align="center" style={{ marginTop: space.md }}>
+              Not in any association yet
+            </Text>
+            <Text variant="bodySmall" tone="secondary" align="center" style={{ marginTop: space.sm, lineHeight: 18, paddingHorizontal: space.md }}>
+              Associations are the communities that host ROSCA circles, welfare funds, and events. Most people join one their family or community already runs — others start fresh with friends.
+            </Text>
+            <View style={{ marginTop: space.lg, width: "100%", gap: space.sm }}>
+              <Pressable style={[styles.btnPrimary, { backgroundColor: t.primary, justifyContent: "center", paddingVertical: space.md }]}>
+                <Text variant="body" weight="bold" style={{ color: "#fff" }}>Browse associations near me</Text>
+                <ChevronRight size={16} color="#fff" />
+              </Pressable>
+              <Pressable style={[styles.btnGhost, { backgroundColor: t.bgMuted, borderColor: t.border, justifyContent: "center", paddingVertical: space.md }]}>
+                <Text variant="body" weight="semibold">Start a new association</Text>
+              </Pressable>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.sm }}>
+            <Sparkles size={14} color={t.textMuted} />
+            <Text variant="caption" tone="muted" style={{ flex: 1 }}>
+              Have an invite link from a treasurer? Tap it to join in one step.
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+// ============================================================================
 // Styles
 // ============================================================================
 
@@ -672,6 +732,20 @@ const styles = StyleSheet.create({
     paddingTop: 72,
     paddingBottom: space.xl,
     paddingHorizontal: space.lg,
+  },
+  emptyCard: {
+    alignItems: "center",
+    paddingHorizontal: space.lg,
+    paddingVertical: space.xl,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+  },
+  emptyIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   summaryRow: {

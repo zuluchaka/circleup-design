@@ -1,5 +1,5 @@
-import { View, ScrollView, StyleSheet } from "react-native";
-import { Sparkles, Heart, ArrowRight } from "lucide-react-native";
+import { View, ScrollView, StyleSheet, Pressable } from "react-native";
+import { Sparkles, Heart, ArrowRight, Plus } from "lucide-react-native";
 import { Text } from "@/components/shared/Text";
 import { Card } from "@/components/shared/Card";
 import { Button } from "@/components/shared/Button";
@@ -9,13 +9,65 @@ import { AppHeader } from "@/components/shared/AppHeader";
 import { useTheme, space, radius } from "@/theme";
 import projects from "@/product/sections/13-projects-and-fundraising/data.json";
 
-export function CampaignsList() {
+type Campaign = (typeof projects.campaigns)[number];
+
+export function CampaignsListEmptyOrganiser() {
+  return <CampaignsList campaigns={[]} organiserCanCreate={true} />;
+}
+
+export function CampaignsListEmptyMember() {
+  return <CampaignsList campaigns={[]} organiserCanCreate={false} />;
+}
+
+export function CampaignsList({
+  campaigns = projects.campaigns,
+  organiserCanCreate = true,
+}: { campaigns?: Campaign[]; organiserCanCreate?: boolean } = {}) {
   const t = useTheme();
+  const count = campaigns.length;
+  const subtitle =
+    count === 0 ? "No active campaigns" : `${count} active campaign${count === 1 ? "" : "s"}`;
+
+  if (count === 0) {
+    return (
+      <View style={{ flex: 1, backgroundColor: t.bg }}>
+        <AppHeader title="Projects" subtitle={subtitle} />
+        <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: space.xxxl, gap: space.lg }}>
+          <Card padded bordered>
+            <View style={{ alignItems: "center", paddingVertical: space.xl }}>
+              <View style={[styles.emptyIcon, { backgroundColor: t.primarySoft }]}>
+                <Heart size={28} color={t.primary} />
+              </View>
+              <Text variant="h2" weight="bold" align="center" style={{ marginTop: space.md }}>
+                No active campaigns
+              </Text>
+              <Text variant="bodySmall" tone="secondary" align="center" style={{ marginTop: space.sm, lineHeight: 18, paddingHorizontal: space.md }}>
+                Campaigns let your association raise money for a specific cause — a school bus, emergency relief, scholarships. Donors get progress updates and impact stories as the goal fills up.
+              </Text>
+              {organiserCanCreate ? (
+                <Pressable style={[styles.cta, { backgroundColor: t.primary }]}>
+                  <Plus size={16} color="#fff" />
+                  <Text variant="bodySmall" weight="bold" style={{ color: "#fff" }}>
+                    Start a campaign
+                  </Text>
+                </Pressable>
+              ) : (
+                <Text variant="caption" tone="muted" style={{ marginTop: space.md }}>
+                  Only organisers and presidents can create campaigns.
+                </Text>
+              )}
+            </View>
+          </Card>
+        </ScrollView>
+      </View>
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <AppHeader title="Projects" subtitle="2 active campaigns" />
+      <AppHeader title="Projects" subtitle={subtitle} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: space.xxxl, gap: space.lg }}>
-        {projects.campaigns.map((c) => {
+        {campaigns.map((c) => {
           const pct = (c.raised / c.goal) * 100;
           return (
             <Card key={c.id} padded={false} bordered>
@@ -78,5 +130,21 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: radius.sm,
     alignSelf: "flex-start",
+  },
+  emptyIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  cta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: space.sm,
+    paddingHorizontal: space.lg,
+    paddingVertical: space.md,
+    borderRadius: radius.md,
+    marginTop: space.lg,
   },
 });

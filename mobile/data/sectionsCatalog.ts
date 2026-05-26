@@ -1,6 +1,11 @@
-// The 17 sections of the CircleUp mobile app. The gallery on the index screen
+// The 21 sections of the CircleUp mobile app. The gallery on the index screen
 // iterates over this list; the screenshot capture script also uses it to drive
 // navigation to each screen route.
+//
+// Some sections (e.g. business-relationships, association-accounts, onboarding)
+// don't live under /sections/[section]/[screen] — they have dedicated top-level
+// routes. For those, the `routes` map keys by screen slug and the gallery / any
+// other consumer should prefer the override over the generic path.
 
 export type SectionMeta = {
   slug: string;
@@ -8,6 +13,7 @@ export type SectionMeta = {
   title: string;
   blurb: string;
   screens: { slug: string; label: string }[];
+  routes?: Record<string, string>;
 };
 
 export const sectionsCatalog: SectionMeta[] = [
@@ -28,11 +34,17 @@ export const sectionsCatalog: SectionMeta[] = [
     index: 1,
     title: "Associations",
     blurb: "Create, brand, configure, and migrate an association.",
+    routes: {
+      dashboard: "/associations/ma1",
+      list: "/associations",
+      "list-empty": "/associations-empty",
+      settings: "/associations/ma1/settings",
+    },
     screens: [
       { slug: "dashboard", label: "Association Hub" },
-      { slug: "create", label: "Create Association" },
+      { slug: "list", label: "My Associations" },
+      { slug: "list-empty", label: "My Associations — Empty (new user)" },
       { slug: "settings", label: "Settings" },
-      { slug: "migration", label: "Migration Wizard" },
     ],
   },
   {
@@ -45,6 +57,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "profile", label: "Member Profile" },
       { slug: "trust", label: "Trust Score Detail" },
       { slug: "invite", label: "Invite Members" },
+      { slug: "directory-empty", label: "Directory — Empty" },
     ],
   },
   {
@@ -133,6 +146,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "ballot", label: "Cast Ballot" },
       { slug: "elections", label: "Elections" },
       { slug: "committees", label: "Committees" },
+      { slug: "proposals-empty", label: "Proposals — Empty" },
     ],
   },
   {
@@ -161,6 +175,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "library", label: "Document Library" },
       { slug: "viewer", label: "Document Viewer" },
       { slug: "share", label: "Share Document" },
+      { slug: "library-empty", label: "Library — Empty" },
     ],
   },
   {
@@ -172,6 +187,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "personal", label: "Personal Dashboard" },
       { slug: "circle-health", label: "Circle Health" },
       { slug: "statements", label: "Statements" },
+      { slug: "personal-empty", label: "Personal — Empty (new user)" },
     ],
   },
   {
@@ -184,6 +200,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "advance", label: "Payout Advance" },
       { slug: "loan", label: "Personal Loan" },
       { slug: "bureau", label: "Bureau Reporting" },
+      { slug: "score-low", label: "Credit — Low Score (ineligible)" },
     ],
   },
   {
@@ -195,6 +212,7 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "feed", label: "Insights Feed" },
       { slug: "assistant", label: "AI Assistant" },
       { slug: "risk", label: "Risk & Fraud" },
+      { slug: "feed-empty", label: "Feed — Empty (low data)" },
     ],
   },
   {
@@ -230,6 +248,8 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "campaign-detail", label: "Campaign Detail" },
       { slug: "donate", label: "Donate" },
       { slug: "impact", label: "Impact Report" },
+      { slug: "campaigns-empty", label: "Campaigns — Empty (organiser)" },
+      { slug: "campaigns-empty-member", label: "Campaigns — Empty (member)" },
     ],
   },
   {
@@ -265,6 +285,122 @@ export const sectionsCatalog: SectionMeta[] = [
       { slug: "overview", label: "Federation Overview" },
       { slug: "associations", label: "Member Associations" },
       { slug: "consolidated", label: "Consolidated Finance" },
+    ],
+  },
+  {
+    slug: "business-relationships",
+    index: 17,
+    title: "Business Relationships",
+    blurb: "CM portfolio: B2B contracts, lifecycle actions, onboarding wizard.",
+    routes: {
+      list: "/business-relationships",
+      detail: "/business-relationships/br1",
+      create: "/business-relationships/new",
+      dashboard: "/business-relationships/dashboard",
+    },
+    screens: [
+      { slug: "list", label: "BR Portfolio" },
+      { slug: "detail", label: "BR Detail" },
+      { slug: "create", label: "New BR Wizard" },
+      { slug: "dashboard", label: "CM Dashboard" },
+    ],
+  },
+  {
+    slug: "association-accounts",
+    index: 18,
+    title: "Association Accounts",
+    blurb: "Double-entry ledger per association: balance, funds, recent entries.",
+    routes: {
+      overview: "/association-accounts/ASS-7K2N-PRI",
+      restricted: "/association-accounts/ASS-4F12-PRI",
+      frozen: "/association-accounts/ASS-FROZ-PRI",
+      empty: "/association-accounts/ASS-NEW1-PRI",
+    },
+    screens: [
+      { slug: "overview", label: "Account Overview" },
+      { slug: "restricted", label: "Overview — Restricted" },
+      { slug: "frozen", label: "Overview — Frozen" },
+      { slug: "empty", label: "Overview — Empty" },
+    ],
+  },
+  {
+    slug: "onboarding",
+    index: 19,
+    title: "Onboarding Checklist",
+    blurb: "5-step CM playbook to bring a newly-signed association fully live.",
+    routes: {
+      checklist: "/business-relationships/br3/onboarding",
+      completed: "/business-relationships/br1/onboarding",
+      "escalated-red": "/business-relationships/br-red/onboarding",
+      "fresh-zero": "/business-relationships/br-fresh/onboarding",
+    },
+    screens: [
+      { slug: "checklist", label: "Onboarding Checklist" },
+      { slug: "completed", label: "Onboarding — Completed" },
+      { slug: "escalated-red", label: "Onboarding — Red Escalation" },
+      { slug: "fresh-zero", label: "Onboarding — Fresh 0%" },
+    ],
+  },
+  {
+    slug: "profile",
+    index: 20,
+    title: "Profile",
+    blurb: "Your account: identity, KYC, payments, security, notifications, language, plan.",
+    routes: {
+      hub: "/profile",
+      "personal-info": "/profile/personal-info",
+      identity: "/profile/identity",
+      "payment-methods": "/profile/payment-methods",
+      security: "/profile/security",
+      notifications: "/profile/notifications",
+      language: "/profile/language",
+      subscription: "/profile/subscription",
+      help: "/profile/help",
+      "legal-about": "/profile/legal-about",
+      "identity-basic": "/profile/identity-basic",
+      "identity-rejected": "/profile/identity-rejected",
+      "payment-methods-empty": "/profile/payment-methods-empty",
+      "subscription-past-due": "/profile/subscription-past-due",
+      "subscription-trial": "/profile/subscription-trial",
+      "subscription-cancels-soon": "/profile/subscription-cancels-soon",
+      "subscription-cancelled": "/profile/subscription-cancelled",
+      "subscription-confirm-cancel": "/profile/subscription-confirm-cancel",
+      "security-confirm-sign-out-all": "/profile/security-confirm-sign-out-all",
+      "security-confirm-delete": "/profile/security-confirm-delete",
+      "personal-info-photo-sheet": "/profile/personal-info-photo-sheet",
+      "hub-confirm-sign-out": "/profile/hub-confirm-sign-out",
+      "hub-past-due": "/profile/hub-past-due",
+      "notifications-dirty": "/profile/notifications-dirty",
+      "hub-association-switcher": "/profile/hub-association-switcher",
+      "subscription-cancel-snackbar": "/profile/subscription-cancel-snackbar",
+    },
+    screens: [
+      { slug: "hub", label: "Profile Hub" },
+      { slug: "personal-info", label: "Personal Info" },
+      { slug: "identity", label: "Identity & KYC" },
+      { slug: "payment-methods", label: "Payment Methods" },
+      { slug: "security", label: "Security" },
+      { slug: "notifications", label: "Notifications" },
+      { slug: "language", label: "Language & Appearance" },
+      { slug: "subscription", label: "Subscription" },
+      { slug: "help", label: "Help & Support" },
+      { slug: "legal-about", label: "Legal & About" },
+      { slug: "identity-basic", label: "Identity — Basic Tier" },
+      { slug: "identity-rejected", label: "Identity — Rejected" },
+      { slug: "payment-methods-empty", label: "Payment Methods — Empty" },
+      { slug: "subscription-past-due", label: "Subscription — Past Due" },
+      { slug: "subscription-trial", label: "Subscription — Trial" },
+      { slug: "subscription-cancels-soon", label: "Subscription — Cancels Soon" },
+      { slug: "subscription-cancelled", label: "Subscription — Cancelled" },
+      { slug: "subscription-confirm-cancel", label: "Subscription — Cancel Sheet" },
+      { slug: "security-confirm-sign-out-all", label: "Security — Sign-out-all Sheet" },
+      { slug: "security-confirm-delete", label: "Security — Delete Sheet" },
+      { slug: "personal-info-photo-sheet", label: "Personal Info — Photo Sheet" },
+      { slug: "hub-confirm-sign-out", label: "Hub — Sign-out Sheet" },
+      { slug: "hub-past-due", label: "Hub — Past-due Banner" },
+      { slug: "notifications-dirty", label: "Notifications — Dirty State" },
+      { slug: "hub-association-switcher", label: "Hub — Association Switcher" },
+      { slug: "subscription-cancel-snackbar", label: "Subscription — Cancel Snackbar" },
     ],
   },
 ];
