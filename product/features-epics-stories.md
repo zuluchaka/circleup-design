@@ -1,7 +1,7 @@
 # CircleUp — Features, Epics & User Stories
 
 > **Complete inventory of the CircleUp platform capabilities**
-> Generated: 2026-02-18
+> Generated: 2026-05-27 (updated to include all features for web + Android + iOS across all stakeholders, with screenshot references) (updated to include all features for web + Android + iOS across all stakeholders, with screenshot references)
 
 ---
 
@@ -24,12 +24,59 @@
 15. [AI Insights](#15-ai-insights)
 16. [Federations](#16-federations)
 17. [Platform Administration](#17-platform-administration)
+18. [Business Relationships *(mobile-only)*](#18-business-relationships-mobile-only)
+19. [Association Accounts *(mobile-only)*](#19-association-accounts-mobile-only)
+20. [Onboarding Checklist *(mobile-only)*](#20-onboarding-checklist-mobile-only)
+21. [Profile *(mobile-only)*](#21-profile-mobile-only)
+
+## Stakeholder Catalog
+
+| Role | Scope | What they do |
+|---|---|---|
+| **Prospective member** | Public (unauthenticated) | Learns about CircleUp on the homepage, takes the quiz, picks a plan, signs up |
+| **Member** | Per-association | Contributes to circles, receives payouts, votes on proposals, joins events |
+| **Treasurer** | Per-association | Manages treasury, approves welfare, reconciles ledger, signs off audits |
+| **President / Chair** | Per-association | Owns governance, calls elections, approves above-threshold transactions |
+| **Secretary** | Per-association | Manages documents, minutes, member records, events |
+| **Organizer** | Per-circle | Creates and runs ROSCA circles, manages participants and cycles |
+| **Auditor** | Per-association | Independent review of treasury, audit reports, FINMA filings |
+| **Donor** | Per-campaign | Donates to fundraising campaigns, receives impact updates |
+| **Circle Manager (CM)** | Mafao employee | Manages Business Relationships, onboards associations, drives revenue |
+| **Platform Admin / Staff** | Mafao operator | KYC review, support tickets, FINMA reporting, feature flags |
+| **Federation Lead** | Per-federation | Governs a federation of associations, consolidated finance, federation-wide votes |
+| **System** | Automated | Background jobs, predictions, default coverage, audit logs, push notifications |
 
 ---
 
 ## 1. Homepage & Landing
 
 **Feature:** Public-facing landing page for platform discovery, education, and user conversion.
+
+> **Primary stakeholders:** Prospective member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Public, unauthenticated landing surface. The homepage's job is to qualify visitors (member vs organiser), educate them on ROSCAs / susus / tandas / paluwagans, build trust with social proof and security disclosures, and route them into the right sign-up flow. The mobile homepage is a focused 4-card primer; the web homepage is a 14-section marketing scroll with hero, stats, benefits, how-it-works, testimonials, comparison, examples, communities, trust, pricing, FAQ, and final CTA.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/homepage/homepage.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/00-homepage/screenshots/android/01-welcome.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/00-homepage/screenshots/android-dark/03-quiz.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/00-homepage/screenshots/ios/01-welcome.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Prospective member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Public, unauthenticated landing surface. The homepage's job is to qualify visitors (member vs organiser), educate them on ROSCAs / susus / tandas / paluwagans, build trust with social proof and security disclosures, and route them into the right sign-up flow. The mobile homepage is a focused 4-card primer; the web homepage is a 14-section marketing scroll with hero, stats, benefits, how-it-works, testimonials, comparison, examples, communities, trust, pricing, FAQ, and final CTA.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/homepage/homepage.png`
+  - **Android (light):** `mobile/product/sections/00-homepage/screenshots/android/01-welcome.png`
+  - **Android (dark):** `mobile/product/sections/00-homepage/screenshots/android-dark/03-quiz.png`
+  - **iOS (light):** `mobile/product/sections/00-homepage/screenshots/ios/01-welcome.png`
 
 ### Epic 1.1: Platform Discovery & Value Proposition
 | ID | User Story | Priority |
@@ -107,6 +154,30 @@
 
 **Feature:** Secure authentication gateway with registration, login, password recovery, verification, and profile onboarding.
 
+> **Primary stakeholders:** Prospective member · Member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Account lifecycle: sign-up, sign-in, email verification, and a 4-step onboarding wizard (profile → identity → preferences → first circle). The wizard's last step shows a Recommended Circle for the user. Mobile adds platform-specific keychain / autofill support and a calm waiting-screen pattern for verification with a 30-second resend countdown.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/login/auth-flow.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/15-login/screenshots/android/01-signin.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/15-login/screenshots/ios/04-onboarding.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Prospective member · Member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Account lifecycle: sign-up, sign-in, email verification, and a 4-step onboarding wizard (profile → identity → preferences → first circle). The wizard's last step shows a Recommended Circle for the user. Mobile adds platform-specific keychain / autofill support and a calm waiting-screen pattern for verification with a 30-second resend countdown.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/login/auth-flow.png`
+  - **Android (light):** `mobile/product/sections/15-login/screenshots/android/01-signin.png`
+  - **iOS (light):** `mobile/product/sections/15-login/screenshots/ios/04-onboarding.png`
+
 ### Epic 2.1: Email Registration
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -166,6 +237,32 @@
 ## 3. Associations
 
 **Feature:** Create, discover, and manage community organizations — including guided migration of existing associations, member rosters, ROSCA circles, and historical financial data onto CircleUp.
+
+> **Primary stakeholders:** Member · Organizer · President · Treasurer · Secretary · Circle Manager
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Create, join, brand, and configure associations — the top-level container that owns members, circles, treasury, governance, and documents. Web exposes the full create-association wizard plus the import/migration suite (member roster, ROSCA structure, historical financials). Mobile focuses on the day-to-day association hub plus the empty-state for brand-new users.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/associations/announcements-dashboard.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/01-associations/screenshots/android/02-dashboard.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/01-associations/screenshots/android-dark/01-list.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  - **iOS — light:** `mobile/product/sections/01-associations/screenshots/ios/02-dashboard.png` *(file not found at export time)*
+</div>
+
+> **Primary stakeholders:** Member · Organizer · President · Treasurer · Secretary · Circle Manager
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Create, join, brand, and configure associations — the top-level container that owns members, circles, treasury, governance, and documents. Web exposes the full create-association wizard plus the import/migration suite (member roster, ROSCA structure, historical financials). Mobile focuses on the day-to-day association hub plus the empty-state for brand-new users.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/associations/announcements-dashboard.png`
+  - **Android (light):** `mobile/product/sections/01-associations/screenshots/android/02-dashboard.png`
+  - **Android (dark):** `mobile/product/sections/01-associations/screenshots/android-dark/01-list.png`
+  - **iOS (light):** `mobile/product/sections/01-associations/screenshots/ios/02-dashboard.png`
 
 ### Epic 3.1: Association Discovery & Browsing
 | ID | User Story | Priority |
@@ -254,6 +351,32 @@
 
 **Feature:** Member directory, profiles, engagement tracking, and AI-powered Trust Score transparency.
 
+> **Primary stakeholders:** Member · Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Member directory with profiles, roles, and the AI Trust Score (0–1000 with a transparent factor breakdown). Mobile adds an empty-state for brand-new associations, a per-member profile view with verified-channels list, and an invite flow with email / SMS / link / QR options.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/members-and-trust/at-risk-members.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/02-members-and-trust/screenshots/android/01-directory.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/02-members-and-trust/screenshots/android-dark/03-trust.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/02-members-and-trust/screenshots/ios/02-profile.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Member directory with profiles, roles, and the AI Trust Score (0–1000 with a transparent factor breakdown). Mobile adds an empty-state for brand-new associations, a per-member profile view with verified-channels list, and an invite flow with email / SMS / link / QR options.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/members-and-trust/at-risk-members.png`
+  - **Android (light):** `mobile/product/sections/02-members-and-trust/screenshots/android/01-directory.png`
+  - **Android (dark):** `mobile/product/sections/02-members-and-trust/screenshots/android-dark/03-trust.png`
+  - **iOS (light):** `mobile/product/sections/02-members-and-trust/screenshots/ios/02-profile.png`
+
 ### Epic 4.1: Member Directory
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -293,6 +416,32 @@
 ## 5. ROSCA Circles
 
 **Feature:** Full lifecycle management of rotating savings circles with automated payments, AI features, and emergency fund protection.
+
+> **Primary stakeholders:** Member · Organizer · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> The core ROSCA experience: automated contributions, payout disbursement, default prediction, and Emergency-Fund protection. The mobile section spans 32 screens across 8 phases — discovery, joining, creating/renewing, live cycle ops, action sheets (pay-for-member, position-swap, bidding, payout-advance), health/risk, settings, and admin monitoring.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/rosca-circles/admin-circle-monitoring.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/03-rosca-circles/screenshots/android/01-my-circles.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/03-rosca-circles/screenshots/android-dark/02-circle-detail.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/03-rosca-circles/screenshots/ios/01-my-circles.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Organizer · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> The core ROSCA experience: automated contributions, payout disbursement, default prediction, and Emergency-Fund protection. The mobile section spans 32 screens across 8 phases — discovery, joining, creating/renewing, live cycle ops, action sheets (pay-for-member, position-swap, bidding, payout-advance), health/risk, settings, and admin monitoring.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/rosca-circles/admin-circle-monitoring.png`
+  - **Android (light):** `mobile/product/sections/03-rosca-circles/screenshots/android/01-my-circles.png`
+  - **Android (dark):** `mobile/product/sections/03-rosca-circles/screenshots/android-dark/02-circle-detail.png`
+  - **iOS (light):** `mobile/product/sections/03-rosca-circles/screenshots/ios/01-my-circles.png`
 
 ### Epic 5.1: Circle Discovery & Browsing
 | ID | User Story | Priority |
@@ -370,6 +519,30 @@
 
 **Feature:** Multi-fund accounting, reconciliation, welfare fund management, and audit compliance.
 
+> **Primary stakeholders:** Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multi-fund accounting with audit trails: overview dashboard, per-fund details, transaction ledger, request workflow, approval queue, reconciliation, reports, audit reports, statements, multi-currency, investments, and Swiss-specific integrations (PostFinance import, external bank accounts).
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/treasury-and-funds/audit-report-generator.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/04-treasury-and-funds/screenshots/android/01-overview.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/04-treasury-and-funds/screenshots/ios/01-overview.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multi-fund accounting with audit trails: overview dashboard, per-fund details, transaction ledger, request workflow, approval queue, reconciliation, reports, audit reports, statements, multi-currency, investments, and Swiss-specific integrations (PostFinance import, external bank accounts).
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/treasury-and-funds/audit-report-generator.png`
+  - **Android (light):** `mobile/product/sections/04-treasury-and-funds/screenshots/android/01-overview.png`
+  - **iOS (light):** `mobile/product/sections/04-treasury-and-funds/screenshots/ios/01-overview.png`
+
 ### Epic 6.1: Treasury Dashboard
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -433,6 +606,32 @@
 
 **Feature:** Credit products built on ROSCA participation history, bridging community savings to formal financial services.
 
+> **Primary stakeholders:** Member · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> CircleUp credit score, payout advances (auto-repaid from next payout), pre-approved personal loans backed by circle participation, and opt-in bureau reporting (TransUnion CH). All flows surface the FINMA responsible-lending disclosure.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/credit-and-lending/CollectiveLending.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/09-credit-and-lending/screenshots/android/01-score.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/09-credit-and-lending/screenshots/android-dark/02-advance.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/09-credit-and-lending/screenshots/ios/03-loan.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> CircleUp credit score, payout advances (auto-repaid from next payout), pre-approved personal loans backed by circle participation, and opt-in bureau reporting (TransUnion CH). All flows surface the FINMA responsible-lending disclosure.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/credit-and-lending/CollectiveLending.png`
+  - **Android (light):** `mobile/product/sections/09-credit-and-lending/screenshots/android/01-score.png`
+  - **Android (dark):** `mobile/product/sections/09-credit-and-lending/screenshots/android-dark/02-advance.png`
+  - **iOS (light):** `mobile/product/sections/09-credit-and-lending/screenshots/ios/03-loan.png`
+
 ### Epic 7.1: Credit Score & Education
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -488,6 +687,30 @@
 ## 8. Multi-Share
 
 **Feature:** Enhanced ROSCA functionality allowing members to hold 1–10 shares of the base contribution with proportionally larger payouts.
+
+> **Primary stakeholders:** Member · Treasurer · Auditor · Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multiple-share contributions: trusted members can hold 1–10 shares per circle, contributing N× and receiving N× the payout. Eligibility is gated by Trust Score (≥700), tenure (≥12 months), missed-payment history, and a 30% concentration cap. Approval flow runs through Treasurer + Auditor.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/multi-share/circle-dashboard.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/12-multi-share/screenshots/android/01-my-shares.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/12-multi-share/screenshots/ios/02-request.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Treasurer · Auditor · Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multiple-share contributions: trusted members can hold 1–10 shares per circle, contributing N× and receiving N× the payout. Eligibility is gated by Trust Score (≥700), tenure (≥12 months), missed-payment history, and a 30% concentration cap. Approval flow runs through Treasurer + Auditor.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/multi-share/circle-dashboard.png`
+  - **Android (light):** `mobile/product/sections/12-multi-share/screenshots/android/01-my-shares.png`
+  - **iOS (light):** `mobile/product/sections/12-multi-share/screenshots/ios/02-request.png`
 
 ### Epic 8.1: Multi-Share Circle Configuration (P0)
 | ID | User Story | Priority |
@@ -574,6 +797,32 @@
 
 **Feature:** Democratic decision-making through elections, proposals, committees, and flexible voting models.
 
+> **Primary stakeholders:** Member · President · Treasurer · Secretary
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Proposals, ballots, elections, and committees. The ballot screen runs eligibility checks live, surfaces quorum + vote breakdown, and uses a sticky vote bar. Elections show candidate cards with pitch, trust, endorsements, and live vote share.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/governance-and-voting/candidate-profile.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/05-governance-and-voting/screenshots/android/01-proposals.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/05-governance-and-voting/screenshots/android-dark/03-elections.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/05-governance-and-voting/screenshots/ios/02-ballot.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · President · Treasurer · Secretary
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Proposals, ballots, elections, and committees. The ballot screen runs eligibility checks live, surfaces quorum + vote breakdown, and uses a sticky vote bar. Elections show candidate cards with pitch, trust, endorsements, and live vote share.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/governance-and-voting/candidate-profile.png`
+  - **Android (light):** `mobile/product/sections/05-governance-and-voting/screenshots/android/01-proposals.png`
+  - **Android (dark):** `mobile/product/sections/05-governance-and-voting/screenshots/android-dark/03-elections.png`
+  - **iOS (light):** `mobile/product/sections/05-governance-and-voting/screenshots/ios/02-ballot.png`
+
 ### Epic 9.1: Governance Dashboard
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -644,6 +893,30 @@
 
 **Feature:** Multi-channel messaging, announcements, and event management with cultural and accessibility support.
 
+> **Primary stakeholders:** Member · Organizer · Secretary
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multi-channel messaging (in-app, email, SMS, push, WhatsApp) plus events with RSVPs, QR check-in, and association-wide announcement composer. Mobile uses a Messages tab as the bottom-nav inbox; web uses the announcements dashboard.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/communication-and-events/admin-events-overview.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/06-communication-and-events/screenshots/android/01-inbox.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/06-communication-and-events/screenshots/ios/03-events.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Organizer · Secretary
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Multi-channel messaging (in-app, email, SMS, push, WhatsApp) plus events with RSVPs, QR check-in, and association-wide announcement composer. Mobile uses a Messages tab as the bottom-nav inbox; web uses the announcements dashboard.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/communication-and-events/admin-events-overview.png`
+  - **Android (light):** `mobile/product/sections/06-communication-and-events/screenshots/android/01-inbox.png`
+  - **iOS (light):** `mobile/product/sections/06-communication-and-events/screenshots/ios/03-events.png`
+
 ### Epic 10.1: Unified Inbox
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -705,6 +978,30 @@
 
 **Feature:** Document storage, organization, sharing, and collaboration for association and circle records.
 
+> **Primary stakeholders:** Member · Secretary · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Document library (categories, versions, visibility), viewer with version timeline, and share flow (All members / Committee / Organisers / Public link). Each shared link can expire; audit log records every view and download.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/documents/agreement-signing.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/07-documents/screenshots/android/01-library.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/07-documents/screenshots/ios/02-viewer.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Secretary · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Document library (categories, versions, visibility), viewer with version timeline, and share flow (All members / Committee / Organisers / Public link). Each shared link can expire; audit log records every view and download.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/documents/agreement-signing.png`
+  - **Android (light):** `mobile/product/sections/07-documents/screenshots/android/01-library.png`
+  - **iOS (light):** `mobile/product/sections/07-documents/screenshots/ios/02-viewer.png`
+
 ### Epic 11.1: Document Library
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -754,6 +1051,32 @@
 
 **Feature:** Community fundraising campaigns for specific projects, emergencies, or community initiatives.
 
+> **Primary stakeholders:** Member · Organizer · Donor · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Community fundraising campaigns: campaign list, detail (with progress + matching partner banner), donate flow (quick amounts, custom amount, payment method, anonymous toggle), and aggregated impact stories with cumulative stats.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/projects-and-fundraising/campaign-creator.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/13-projects-and-fundraising/screenshots/android/01-campaigns.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/13-projects-and-fundraising/screenshots/android-dark/03-donate.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/13-projects-and-fundraising/screenshots/ios/02-campaign-detail.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Organizer · Donor · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Community fundraising campaigns: campaign list, detail (with progress + matching partner banner), donate flow (quick amounts, custom amount, payment method, anonymous toggle), and aggregated impact stories with cumulative stats.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/projects-and-fundraising/campaign-creator.png`
+  - **Android (light):** `mobile/product/sections/13-projects-and-fundraising/screenshots/android/01-campaigns.png`
+  - **Android (dark):** `mobile/product/sections/13-projects-and-fundraising/screenshots/android-dark/03-donate.png`
+  - **iOS (light):** `mobile/product/sections/13-projects-and-fundraising/screenshots/ios/02-campaign-detail.png`
+
 ### Epic 12.1: Campaign Management
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -797,6 +1120,30 @@
 ## 13. Community & Social
 
 **Feature:** Social engagement features that strengthen trust, encourage savings behavior, and drive organic growth.
+
+> **Primary stakeholders:** Member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Engagement layer: community activity feed (kudos, milestones, joins), badge gallery (earned + locked with criteria), opt-in leaderboard with anonymisable names, and referral program with code + reward ladder.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/community-and-social/badge-gallery.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/11-community-and-social/screenshots/android/02-badges.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/11-community-and-social/screenshots/ios/03-leaderboard.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Engagement layer: community activity feed (kudos, milestones, joins), badge gallery (earned + locked with criteria), opt-in leaderboard with anonymisable names, and referral program with code + reward ladder.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/community-and-social/badge-gallery.png`
+  - **Android (light):** `mobile/product/sections/11-community-and-social/screenshots/android/02-badges.png`
+  - **iOS (light):** `mobile/product/sections/11-community-and-social/screenshots/ios/03-leaderboard.png`
 
 ### Epic 13.1: Referral Program
 | ID | User Story | Priority |
@@ -864,6 +1211,30 @@
 
 **Feature:** Savings tracking, circle health metrics, statements, and business intelligence at every level (personal, circle, association, federation).
 
+> **Primary stakeholders:** Member · Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Personal dashboard (savings YTD, streak, trust trend, next payout), circle health (collection rate, default risk, attendance, welfare uptake + at-risk drilldown), and scoped statements (Personal / Circle / Association) with PDF/CSV export and FINMA-compliant 10-year retention.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/analytics-and-reporting/AssociationDashboard.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/08-analytics-and-reporting/screenshots/android/01-personal.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/08-analytics-and-reporting/screenshots/ios/02-circle-health.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Treasurer · President · Auditor
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Personal dashboard (savings YTD, streak, trust trend, next payout), circle health (collection rate, default risk, attendance, welfare uptake + at-risk drilldown), and scoped statements (Personal / Circle / Association) with PDF/CSV export and FINMA-compliant 10-year retention.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/analytics-and-reporting/AssociationDashboard.png`
+  - **Android (light):** `mobile/product/sections/08-analytics-and-reporting/screenshots/android/01-personal.png`
+  - **iOS (light):** `mobile/product/sections/08-analytics-and-reporting/screenshots/ios/02-circle-health.png`
+
 ### Epic 14.1: Personal Savings Dashboard
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -919,6 +1290,32 @@
 
 **Feature:** Personalized AI intelligence hub for members, organizers, and platform operations.
 
+> **Primary stakeholders:** Member · Treasurer · Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> AI-powered insights: personalised feed (Recommendation / Risk / Fraud cards with why-explanations), assistant chat with citations to source data, and risk dashboard with KPI tiles + active alerts. Low-confidence signals are filtered by default; opt-in lives in Notification preferences.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/ai-insights/ai-insights-dashboard.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/10-ai-insights/screenshots/android/01-feed.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/10-ai-insights/screenshots/android-dark/02-assistant.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/10-ai-insights/screenshots/ios/03-risk.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Member · Treasurer · Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> AI-powered insights: personalised feed (Recommendation / Risk / Fraud cards with why-explanations), assistant chat with citations to source data, and risk dashboard with KPI tiles + active alerts. Low-confidence signals are filtered by default; opt-in lives in Notification preferences.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/ai-insights/ai-insights-dashboard.png`
+  - **Android (light):** `mobile/product/sections/10-ai-insights/screenshots/android/01-feed.png`
+  - **Android (dark):** `mobile/product/sections/10-ai-insights/screenshots/android-dark/02-assistant.png`
+  - **iOS (light):** `mobile/product/sections/10-ai-insights/screenshots/ios/03-risk.png`
+
 ### Epic 15.1: AI for Members
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -953,6 +1350,30 @@
 ## 16. Federations
 
 **Feature:** Umbrella organizations coordinating multiple child associations with shared governance, finances, and reporting.
+
+> **Primary stakeholders:** Federation Lead · President · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Federation hub (aggregated stats, member associations), federated-associations management (link/unlink, organiser contact), and consolidated finance (tabs: Dues, Transfers, Federation Fund with earmarks). Federation-wide elections route into Section 9 governance.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/federations/alert-panel.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/16-federations/screenshots/android/01-overview.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/16-federations/screenshots/ios/03-consolidated.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Federation Lead · President · Treasurer
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Federation hub (aggregated stats, member associations), federated-associations management (link/unlink, organiser contact), and consolidated finance (tabs: Dues, Transfers, Federation Fund with earmarks). Federation-wide elections route into Section 9 governance.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/federations/alert-panel.png`
+  - **Android (light):** `mobile/product/sections/16-federations/screenshots/android/01-overview.png`
+  - **iOS (light):** `mobile/product/sections/16-federations/screenshots/ios/03-consolidated.png`
 
 ### Epic 16.1: Federation Setup
 | ID | User Story | Priority |
@@ -1021,6 +1442,32 @@
 
 **Feature:** Tools for platform operators, compliance officers, and support staff to manage the entire CircleUp platform.
 
+> **Primary stakeholders:** Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Mafao operator console: KPI strip (users, ARR, KYC backlog, disputes, uptime), queue counts (KYC, support, compliance, appeals), KYC review with risk-scored applicants, support tickets with SLA timers, and feature-flag console with cohort targeting + RBAC.
+
+<div style="margin:14px 0;text-align:center;">
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/product/sections/platform-administration/access-requests.png" alt="Web" style="width:380px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Web</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/14-platform-administration/screenshots/android/01-console.png" alt="Android — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — light</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/14-platform-administration/screenshots/android-dark/02-kyc.png" alt="Android — dark" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">Android — dark</figcaption></figure>
+  <figure style="display:inline-block;margin:6px;text-align:center;vertical-align:top;"><img src="file:///Users/lunang/Documents/Documents - iMac/Projects/circleup-design/mobile/product/sections/14-platform-administration/screenshots/ios/04-flags.png" alt="iOS — light" style="width:220px;max-width:100%;border:1px solid #e2e8f0;border-radius:8px;"/><figcaption style="font-size:11px;color:#64748b;margin-top:4px;">iOS — light</figcaption></figure>
+</div>
+
+> **Primary stakeholders:** Platform Admin
+>
+> **Platforms:** Web ✓ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Mafao operator console: KPI strip (users, ARR, KYC backlog, disputes, uptime), queue counts (KYC, support, compliance, appeals), KYC review with risk-scored applicants, support tickets with SLA timers, and feature-flag console with cohort targeting + RBAC.
+
+**Representative screenshots:**
+
+  - **Web:** `product/sections/platform-administration/access-requests.png`
+  - **Android (light):** `mobile/product/sections/14-platform-administration/screenshots/android/01-console.png`
+  - **Android (dark):** `mobile/product/sections/14-platform-administration/screenshots/android-dark/02-kyc.png`
+  - **iOS (light):** `mobile/product/sections/14-platform-administration/screenshots/ios/04-flags.png`
+
 ### Epic 17.1: Compliance & Regulatory
 | ID | User Story | Priority |
 |----|-----------|----------|
@@ -1082,6 +1529,442 @@
 
 ---
 
+## 18. Business Relationships *(mobile-only)*
+
+**Feature:** Revenue contracts between Circle Managers (Mafao employees) and the associations they sign and serve.
+
+> **Primary stakeholders:** Circle Manager · Platform Admin · President
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> A Business Relationship (BR) is the formal commercial tier between Mafao and a customer association. The CM owns the relationship end-to-end: creation wizard (4 steps), lifecycle events, financial overview, monthly fee billing, and churn handling. Most BR screens are CM-facing; presidents see a read-only summary of their association's BR.
+
+> **Screenshots:** Android: `mobile/product/sections/17-business-relationships/screenshots/android/01-list.png` · Android dark: `.../android-dark/02-detail.png` · iOS: `.../ios/03-new.png`
+
+### Epic 18.1: BR Discovery & Lifecycle
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.1.1 | As a CM, I want to browse my BR portfolio with filters (status, tier, risk) so I can prioritise outreach | P0 |
+| 18.1.2 | As a CM, I want to see a BR detail page with timeline of lifecycle events (signed → activated → suspended → churned) | P0 |
+| 18.1.3 | As a CM, I want a dashboard with revenue, churn risk, and upcoming renewals | P1 |
+| 18.1.4 | As a President, I want to see my association's BR status and CM contact info (read-only) | P0 |
+
+### Epic 18.2: BR Creation Wizard
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.2.1 | As a CM, I want a 4-step wizard (Association → Tier → Fees → Confirm) to sign a new BR | P0 |
+| 18.2.2 | As a CM, I want to copy fee structures from an existing BR to save time | P1 |
+| 18.2.3 | As a CM, I want to attach a signed contract PDF during creation | P0 |
+| 18.2.4 | As a system, I want to auto-provision an Association Account (Section 19) the moment a BR activates | P0 |
+
+### Epic 18.3: Lifecycle Sheets
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.3.1 | As a CM, I want a Suspend BR sheet with reason picker + grace-period selector | P0 |
+| 18.3.2 | As a CM, I want a Reactivate sheet that re-enables the linked Association Account | P0 |
+| 18.3.3 | As a CM, I want a Churn sheet with exit-survey + data-export option | P1 |
+
+---
+
+## 19. Association Accounts *(mobile-only)*
+
+**Feature:** Double-entry ledger auto-provisioned per association when its BR (Section 18) activates.
+
+> **Primary stakeholders:** Treasurer · President · Circle Manager · Auditor
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> The Association Account is the canonical ledger every dues collection, fee payment, circle transfer, and adjustment flows through. Fund-category roll-ups (General / Welfare / Reserve) sit at the top; the action chips (Credit / Debit / Transfer) launch a form. Restricted mode kicks in when the upstream BR is suspended — only dues + fee entries are allowed.
+
+> **Screenshots:** Android light: `mobile/product/sections/18-association-accounts/screenshots/android/01-overview.png` · Restricted: `.../02-restricted.png` · Frozen: `.../03-frozen.png` · Empty: `.../04-empty.png` · iOS: `.../ios/01-overview.png`
+
+### Epic 19.1: Account Overview
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.1.1 | As a Treasurer, I want a balance card with gradient hero, currency-formatted total, and account-type pill | P0 |
+| 19.1.2 | As a Treasurer, I want fund-category cards (General / Welfare / Reserve) with progress against target | P0 |
+| 19.1.3 | As a Treasurer, I want recent entries as list rows (date, type, fund-chip, amount, running balance) | P0 |
+| 19.1.4 | As a Treasurer, I want action chips (Credit / Debit / Transfer) that disable when account is frozen or closed | P0 |
+| 19.1.5 | As a new Treasurer, I want an empty-state with "Record opening credit" CTA when the account has zero entries | P0 |
+
+### Epic 19.2: Restricted & Frozen States
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.2.1 | As a Treasurer, I want a restricted-mode banner when the BR is suspended so I know only dues + fees are allowed | P0 |
+| 19.2.2 | As a system, I want to freeze the account on platform-admin action and surface a clear banner | P0 |
+| 19.2.3 | As a Treasurer, I want a closed-account read-only mode after BR churn | P1 |
+
+### Epic 19.3: Approvals & Future Surfaces
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.3.1 | As a Treasurer, I want a "X pending approvals" strip linking to the approvals queue when above-threshold txns wait | P0 |
+| 19.3.2 | As a Treasurer, I want a full paged ledger view with filters *(planned)* | P1 |
+| 19.3.3 | As a Treasurer, I want an income/expense statement export *(planned)* | P1 |
+
+---
+
+## 20. Onboarding Checklist *(mobile-only)*
+
+**Feature:** 5-step Circle-Manager playbook for bringing a newly-signed association fully live.
+
+> **Primary stakeholders:** Circle Manager · President · Treasurer
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Auto-created when a CmContract is signed; one per BR. The 5 steps cover: Association profile · Account activation · Dues config · Member invitations · First circle. Escalation kicks in at 48h (amber) and 7 days (red). CMs can complete steps "on behalf of" the customer with a consent note.
+
+> **Screenshots:** Android: `mobile/product/sections/19-onboarding/screenshots/android/01-checklist.png` · Completed: `.../02-completed.png` · Red escalation: `.../03-escalated-red.png` · Fresh 0%: `.../04-fresh-zero.png` · iOS: `.../ios/01-checklist.png`
+
+### Epic 20.1: Step Tracking
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.1.1 | As a CM, I want a step-by-step checklist with percent complete + status pills (pending / in_progress / completed) | P0 |
+| 20.1.2 | As a CM, I want a banner showing the prospect name, contract reference, and progress | P0 |
+| 20.1.3 | As a CM, I want fresh-zero state with stepped progress dots and a clear "Start step 1" CTA | P0 |
+| 20.1.4 | As a CM, I want a celebratory completed state with all 5 steps locked + green check | P1 |
+
+### Epic 20.2: On-behalf Completion
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.2.1 | As a CM, I want a "Complete on behalf" toggle with required consent note (text area) | P0 |
+| 20.2.2 | As a CM, I want the Mark Complete button disabled until the consent note is non-empty | P0 |
+| 20.2.3 | As an Auditor, I want every on-behalf completion logged with the CM's name + timestamp + consent text | P0 |
+
+### Epic 20.3: Escalation
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.3.1 | As a CM, I want an amber-escalation banner after 48h of inactivity | P0 |
+| 20.3.2 | As a CM, I want a red-escalation banner after 7 days with "Reach out to president" CTA | P0 |
+| 20.3.3 | As a CM Manager, I want escalated checklists surfaced in my queue with SLA timers | P1 |
+
+---
+
+## 21. Profile *(mobile-only — bottom-nav destination)*
+
+**Feature:** The user's own account hub — identity, KYC, payments, security, notifications, language, plan, help, legal.
+
+> **Primary stakeholders:** Member · Treasurer · President · Organizer · Circle Manager · Platform Admin
+>
+> **Platforms:** Web partial *(web handles profile/settings inside a header drop-down menu — mobile gives it a dedicated tab)* &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Every authenticated user is in Profile. The hub (10 menu rows) routes into 9 sub-screens plus 16 edge-state variants (Basic KYC, payment-failed subscription, photo-update sheet, sign-out confirm, delete-account, association switcher, undo-cancel snackbar). The most polished section in the codebase; serves as the reference implementation for shared primitives (ConfirmSheet, Snackbar, ThemeModeProvider).
+
+> **Screenshots:** Hub: `mobile/product/sections/20-profile/screenshots/android/01-hub.png` · Identity: `.../03-identity.png` · Payment methods: `.../04-payment-methods.png` · Security: `.../05-security.png` · Notifications: `.../06-notifications.png` · Language: `.../07-language.png` · Subscription past-due: `.../14-subscription-past-due.png` · Association switcher: `.../25-hub-association-switcher.png` · Cancel snackbar: `.../26-subscription-cancel-snackbar.png` · iOS hub: `mobile/product/sections/20-profile/screenshots/ios/01-hub.png` · iOS dark: `.../ios-dark/01-hub.png`
+
+### Epic 21.1: Profile Hub
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.1.1 | As a member, I want a gradient hero with my avatar, name, role, association, city, and Trust Score with weekly delta | P0 |
+| 21.1.2 | As a member, I want a 3-tile stats snapshot (Contributions / Payouts / Circles) without duplicating Section 8 analytics | P0 |
+| 21.1.3 | As a member, I want a 9-item menu grid with status badges (Enhanced KYC / Card expiring) | P0 |
+| 21.1.4 | As a member with multiple memberships, I want an Association Switcher pill below my role with quick-switch sheet | P0 |
+| 21.1.5 | As a member with a past-due subscription, I want a red banner above the menu linking to subscription | P0 |
+| 21.1.6 | As a member, I want a destructive Sign-out card that opens a ConfirmSheet, not an immediate logout | P0 |
+
+### Epic 21.2: Personal Info
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.2.1 | As a member, I want to edit name, preferred name, bio (≤280 chars with counter), languages, location, DoB, gender | P0 |
+| 21.2.2 | As a member, I want to tap my avatar to open a photo-update sheet (Camera / Gallery / Remove) | P0 |
+| 21.2.3 | As a member, I want a sticky Save bar with explicit-save (no auto-save) plus Discard | P0 |
+
+### Epic 21.3: Identity & KYC
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.3.1 | As a member, I want a KYC-tier hero (Basic / Enhanced) with progress bar and reviewer note | P0 |
+| 21.3.2 | As a member, I want a verified-channels list (phone / email / national ID) with status pills | P0 |
+| 21.3.3 | As a member, I want a horizontal document carousel with per-document re-upload icon | P0 |
+| 21.3.4 | As a Basic-tier member joining a CHF 500+ circle, I want an Upgrade-to-Enhanced CTA card | P0 |
+| 21.3.5 | As a member with a rejected document, I want a red "Documents need attention" card with Re-submit CTA | P0 |
+
+### Epic 21.4: Payment Methods
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.4.1 | As a member, I want pay-in (cards / TWINT / PostFinance) and pay-out (IBAN / mobile wallet) lists, grouped | P0 |
+| 21.4.2 | As a member, I want default + backup selectors, long-press to set default | P0 |
+| 21.4.3 | As a member, I want swipe-left → Delete with confirm sheet | P0 |
+| 21.4.4 | As a new member, I want an empty-state card with twin "Add pay-out / Add pay-in" CTAs | P0 |
+| 21.4.5 | As a member with an expiring card, I want a warning banner with one-tap update | P0 |
+
+### Epic 21.5: Security
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.5.1 | As a member, I want password / biometric / 2FA rows with platform-aware copy (Face ID on iPhone, Fingerprint on device) | P0 |
+| 21.5.2 | As a member, I want an active-sessions card with device + city + last-active (correctly pluralised: "1 hour ago", not "1 hours ago") | P0 |
+| 21.5.3 | As a member, I want a Sign-out-of-all-devices danger row with confirm sheet | P0 |
+| 21.5.4 | As a member, I want a Danger Zone card with Delete Account (App Store / Play Store compliance) and confirm sheet | P0 |
+
+### Epic 21.6: Notifications
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.6.1 | As a member, I want a Quiet hours card with start/end pickers and a "contributions-due alerts always come through" note | P0 |
+| 21.6.2 | As a member, I want a category × channel matrix (6 categories × 4 channels: Push / Email / SMS / WhatsApp) | P0 |
+| 21.6.3 | As a member, I want the Save bar to appear only when dirty (not always visible) | P0 |
+| 21.6.4 | As a member, I want time-picker affordances (ChevronDown) on the quiet-hours times | P1 |
+
+### Epic 21.7: Language & Appearance
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.7.1 | As a member, I want an Appearance card with Light / Dark / System segmented control (via ThemeModeProvider) | P0 |
+| 21.7.2 | As a member, I want a language list (EN / FR / DE / IT / PT) with native + English names and a country flag | P0 |
+| 21.7.3 | As a member, I want a currency picker (CHF / EUR / USD) as a segmented control | P0 |
+| 21.7.4 | As a member, I want a country selector that opens a country-picker sheet | P1 |
+
+### Epic 21.8: Subscription
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.8.1 | As a member, I want a plan card (Free / Plus / Pro) with crown icon, status pill, renewal date, next-bill amount | P0 |
+| 21.8.2 | As a member, I want a 6-row billing-history list with download icons | P0 |
+| 21.8.3 | As a Plus member, I want a Cancel subscription action with confirm sheet AND a 10-second undo snackbar after confirming | P0 |
+| 21.8.4 | As a member with a past-due card, I want a red "Payment failed" banner + rose-tinted hero variant | P0 |
+| 21.8.5 | As a trial / cancels-soon / cancelled member, I want a distinct status pill on the plan card | P0 |
+
+### Epic 21.9: Help, Legal & About
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.9.1 | As a member, I want a Help screen with FAQ search, category cards, contact-support row, report-a-bug row, status-page link | P0 |
+| 21.9.2 | As a member, I want a Legal screen with Terms / Privacy / Cookies / FINMA disclosure / Open-source licenses | P0 |
+| 21.9.3 | As a member, I want an About card with version, build, region, environment pill, and "Tap version 7×" hidden dev mode | P1 |
+
+---
+
+
+## 18. Business Relationships *(mobile-only)*
+
+**Feature:** Revenue contracts between Circle Managers (Mafao employees) and the associations they sign and serve.
+
+> **Primary stakeholders:** Circle Manager · Platform Admin · President
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> A Business Relationship (BR) is the formal commercial tier between Mafao and a customer association. The CM owns the relationship end-to-end: creation wizard (4 steps), lifecycle events, financial overview, monthly fee billing, and churn handling. Most BR screens are CM-facing; presidents see a read-only summary of their association's BR.
+
+> **Screenshots:** Android: `mobile/product/sections/17-business-relationships/screenshots/android/01-list.png` · Android dark: `.../android-dark/02-detail.png` · iOS: `.../ios/03-new.png`
+
+### Epic 18.1: BR Discovery & Lifecycle
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.1.1 | As a CM, I want to browse my BR portfolio with filters (status, tier, risk) so I can prioritise outreach | P0 |
+| 18.1.2 | As a CM, I want to see a BR detail page with timeline of lifecycle events (signed → activated → suspended → churned) | P0 |
+| 18.1.3 | As a CM, I want a dashboard with revenue, churn risk, and upcoming renewals | P1 |
+| 18.1.4 | As a President, I want to see my association's BR status and CM contact info (read-only) | P0 |
+
+### Epic 18.2: BR Creation Wizard
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.2.1 | As a CM, I want a 4-step wizard (Association → Tier → Fees → Confirm) to sign a new BR | P0 |
+| 18.2.2 | As a CM, I want to copy fee structures from an existing BR to save time | P1 |
+| 18.2.3 | As a CM, I want to attach a signed contract PDF during creation | P0 |
+| 18.2.4 | As a system, I want to auto-provision an Association Account (Section 19) the moment a BR activates | P0 |
+
+### Epic 18.3: Lifecycle Sheets
+
+| ID | User Story | Priority |
+|---|---|---|
+| 18.3.1 | As a CM, I want a Suspend BR sheet with reason picker + grace-period selector | P0 |
+| 18.3.2 | As a CM, I want a Reactivate sheet that re-enables the linked Association Account | P0 |
+| 18.3.3 | As a CM, I want a Churn sheet with exit-survey + data-export option | P1 |
+
+---
+
+## 19. Association Accounts *(mobile-only)*
+
+**Feature:** Double-entry ledger auto-provisioned per association when its BR (Section 18) activates.
+
+> **Primary stakeholders:** Treasurer · President · Circle Manager · Auditor
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> The Association Account is the canonical ledger every dues collection, fee payment, circle transfer, and adjustment flows through. Fund-category roll-ups (General / Welfare / Reserve) sit at the top; the action chips (Credit / Debit / Transfer) launch a form. Restricted mode kicks in when the upstream BR is suspended — only dues + fee entries are allowed.
+
+> **Screenshots:** Android light: `mobile/product/sections/18-association-accounts/screenshots/android/01-overview.png` · Restricted: `.../02-restricted.png` · Frozen: `.../03-frozen.png` · Empty: `.../04-empty.png` · iOS: `.../ios/01-overview.png`
+
+### Epic 19.1: Account Overview
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.1.1 | As a Treasurer, I want a balance card with gradient hero, currency-formatted total, and account-type pill | P0 |
+| 19.1.2 | As a Treasurer, I want fund-category cards (General / Welfare / Reserve) with progress against target | P0 |
+| 19.1.3 | As a Treasurer, I want recent entries as list rows (date, type, fund-chip, amount, running balance) | P0 |
+| 19.1.4 | As a Treasurer, I want action chips (Credit / Debit / Transfer) that disable when account is frozen or closed | P0 |
+| 19.1.5 | As a new Treasurer, I want an empty-state with "Record opening credit" CTA when the account has zero entries | P0 |
+
+### Epic 19.2: Restricted & Frozen States
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.2.1 | As a Treasurer, I want a restricted-mode banner when the BR is suspended so I know only dues + fees are allowed | P0 |
+| 19.2.2 | As a system, I want to freeze the account on platform-admin action and surface a clear banner | P0 |
+| 19.2.3 | As a Treasurer, I want a closed-account read-only mode after BR churn | P1 |
+
+### Epic 19.3: Approvals & Future Surfaces
+
+| ID | User Story | Priority |
+|---|---|---|
+| 19.3.1 | As a Treasurer, I want a "X pending approvals" strip linking to the approvals queue when above-threshold txns wait | P0 |
+| 19.3.2 | As a Treasurer, I want a full paged ledger view with filters *(planned)* | P1 |
+| 19.3.3 | As a Treasurer, I want an income/expense statement export *(planned)* | P1 |
+
+---
+
+## 20. Onboarding Checklist *(mobile-only)*
+
+**Feature:** 5-step Circle-Manager playbook for bringing a newly-signed association fully live.
+
+> **Primary stakeholders:** Circle Manager · President · Treasurer
+>
+> **Platforms:** Web ✗ &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Auto-created when a CmContract is signed; one per BR. The 5 steps cover: Association profile · Account activation · Dues config · Member invitations · First circle. Escalation kicks in at 48h (amber) and 7 days (red). CMs can complete steps "on behalf of" the customer with a consent note.
+
+> **Screenshots:** Android: `mobile/product/sections/19-onboarding/screenshots/android/01-checklist.png` · Completed: `.../02-completed.png` · Red escalation: `.../03-escalated-red.png` · Fresh 0%: `.../04-fresh-zero.png` · iOS: `.../ios/01-checklist.png`
+
+### Epic 20.1: Step Tracking
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.1.1 | As a CM, I want a step-by-step checklist with percent complete + status pills (pending / in_progress / completed) | P0 |
+| 20.1.2 | As a CM, I want a banner showing the prospect name, contract reference, and progress | P0 |
+| 20.1.3 | As a CM, I want fresh-zero state with stepped progress dots and a clear "Start step 1" CTA | P0 |
+| 20.1.4 | As a CM, I want a celebratory completed state with all 5 steps locked + green check | P1 |
+
+### Epic 20.2: On-behalf Completion
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.2.1 | As a CM, I want a "Complete on behalf" toggle with required consent note (text area) | P0 |
+| 20.2.2 | As a CM, I want the Mark Complete button disabled until the consent note is non-empty | P0 |
+| 20.2.3 | As an Auditor, I want every on-behalf completion logged with the CM's name + timestamp + consent text | P0 |
+
+### Epic 20.3: Escalation
+
+| ID | User Story | Priority |
+|---|---|---|
+| 20.3.1 | As a CM, I want an amber-escalation banner after 48h of inactivity | P0 |
+| 20.3.2 | As a CM, I want a red-escalation banner after 7 days with "Reach out to president" CTA | P0 |
+| 20.3.3 | As a CM Manager, I want escalated checklists surfaced in my queue with SLA timers | P1 |
+
+---
+
+## 21. Profile *(mobile-only — bottom-nav destination)*
+
+**Feature:** The user's own account hub — identity, KYC, payments, security, notifications, language, plan, help, legal.
+
+> **Primary stakeholders:** Member · Treasurer · President · Organizer · Circle Manager · Platform Admin
+>
+> **Platforms:** Web partial *(web handles profile/settings inside a header drop-down menu — mobile gives it a dedicated tab)* &nbsp;·&nbsp; Android ✓ &nbsp;·&nbsp; iOS ✓
+>
+> Every authenticated user is in Profile. The hub (10 menu rows) routes into 9 sub-screens plus 16 edge-state variants (Basic KYC, payment-failed subscription, photo-update sheet, sign-out confirm, delete-account, association switcher, undo-cancel snackbar). The most polished section in the codebase; serves as the reference implementation for shared primitives (ConfirmSheet, Snackbar, ThemeModeProvider).
+
+> **Screenshots:** Hub: `mobile/product/sections/20-profile/screenshots/android/01-hub.png` · Identity: `.../03-identity.png` · Payment methods: `.../04-payment-methods.png` · Security: `.../05-security.png` · Notifications: `.../06-notifications.png` · Language: `.../07-language.png` · Subscription past-due: `.../14-subscription-past-due.png` · Association switcher: `.../25-hub-association-switcher.png` · Cancel snackbar: `.../26-subscription-cancel-snackbar.png` · iOS hub: `mobile/product/sections/20-profile/screenshots/ios/01-hub.png` · iOS dark: `.../ios-dark/01-hub.png`
+
+### Epic 21.1: Profile Hub
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.1.1 | As a member, I want a gradient hero with my avatar, name, role, association, city, and Trust Score with weekly delta | P0 |
+| 21.1.2 | As a member, I want a 3-tile stats snapshot (Contributions / Payouts / Circles) without duplicating Section 8 analytics | P0 |
+| 21.1.3 | As a member, I want a 9-item menu grid with status badges (Enhanced KYC / Card expiring) | P0 |
+| 21.1.4 | As a member with multiple memberships, I want an Association Switcher pill below my role with quick-switch sheet | P0 |
+| 21.1.5 | As a member with a past-due subscription, I want a red banner above the menu linking to subscription | P0 |
+| 21.1.6 | As a member, I want a destructive Sign-out card that opens a ConfirmSheet, not an immediate logout | P0 |
+
+### Epic 21.2: Personal Info
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.2.1 | As a member, I want to edit name, preferred name, bio (≤280 chars with counter), languages, location, DoB, gender | P0 |
+| 21.2.2 | As a member, I want to tap my avatar to open a photo-update sheet (Camera / Gallery / Remove) | P0 |
+| 21.2.3 | As a member, I want a sticky Save bar with explicit-save (no auto-save) plus Discard | P0 |
+
+### Epic 21.3: Identity & KYC
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.3.1 | As a member, I want a KYC-tier hero (Basic / Enhanced) with progress bar and reviewer note | P0 |
+| 21.3.2 | As a member, I want a verified-channels list (phone / email / national ID) with status pills | P0 |
+| 21.3.3 | As a member, I want a horizontal document carousel with per-document re-upload icon | P0 |
+| 21.3.4 | As a Basic-tier member joining a CHF 500+ circle, I want an Upgrade-to-Enhanced CTA card | P0 |
+| 21.3.5 | As a member with a rejected document, I want a red "Documents need attention" card with Re-submit CTA | P0 |
+
+### Epic 21.4: Payment Methods
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.4.1 | As a member, I want pay-in (cards / TWINT / PostFinance) and pay-out (IBAN / mobile wallet) lists, grouped | P0 |
+| 21.4.2 | As a member, I want default + backup selectors, long-press to set default | P0 |
+| 21.4.3 | As a member, I want swipe-left → Delete with confirm sheet | P0 |
+| 21.4.4 | As a new member, I want an empty-state card with twin "Add pay-out / Add pay-in" CTAs | P0 |
+| 21.4.5 | As a member with an expiring card, I want a warning banner with one-tap update | P0 |
+
+### Epic 21.5: Security
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.5.1 | As a member, I want password / biometric / 2FA rows with platform-aware copy (Face ID on iPhone, Fingerprint on device) | P0 |
+| 21.5.2 | As a member, I want an active-sessions card with device + city + last-active (correctly pluralised: "1 hour ago", not "1 hours ago") | P0 |
+| 21.5.3 | As a member, I want a Sign-out-of-all-devices danger row with confirm sheet | P0 |
+| 21.5.4 | As a member, I want a Danger Zone card with Delete Account (App Store / Play Store compliance) and confirm sheet | P0 |
+
+### Epic 21.6: Notifications
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.6.1 | As a member, I want a Quiet hours card with start/end pickers and a "contributions-due alerts always come through" note | P0 |
+| 21.6.2 | As a member, I want a category × channel matrix (6 categories × 4 channels: Push / Email / SMS / WhatsApp) | P0 |
+| 21.6.3 | As a member, I want the Save bar to appear only when dirty (not always visible) | P0 |
+| 21.6.4 | As a member, I want time-picker affordances (ChevronDown) on the quiet-hours times | P1 |
+
+### Epic 21.7: Language & Appearance
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.7.1 | As a member, I want an Appearance card with Light / Dark / System segmented control (via ThemeModeProvider) | P0 |
+| 21.7.2 | As a member, I want a language list (EN / FR / DE / IT / PT) with native + English names and a country flag | P0 |
+| 21.7.3 | As a member, I want a currency picker (CHF / EUR / USD) as a segmented control | P0 |
+| 21.7.4 | As a member, I want a country selector that opens a country-picker sheet | P1 |
+
+### Epic 21.8: Subscription
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.8.1 | As a member, I want a plan card (Free / Plus / Pro) with crown icon, status pill, renewal date, next-bill amount | P0 |
+| 21.8.2 | As a member, I want a 6-row billing-history list with download icons | P0 |
+| 21.8.3 | As a Plus member, I want a Cancel subscription action with confirm sheet AND a 10-second undo snackbar after confirming | P0 |
+| 21.8.4 | As a member with a past-due card, I want a red "Payment failed" banner + rose-tinted hero variant | P0 |
+| 21.8.5 | As a trial / cancels-soon / cancelled member, I want a distinct status pill on the plan card | P0 |
+
+### Epic 21.9: Help, Legal & About
+
+| ID | User Story | Priority |
+|---|---|---|
+| 21.9.1 | As a member, I want a Help screen with FAQ search, category cards, contact-support row, report-a-bug row, status-page link | P0 |
+| 21.9.2 | As a member, I want a Legal screen with Terms / Privacy / Cookies / FINMA disclosure / Open-source licenses | P0 |
+| 21.9.3 | As a member, I want an About card with version, build, region, environment pill, and "Tap version 7×" hidden dev mode | P1 |
+
+---
+
+
 ## Summary
 
 | Feature Area | Epics | User Stories |
@@ -1103,4 +1986,36 @@
 | 15. AI Insights | 3 | 17 |
 | 16. Federations | 8 | 27 |
 | 17. Platform Administration | 4 | 36 |
-| **TOTAL** | **123** | **406** |
+| 18. Business Relationships *(mobile-only)* | 3 | 10 |
+| 19. Association Accounts *(mobile-only)* | 3 | 11 |
+| 20. Onboarding Checklist *(mobile-only)* | 3 | 10 |
+| 21. Profile *(mobile-only)* | 9 | 33 |
+| **TOTAL** | **136** | **490** |
+
+## Coverage Matrix
+
+| Section | Web | Android | iOS |
+|---|---|---|---|
+| 1. Homepage | ✓ | ✓ | ✓ |
+| 2. Authentication & Onboarding | ✓ | ✓ | ✓ |
+| 3. Associations | ✓ | ✓ | ✓ |
+| 4. Members & Trust | ✓ | ✓ | ✓ |
+| 5. ROSCA Circles | ✓ | ✓ | ✓ |
+| 6. Treasury & Funds | ✓ | ✓ | ✓ |
+| 7. Credit & Lending | ✓ | ✓ | ✓ |
+| 8. Multi-Share | ✓ | ✓ | ✓ |
+| 9. Governance & Voting | ✓ | ✓ | ✓ |
+| 10. Communication & Events | ✓ | ✓ | ✓ |
+| 11. Documents | ✓ | ✓ | ✓ |
+| 12. Projects & Fundraising | ✓ | ✓ | ✓ |
+| 13. Community & Social | ✓ | ✓ | ✓ |
+| 14. Analytics & Reporting | ✓ | ✓ | ✓ |
+| 15. AI Insights | ✓ | ✓ | ✓ |
+| 16. Federations | ✓ | ✓ | ✓ |
+| 17. Platform Administration | ✓ | ✓ | ✓ |
+| 18. Business Relationships | — | ✓ | ✓ |
+| 19. Association Accounts | — | ✓ | ✓ |
+| 20. Onboarding Checklist | — | ✓ | ✓ |
+| 21. Profile *(web has partial via header dropdown)* | partial | ✓ | ✓ |
+
+**Total screen designs captured: 681 PNGs** (Android light 222 + Android dark 153 + iOS light 153 + iOS dark 153)
