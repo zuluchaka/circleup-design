@@ -12,6 +12,8 @@ import {
   Mail,
   MapPin,
   Users,
+  User as UserIcon,
+  UserPlus,
   Building2,
   Percent,
   Coins,
@@ -82,6 +84,26 @@ const RELATIONSHIP_TYPES: { value: BrRelationshipType; label: string; blurb: str
   { value: "management", label: "Management", blurb: "CM operates the association day-to-day." },
   { value: "advisory", label: "Advisory", blurb: "CM advises; president retains ops control." },
   { value: "audit", label: "Audit", blurb: "Periodic review only; no operational role." },
+];
+
+// Sample CircleUp users available as presidents when creating a new association.
+// In production this would be a server-side search of verified users.
+type PresidentCandidate = {
+  id: string;
+  name: string;
+  email: string;
+  city: string;
+  kyc: "basic" | "enhanced";
+  trust: number;
+  avatarHue: string;
+};
+
+const PRESIDENT_CANDIDATES: PresidentCandidate[] = [
+  { id: "u_amara",  name: "Amara Ofori",     email: "amara.o@example.org",    city: "Geneva, CH",   kyc: "enhanced", trust: 824, avatarHue: palette.indigo[500] },
+  { id: "u_kofi",   name: "Kofi Mensah",     email: "kofi.m@example.org",     city: "Lausanne, CH", kyc: "enhanced", trust: 891, avatarHue: palette.emerald[500] },
+  { id: "u_mariam", name: "Mariam Rahimi",   email: "mariam.r@example.org",   city: "Geneva, CH",   kyc: "enhanced", trust: 802, avatarHue: palette.rose[500] },
+  { id: "u_ngozi",  name: "Ngozi Okafor",    email: "ngozi.o@example.org",    city: "Zurich, CH",   kyc: "basic",    trust: 731, avatarHue: palette.amber[500] },
+  { id: "u_linh",   name: "Linh Pham",       email: "linh.p@example.org",     city: "Vevey, CH",    kyc: "basic",    trust: 615, avatarHue: palette.sky[500] },
 ];
 
 // ============================================================================
@@ -259,7 +281,7 @@ function LabeledInput({
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
-  keyboardType?: "default" | "number-pad" | "decimal-pad";
+  keyboardType?: "default" | "number-pad" | "decimal-pad" | "email-address";
 }) {
   const t = useTheme();
   return (
@@ -274,6 +296,8 @@ function LabeledInput({
           placeholder={placeholder}
           placeholderTextColor={t.textMuted}
           keyboardType={keyboardType ?? "default"}
+          autoCapitalize={keyboardType === "email-address" ? "none" : "sentences"}
+          autoCorrect={keyboardType !== "email-address"}
           style={[styles.input, { color: t.textPrimary }]}
         />
       </View>
@@ -346,6 +370,33 @@ export function BrCreationWizard() {
     estimatedMembers: "",
   });
   const [draftCreated, setDraftCreated] = useState<Candidate | null>(null);
+
+  // Step 1 — create-new: president picker
+  type PresidentMode = "pick" | "invite";
+  const [presidentMode, setPresidentMode] = useState<PresidentMode>("pick");
+  const [presidentQuery, setPresidentQuery] = useState("");
+  const [presidentId, setPresidentId] = useState<string | null>(null);
+  const [inviteName, setInviteName] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
+
+  const filteredPresidents = useMemo(() => {
+    const q = presidentQuery.trim().toLowerCase();
+    if (!q) return PRESIDENT_CANDIDATES;
+    return PRESIDENT_CANDIDATES.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.email.toLowerCase().includes(q),
+    );
+  }, [presidentQuery]);
+
+  const resolvedPresident: { name: string; email: string } | null = useMemo(() => {
+    if (presidentMode === "pick" && presidentId) {
+      const u = PRESIDENT_CANDIDATES.find((p) => p.id === presidentId);
+      return u ? { name: u.name, email: u.email } : null;
+    }
+    if (presidentMode === "invite" && inviteName.trim() && inviteEmail.trim()) {
+      return { name: inviteName.trim(), email: inviteEmail.trim() };
+    }
+    return null;
+  }, [presidentMode, presidentId, inviteName, inviteEmail]);
 
   // Step 1 — migration form
   const [migration, setMigration] = useState({
@@ -767,9 +818,167 @@ export function BrCreationWizard() {
                   </Text>
                 </View>
 
+                {/* ===== President picker ===== */}
+                <View style={[styles.fieldCard, { backgroundColor: t.surface, borderColor: t.border }]}>
+                  <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, marginBottom: space.sm }}>
+                    <View style={[styles.uploadIcon, { backgroundColor: t.primarySoft, width: 28, height: 28 }]}>
+                      <ShieldCheck size={14} color={t.primary} />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text variant="micro" tone="muted" weight="bold" style={{ letterSpacing: 0.8 }}>
+                        PRESIDENT
+                      </Text>
+                      <Text variant="caption" tone="secondary" style={{ marginTop: 2 }}>
+                        The contract is sent to this person for signature.
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Mode toggle */}
+                  <View style={[styles.modeWrap, { backgroundColor: t.bgMuted, borderColor: t.border, marginBottom: space.sm }]}>
+                    {(
+                      [
+                        { v: "pick" as PresidentMode,   label: "Pick existing user" },
+                        { v: "invite" as PresidentMode, label: "Invite by email" },
+                      ]
+                    ).map((opt) => {
+                      const active = presidentMode === opt.v;
+                      return (
+                        <Pressable
+                          key={opt.v}
+                          onPress={() => setPresidentMode(opt.v)}
+                          style={[
+                            styles.modeBtn,
+                            active && { backgroundColor: t.bgElevated, shadowColor: t.shadow },
+                          ]}
+                        >
+                          <Text
+                            variant="caption"
+                            weight={active ? "bold" : "semibold"}
+                            style={{ color: active ? t.textPrimary : t.textSecondary }}
+                          >
+                            {opt.label}
+                          </Text>
+                        </Pressable>
+                      );
+                    })}
+                  </View>
+
+                  {presidentMode === "pick" ? (
+                    <View style={{ gap: space.sm }}>
+                      <View style={[styles.searchWrap, { backgroundColor: t.bgMuted, borderColor: t.border }]}>
+                        <SearchIcon size={14} color={t.textMuted} />
+                        <TextInput
+                          value={presidentQuery}
+                          onChangeText={setPresidentQuery}
+                          placeholder="Search verified users by name or email…"
+                          placeholderTextColor={t.textMuted}
+                          autoCapitalize="none"
+                          style={[styles.searchInput, { color: t.textPrimary }]}
+                        />
+                      </View>
+
+                      {filteredPresidents.length === 0 ? (
+                        <View style={[styles.emptyHint, { backgroundColor: t.warningSoft, borderColor: t.warning }]}>
+                          <AlertCircle size={14} color={t.warning} />
+                          <Text variant="caption" weight="semibold" style={{ color: t.warning, flex: 1 }}>
+                            No verified users match. Switch to "Invite by email" to send a sign-up link.
+                          </Text>
+                        </View>
+                      ) : null}
+
+                      <View style={{ gap: space.xs }}>
+                        {filteredPresidents.map((p) => {
+                          const active = presidentId === p.id;
+                          return (
+                            <Pressable
+                              key={p.id}
+                              onPress={() => setPresidentId(p.id)}
+                              style={[
+                                styles.presidentRow,
+                                {
+                                  backgroundColor: active ? t.primarySoft : t.bgElevated,
+                                  borderColor: active ? t.primary : t.border,
+                                  borderWidth: active ? 2 : 1,
+                                },
+                              ]}
+                            >
+                              <View style={[styles.presidentAvatar, { backgroundColor: p.avatarHue }]}>
+                                <Text variant="caption" weight="bold" style={{ color: "#fff" }}>
+                                  {p.name.split(" ").map((s) => s[0]).slice(0, 2).join("")}
+                                </Text>
+                              </View>
+                              <View style={{ flex: 1, gap: 2 }}>
+                                <Text variant="bodySmall" weight="semibold" numberOfLines={1}>
+                                  {p.name}
+                                </Text>
+                                <Text variant="micro" tone="secondary" numberOfLines={1}>
+                                  {p.email} · {p.city}
+                                </Text>
+                                <View style={{ flexDirection: "row", gap: 4, marginTop: 2 }}>
+                                  <View style={[styles.kycPill, { backgroundColor: p.kyc === "enhanced" ? t.successSoft : t.warningSoft }]}>
+                                    <Text variant="micro" weight="bold" style={{ color: p.kyc === "enhanced" ? t.success : t.warning, letterSpacing: 0.4 }}>
+                                      {p.kyc === "enhanced" ? "ENHANCED KYC" : "BASIC KYC"}
+                                    </Text>
+                                  </View>
+                                  <View style={[styles.kycPill, { backgroundColor: t.bgMuted }]}>
+                                    <Text variant="micro" weight="bold" tone="secondary" style={{ letterSpacing: 0.4 }}>
+                                      TRUST {p.trust}
+                                    </Text>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                style={[
+                                  styles.radio,
+                                  { borderColor: active ? t.primary : t.border, backgroundColor: active ? t.primary : "transparent" },
+                                ]}
+                              >
+                                {active ? <Check size={12} color="#fff" strokeWidth={3} /> : null}
+                              </View>
+                            </Pressable>
+                          );
+                        })}
+                      </View>
+                    </View>
+                  ) : (
+                    <View style={{ gap: space.sm }}>
+                      <LabeledInput
+                        label="President's full name"
+                        value={inviteName}
+                        onChange={setInviteName}
+                        placeholder="e.g. Eric Boateng"
+                      />
+                      <LabeledInput
+                        label="Email address"
+                        value={inviteEmail}
+                        onChange={setInviteEmail}
+                        placeholder="president@example.org"
+                        keyboardType="email-address"
+                      />
+                      <View style={[styles.note, { backgroundColor: t.infoSoft, borderColor: t.info }]}>
+                        <Mail size={14} color={t.info} />
+                        <Text variant="caption" weight="semibold" style={{ color: t.info, flex: 1 }}>
+                          They'll receive a sign-up + signing link when you send the contract.
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+
+                  {resolvedPresident ? (
+                    <View style={[styles.resolvedPresident, { backgroundColor: t.successSoft, borderColor: t.success }]}>
+                      <UserIcon size={12} color={t.success} />
+                      <Text variant="caption" weight="bold" style={{ color: t.success, flex: 1 }} numberOfLines={1}>
+                        {resolvedPresident.name} · {resolvedPresident.email}
+                      </Text>
+                    </View>
+                  ) : null}
+                </View>
+
                 {/* Use-as-candidate CTA */}
                 <Pressable
                   onPress={() => {
+                    if (!resolvedPresident) return;
                     const draft: Candidate = {
                       id: "new-draft",
                       source: "discoverable",
@@ -779,14 +988,20 @@ export function BrCreationWizard() {
                       memberCount: parseInt(newAssoc.estimatedMembers || "0", 10) || 0,
                       logo:
                         "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=200&h=200&fit=crop",
+                      presidentName: resolvedPresident.name,
+                      presidentEmail: resolvedPresident.email,
                     };
                     setDraftCreated(draft);
                   }}
-                  disabled={!newAssoc.name.trim()}
+                  disabled={!newAssoc.name.trim() || !resolvedPresident}
                   style={[
                     styles.draftCta,
                     {
-                      backgroundColor: draftCreated ? t.successSoft : newAssoc.name.trim() ? t.primary : t.bgMuted,
+                      backgroundColor: draftCreated
+                        ? t.successSoft
+                        : newAssoc.name.trim() && resolvedPresident
+                        ? t.primary
+                        : t.bgMuted,
                       borderColor: draftCreated ? t.success : "transparent",
                     },
                   ]}
@@ -795,16 +1010,20 @@ export function BrCreationWizard() {
                     <>
                       <Check size={14} color={t.success} />
                       <Text variant="caption" weight="bold" style={{ color: t.success }}>
-                        Draft ready · "{draftCreated.associationName}"
+                        Draft ready · "{draftCreated.associationName}" · {draftCreated.presidentName}
                       </Text>
                     </>
                   ) : (
                     <Text
                       variant="caption"
                       weight="bold"
-                      style={{ color: newAssoc.name.trim() ? "#fff" : t.textMuted }}
+                      style={{ color: newAssoc.name.trim() && resolvedPresident ? "#fff" : t.textMuted }}
                     >
-                      Use this draft
+                      {!newAssoc.name.trim()
+                        ? "Enter an association name"
+                        : !resolvedPresident
+                        ? "Pick or invite a president"
+                        : "Use this draft"}
                     </Text>
                   )}
                 </Pressable>
@@ -1376,6 +1595,46 @@ const styles = StyleSheet.create({
     paddingVertical: space.sm,
     borderRadius: radius.md,
     borderWidth: 1,
+  },
+
+  emptyHint: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: space.md,
+    paddingVertical: space.sm,
+    borderRadius: radius.md,
+    borderWidth: 1,
+  },
+
+  presidentRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: space.sm,
+    padding: space.sm,
+    borderRadius: radius.md,
+  },
+  presidentAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  kycPill: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: radius.pill,
+  },
+  resolvedPresident: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: space.sm,
+    paddingVertical: 6,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    marginTop: space.sm,
   },
 
   fieldCard: {
